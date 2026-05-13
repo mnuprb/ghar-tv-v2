@@ -31,6 +31,9 @@ desktop.ini
 .vscode/
 .idea/
 
+# Claude Code local-only settings (the .local.json convention is "don't commit")
+.claude/settings.local.json
+
 # Env
 .env
 .env.local
