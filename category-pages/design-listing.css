@@ -789,7 +789,7 @@ button { font-family: inherit; cursor: pointer; }
   text-decoration: none; transition: background .2s;
 }
 .guide-row:first-child { border-top: 1px solid var(--rule); }
-.guide-row:hover { background: var(--surface); margin: 0 -16px; padding: 28px 16px; }
+.guide-row:hover { background: var(--surface); }
 .guide-row__num {
   font-family: var(--ff-display); font-size: 48px; font-weight: 700;
   color: rgba(26,23,20,.06); line-height: 1; letter-spacing: -.03em;

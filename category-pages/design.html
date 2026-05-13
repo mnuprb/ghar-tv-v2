@@ -32,6 +32,8 @@
 
   <!-- Page surfaces — white body + hero, warm-paper nav (matches index4.html) -->
   <style>
+    /* Match index4.html — smooth anchor scroll + horizontal overflow clip */
+    html { scroll-behavior: smooth; overflow-x: clip; }
     /* Match index4.html container width (was 1280px fixed) */
     :root {
       --max-w: clamp(1280px, 75vw, 1840px) !important;
@@ -234,18 +236,178 @@
       .page-wrap { padding-top: 32px !important; }
     }
 
-    /* ─── Designers section: sec-head + two rails (Brands · People) ───── */
-    #designers > .sec-head {
+    /* ─── Shared section header — all sec-head sections */
+    #designers > .sec-head,
+    #architecture > .sec-head,
+    #vastu > .sec-head,
+    #home-tours > .sec-head,
+    #home-tours-shape > .sec-head,
+    #interiors > .sec-head,
+    #guides > .sec-head {
       max-width: var(--max-w);
-      margin: 0 auto;
+      margin: 0 auto clamp(40px, 5vw, 64px) auto;
       padding: 0 var(--pad-h);
     }
-    #designers .sec-title {
+    #designers .sec-title,
+    #architecture .sec-title,
+    #vastu .sec-title,
+    #home-tours .sec-title,
+    #home-tours-shape .sec-title,
+    #interiors .sec-title,
+    #guides .sec-title {
       max-width: 18ch;
       font-size: clamp(28px, 3.6vw, 44px);
       letter-spacing: -.022em;
     }
-    #designers .sec-lead { max-width: 460px; }
+    #designers .sec-lead,
+    #architecture .sec-lead,
+    #vastu .sec-lead,
+    #home-tours .sec-lead,
+    #home-tours-shape .sec-lead,
+    #interiors .sec-lead,
+    #guides .sec-lead { max-width: 460px; }
+
+    /* ─── Disable hover transforms on grid cards — cards stay completely
+       still on hover (no lift, no scale, no rotate, no shadow change, no
+       transition animation). Inner image zooms also disabled. */
+    #designers .ds-article,
+    #designers .ds-article:hover,
+    #designers .ds-dc,
+    #designers .ds-dc:hover,
+    #architecture .ad4-card,
+    #architecture .ad4-card:hover,
+    #vastu .ad4-card,
+    #vastu .ad4-card:hover,
+    #interiors .ad4-card,
+    #interiors .ad4-card:hover,
+    #home-tours .ed4-article,
+    #home-tours .ed4-article:hover,
+    #home-tours-shape .cc-card,
+    #home-tours-shape .cc-card:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+    #designers .ds-article:hover .ds-article__img,
+    #designers .ds-article:hover .ds-article__logo,
+    #architecture .ad4-card:hover .ad4-card-img img,
+    #vastu .ad4-card:hover .ad4-card-img img,
+    #interiors .ad4-card:hover .ad4-card-img img,
+    #home-tours .ed4-article:hover .ed4-article-img img,
+    #home-tours .ed4-article:hover .thumb-play-btn,
+    #home-tours-shape .cc-card:hover .thumb-play-btn {
+      transform: none !important;
+      transition: none !important;
+    }
+    /* Architects & Founders portraits — image zoom on card hover. */
+    #designers .ds-dc .ds-dc__img {
+      transition: transform .8s cubic-bezier(.4, 0, .2, 1) !important;
+    }
+    #designers .ds-dc:hover .ds-dc__img {
+      transform: scale(1.04) !important;
+    }
+
+    /* ─── Guides — numbered list-row pattern (distinct from editorial cards).
+       Full-width rows with number + thumbnail + cat + title + meta + arrow.
+       Communicates "indexable reference" rather than "editorial story". */
+    .guide-list {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+    }
+    .guide-row {
+      display: grid;
+      grid-template-columns: auto 96px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 32px;
+      padding: 36px 8px;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      transition: padding .25s ease;
+    }
+    .guide-row:first-child { border-top: 1px solid var(--rule); }
+    .guide-row:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: -2px;
+      border-radius: 4px;
+    }
+    .guide-row__num {
+      font-family: var(--ff-display);
+      font-size: clamp(26px, 2.6vw, 38px);
+      font-weight: 700;
+      color: var(--muted);
+      line-height: 1;
+      letter-spacing: -.02em;
+      min-width: 56px;
+      transition: color .25s ease;
+    }
+    .guide-row:hover .guide-row__num { color: var(--ink); }
+    .guide-row__thumb {
+      width: 96px;
+      height: 96px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--surface);
+    }
+    .guide-row__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .8s cubic-bezier(.2, .8, .2, 1);
+    }
+    .guide-row:hover .guide-row__thumb img { transform: scale(1.05); }
+    .guide-row__body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+    .guide-row__cat {
+      font-family: var(--ff-sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .guide-row__title {
+      font-family: var(--ff-display);
+      font-size: clamp(18px, 1.5vw, 22px);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.22;
+      letter-spacing: -.012em;
+      margin: 0;
+    }
+    .guide-row__meta {
+      font-family: var(--ff-sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .guide-row__arrow {
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: transform .3s cubic-bezier(.2, .8, .2, 1), color .25s ease;
+    }
+    .guide-row__arrow svg { width: 18px; height: 18px; display: block; }
+    .guide-row:hover .guide-row__arrow {
+      color: var(--ink);
+      transform: translateX(6px);
+    }
+
+    @media (max-width: 599.98px) {
+      .guide-row {
+        grid-template-columns: auto 72px minmax(0, 1fr);
+        gap: 20px;
+        padding: 24px 0;
+      }
+      .guide-row__thumb { width: 72px; height: 72px; border-radius: 12px; }
+      .guide-row__num { font-size: 22px; min-width: 36px; }
+      .guide-row__arrow { display: none; }
+    }
 
     /* Sub-rail wrapper + header (title left, View all link right) */
     #designers .ds-rail { margin-top: 48px; }
@@ -328,30 +490,236 @@
       #designers .ds-rail__title { font-size: 18px; }
     }
 
-    /* People rail uses .ds-dc cards — give them the same scroll-snap
-       behavior as .ds-article on mobile/tablet so the rail feels uniform. */
-    #designers .ds-grid > .ds-dc {
+    /* Cards inside .ds-grid that aren't .ds-article (.ds-dc portrait, .ad4-card
+       editorial) need the same scroll-snap + breakpoint flex sizing as
+       .ds-article so all rails behave uniformly across viewports. */
+    #designers .ds-grid > .ds-dc,
+    #architecture .ds-grid > .ad4-card,
+    #vastu .ds-grid > .ad4-card,
+    #interiors .ds-grid > .ad4-card,
+    #home-tours .ds-grid > .ed4-article,
+    #home-tours-shape .ds-grid > .cc-card {
       flex: 0 0 84%;
       min-width: 260px;
       scroll-snap-align: start;
       width: auto;
     }
     @media (min-width: 600px) {
-      #designers .ds-grid > .ds-dc { flex: 0 0 calc((100% - 24px) / 2 - 8%); }
+      #designers .ds-grid > .ds-dc,
+      #architecture .ds-grid > .ad4-card,
+      #vastu .ds-grid > .ad4-card,
+      #interiors .ds-grid > .ad4-card,
+      #home-tours .ds-grid > .ed4-article,
+      #home-tours-shape .ds-grid > .cc-card { flex: 0 0 calc((100% - 24px) / 2 - 8%); }
     }
     @media (min-width: 768px) {
-      #designers .ds-grid > .ds-dc { flex: 0 0 calc((100% - 110px) / 3); }
+      /* Home Tours + Cities stay 2-up (magazine); other sections go 3-up. */
+      #designers .ds-grid > .ds-dc,
+      #architecture .ds-grid > .ad4-card,
+      #vastu .ds-grid > .ad4-card,
+      #interiors .ds-grid > .ad4-card { flex: 0 0 calc((100% - 110px) / 3); }
+      /* Exact 2-up fill — 2 cards + 24px gap = full width, no empty right side. */
+      #home-tours .ds-grid > .ed4-article,
+      #home-tours-shape .ds-grid > .cc-card { flex: 0 0 calc((100% - 24px) / 2); }
+    }
+
+    /* ─── Editorial magazine card pattern (.ed4-article) — used for Home Tours.
+       Cleaner than .ad4-card: image + uppercase meta + Gazpacho title only.
+       Ported from design-system.html since this pattern isn't yet in styles4.css. */
+    .ed4-article {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .ed4-article-img {
+      position: relative;
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+    .ed4-article-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.94);
+      transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
+    }
+    .ed4-article:hover .ed4-article-img img { transform: scale(1.025); }
+    .ed4-article:hover .thumb-play-btn {
+      background: rgba(0,0,0,.65);
+      transform: scale(1.08);
+      box-shadow: 0 10px 24px -8px rgba(0,0,0,.5);
+    }
+    .ed4-article-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .ed4-article-title {
+      font-family: 'Gazpacho', Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(22px, 2.2vw, 28px);
+      line-height: 1.14;
+      color: var(--ink);
+      max-width: 22ch;
+      margin: 0;
+      transition: color .25s ease;
+    }
+    .ed4-article:hover .ed4-article-title { color: var(--espresso); }
+
+    /* ─── House-mask tour card (.cc-card) — ported from design-system.html
+       #bi-color-cards. Uses an SVG mask with rounded stroke (stroke-width: 28,
+       stroke-linejoin: round) which gives the soft silhouette CSS clip-path
+       can't. Each card embeds its own <mask> + <linearGradient> definitions
+       with unique ids so multiple cards can coexist. */
+    .cc-card {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 24px;
+      padding: clamp(16px, 2vw, 24px);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #fff;
+      transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+    }
+    .cc-card:hover { transform: translateY(-6px) rotate(-1deg); }
+    .cc-card--turmeric   { background: #d4a048; }
+    .cc-card--terracotta { background: #c4775a; }
+    .cc-card--sage       { background: #a8b5a0; }
+    .cc-card--sand       { background: #d4b896; color: var(--ink); }
+
+    .cc-mask-wrap {
+      position: relative;
+      width: 92%;
+    }
+    .cc-mask {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,.2));
+    }
+    .cc-info {
+      position: absolute;
+      bottom: 12%;
+      left: 10%;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 2;
+      max-width: 70%;
+    }
+    .cc-meta {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,.85);
+    }
+    .cc-loc {
+      font-family: 'Gazpacho', Georgia, serif;
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .cc-plus {
+      position: absolute;
+      bottom: 12%;
+      right: 10%;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: transform .25s, background .25s;
+    }
+    .cc-card:hover .cc-plus { transform: scale(1.1); background: rgba(255,255,255,.35); }
+    .cc-plus svg { width: 14px; height: 14px; display: block; margin-left: 2px; }
+    /* Video play overlay (.thumb-play) inside .cc-mask-wrap.
+       Override the default dark glass for higher contrast against the
+       photo silhouettes, and extend the hover-scale to .cc-card. */
+    .cc-card .thumb-play-btn {
+      width: 64px;
+      height: 64px;
+      background: rgba(255,255,255,.92);
+      color: var(--ink);
+      box-shadow: 0 8px 24px -6px rgba(0,0,0,.4);
+    }
+    .cc-card .thumb-play-btn svg { fill: var(--ink); width: 22px; height: 22px; }
+    /* Make the play button itself clickable — .thumb-play has pointer-events:none
+       so the whole card stays clickable as a link, but the button intercepts
+       clicks to play the YouTube video in place. */
+    .cc-card .thumb-play-btn { pointer-events: auto; cursor: pointer; }
+    .cc-card .thumb-play-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+    /* When playing, hide the play overlay so the video controls are visible. */
+    .cc-card.is-playing .thumb-play { display: none; }
+    .cc-card.is-playing .cc-mask foreignObject iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .cc-card:hover .thumb-play-btn {
+      background: #fff;
+      transform: scale(1.08);
+      box-shadow: 0 12px 30px -8px rgba(0,0,0,.55);
+    }
+
+    /* Alternate layout — text sits in a footer below the masked image,
+       not inside the silhouette. Use when titles are long and need room. */
+    .cc-card--outer-text {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      aspect-ratio: auto;
+      gap: clamp(14px, 2vw, 20px);
+    }
+    .cc-card--outer-text .cc-mask-wrap { width: 88%; margin: 0 auto; }
+    .cc-card-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 4px;
+      margin-top: auto;
+    }
+    .cc-info--outer {
+      position: static;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: none;
+    }
+    .cc-plus--outer {
+      position: static;
+      flex-shrink: 0;
+    }
+    .cc-card--outer-text .cc-loc {
+      font-size: clamp(16px, 1.6vw, 20px);
+      line-height: 1.2;
     }
 
     /* No-peek 4-up grid on desktop — keep the default .ds-grid max-width and
        horizontal padding so cards align with the section header at every
-       viewport (otherwise an iPad-class viewport pushes the grid wider than
-       the screen and the first card bleeds past the section's left edge).
-       Mask the left/right padding zones to transparent — any card straying
-       outside the content area (5th card on the right, previous card fading
-       out on the left during scroll) becomes invisible. */
+       viewport. Mask the left/right padding zones to transparent so any card
+       straying outside the content area becomes invisible.
+       Applied to Designers + Architecture (same chassis). */
     @media (min-width: 900px) {
-      #designers .ds-grid {
+      #designers .ds-grid,
+      #architecture .ds-grid,
+      #vastu .ds-grid,
+      #home-tours .ds-grid,
+      #home-tours-shape .ds-grid,
+      #interiors .ds-grid {
         -webkit-mask-image: linear-gradient(to right,
           transparent 0, transparent var(--pad-h),
           #000 var(--pad-h), #000 calc(100% - var(--pad-h)),
@@ -361,13 +729,27 @@
           #000 var(--pad-h), #000 calc(100% - var(--pad-h)),
           transparent calc(100% - var(--pad-h)), transparent 100%);
       }
-      /* 4-up sizing: 3 × 24px gap = 72px between 4 cards, 1px sub-pixel safety.
-         Override the inherited 260px floor so 4 cards actually fit in iPad
-         viewports — otherwise the cards stay 260px wide and the 4th one
-         peeks well into the content area. */
+      /* Designers: 4-up (3 × 24px gap = 72px between 4 cards, 1px safety).
+         Override the inherited 260px floor so 4 cards fit at iPad widths. */
       #designers .ds-grid > .ds-article,
       #designers .ds-grid > .ds-dc {
         flex: 0 0 calc((100% - 72px) / 4 - 1px);
+        min-width: 0;
+      }
+      /* Architecture + Vastu + Interiors: 3-up (2 × 24px gap = 48px). */
+      #architecture .ds-grid > .ad4-card,
+      #vastu .ds-grid > .ad4-card,
+      #interiors .ds-grid > .ad4-card {
+        flex: 0 0 calc((100% - 48px) / 3 - 1px);
+        min-width: 0;
+      }
+      /* Home Tours: 2-up with a wider 48px gap so the magazine cards
+         breathe properly. .ed4-article wants spaciousness. */
+      #home-tours .ds-grid,
+      #home-tours-shape .ds-grid { gap: 48px; }
+      #home-tours .ds-grid > .ed4-article,
+      #home-tours-shape .ds-grid > .cc-card {
+        flex: 0 0 calc((100% - 48px) / 2 - 1px);
         min-width: 0;
       }
     }
@@ -1300,114 +1682,68 @@
         </div>
       </section>
 
-      <!-- 2. ARCHITECTURE — Blueprint -->
-      <section class="sec sec--architecture reveal">
-        <div class="sec-header">
-          <div class="sec-header__left">
-            <span class="sec-header__num">02</span>
-            <h2 class="sec-header__title">Architecture</h2>
-          </div>
-          <a href="architecture.html" class="sec-header__link">View all &rarr;</a>
-        </div>
-        <!-- Featured horizontal card + 3-col row below -->
-        <div class="arch-layout">
-          <a href="#" class="arch-featured">
-            <div class="arch-featured__img">
-              <img src="https://images.unsplash.com/photo-1518005068251-37900150dfca?w=800&h=500&fit=crop&q=75" alt="Biophilic architecture in India" loading="lazy">
+      <!-- 2. ARCHITECTURE — sec-head + 4-up editorial grid -->
+      <section class="sec reveal" id="architecture">
+        <div class="sec-head">
+          <span class="sec-eyebrow">Architecture</span>
+          <div class="sec-head-row">
+            <div class="sec-head-l">
+              <h2 class="sec-title">Homes that shape, and are shaped by, India.</h2>
             </div>
-            <div class="arch-featured__body">
-              <span class="arch-featured__cat">Architecture</span>
-              <h3 class="arch-featured__title">Biophilic Architecture India: Homes That Breathe</h3>
-              <p class="arch-featured__excerpt">Living walls, courtyards, and cross-ventilation are making a comeback in Indian residential design &mdash; not as luxury add-ons but as essential building philosophy.</p>
-              <span class="arch-featured__meta">Mar 22, 2026 &middot; 12 min</span>
+            <div class="sec-head-r">
+              <p class="sec-lead">From biophilic homes to net-zero construction &mdash; the ideas reshaping how Indian architecture meets climate, culture, and craft.</p>
+              <a href="architecture.html" class="btn-text">
+                View all stories
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
             </div>
-          </a>
-          <div class="arch-row">
-            <a href="#" class="sec-card2 sec-card2--featured">
-              <div class="sec-card2__img-wrap">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop&q=75" alt="Courtyard house modern India" class="sec-card2__img" loading="lazy">
-              </div>
-              <div class="sec-card2__body">
-                <span class="sec-card2__cat">Architecture</span>
-                <h3 class="sec-card2__title">The Courtyard House Returns to Modern India</h3>
-                <p class="sec-card2__excerpt">The courtyard typology is making a dramatic return in contemporary Indian residential architecture.</p>
-                <span class="sec-card2__meta">Mar 19, 2026 &middot; 10 min</span>
-                <span class="sec-card2__arrow">&rarr;</span>
-              </div>
-            </a>
-            <a href="#" class="sec-card2 sec-card2--featured">
-              <div class="sec-card2__img-wrap">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop&q=75" alt="Sustainable homes India" class="sec-card2__img" loading="lazy">
-              </div>
-              <div class="sec-card2__body">
-                <span class="sec-card2__cat">Sustainable</span>
-                <h3 class="sec-card2__title">Sustainable Homes in India: A Builder's Guide</h3>
-                <p class="sec-card2__excerpt">From rainwater harvesting to passive cooling &mdash; a practical guide for sustainable construction.</p>
-                <span class="sec-card2__meta">Mar 16, 2026 &middot; 9 min</span>
-                <span class="sec-card2__arrow">&rarr;</span>
-              </div>
-            </a>
-            <a href="#" class="sec-card2 sec-card2--featured">
-              <div class="sec-card2__img-wrap">
-                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&h=400&fit=crop&q=75" alt="Net-zero homes India" class="sec-card2__img" loading="lazy">
-              </div>
-              <div class="sec-card2__body">
-                <span class="sec-card2__cat">Green Building</span>
-                <h3 class="sec-card2__title">Net-Zero Homes: India's Next Building Revolution</h3>
-                <p class="sec-card2__excerpt">How carbon-neutral construction is moving from concept to reality across Indian cities.</p>
-                <span class="sec-card2__meta">Mar 12, 2026 &middot; 8 min</span>
-                <span class="sec-card2__arrow">&rarr;</span>
-              </div>
-            </a>
           </div>
-        </div>
-      </section>
-
-      <!-- 3. VASTU — Warm & Centered (3-col equal) -->
-      <section class="sec reveal">
-        <div class="sec-header">
-          <div class="sec-header__left">
-            <span class="sec-header__num">03</span>
-            <h2 class="sec-header__title">Vastu</h2>
-          </div>
-          <a href="vastu.html" class="sec-header__link">View all &rarr;</a>
         </div>
         <div class="ds-grid">
-          <a href="#" class="ds-article">
-            <div class="ds-article__img-wrap">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop&q=75" alt="Vastu floor plan 2BHK" class="ds-article__img" loading="lazy">
+          <a href="#" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1518005068251-37900150dfca?w=720&h=540&fit=crop&q=80" alt="Biophilic architecture in India" loading="lazy">
             </div>
-            <div class="ds-article__body">
-              <span class="ds-article__cat">Vastu Guide</span>
-              <h3 class="ds-article__title">East-Facing 2BHK: Vastu-Perfect Floor Plans</h3>
-              <p class="ds-article__excerpt">Detailed Vastu-compliant floor plans for east-facing 2BHK apartments, covering room placement, kitchen direction, and entrance positioning.</p>
-              <span class="ds-article__meta">Mar 21, 2026 &middot; 8 min</span>
-            </div>
-          </a>
-          <a href="#" class="ds-article">
-            <div class="ds-article__img-wrap">
-              <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop&q=75" alt="Kitchen Vastu guide" class="ds-article__img" loading="lazy">
-            </div>
-            <div class="ds-article__body">
-              <span class="ds-article__cat">Vastu Guide</span>
-              <h3 class="ds-article__title">Kitchen Placement Guide: Direction &amp; Zone</h3>
-              <p class="ds-article__excerpt">The kitchen is the fire element of your home. Ideal directions, stove placement, sink positioning, and storage zones according to Vastu Shastra.</p>
-              <span class="ds-article__meta">Mar 17, 2026 &middot; 6 min</span>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Architecture</span>
+              <h3 class="ad4-card-title">Biophilic Architecture India: Homes That Breathe</h3>
+              <p class="ad4-card-desc">Living walls, courtyards, and cross-ventilation are making a comeback &mdash; not as luxury add-ons but as essential building philosophy.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 22, 2026</span>
+                <span class="ad4-card-time">12 min read</span>
+              </div>
             </div>
           </a>
-          <a href="#" class="ds-article">
-            <div class="ds-article__img-wrap">
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop&q=75" alt="Main door Vastu directions" class="ds-article__img" loading="lazy">
+          <a href="#" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=720&h=540&fit=crop&q=80" alt="Courtyard house modern India" loading="lazy">
             </div>
-            <div class="ds-article__body">
-              <span class="ds-article__cat">Vastu Guide</span>
-              <h3 class="ds-article__title">Main Door Vastu: All 8 Directions Explained</h3>
-              <p class="ds-article__excerpt">Your main door is the mouth of your home. Vastu recommendations for all eight cardinal and inter-cardinal directions.</p>
-              <span class="ds-article__meta">Mar 14, 2026 &middot; 7 min</span>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Typology</span>
+              <h3 class="ad4-card-title">The Courtyard House Returns to Modern India</h3>
+              <p class="ad4-card-desc">The courtyard typology is making a dramatic return in contemporary Indian residential architecture.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 19, 2026</span>
+                <span class="ad4-card-time">10 min read</span>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=720&h=540&fit=crop&q=80" alt="Sustainable homes India" loading="lazy">
+            </div>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Sustainable</span>
+              <h3 class="ad4-card-title">Sustainable Homes in India: A Builder's Guide</h3>
+              <p class="ad4-card-desc">From rainwater harvesting to passive cooling &mdash; a practical guide for sustainable construction.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 16, 2026</span>
+                <span class="ad4-card-time">9 min read</span>
+              </div>
             </div>
           </a>
         </div>
-        <div class="ds-nav" aria-label="Vastu carousel controls">
+        <div class="ds-nav" aria-label="Architecture carousel controls">
           <button type="button" class="ds-nav__arrow" data-dir="prev" aria-label="Previous">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </button>
@@ -1417,187 +1753,298 @@
         </div>
       </section>
 
-      <!-- 4. HOME TOURS — Immersive Gallery (hidden) -->
-      <section class="sec sec--tours reveal" style="display:none">
-        <div class="sec-header">
-          <div class="sec-header__left">
-            <span class="sec-header__num">04</span>
-            <h2 class="sec-header__title">Home Tours</h2>
-          </div>
-          <a href="home-tours.html" class="sec-header__link">View all &rarr;</a>
-        </div>
-        <div class="sec-grid">
-          <a href="#" class="sec-card2 sec-card2--featured">
-            <div class="sec-card2__img-wrap">
-              <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=500&fit=crop&q=75" alt="Sea-facing penthouse Worli" class="sec-card2__img" loading="lazy">
+      <!-- 3. VASTU — sec-head + 3-up editorial grid (ad4-card pattern) -->
+      <section class="sec reveal" id="vastu">
+        <div class="sec-head">
+          <span class="sec-eyebrow">Vastu</span>
+          <div class="sec-head-row">
+            <div class="sec-head-l">
+              <h2 class="sec-title">Direction matters, room by room.</h2>
             </div>
-            <div class="sec-card2__body">
-              <span class="sec-card2__cat">Home Tour</span>
-              <h3 class="sec-card2__title">Sea-Facing Penthouse, Worli &mdash; Designed for the Horizon</h3>
-              <p class="sec-card2__excerpt">A 6,000 sq ft penthouse on Worli Sea Face with floor-to-ceiling glass, curated art, and interiors designed to frame the Arabian Sea at every turn.</p>
-              <span class="sec-card2__meta">Mar 20, 2026 &middot; 8 min</span>
-              <span class="sec-card2__arrow">&rarr;</span>
-            </div>
-          </a>
-          <div class="sec-side2">
-            <a href="#" class="sec-card2 sec-card2--text">
-              <div class="sec-card2__body">
-                <span class="sec-card2__num">02</span>
-                <span class="sec-card2__cat">Heritage Tour</span>
-                <h3 class="sec-card2__title">A 200-Year Haveli in Jodhpur, Lovingly Restored</h3>
-                <p class="sec-card2__excerpt">Stone jaalis, lime-washed walls, and a central courtyard &mdash; a painstaking restoration that preserves Rajasthani heritage while introducing modern comforts.</p>
-                <span class="sec-card2__meta">Mar 17, 2026 &middot; 10 min</span>
-                <span class="sec-card2__arrow">&rarr;</span>
-              </div>
-            </a>
-            <a href="#" class="sec-card2 sec-card2--text">
-              <div class="sec-card2__body">
-                <span class="sec-card2__num">03</span>
-                <span class="sec-card2__cat">Compact Tour</span>
-                <h3 class="sec-card2__title">Compact 1BHK in Bandra: Punching Above Its Weight</h3>
-                <p class="sec-card2__excerpt">At just 450 sq ft, this Bandra apartment uses every square inch with intention &mdash; multifunctional furniture, hidden storage, and clever zoning.</p>
-                <span class="sec-card2__meta">Mar 14, 2026 &middot; 6 min</span>
-                <span class="sec-card2__arrow">&rarr;</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4b. HOME TOURS — Video -->
-      <section class="sec sec--video-tours reveal">
-        <div class="sec-header">
-          <div class="sec-header__left">
-            <span class="sec-header__num">04</span>
-            <h2 class="sec-header__title">Home Tours</h2>
-          </div>
-          <a href="home-tours.html" class="sec-header__link">View all &rarr;</a>
-        </div>
-        <div class="ht-grid">
-          <!-- Video card -->
-          <div class="sec-card2 sec-card2--featured">
-            <div class="sec-card2__video-wrap" data-youtube="dQw4w9WgXcQ" style="aspect-ratio:16/9">
-              <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sea-facing penthouse Worli video tour" class="sec-card2__video-poster" loading="lazy">
-              <button class="sec-card2__play" aria-label="Play video"><span></span></button>
-            </div>
-            <div class="sec-card2__body">
-              <span class="sec-card2__cat">Video Tour</span>
-              <h3 class="sec-card2__title">Sea-Facing Penthouse, Worli &mdash; Full Walkthrough</h3>
-              <p class="sec-card2__excerpt">A cinematic walkthrough of this 6,000 sq ft penthouse on Worli Sea Face.</p>
-              <span class="sec-card2__meta">Mar 20, 2026 &middot; 12 min</span>
+            <div class="sec-head-r">
+              <p class="sec-lead">Daylight, dwelling, and discipline &mdash; Vastu Shastra applied to how Indians actually plan, place, and build today.</p>
+              <a href="vastu.html" class="btn-text">
+                View all guides
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
             </div>
           </div>
-          <!-- Image card -->
-          <a href="#" class="sec-card2 sec-card2--featured">
-            <div class="sec-card2__img-wrap">
-              <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop&q=75" alt="Jodhpur haveli restored" class="sec-card2__img" loading="lazy">
-            </div>
-            <div class="sec-card2__body">
-              <span class="sec-card2__cat">Heritage Tour</span>
-              <h3 class="sec-card2__title">A 200-Year Haveli in Jodhpur, Lovingly Restored</h3>
-              <p class="sec-card2__excerpt">Stone jaalis, lime-washed walls, and a central courtyard &mdash; a painstaking restoration.</p>
-              <span class="sec-card2__meta">Mar 17, 2026 &middot; 8 min</span>
-              <span class="sec-card2__arrow">&rarr;</span>
-            </div>
-          </a>
-        </div>
-      </section>
-
-      <!-- 5. GUIDES — Clean Index (row layout, no images) -->
-      <section class="sec sec--guides reveal">
-        <div class="sec-header">
-          <div class="sec-header__left">
-            <span class="sec-header__num">05</span>
-            <h2 class="sec-header__title">Guides</h2>
-          </div>
-          <a href="guides.html" class="sec-header__link">View all &rarr;</a>
-        </div>
-        <!-- Horizontal row cards: thumbnail left + text right -->
-        <div class="guide-cards">
-          <a href="#" class="guide-card">
-            <div class="guide-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=300&h=200&fit=crop&q=75" alt="Italian marble vs Indian granite" class="guide-card__img" loading="lazy">
-            </div>
-            <div class="guide-card__body">
-              <span class="guide-card__cat">Buyer's Guide</span>
-              <h3 class="guide-card__title">Italian Marble vs Indian Granite: The Definitive Guide</h3>
-              <p class="guide-card__excerpt">Cost, durability, maintenance, aesthetics &mdash; a side-by-side comparison to help you choose the right flooring material.</p>
-              <span class="guide-card__meta">Mar 22, 2026 &middot; 7 min</span>
-            </div>
-          </a>
-          <a href="#" class="guide-card">
-            <div class="guide-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=300&h=200&fit=crop&q=75" alt="Smart home setup India" class="guide-card__img" loading="lazy">
-            </div>
-            <div class="guide-card__body">
-              <span class="guide-card__cat">Tech Guide</span>
-              <h3 class="guide-card__title">Smart Home Setup India: What It Costs in 2025</h3>
-              <p class="guide-card__excerpt">From basic voice-controlled lighting to full home automation &mdash; a realistic cost breakdown across three budget tiers.</p>
-              <span class="guide-card__meta">Mar 19, 2026 &middot; 8 min</span>
-            </div>
-          </a>
-          <a href="#" class="guide-card">
-            <div class="guide-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=300&h=200&fit=crop&q=75" alt="False ceiling types and cost" class="guide-card__img" loading="lazy">
-            </div>
-            <div class="guide-card__body">
-              <span class="guide-card__cat">Buyer's Guide</span>
-              <h3 class="guide-card__title">False Ceiling Types, Materials &amp; Cost Guide</h3>
-              <p class="guide-card__excerpt">POP, gypsum, PVC, wooden &mdash; an exhaustive comparison with material costs, installation charges, and pros and cons.</p>
-              <span class="guide-card__meta">Mar 16, 2026 &middot; 6 min</span>
-            </div>
-          </a>
-        </div>
-      </section>
-
-      <!-- 6. INTERIORS — Mood Board (3 image cards, staggered) -->
-      <section class="sec reveal">
-        <div class="sec-header">
-          <div class="sec-header__left">
-            <span class="sec-header__num">06</span>
-            <h2 class="sec-header__title">Interiors</h2>
-          </div>
-          <a href="interiors.html" class="sec-header__link">View all &rarr;</a>
         </div>
         <div class="ds-grid">
-          <a href="interiors/living-room-design-trends.html" class="ds-article">
-            <div class="ds-article__img-wrap">
-              <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=400&fit=crop&q=75" alt="Living room design trends India" class="ds-article__img" loading="lazy">
+          <a href="#" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=720&h=540&fit=crop&q=80" alt="Vastu floor plan 2BHK" loading="lazy">
             </div>
-            <div class="ds-article__body">
-              <span class="ds-article__cat">Trends</span>
-              <h3 class="ds-article__title">Living Room Design Trends Dominating Indian Homes</h3>
-              <span class="ds-article__meta">Mar 20, 2026 &middot; 10 min</span>
-            </div>
-          </a>
-          <a href="#" class="ds-article">
-            <div class="ds-article__img-wrap">
-              <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&h=400&fit=crop&q=75" alt="Small bedroom space saving ideas" class="ds-article__img" loading="lazy">
-            </div>
-            <div class="ds-article__body">
-              <span class="ds-article__cat">Space Planning</span>
-              <h3 class="ds-article__title">Small Bedroom Space-Saving: 15 Ideas That Work</h3>
-              <span class="ds-article__meta">Mar 17, 2026 &middot; 8 min</span>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Floor Plans</span>
+              <h3 class="ad4-card-title">East-Facing 2BHK: Vastu-Perfect Floor Plans</h3>
+              <p class="ad4-card-desc">Detailed Vastu-compliant floor plans for east-facing 2BHK apartments &mdash; room placement, kitchen direction, and entrance positioning.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 21, 2026</span>
+                <span class="ad4-card-time">8 min read</span>
+              </div>
             </div>
           </a>
-          <a href="#" class="ds-article">
-            <div class="ds-article__img-wrap">
-              <img src="https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=600&h=400&fit=crop&q=75" alt="Open kitchen design Indian homes" class="ds-article__img" loading="lazy">
+          <a href="#" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=720&h=540&fit=crop&q=80" alt="Kitchen Vastu guide" loading="lazy">
             </div>
-            <div class="ds-article__body">
-              <span class="ds-article__cat">Kitchen</span>
-              <h3 class="ds-article__title">Open Kitchen Designs for Indian Homes</h3>
-              <span class="ds-article__meta">Mar 14, 2026 &middot; 7 min</span>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Kitchen</span>
+              <h3 class="ad4-card-title">Kitchen Placement Guide: Direction &amp; Zone</h3>
+              <p class="ad4-card-desc">The kitchen is the fire element of your home. Ideal directions, stove placement, sink positioning, and storage zones according to Vastu Shastra.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 17, 2026</span>
+                <span class="ad4-card-time">6 min read</span>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=720&h=540&fit=crop&q=80" alt="Main door Vastu directions" loading="lazy">
+            </div>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Entry</span>
+              <h3 class="ad4-card-title">Main Door Vastu: All 8 Directions Explained</h3>
+              <p class="ad4-card-desc">Your main door is the mouth of your home. Vastu recommendations for all eight cardinal and inter-cardinal directions.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 14, 2026</span>
+                <span class="ad4-card-time">7 min read</span>
+              </div>
             </div>
           </a>
         </div>
-        <div class="ds-nav" aria-label="Interiors carousel controls">
-          <button type="button" class="ds-nav__arrow" data-dir="prev" aria-label="Previous">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          </button>
-          <button type="button" class="ds-nav__arrow" data-dir="next" aria-label="Next">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
+      </section>
+
+      <!-- 4. HOME TOURS — sec-head + 3-up ad4-card with thumb-play overlay -->
+      <section class="sec reveal" id="home-tours">
+        <div class="sec-head">
+          <span class="sec-eyebrow">Home Tours</span>
+          <div class="sec-head-row">
+            <div class="sec-head-l">
+              <h2 class="sec-title">Walk through homes worth showing.</h2>
+            </div>
+            <div class="sec-head-r">
+              <p class="sec-lead">Cinematic walkthroughs of India's most considered homes &mdash; from sea-facing penthouses to heritage havelis to clever compact apartments.</p>
+              <a href="home-tours.html" class="btn-text">
+                View all tours
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="ds-grid">
+          <a href="#" class="ed4-article">
+            <div class="ed4-article-img">
+              <video src="Brand%20Media.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"></video>
+            </div>
+            <div class="ed4-article-meta">Penthouse &middot; 12 min watch</div>
+            <h3 class="ed4-article-title">Sea-Facing Penthouse, Worli &mdash; Designed for the Horizon.</h3>
+          </a>
+          <a href="#" class="ed4-article">
+            <div class="ed4-article-img">
+              <img src="https://images.unsplash.com/photo-1600573472556-e636c2acda88?w=720&h=540&fit=crop&q=80" alt="200-year Jodhpur haveli restored" loading="lazy">
+              <div class="thumb-play"><div class="thumb-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="ed4-article-meta">Heritage &middot; 9 min watch</div>
+            <h3 class="ed4-article-title">A 200-Year Haveli in Jodhpur, Lovingly Restored.</h3>
+          </a>
+          <a href="#" class="ed4-article">
+            <div class="ed4-article-img">
+              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=720&h=540&fit=crop&q=80" alt="Compact 1BHK Bandra Mumbai" loading="lazy">
+              <div class="thumb-play"><div class="thumb-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="ed4-article-meta">Compact &middot; 6 min watch</div>
+            <h3 class="ed4-article-title">Compact 1BHK in Bandra, Punching Above Its Weight.</h3>
+          </a>
+        </div>
+      </section>
+
+      <!-- 4c. HOME TOURS — house-silhouette video cards (alternate design) -->
+      <section class="sec reveal" id="home-tours-shape">
+        <div class="sec-head">
+          <span class="sec-eyebrow">Home Tours</span>
+          <div class="sec-head-row">
+            <div class="sec-head-l">
+              <h2 class="sec-title">Walk through homes worth showing.</h2>
+            </div>
+            <div class="sec-head-r">
+              <p class="sec-lead">Cinematic walkthroughs of India's most considered homes &mdash; from sea-facing penthouses to heritage havelis to clever compact apartments.</p>
+              <a href="home-tours.html" class="btn-text">
+                View all tours
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="ds-grid">
+          <a href="#" class="cc-card cc-card--outer-text cc-card--turmeric is-playing">
+            <div class="cc-mask-wrap">
+              <svg class="cc-mask" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <mask id="ht1">
+                    <rect width="200" height="200" fill="black"/>
+                    <path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/>
+                  </mask>
+                </defs>
+                <foreignObject x="0" y="0" width="200" height="200" mask="url(#ht1)">
+                  <video xmlns="http://www.w3.org/1999/xhtml" src="Brand%20Media.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"></video>
+                </foreignObject>
+              </svg>
+            </div>
+            <div class="cc-card-footer">
+              <div class="cc-info cc-info--outer">
+                <span class="cc-meta">12 min watch</span>
+                <span class="cc-loc">Sea-Facing Penthouse, Worli &mdash; Designed for the Horizon</span>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="cc-card cc-card--outer-text cc-card--terracotta" data-youtube="9bZkp7q19f0">
+            <div class="cc-mask-wrap">
+              <svg class="cc-mask" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <mask id="ht2">
+                    <rect width="200" height="200" fill="black"/>
+                    <path d="M 62,38 L 176,82 L 176,170 L 24,170 L 24,68 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/>
+                  </mask>
+                </defs>
+                <image href="https://images.unsplash.com/photo-1600573472556-e636c2acda88?w=600&h=600&fit=crop&q=80" width="200" height="200" mask="url(#ht2)" preserveAspectRatio="xMidYMid slice"/>
+              </svg>
+              <div class="thumb-play"><div class="thumb-play-btn" role="button" tabindex="0" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="cc-card-footer">
+              <div class="cc-info cc-info--outer">
+                <span class="cc-meta">9 min watch</span>
+                <span class="cc-loc">A 200-Year Haveli in Jodhpur, Lovingly Restored</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- 5. GUIDES — sec-head + numbered list-row pattern (distinct from editorial sections) -->
+      <section class="sec reveal" id="guides">
+        <div class="sec-head">
+          <span class="sec-eyebrow">Guides</span>
+          <div class="sec-head-row">
+            <div class="sec-head-l">
+              <h2 class="sec-title">Material, cost, methodology &mdash; explained.</h2>
+            </div>
+            <div class="sec-head-r">
+              <p class="sec-lead">Indexable knowledge for the practical decisions &mdash; from flooring choices to smart-home budgets to ceiling material costs.</p>
+              <a href="guides.html" class="btn-text">
+                View all guides
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="guide-list">
+          <a href="#" class="guide-row">
+            <span class="guide-row__num">01</span>
+            <div class="guide-row__thumb">
+              <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=240&h=240&fit=crop&q=80" alt="Italian marble vs Indian granite" loading="lazy">
+            </div>
+            <div class="guide-row__body">
+              <span class="guide-row__cat">Buyer's Guide</span>
+              <h3 class="guide-row__title">Italian Marble vs Indian Granite: The Definitive Guide</h3>
+              <span class="guide-row__meta">Mar 22, 2026 &middot; 7 min read</span>
+            </div>
+            <span class="guide-row__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a href="#" class="guide-row">
+            <span class="guide-row__num">02</span>
+            <div class="guide-row__thumb">
+              <img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=240&h=240&fit=crop&q=80" alt="Smart home setup India" loading="lazy">
+            </div>
+            <div class="guide-row__body">
+              <span class="guide-row__cat">Tech Guide</span>
+              <h3 class="guide-row__title">Smart Home Setup India: What It Costs in 2026</h3>
+              <span class="guide-row__meta">Mar 19, 2026 &middot; 8 min read</span>
+            </div>
+            <span class="guide-row__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a href="#" class="guide-row">
+            <span class="guide-row__num">03</span>
+            <div class="guide-row__thumb">
+              <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=240&h=240&fit=crop&q=80" alt="False ceiling types and cost" loading="lazy">
+            </div>
+            <div class="guide-row__body">
+              <span class="guide-row__cat">Buyer's Guide</span>
+              <h3 class="guide-row__title">False Ceiling Types, Materials &amp; Cost Guide</h3>
+              <span class="guide-row__meta">Mar 16, 2026 &middot; 6 min read</span>
+            </div>
+            <span class="guide-row__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 6. INTERIORS — sec-head + 3-up editorial grid (ad4-card pattern) -->
+      <section class="sec reveal" id="interiors">
+        <div class="sec-head">
+          <span class="sec-eyebrow">Interiors</span>
+          <div class="sec-head-row">
+            <div class="sec-head-l">
+              <h2 class="sec-title">Inside how India lives, room by room.</h2>
+            </div>
+            <div class="sec-head-r">
+              <p class="sec-lead">Trends, space-savers, and room-by-room ideas &mdash; how India's interior designers solve real homes.</p>
+              <a href="interiors.html" class="btn-text">
+                View all ideas
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="ds-grid">
+          <a href="interiors/living-room-design-trends.html" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=720&h=540&fit=crop&q=80" alt="Living room design trends India" loading="lazy">
+            </div>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Trends</span>
+              <h3 class="ad4-card-title">Living Room Design Trends Dominating Indian Homes</h3>
+              <p class="ad4-card-desc">From low-floor seating to multi-tonal walls &mdash; what's actually showing up in Indian living rooms in 2026.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 20, 2026</span>
+                <span class="ad4-card-time">10 min read</span>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=720&h=540&fit=crop&q=80" alt="Small bedroom space saving ideas" loading="lazy">
+            </div>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Space Planning</span>
+              <h3 class="ad4-card-title">Small Bedroom Space-Saving: 15 Ideas That Work</h3>
+              <p class="ad4-card-desc">Wall beds, vertical storage, and zoning tricks for the 9&times;10 bedroom most Indian apartments give you.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 17, 2026</span>
+                <span class="ad4-card-time">8 min read</span>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="ad4-card">
+            <div class="ad4-card-img">
+              <img src="https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=720&h=540&fit=crop&q=80" alt="Open kitchen design Indian homes" loading="lazy">
+            </div>
+            <div class="ad4-card-body">
+              <span class="ad4-card-cat">Kitchen</span>
+              <h3 class="ad4-card-title">Open Kitchen Designs for Indian Homes</h3>
+              <p class="ad4-card-desc">Open kitchens vs Indian cooking &mdash; the layout choices that survive daily masalas and family scale.</p>
+              <div class="ad4-card-foot">
+                <span class="ad4-card-byline">Mar 14, 2026</span>
+                <span class="ad4-card-time">7 min read</span>
+              </div>
+            </div>
+          </a>
         </div>
       </section>
 
@@ -1775,6 +2222,57 @@
   });
   /* Post dropdown removed — nav is now from index4.html */
 
+  /* ─── Inline YouTube play for .cc-card video tours ─────────────────
+     Click on .thumb-play-btn swaps the SVG <image> for a <foreignObject>
+     containing a YouTube iframe — same SVG mask applies, so the playing
+     video stays inside the house silhouette. */
+  document.querySelectorAll('.cc-card[data-youtube]').forEach(function(card){
+    var btn = card.querySelector('.thumb-play-btn');
+    if(!btn) return;
+    function play(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+      if(card.classList.contains('is-playing')) return;
+      var ytId = card.getAttribute('data-youtube');
+      var svg = card.querySelector('svg.cc-mask');
+      var mask = svg && svg.querySelector('mask');
+      if(!ytId || !svg || !mask) return;
+      var maskId = mask.id;
+      var SVG_NS = 'http://www.w3.org/2000/svg';
+      var XHTML_NS = 'http://www.w3.org/1999/xhtml';
+      var fo = document.createElementNS(SVG_NS, 'foreignObject');
+      fo.setAttribute('x', '0');
+      fo.setAttribute('y', '0');
+      fo.setAttribute('width', '200');
+      fo.setAttribute('height', '200');
+      fo.setAttribute('mask', 'url(#' + maskId + ')');
+      /* Wrapper div lets us absolutely position the iframe to cover the
+         square mask. YouTube embeds are 16:9 — we oversize horizontally
+         so the video fills the 1:1 area edge-to-edge (sides cropped) instead
+         of letterboxing with black bars top/bottom. */
+      var wrapper = document.createElementNS(XHTML_NS, 'div');
+      wrapper.setAttribute('xmlns', XHTML_NS);
+      wrapper.style.cssText = 'position:relative;width:100%;height:100%;overflow:hidden';
+      var iframe = document.createElementNS(XHTML_NS, 'iframe');
+      iframe.setAttribute('src', 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1');
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      /* 16:9 / 1:1 = 1.7778 — iframe width is 177.78% of container so its
+         height (100%) matches a 16:9 ratio. Centered horizontally. */
+      iframe.style.cssText = 'position:absolute;top:0;left:50%;width:177.78%;height:100%;transform:translateX(-50%);border:0;display:block';
+      wrapper.appendChild(iframe);
+      fo.appendChild(wrapper);
+      var image = svg.querySelector('image');
+      if(image){ image.replaceWith(fo); }
+      else { svg.appendChild(fo); }
+      card.classList.add('is-playing');
+    }
+    btn.addEventListener('click', play);
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ play(e); }
+    });
+  });
+
   /* ─── Prev/Next arrow nav for .ds-grid carousels ──────────────────── */
   document.querySelectorAll('.ds-nav').forEach(function(nav){
     var rail = nav.previousElementSibling;
@@ -1784,7 +2282,7 @@
     if(!prev || !next) return;
 
     function step(){
-      var card = rail.querySelector('.ds-article, .ds-dc');
+      var card = rail.querySelector('.ds-article, .ds-dc, .ad4-card, .ed4-article, .cc-card');
       var cs = getComputedStyle(rail);
       var gap = parseFloat(cs.columnGap || cs.gap) || 24;
       return card ? card.getBoundingClientRect().width + gap : rail.clientWidth;
