@@ -1,0 +1,37 @@
+# Node / npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Vercel
+.vercel
+
+# Claude Code / Playwright test output
+.playwright-mcp/
+screenshots/claude-screenshots/
+
+# Temp files left by extractions / refactors
+.nav-block.html
+.nav-temp.html
+.nav-css.tmp
+*.tmp
+
+# Backups
+*.bak
+*.rar
+interiors-backup.html
+design-listing.pre-reskin.css.bak
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+
+# Env
+.env
+.env.local
+.env.*.local

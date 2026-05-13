@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>VideoWorks — Branded Media Production for Real Estate - GHAR.tv</title>
+  <meta name="description" content="VideoWorks is Ghar.tv's in-house creative production studio — India's first real estate-specialised creative agency.">
+  <link rel="canonical" href="https://ghar.tv/videoworks">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+
+  <style>
+    @font-face{font-family:'Gazpacho';src:url('fonts/Gazpacho-Bold.woff2') format('woff2'),url('fonts/Gazpacho-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+
+    :root{
+      --bg:#ffffff;--ink:#111111;--ink2:#4b5563;--faint:#9ca3af;--rule:#e8e8e8;
+      --accent:#ee324b;--surface:#ffffff;--warm:#ffffff;
+      --ff-display:'Gazpacho',Georgia,serif;--ff-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --ease:cubic-bezier(.4,0,.2,1);--max-w:1600px;--pad-h:clamp(24px,3vw,80px);
+      --sh-sm:0 1px 3px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.04);
+      --sh-md:0 4px 20px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.03);
+      --r:20px
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:var(--ff-sans);background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
+    .cont{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h)}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);box-shadow:var(--sh-sm)}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-logo{display:flex;align-items:baseline;flex-shrink:0}.nav-logo-img{height:28px;width:auto}
+    .nav-logo-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-left:10px}
+    .nav-links{display:none;align-items:center;justify-content:center;gap:2px;list-style:none;flex:1}
+    .nav-links a{font-size:13.5px;font-weight:500;color:var(--ink2);padding:6px 11px;border-radius:7px;transition:background .16s,color .16s}
+    .nav-links a:hover{background:var(--surface);color:var(--ink)}.nav-links a.active{background:var(--surface);color:var(--ink);font-weight:600}
+    .nav-right{display:none;align-items:center;gap:8px;flex-shrink:0}
+    .nav-btn{font-size:13px;font-weight:600;color:#fff;padding:8px 20px;border-radius:8px;background:var(--ink);display:inline-flex;align-items:center;transition:background .18s,transform .18s}
+    .nav-btn:hover{background:var(--accent);transform:translateY(-1px)}
+    .nav-hamburger{display:flex;flex-direction:column;gap:5px;padding:6px;background:none;border:none;z-index:901}
+    .nav-hamburger span{display:block;width:20px;height:1.5px;background:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+    .nav-hamburger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .nav-hamburger.active span:nth-child(2){opacity:0}
+    .nav-hamburger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .mob-menu{position:fixed;inset:0;background:var(--bg);z-index:850;transform:translateX(100%);transition:transform .42s var(--ease);padding:88px 28px 48px}
+    .mob-menu.open{transform:translateX(0)}
+    .mob-links{list-style:none}.mob-links li{border-bottom:1px solid var(--rule)}
+    .mob-links a{display:block;padding:15px 0;font-family:var(--ff-display);font-size:24px;font-weight:700;color:var(--ink)}
+    .mob-links .mob-accent{color:var(--accent)}
+
+    /* ═══ HERO ═══ */
+    .hero{position:relative;overflow:hidden;min-height:90vh;display:flex;align-items:center;background:#080808;color:#fff}
+    .hero__video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+    .hero__video-wrap video{width:100%;height:100%;object-fit:cover;opacity:.15;filter:saturate(.3)}
+    .hero__video-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#080808 0%,rgba(8,8,8,.6) 30%,rgba(8,8,8,.6) 70%,#080808 100%)}
+    .hero__glow{position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:1200px;height:1200px;border-radius:50%;z-index:0;background:radial-gradient(ellipse,rgba(238,50,75,.04) 0%,rgba(238,50,75,.015) 30%,transparent 60%);pointer-events:none}
+    .hero__content{position:relative;z-index:2;max-width:var(--max-w);margin:0 auto;padding:clamp(100px,12vw,160px) var(--pad-h) clamp(80px,10vw,120px);width:100%}
+    .hero__eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:28px}
+    .hero__eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+    .hero__title{font-family:var(--ff-display);font-size:clamp(48px,9vw,110px);font-weight:700;line-height:.94;letter-spacing:-.04em;color:#ffffff;margin-bottom:24px}
+    .hero__sub{font-size:clamp(16px,1.5vw,20px);line-height:1.7;color:rgba(255,255,255,.7);max-width:580px;margin-bottom:40px}
+    .hero__tagline{font-size:13px;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:40px}
+    .hero__ctas{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-size:14px;font-weight:600;min-height:48px;transition:transform .2s var(--ease),box-shadow .2s,background .2s}
+    .btn--primary{background:#fff;color:var(--ink)}.btn--primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15);background:var(--accent);color:#fff}
+    .cta-ban .btn--primary{background:#fff;color:var(--ink)}.cta-ban .btn--primary:hover{background:var(--accent);color:#fff}
+    .cta-ban .btn--outline{border-color:rgba(255,255,255,.25);color:#fff}.cta-ban .btn--outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+    .btn--outline{border:1.5px solid rgba(255,255,255,.25);color:#fff;background:none}.btn--outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+    /* ═══ SECTIONS ═══ */
+    .sec{padding:clamp(64px,8vw,100px) 0}
+    .sec--warm{background:var(--warm)}
+    .sec--surface{background:var(--surface)}
+    .sec__header{margin-bottom:48px;max-width:640px}
+    .sec__eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block}
+    .sec__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.08;color:var(--ink);margin-bottom:14px}
+    .sec__desc{font-size:15px;line-height:1.8;color:var(--ink2)}
+
+    /* ═══ SERVICES — 3x2 card grid ═══ */
+    .svc-grid{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+    .svc-grid::-webkit-scrollbar{display:none}
+    .svc-grid > .svc{flex:0 0 80%;max-width:340px;scroll-snap-align:start}
+    @media(min-width:600px){.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);overflow:visible;padding-bottom:0}.svc-grid > .svc{flex:none;max-width:none}}
+    @media(min-width:1024px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
+    .svc{background:var(--bg);border:1px solid var(--rule);border-radius:var(--r);padding:32px;transition:border-color .25s,box-shadow .25s,transform .25s}
+    .svc:hover{border-color:rgba(17,17,17,.15);box-shadow:var(--sh-md);transform:translateY(-3px)}
+    .svc__icon{width:48px;height:48px;border-radius:14px;background:var(--surface);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+    .svc__icon svg{width:22px;height:22px;color:var(--ink)}
+    .svc__name{font-family:var(--ff-display);font-size:19px;font-weight:700;color:var(--ink);margin-bottom:10px}
+    .svc__desc{font-size:14px;line-height:1.75;color:var(--ink2);margin-bottom:16px}
+    .svc__price{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.03em}
+
+    /* ═══ LOOP — horizontal stepper ═══ */
+    .loop{display:flex;align-items:flex-start;position:relative;padding:0;margin-bottom:0;overflow-x:auto}
+    .loop__step{display:flex;flex-direction:column;align-items:center;flex:1;min-width:80px;position:relative;text-align:center}
+    /* Connecting line drawn per step so it scales with scrollable content */
+    .loop__step:not(:last-child)::before{content:'';position:absolute;top:15px;left:50%;width:calc(100% + 8px);height:2px;background:var(--rule);z-index:0}
+    .loop__step-dot,.loop__step-name{position:relative;z-index:1}
+    .loop__step-dot{width:32px;height:32px;border-radius:50%;background:var(--bg);border:2px solid var(--rule);display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:11px;font-weight:700;color:var(--faint);transition:border-color .2s,background .2s,color .2s}
+    .loop__step:hover .loop__step-dot{border-color:var(--accent);background:var(--accent);color:#fff}
+    .loop__step-name{font-family:var(--ff-display);font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+    @media(max-width:600px){.loop{gap:8px;justify-content:flex-start}.loop__step{min-width:70px}.loop__step-name{font-size:11px}}
+
+    /* ═══ ADVANTAGES — 2x2 grid ═══ */
+    .adv-grid{display:flex;gap:16px;margin-top:48px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+    .adv-grid::-webkit-scrollbar{display:none}
+    .adv-grid > .adv{flex:0 0 82%;max-width:360px;scroll-snap-align:start}
+    @media(min-width:768px){.adv-grid{display:grid;grid-template-columns:repeat(2,1fr);overflow:visible;padding-bottom:0}.adv-grid > .adv{flex:none;max-width:none}}
+    .adv{background:var(--bg);border:1px solid var(--rule);border-radius:16px;padding:32px;transition:border-color .2s,box-shadow .2s}
+    .adv:hover{border-color:rgba(17,17,17,.12);box-shadow:var(--sh-md)}
+    .adv__vs{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+    .adv__title{font-family:var(--ff-display);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:8px}
+    .adv__desc{font-size:13.5px;line-height:1.7;color:var(--ink2)}
+
+    /* ═══ PRICING — 3-col cards ═══ */
+    .price-grid{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+    .price-grid::-webkit-scrollbar{display:none}
+    .price-grid > .price{flex:0 0 82%;max-width:340px;scroll-snap-align:start}
+    @media(min-width:768px){.price-grid{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible;padding-bottom:0}.price-grid > .price{flex:none;max-width:none}}
+    .price{background:var(--bg);border:1px solid var(--rule);border-radius:var(--r);padding:32px;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s}
+    .price:hover{border-color:rgba(17,17,17,.12);box-shadow:var(--sh-md)}
+    .price--pop{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+    .price__name{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+    .price__amt{font-family:var(--ff-display);font-size:32px;font-weight:700;color:var(--ink);margin-bottom:4px}
+    .price__period{font-size:12px;color:var(--faint);margin-bottom:24px}
+    .price__list{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;margin-bottom:28px}
+    .price__list li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .price__list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:7px}
+    .price__cta{display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;padding:12px 24px;border-radius:8px;border:1.5px solid var(--rule);color:var(--ink);transition:border-color .18s,background .18s}
+    .price__cta:hover{border-color:var(--ink);background:var(--surface)}
+    .price--pop .price__cta{background:var(--ink);border-color:var(--ink);color:#fff}.price--pop .price__cta:hover{background:var(--accent);border-color:var(--accent)}
+
+    /* ═══ CTA BANNER ═══ */
+    .cta-ban{text-align:center;padding:clamp(64px,8vw,100px) 0;background:var(--ink);color:#fff}
+    .cta-ban__title{font-family:var(--ff-display);font-size:clamp(28px,5vw,48px);font-weight:700;color:#fff;margin-bottom:14px}
+    .cta-ban__sub{font-size:15px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 32px}
+    .cta-ban__btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    /* ═══ FOOTER ═══ */
+    .footer{background:#111;border-top:none;padding:36px 0}
+    .ft-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h)}
+    .ft-top{display:flex;flex-direction:column;gap:24px;padding-bottom:32px;border-bottom:1px solid var(--rule);margin-bottom:24px}
+    @media(min-width:744px){.ft-top{flex-direction:row;align-items:flex-start;justify-content:space-between}}
+    .ft-top{border-bottom-color:#1a1a1a}
+    .ft-logo-img{height:24px;width:auto;margin-bottom:8px;filter:brightness(0) invert(1)}.ft-tag{font-size:12px;color:rgba(255,255,255,.3)}
+    .ft-nav{display:flex;gap:24px;flex-wrap:wrap}.ft-nav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.45)}.ft-nav a:hover{color:#fff}
+    .ft-bot{display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(255,255,255,.2)}
+    @media(min-width:744px){.ft-bot{flex-direction:row;justify-content:space-between}}
+    .ft-bot-links{display:flex;gap:16px}.ft-bot-links a{font-size:12px;color:rgba(255,255,255,.2)}.ft-bot-links a:hover{color:rgba(255,255,255,.6)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}.reveal.revealed{opacity:1;transform:none}
+
+    @media(min-width:1024px){.nav-inner{padding:0 32px;height:62px;gap:32px}.nav-links{display:flex}.nav-right{display:flex}.nav-hamburger{display:none}}
+    @media(max-width:480px){.hero__ctas,.cta-ban__btns{flex-direction:column}.btn{width:100%;justify-content:center}}
+  </style>
+</head>
+
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="logo.svg" alt="GHAR.tv" class="nav-logo-img"><span class="nav-logo-tag">VideoWorks</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="/intelligence">Intelligence</a></li>
+      <li><a href="/design">Design</a></li>
+      <li><a href="/people">People</a></li>
+      <li><a href="/ghartalks">GharTalks</a></li>
+      <li><a href="/videoworks" class="active">VideoWorks</a></li>
+      <li><a href="/gharevents">GharEvents</a></li>
+      <li><a href="/industry-voices">Industry Voices</a></li>
+    </ul>
+    <div class="nav-right"><a href="#" class="nav-btn">Get a Quote</a></div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <ul class="mob-links">
+    <li><a href="/intelligence">Intelligence</a></li>
+    <li><a href="/design">Design</a></li>
+    <li><a href="/people">People</a></li>
+    <li><a href="/ghartalks">GharTalks</a></li>
+    <li><a href="/videoworks" class="mob-accent">VideoWorks</a></li>
+    <li><a href="/gharevents">GharEvents</a></li>
+    <li><a href="/industry-voices">Industry Voices</a></li>
+    <li><a href="/post-property">Post Property</a></li>
+    <li><a href="/post-requirement">Post Requirement</a></li>
+    <li><a href="/join" class="mob-accent">Join Now &rarr;</a></li>
+  </ul>
+</div>
+
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero__video-wrap">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=900&fit=crop&q=80">
+      <source src="3141208-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="hero__eyebrow"><span class="hero__eyebrow-dot"></span> Ghar.tv Creative Studio</div>
+    <h1 class="hero__title">VideoWorks</h1>
+    <p class="hero__tagline">Branded media production for real estate.</p>
+    <p class="hero__sub">India's first real estate-specialised creative agency &mdash; ad-agency level creative, exclusively for the industry that builds India.</p>
+    <div class="hero__ctas">
+      <a href="#services" class="btn btn--primary">Explore Services &rarr;</a>
+      <a href="#pricing" class="btn btn--outline">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SERVICES ═══ -->
+<section class="sec sec--warm" id="services">
+  <div class="cont">
+    <div class="sec__header reveal">
+      <span class="sec__eyebrow">What We Do</span>
+      <h2 class="sec__title">Six Capabilities.<br>One Specialisation.</h2>
+      <p class="sec__desc">Every format a real estate brand needs &mdash; produced by a team that speaks the language of carpet area, RERA, and micro-markets.</p>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m23 7-7 5 7 5V7Z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <h3 class="svc__name">Brand Campaigns</h3>
+        <p class="svc__desc">Developer brand films, corporate vision videos, CSR narratives, leadership profiles, and company culture content that positions your brand beyond the project level.</p>
+        <span class="svc__price">&#8377;5L &ndash; 50L</span>
+      </div>
+
+      <div class="svc reveal">
+        <div class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <h3 class="svc__name">Product Launches</h3>
+        <p class="svc__desc">Cinematic project reveals, teaser campaigns, multi-platform video series, celebrity integration shoots, and influencer collaboration content.</p>
+        <span class="svc__price">&#8377;10L &ndash; 1Cr+</span>
+      </div>
+
+      <div class="svc reveal">
+        <div class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3 class="svc__name">Performance Marketing</h3>
+        <p class="svc__desc">Social media ads (15/30/60 sec), YouTube pre-roll, Instagram Reels, LinkedIn campaigns, and retargeting sequences &mdash; optimised for leads.</p>
+        <span class="svc__price">&#8377;2L &ndash; 10L</span>
+      </div>
+
+      <div class="svc reveal">
+        <div class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3 class="svc__name">Property Films &amp; Tours</h3>
+        <p class="svc__desc">Cinematic walkthroughs, neighbourhood films, apartment tours, 360&deg; virtual tours, and drone cinematography that make properties feel like destinations.</p>
+        <span class="svc__price">&#8377;25K &ndash; 1.5L</span>
+      </div>
+
+      <div class="svc reveal">
+        <div class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+        <h3 class="svc__name">Experiential Content</h3>
+        <p class="svc__desc">VR experiences, AR property tours, interactive 360&deg; showcases, and virtual event productions &mdash; immersive formats that let buyers feel the space.</p>
+        <span class="svc__price">&#8377;25L &ndash; 2Cr</span>
+      </div>
+
+      <div class="svc reveal">
+        <div class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3"/></svg></div>
+        <h3 class="svc__name">Documentary Style</h3>
+        <p class="svc__desc">Construction time-lapses, architectural documentaries, community impact stories, heritage property films, and urban development narratives.</p>
+        <span class="svc__price">&#8377;15L &ndash; 75L</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ AMPLIFICATION LOOP + ADVANTAGES ═══ -->
+<section class="sec" id="why">
+  <div class="cont">
+    <div class="sec__header reveal">
+      <span class="sec__eyebrow">The Amplification Loop</span>
+      <h2 class="sec__title">Create. Distribute. Monetise.</h2>
+      <p class="sec__desc">VideoWorks doesn't just produce content. It creates, distributes, amplifies, measures, optimises, and monetises through Ghar.tv's ecosystem.</p>
+    </div>
+
+    <div class="loop reveal">
+      <div class="loop__step">
+        <div class="loop__step-dot">1</div>
+        <div class="loop__step-name">Create</div>
+      </div>
+      <div class="loop__step">
+        <div class="loop__step-dot">2</div>
+        <div class="loop__step-name">Distribute</div>
+      </div>
+      <div class="loop__step">
+        <div class="loop__step-dot">3</div>
+        <div class="loop__step-name">Amplify</div>
+      </div>
+      <div class="loop__step">
+        <div class="loop__step-dot">4</div>
+        <div class="loop__step-name">Measure</div>
+      </div>
+      <div class="loop__step">
+        <div class="loop__step-dot">5</div>
+        <div class="loop__step-name">Optimise</div>
+      </div>
+      <div class="loop__step">
+        <div class="loop__step-dot">6</div>
+        <div class="loop__step-name">Monetise</div>
+      </div>
+    </div>
+
+    <div class="adv-grid">
+      <div class="adv reveal">
+        <div class="adv__vs">Vs. Ad Agencies</div>
+        <h3 class="adv__title">Domain expertise + 50% lower cost</h3>
+        <p class="adv__desc">48-hour turnarounds vs 4-week agency timelines. We speak RERA, carpet area, and micro-markets &mdash; no real estate 101 briefings needed.</p>
+      </div>
+      <div class="adv reveal">
+        <div class="adv__vs">Vs. Production Houses</div>
+        <h3 class="adv__title">Strategic thinking + built-in distribution</h3>
+        <p class="adv__desc">Performance data that tracks leads per video. Your content lives on Ghar.tv's platform &mdash; not just your YouTube channel.</p>
+      </div>
+      <div class="adv reveal">
+        <div class="adv__vs">Vs. In-House Teams</div>
+        <h3 class="adv__title">Agency-level quality at scale</h3>
+        <p class="adv__desc">Multi-platform expertise, professional equipment, and creative direction that in-house teams can't sustain across 30+ projects a month.</p>
+      </div>
+      <div class="adv reveal">
+        <div class="adv__vs">Vs. Generic Agencies</div>
+        <h3 class="adv__title">Real estate is all we do</h3>
+        <p class="adv__desc">100% specialisation means every frame, every cut, every CTA is built for property. We don't do FMCG on Monday and real estate on Friday.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PRICING ═══ -->
+<section class="sec sec--surface" id="pricing">
+  <div class="cont">
+    <div class="sec__header reveal">
+      <span class="sec__eyebrow">Retainer Packages</span>
+      <h2 class="sec__title">Predictable Pricing.<br>Unpredictable Creative.</h2>
+      <p class="sec__desc">Monthly retainers for developers and brands who need consistent, high-quality video output.</p>
+    </div>
+
+    <div class="price-grid">
+      <div class="price reveal">
+        <div class="price__name">Starter</div>
+        <div class="price__amt">&#8377;3L</div>
+        <div class="price__period">per month</div>
+        <ul class="price__list">
+          <li>2 videos per month</li>
+          <li>10 social media cuts</li>
+          <li>Dedicated project manager</li>
+          <li>Platform distribution on Ghar.tv</li>
+        </ul>
+        <a href="#" class="price__cta">Get Started &rarr;</a>
+      </div>
+
+      <div class="price price--pop reveal">
+        <div class="price__name">Growth</div>
+        <div class="price__amt">&#8377;10L</div>
+        <div class="price__period">per month</div>
+        <ul class="price__list">
+          <li>5 videos per month</li>
+          <li>30 social media assets</li>
+          <li>Dedicated creative team</li>
+          <li>Performance analytics dashboard</li>
+          <li>Priority 48-hour turnarounds</li>
+        </ul>
+        <a href="#" class="price__cta">Get Started &rarr;</a>
+      </div>
+
+      <div class="price reveal">
+        <div class="price__name">Enterprise</div>
+        <div class="price__amt">&#8377;25L</div>
+        <div class="price__period">per month</div>
+        <ul class="price__list">
+          <li>Unlimited videos</li>
+          <li>Full embedded creative team</li>
+          <li>Brand strategy &amp; creative direction</li>
+          <li>Multi-platform campaign management</li>
+          <li>Quarterly brand review sessions</li>
+        </ul>
+        <a href="#" class="price__cta">Contact Us &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CTA BANNER ═══ -->
+<section class="cta-ban">
+  <div class="cont">
+    <h2 class="cta-ban__title">Ready to create something cinematic?</h2>
+    <p class="cta-ban__sub">From a single property film to a full launch campaign &mdash; let's talk about what VideoWorks can build for your brand.</p>
+    <div class="cta-ban__btns">
+      <a href="#" class="btn btn--primary">Get a Quote &rarr;</a>
+      <a href="#" class="btn btn--outline">View Showreel</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div><img src="logo.svg" alt="GHAR.tv" class="ft-logo-img"><p class="ft-tag">India's AI-Native Real Estate Intelligence</p></div>
+      <nav class="ft-nav">
+        <a href="/intelligence">Intelligence</a>
+        <a href="/design">Design</a>
+        <a href="/people">People</a>
+        <a href="/ghartalks">GharTalks</a>
+        <a href="/videoworks">VideoWorks</a>
+        <a href="/gharevents">GharEvents</a>
+        <a href="/industry-voices">Industry Voices</a>
+      </nav>
+    </div>
+    <div class="ft-bot">
+      <p>&copy; 2026 Ghar.tv &middot; Zybeq Ventures Pvt Ltd</p>
+      <div class="ft-bot-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var btn=document.getElementById('hamburgerBtn'),menu=document.getElementById('mobMenu');
+  btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.classList.toggle('active',o);btn.setAttribute('aria-expanded',o);menu.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.classList.remove('active');btn.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow=''})});
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href'),t=id.length>1&&document.querySelector(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+  var reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -32px 0px'});reveals.forEach(function(el){io.observe(el)})}else{reveals.forEach(function(el){el.classList.add('revealed')})}
+})();
+</script>
+</body>

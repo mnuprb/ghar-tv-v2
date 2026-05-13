@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>People - Community - GHAR.tv</title>
+  <meta name="description" content="The leaders, builders, and visionaries shaping India's real estate landscape. Architects, investors, developers, brokers, policymakers, and every leader behind the projects.">
+  <link rel="canonical" href="https://ghar.tv/community/people">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+
+  <style>
+    @font-face{font-family:'Gazpacho';src:url('fonts/Gazpacho-Bold.woff2') format('woff2'),url('fonts/Gazpacho-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+
+    :root{--bg:#ffffff;--ink:#111111;--ink2:#4b5563;--faint:#9ca3af;--rule:#e8e8e8;--accent:#ee324b;--surface:#f7f7f7;--ff-display:'Gazpacho',Georgia,serif;--ff-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--ease:cubic-bezier(.4,0,.2,1);--max-w:1600px;--pad-h:clamp(24px,3vw,80px);--pad-v:clamp(80px,9vw,120px);--sh-sm:0 1px 3px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.04)}
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:var(--ff-sans);background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
+    .cont{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h)}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);box-shadow:var(--sh-sm)}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-logo{display:flex;align-items:baseline;flex-shrink:0}.nav-logo-img{height:28px;width:auto}
+    .nav-logo-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-left:10px}
+    .nav-links{display:none;align-items:center;justify-content:center;gap:2px;list-style:none;flex:1}
+    .nav-links a{font-size:13.5px;font-weight:500;color:var(--ink2);padding:6px 11px;border-radius:7px;white-space:nowrap;transition:background .16s,color .16s}
+    .nav-links a:hover{background:var(--surface);color:var(--ink)}.nav-links a.active{background:var(--surface);color:var(--ink);font-weight:600}
+    .nav-right{display:none;align-items:center;gap:8px;flex-shrink:0}
+    .nav-btn-join{font-size:13px;font-weight:600;color:#fff;padding:8px 20px;border-radius:8px;background:var(--ink);display:inline-flex;align-items:center;transition:background .18s,transform .18s}
+    .nav-btn-join:hover{background:var(--accent);transform:translateY(-1px)}
+    .nav-hamburger{display:flex;flex-direction:column;gap:5px;padding:6px;background:none;border:none;z-index:901}
+    .nav-hamburger span{display:block;width:20px;height:1.5px;background:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+    .nav-hamburger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .nav-hamburger.active span:nth-child(2){opacity:0}
+    .nav-hamburger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .mob-menu{position:fixed;inset:0;background:var(--bg);z-index:850;transform:translateX(100%);transition:transform .42s var(--ease);padding:88px 28px 48px}
+    .mob-menu.open{transform:translateX(0)}
+    .mob-links{list-style:none}.mob-links li{border-bottom:1px solid var(--rule)}
+    .mob-links a{display:block;padding:15px 0;font-family:var(--ff-display);font-size:24px;font-weight:700;color:var(--ink)}
+    .mob-links .mob-accent{color:var(--accent)}
+
+    /* HERO */
+    .hero{position:relative;overflow:hidden;display:flex;align-items:center}
+    .hero-bg{position:absolute;inset:0;pointer-events:none;background:var(--bg)}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .hero-grid::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(17,17,17,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,17,.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%)}
+    .hero-split{display:grid;grid-template-columns:1fr;gap:40px;max-width:var(--max-w);margin:0 auto;padding:clamp(40px,5vw,60px) var(--pad-h);width:100%;position:relative;z-index:2;align-items:center}
+    @media(min-width:900px){.hero-split{grid-template-columns:1fr 1fr;gap:64px}}
+    .hero-left{text-align:center}
+    @media(min-width:900px){.hero-left{text-align:left}}
+    .hero-eyebrow,.hero-title,.hero-sub,.hero-ctas{opacity:0;transform:translateY(24px);animation:cpFadeUp .8s var(--ease) forwards}
+    .hero-eyebrow{animation-delay:.1s}.hero-title{animation-delay:.25s}.hero-sub{animation-delay:.4s}.hero-ctas{animation-delay:.55s}
+    @keyframes cpFadeUp{to{opacity:1;transform:none}}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;padding:8px 20px;border:1px solid rgba(238,50,75,.15);border-radius:24px;background:rgba(238,50,75,.04)}
+    .hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:cpDotPulse 2s ease-in-out infinite}
+    @keyframes cpDotPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(238,50,75,.3)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(238,50,75,0)}}
+    .hero-title{font-family:var(--ff-display);font-size:clamp(40px,6vw,76px);font-weight:700;line-height:.98;letter-spacing:-.04em;color:var(--ink);margin-bottom:20px}
+    .hero-title span{display:block}
+    .hero-sub{font-size:clamp(15px,1.3vw,18px);line-height:1.75;color:var(--ink2);max-width:480px;margin-bottom:36px}
+    @media(min-width:900px){.hero-sub{margin-left:0;margin-right:auto}}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+    @media(min-width:900px){.hero-ctas{justify-content:flex-start}}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:16px 32px;border-radius:10px;font-size:15px;font-weight:600;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(17,17,17,.2)}
+    .btn-primary::after{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity .25s}
+    .btn-primary:hover::after{opacity:1}
+    .btn-primary span{position:relative;z-index:1}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--rule);color:var(--ink);padding:16px 32px;border-radius:10px;font-size:15px;font-weight:500;background:none;transition:border-color .25s,background .25s}
+    .btn-outline:hover{border-color:var(--ink);background:var(--surface)}
+
+    /* Right — SVG */
+    .hero-right{display:flex;align-items:center;justify-content:center;position:relative;min-height:340px;opacity:0;animation:cpFadeUp 1s .3s forwards}
+    .hero-svg{width:100%;max-width:460px;height:auto}
+    .cp-fade{opacity:0;animation:cpFillIn .5s ease-out forwards}
+    .cp-1{animation-delay:.5s}.cp-2{animation-delay:.7s}.cp-3{animation-delay:.9s}.cp-4{animation-delay:1.1s}.cp-5{animation-delay:1.3s}.cp-6{animation-delay:1.5s}
+    @keyframes cpFillIn{to{opacity:1}}
+    @keyframes cpOrbit{to{transform:rotate(360deg)}}
+    @media(max-width:899px){.hero-right{display:none}}
+    @media(max-width:480px){.hero-ctas{flex-direction:column}.btn-primary,.btn-outline{width:100%;justify-content:center}}
+
+    /* BREADCRUMB */
+    .bc{padding:14px 0 16px;display:flex;align-items:center;gap:8px}
+    .bc a{font-size:12px;color:var(--faint);font-weight:500}.bc a:hover{color:var(--ink)}
+    .bc-sep{font-size:11px;color:var(--faint)}.bc-cur{font-size:12px;color:var(--ink);font-weight:600}
+
+    /* FILTERS */
+    .filters{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:40px;position:sticky;top:56px;z-index:880;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px 0;margin-left:calc(var(--pad-h) * -1);margin-right:calc(var(--pad-h) * -1);padding-left:var(--pad-h);padding-right:var(--pad-h);border-bottom:1px solid transparent;transition:border-color .2s}
+    .filters.stuck{border-bottom-color:var(--rule)}
+    .filter-group{display:flex;flex-direction:column}
+    .filter-select-wrap{position:relative;display:inline-flex}
+    .filter-select{font-family:var(--ff-sans);font-size:13.5px;font-weight:500;color:var(--ink);background:var(--bg);padding:10px 36px 10px 16px;border-radius:8px;border:1.5px solid var(--rule);appearance:none;-webkit-appearance:none;cursor:pointer;min-width:200px;transition:border-color .18s}
+    .filter-select:hover{border-color:rgba(17,17,17,.25)}
+    .filter-select:focus{outline:none;border-color:var(--ink)}
+    .filter-select-arrow{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:10px;height:10px;color:var(--faint);pointer-events:none}
+    .filter-reset{font-family:var(--ff-sans);font-size:12.5px;font-weight:600;color:var(--accent);background:none;border:none;cursor:pointer;padding:10px 0;white-space:nowrap;transition:opacity .18s}
+    .filter-reset:hover{opacity:.7}
+    @media(max-width:520px){.filters{gap:8px;flex-wrap:nowrap}.filter-group{flex:1;min-width:0}.filter-select{width:100%;min-width:0;font-size:12px;padding:9px 28px 9px 10px}.filter-reset{font-size:12px;padding:8px 4px;flex-shrink:0}}
+
+    /* SECTION */
+    .sec{padding:80px 0;position:relative}
+    .sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:16px;flex-wrap:wrap}
+    .sec-header__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.15;color:var(--ink)}
+
+    /* PEOPLE GRID */
+    .people-grid{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:520px){.people-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.people-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:1200px){.people-grid{grid-template-columns:repeat(4,1fr)}}
+
+    /* PEOPLE CARD */
+    .ppl-card{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--rule);border-radius:16px;overflow:hidden;transition:border-color .22s var(--ease),box-shadow .22s var(--ease),transform .22s var(--ease)}
+    .ppl-card:hover{border-color:rgba(17,17,17,.18);box-shadow:0 8px 32px rgba(0,0,0,.08),0 2px 8px rgba(0,0,0,.04);transform:translateY(-3px)}
+    .ppl-card__img-wrap{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--surface)}
+    .ppl-card__img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+    .ppl-card:hover .ppl-card__img{transform:scale(1.04)}
+    .ppl-card__cat-badge{position:absolute;top:12px;left:12px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(17,17,17,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:5px 10px;border-radius:6px;line-height:1.2}
+    .ppl-card__body{padding:20px;display:flex;flex-direction:column;flex:1}
+    .ppl-card__name{font-family:var(--ff-display);font-size:18px;font-weight:700;line-height:1.2;color:var(--ink);margin-bottom:4px}
+    .ppl-card__desig{font-size:13px;font-weight:500;color:var(--ink2);line-height:1.5;margin-bottom:12px}
+    .ppl-card__meta{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);font-weight:500;margin-top:auto}
+    .ppl-card__meta-icon{width:13px;height:13px;flex-shrink:0;color:var(--faint)}
+    .ppl-card__arrow{margin-left:auto;color:var(--rule);transition:color .2s,transform .2s}
+    .ppl-card:hover .ppl-card__arrow{color:var(--ink);transform:translateX(3px)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+    .reveal.revealed{opacity:1;transform:none}
+    .reveal-item{opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+    .reveal-item.revealed{opacity:1;transform:none}
+    .reveal-item:nth-child(2).revealed{transition-delay:.06s}
+    .reveal-item:nth-child(3).revealed{transition-delay:.12s}
+    .reveal-item:nth-child(4).revealed{transition-delay:.18s}
+    .reveal-item:nth-child(5).revealed{transition-delay:.24s}
+    .reveal-item:nth-child(6).revealed{transition-delay:.30s}
+    .reveal-item:nth-child(7).revealed{transition-delay:.36s}
+    .reveal-item:nth-child(8).revealed{transition-delay:.42s}
+
+    /* LOAD MORE */
+    .load-more{text-align:center;padding:48px 0 0}
+    .load-more.is-hidden{display:none}
+    .load-more__btn{font-family:var(--ff-sans);font-size:14px;font-weight:600;color:var(--ink);background:none;border:1.5px solid var(--rule);border-radius:8px;padding:12px 32px;cursor:pointer;transition:background .18s,border-color .18s}
+    .load-more__btn:hover{background:var(--surface);border-color:rgba(17,17,17,.2)}
+
+    /* CTA MODERN */
+    .cta-modern{position:relative;overflow:hidden;padding:clamp(64px,8vw,100px) 0;background:#111}
+    .cta-modern__bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(238,50,75,.08),transparent 70%),radial-gradient(ellipse 40% 40% at 80% 60%,rgba(59,130,246,.06),transparent 70%)}
+    .cta-modern__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);display:grid;grid-template-columns:1fr;gap:48px;position:relative;z-index:1}
+    @media(min-width:900px){.cta-modern__inner{grid-template-columns:1fr 1fr;gap:64px;align-items:center}}
+    .cta-modern__eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#ee324b;margin-bottom:20px}
+    .cta-modern__eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#ee324b}
+    .cta-modern__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.1;color:#fff;margin-bottom:16px}
+    .cta-modern__desc{font-size:15px;line-height:1.75;color:rgba(255,255,255,.55);margin-bottom:28px;max-width:480px}
+    .cta-modern__features{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
+    .cta-modern__feature{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,.7)}
+    .cta-modern__feature svg{color:#ee324b;flex-shrink:0}
+    .cta-modern__form-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:clamp(28px,4vw,40px)}
+    .cta-modern__form{display:flex;flex-direction:column;gap:14px}
+    .cta-modern__input-row{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:500px){.cta-modern__input-row{grid-template-columns:1fr 1fr}}
+    .cta-modern__inp{font-family:var(--ff-sans);font-size:14px;padding:14px 18px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#fff;transition:border-color .2s}
+    .cta-modern__inp::placeholder{color:rgba(255,255,255,.3)}
+    .cta-modern__inp:focus{outline:none;border-color:rgba(255,255,255,.25)}
+    .cta-modern__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--ff-sans);font-size:15px;font-weight:600;color:#111;background:#fff;padding:15px 28px;border-radius:10px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
+    .cta-modern__btn:hover{background:#ee324b;color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(238,50,75,.25)}
+    .cta-modern__note{font-size:11.5px;color:rgba(255,255,255,.3);text-align:center}
+    .cta-modern__ok{text-align:center;padding:20px 0}
+    .cta-modern__ok-icon{font-size:36px;color:#22c55e;margin-bottom:12px}
+    .cta-modern__ok p{font-size:15px;color:rgba(255,255,255,.7)}
+
+    /* FOOTER */
+    .footer{background:#111;border-top:none;padding:36px 0}
+    .ft-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h)}
+    .ft-top{display:flex;flex-direction:column;gap:24px;padding-bottom:32px;border-bottom:1px solid #1a1a1a;margin-bottom:24px}
+    @media(min-width:744px){.ft-top{flex-direction:row;align-items:flex-start;justify-content:space-between}}
+    .ft-logo-img{height:24px;width:auto;margin-bottom:8px;filter:brightness(0) invert(1)}
+    .ft-tag{font-size:12px;color:rgba(255,255,255,.3)}
+    .ft-nav{display:flex;gap:24px;flex-wrap:wrap}.ft-nav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.45)}.ft-nav a:hover{color:#fff}
+    .ft-bot{display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(255,255,255,.2)}
+    @media(min-width:744px){.ft-bot{flex-direction:row;justify-content:space-between}}
+    .ft-bot-links{display:flex;gap:16px}.ft-bot-links a{font-size:12px;color:rgba(255,255,255,.2)}.ft-bot-links a:hover{color:rgba(255,255,255,.6)}
+
+    @media(min-width:1200px){.nav-inner{padding:0 32px;height:62px;gap:32px}.nav-links{display:flex}.nav-right{display:flex}.nav-hamburger{display:none}.filters{top:62px}}
+  </style>
+</head>
+
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="logo.svg" alt="GHAR.tv" class="nav-logo-img"><span class="nav-logo-tag">People</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="/intelligence">Intelligence</a></li>
+      <li><a href="/design">Design</a></li>
+      <li><a href="/community" class="active">Community</a></li>
+      <li><a href="/ghartalks">GharTalks</a></li>
+      <li><a href="/videoworks">VideoWorks</a></li>
+      <li><a href="/gharevents">GharEvents</a></li>
+      <li><a href="/industry-voices">Industry Voices</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/join" class="nav-btn-join">Join Now</a>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <ul class="mob-links">
+    <li><a href="/intelligence">Intelligence</a></li>
+    <li><a href="/design">Design</a></li>
+    <li><a href="/community" class="mob-accent">Community</a></li>
+    <li><a href="/ghartalks">GharTalks</a></li>
+    <li><a href="/videoworks">VideoWorks</a></li>
+    <li><a href="/gharevents">GharEvents</a></li>
+    <li><a href="/industry-voices">Industry Voices</a></li>
+    <li><a href="/join" class="mob-accent">Join Now &rarr;</a></li>
+  </ul>
+</div>
+
+<!-- Breadcrumb -->
+<div class="cont" style="padding-top:72px;">
+  <nav class="bc" aria-label="Breadcrumb">
+    <a href="/">GHAR.tv</a>
+    <span class="bc-sep">&rsaquo;</span>
+    <a href="/community">Community</a>
+    <span class="bc-sep">&rsaquo;</span>
+    <span class="bc-cur">People</span>
+  </nav>
+</div>
+
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-split">
+    <!-- LEFT -->
+    <div class="hero-left">
+      <h1 class="hero-title">The Minds Behind<span>India's Built World</span></h1>
+      <p class="hero-sub">Developers, architects, policymakers, investors, and the visionaries shaping India's real estate and design landscape &mdash; the people behind the projects.</p>
+      <div class="hero-ctas">
+        <a href="#people-listing" class="btn-primary"><span>Explore People &rarr;</span></a>
+        <a href="/community" class="btn-outline">Back to Community</a>
+      </div>
+    </div>
+
+    <!-- RIGHT — Connected people network SVG -->
+    <div class="hero-right">
+      <svg class="hero-svg" viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Central hub -->
+        <g class="cp-fade cp-2">
+          <circle cx="210" cy="190" r="55" fill="#fff" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="210" cy="190" r="50" fill="rgba(59,130,246,.03)"/>
+          <!-- Person group icon -->
+          <circle cx="200" cy="178" r="8" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+          <path d="M188 198a12 12 0 0 1 24 0" stroke="#3b82f6" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="222" cy="178" r="6" fill="none" stroke="#3b82f6" stroke-width="1.2" opacity=".5"/>
+          <path d="M214 195a9 9 0 0 1 18 0" stroke="#3b82f6" stroke-width="1.2" fill="none" opacity=".5" stroke-linecap="round"/>
+        </g>
+
+        <!-- Connections -->
+        <g class="cp-fade cp-1" stroke="#e5e7eb" stroke-width="1">
+          <line x1="210" y1="135" x2="120" y2="60"/>
+          <line x1="210" y1="135" x2="300" y2="55"/>
+          <line x1="155" y1="190" x2="50" y2="170"/>
+          <line x1="265" y1="190" x2="370" y2="175"/>
+          <line x1="210" y1="245" x2="120" y2="320"/>
+          <line x1="210" y1="245" x2="300" y2="325"/>
+          <line x1="155" y1="210" x2="65" y2="280"/>
+          <line x1="265" y1="210" x2="355" y2="275"/>
+        </g>
+
+        <!-- Developers -->
+        <g class="cp-fade cp-3">
+          <circle cx="120" cy="60" r="24" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+          <circle cx="120" cy="53" r="6" fill="none" stroke="#ee324b" stroke-width="1.1"/>
+          <path d="M110 68a10 10 0 0 1 20 0" stroke="#ee324b" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <text x="120" y="94" text-anchor="middle" font-size="9" font-weight="600" fill="#ee324b" font-family="Inter,sans-serif">Developers</text>
+        </g>
+
+        <!-- Architects -->
+        <g class="cp-fade cp-3">
+          <circle cx="300" cy="55" r="22" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+          <circle cx="300" cy="48" r="5" fill="none" stroke="#3b82f6" stroke-width="1.1"/>
+          <path d="M291 62a9 9 0 0 1 18 0" stroke="#3b82f6" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <text x="300" y="86" text-anchor="middle" font-size="9" font-weight="600" fill="#3b82f6" font-family="Inter,sans-serif">Architects</text>
+        </g>
+
+        <!-- Policy -->
+        <g class="cp-fade cp-4">
+          <circle cx="50" cy="170" r="20" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+          <circle cx="50" cy="163" r="5" fill="none" stroke="#8b5cf6" stroke-width="1"/>
+          <path d="M42 178a8 8 0 0 1 16 0" stroke="#8b5cf6" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <text x="50" y="200" text-anchor="middle" font-size="8" font-weight="600" fill="#8b5cf6" font-family="Inter,sans-serif">Policy</text>
+        </g>
+
+        <!-- Investors -->
+        <g class="cp-fade cp-4">
+          <circle cx="370" cy="175" r="20" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+          <circle cx="370" cy="168" r="5" fill="none" stroke="#10b981" stroke-width="1"/>
+          <path d="M362 183a8 8 0 0 1 16 0" stroke="#10b981" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <text x="370" y="205" text-anchor="middle" font-size="8" font-weight="600" fill="#10b981" font-family="Inter,sans-serif">Investors</text>
+        </g>
+
+        <!-- Brokers -->
+        <g class="cp-fade cp-5">
+          <circle cx="65" cy="280" r="18" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+          <circle cx="65" cy="274" r="4" fill="none" stroke="#14b8a6" stroke-width=".9"/>
+          <path d="M58 287a7 7 0 0 1 14 0" stroke="#14b8a6" stroke-width=".9" fill="none" stroke-linecap="round"/>
+          <text x="65" y="306" text-anchor="middle" font-size="8" font-weight="600" fill="#14b8a6" font-family="Inter,sans-serif">Brokers</text>
+        </g>
+
+        <!-- PropTech -->
+        <g class="cp-fade cp-5">
+          <circle cx="355" cy="275" r="18" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+          <circle cx="355" cy="269" r="4" fill="none" stroke="#ec4899" stroke-width=".9"/>
+          <path d="M348 282a7 7 0 0 1 14 0" stroke="#ec4899" stroke-width=".9" fill="none" stroke-linecap="round"/>
+          <text x="355" y="301" text-anchor="middle" font-size="8" font-weight="600" fill="#ec4899" font-family="Inter,sans-serif">PropTech</text>
+        </g>
+
+        <!-- Media -->
+        <g class="cp-fade cp-5">
+          <circle cx="120" cy="320" r="16" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+          <circle cx="120" cy="315" r="3.5" fill="none" stroke="#f59e0b" stroke-width=".8"/>
+          <path d="M114 326a6 6 0 0 1 12 0" stroke="#f59e0b" stroke-width=".8" fill="none" stroke-linecap="round"/>
+          <text x="120" y="344" text-anchor="middle" font-size="8" font-weight="600" fill="#f59e0b" font-family="Inter,sans-serif">Media</text>
+        </g>
+
+        <!-- Legal -->
+        <g class="cp-fade cp-6">
+          <circle cx="300" cy="325" r="16" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+          <circle cx="300" cy="320" r="3.5" fill="none" stroke="#f97316" stroke-width=".8"/>
+          <path d="M294 331a6 6 0 0 1 12 0" stroke="#f97316" stroke-width=".8" fill="none" stroke-linecap="round"/>
+          <text x="300" y="349" text-anchor="middle" font-size="8" font-weight="600" fill="#f97316" font-family="Inter,sans-serif">Legal</text>
+        </g>
+
+        <!-- Orbiting dot -->
+        <circle cx="210" cy="110" r="4" fill="#3b82f6" opacity=".5" style="animation:cpOrbit 14s linear infinite;transform-origin:210px 190px;will-change:transform"/>
+
+        <!-- Decorative dots -->
+        <circle cx="25" cy="110" r="2" fill="#ee324b" opacity=".08" class="cp-fade cp-4"/>
+        <circle cx="400" cy="110" r="2" fill="#3b82f6" opacity=".08" class="cp-fade cp-5"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+
+<!-- PEOPLE LISTING -->
+<section class="sec" id="people-listing">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div><h2 class="sec-header__title">People Directory</h2></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters" id="filtersBar">
+      <div class="filter-group">
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterCategory">
+            <option value="all">All Categories</option>
+            <option value="developers">Developers</option>
+            <option value="architects">Architects</option>
+            <option value="brokers">Brokers &amp; Consultants</option>
+            <option value="interior-designers">Interior Designers</option>
+            <option value="investors">Investors &amp; Funds</option>
+            <option value="proptech">PropTech Founders</option>
+            <option value="legal">Legal Experts</option>
+            <option value="finance">Finance &amp; Home Loan</option>
+            <option value="government">Government &amp; Policy</option>
+            <option value="media">Media &amp; Influencers</option>
+          </select>
+          <svg class="filter-select-arrow" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterCity">
+            <option value="all">All Cities</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="delhi">Delhi NCR</option>
+            <option value="bengaluru">Bengaluru</option>
+            <option value="pune">Pune</option>
+            <option value="hyderabad">Hyderabad</option>
+            <option value="chennai">Chennai</option>
+          </select>
+          <svg class="filter-select-arrow" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <button class="filter-reset" id="filterReset" hidden>Clear all</button>
+    </div>
+
+    <!-- People Grid -->
+    <div class="people-grid" id="peopleGrid">
+
+      <!-- 1. Niranjan Hiranandani -->
+      <a href="#" class="ppl-card reveal-item" data-category="developers" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face&q=80" alt="Niranjan Hiranandani" loading="lazy">
+          <span class="ppl-card__cat-badge">Developers</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Niranjan Hiranandani</h3>
+          <p class="ppl-card__desig">Co-Founder &amp; MD, Hiranandani Group</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 2. Hafeez Contractor -->
+      <a href="#" class="ppl-card reveal-item" data-category="architects" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face&q=80" alt="Hafeez Contractor" loading="lazy">
+          <span class="ppl-card__cat-badge">Architects</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Hafeez Contractor</h3>
+          <p class="ppl-card__desig">Founder, Hafeez Contractor Architects</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 3. Anuj Puri -->
+      <a href="#" class="ppl-card reveal-item" data-category="brokers" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face&q=80" alt="Anuj Puri" loading="lazy">
+          <span class="ppl-card__cat-badge">Brokers &amp; Consultants</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Anuj Puri</h3>
+          <p class="ppl-card__desig">Chairman, ANAROCK Property Consultants</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 4. Gauri Khan -->
+      <a href="#" class="ppl-card reveal-item" data-category="interior-designers" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face&q=80" alt="Gauri Khan" loading="lazy">
+          <span class="ppl-card__cat-badge">Interior Designers</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Gauri Khan</h3>
+          <p class="ppl-card__desig">Founder, Gauri Khan Designs</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 5. Kalpesh Mehta -->
+      <a href="#" class="ppl-card reveal-item" data-category="legal" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face&q=80" alt="Kalpesh Mehta" loading="lazy">
+          <span class="ppl-card__cat-badge">Legal Experts</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Kalpesh Mehta</h3>
+          <p class="ppl-card__desig">Partner, Deloitte India (Real Estate)</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 6. Dhruv Agarwala -->
+      <a href="#" class="ppl-card reveal-item" data-category="proptech" data-city="bengaluru">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face&q=80" alt="Dhruv Agarwala" loading="lazy">
+          <span class="ppl-card__cat-badge">PropTech Founders</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Dhruv Agarwala</h3>
+          <p class="ppl-card__desig">CEO, Housing.com &amp; PropTiger</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Bengaluru
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 7. Pirojsha Godrej -->
+      <a href="#" class="ppl-card reveal-item" data-category="developers" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face&q=80" alt="Pirojsha Godrej" loading="lazy">
+          <span class="ppl-card__cat-badge">Developers</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Pirojsha Godrej</h3>
+          <p class="ppl-card__desig">Executive Chairman, Godrej Properties</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 8. Ramesh Nair -->
+      <a href="#" class="ppl-card reveal-item" data-category="brokers" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face&q=80" alt="Ramesh Nair" loading="lazy">
+          <span class="ppl-card__cat-badge">Brokers &amp; Consultants</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Ramesh Nair</h3>
+          <p class="ppl-card__desig">CEO, Mindspace Business Parks REIT</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 9. Shobha Karandlaje -->
+      <a href="#" class="ppl-card reveal-item" data-category="government" data-city="delhi">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face&q=80" alt="Policy Leader" loading="lazy">
+          <span class="ppl-card__cat-badge">Government &amp; Policy</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Hardeep S. Puri</h3>
+          <p class="ppl-card__desig">Union Minister, Housing &amp; Urban Affairs</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Delhi NCR
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 10. Abhishek Lodha -->
+      <a href="#" class="ppl-card reveal-item" data-category="developers" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&h=400&fit=crop&crop=face&q=80" alt="Abhishek Lodha" loading="lazy">
+          <span class="ppl-card__cat-badge">Developers</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Abhishek Lodha</h3>
+          <p class="ppl-card__desig">MD &amp; CEO, Macrotech Developers</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 11. Irfan Razack -->
+      <a href="#" class="ppl-card reveal-item" data-category="developers" data-city="bengaluru">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face&q=80" alt="Irfan Razack" loading="lazy">
+          <span class="ppl-card__cat-badge">Developers</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Irfan Razack</h3>
+          <p class="ppl-card__desig">Chairman, Prestige Group</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Bengaluru
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 12. Samantak Das -->
+      <a href="#" class="ppl-card reveal-item" data-category="investors" data-city="mumbai">
+        <div class="ppl-card__img-wrap">
+          <img class="ppl-card__img" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face&q=80" alt="Samantak Das" loading="lazy">
+          <span class="ppl-card__cat-badge">Investors &amp; Funds</span>
+        </div>
+        <div class="ppl-card__body">
+          <h3 class="ppl-card__name">Samantak Das</h3>
+          <p class="ppl-card__desig">Chief Economist, JLL India</p>
+          <div class="ppl-card__meta">
+            <svg class="ppl-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai
+            <svg class="ppl-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Load More -->
+    <div class="load-more reveal" id="loadMoreWrap">
+      <button class="load-more__btn" id="loadMoreBtn">Load more people &darr;</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA — Modern Dark -->
+<section class="cta-modern reveal" id="newsletter">
+  <div class="cta-modern__bg" aria-hidden="true"></div>
+  <div class="cta-modern__inner">
+    <div class="cta-modern__content">
+      <span class="cta-modern__eyebrow"><span class="cta-modern__eyebrow-dot"></span> People Briefing</span>
+      <h2 class="cta-modern__title">Know the Leaders Shaping India's Real Estate</h2>
+      <p class="cta-modern__desc">Weekly profiles, interviews, and leadership insights from the people driving India's property and design industry.</p>
+      <div class="cta-modern__features">
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Leadership profiles</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> New appointments</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Industry awards</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Emerging voices</span>
+      </div>
+    </div>
+    <div class="cta-modern__form-wrap">
+      <form class="cta-modern__form" id="nlForm" novalidate>
+        <div class="cta-modern__input-row">
+          <input type="text" class="cta-modern__inp" placeholder="Your name" autocomplete="name" required>
+          <input type="email" class="cta-modern__inp" placeholder="Your email address" autocomplete="email" required id="nlEmailField">
+        </div>
+        <button type="submit" class="cta-modern__btn" id="nlBtn">
+          <span>Subscribe to People Briefing</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <p class="cta-modern__note">Free. No spam. Unsubscribe anytime.</p>
+      </form>
+      <div class="cta-modern__ok" id="nlOk" hidden>
+        <div class="cta-modern__ok-icon">&check;</div>
+        <p>You're subscribed. Welcome to the community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div><img src="logo.svg" alt="GHAR.tv" class="ft-logo-img"><p class="ft-tag">India's AI-Native Real Estate Intelligence</p></div>
+      <nav class="ft-nav">
+        <a href="/intelligence">Intelligence</a>
+        <a href="/design">Design</a>
+        <a href="/community">Community</a>
+        <a href="/ghartalks">GharTalks</a>
+        <a href="/videoworks">VideoWorks</a>
+        <a href="/gharevents">GharEvents</a>
+        <a href="/industry-voices">Industry Voices</a>
+      </nav>
+    </div>
+    <div class="ft-bot">
+      <p>&copy; 2026 Ghar.tv &middot; Zybeq Ventures Pvt Ltd</p>
+      <div class="ft-bot-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  'use strict';
+
+  /* Nav scroll */
+  var nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>8)},{passive:true});
+
+  /* Hamburger */
+  var btn=document.getElementById('hamburgerBtn'),menu=document.getElementById('mobMenu');
+  btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.classList.toggle('active',o);btn.setAttribute('aria-expanded',o);menu.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.classList.remove('active');btn.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow=''})});
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');var t=id.length>1&&document.querySelector(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+
+  /* Reveal */
+  var reveals=document.querySelectorAll('.reveal,.reveal-item');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -32px 0px'});reveals.forEach(function(el){io.observe(el)})}else{reveals.forEach(function(el){el.classList.add('revealed')})}
+
+  /* Sticky filter bar */
+  var filtersBar=document.getElementById('filtersBar');
+  if(filtersBar&&'IntersectionObserver' in window){var sentinel=document.createElement('div');sentinel.style.height='1px';sentinel.style.marginBottom='-1px';filtersBar.parentNode.insertBefore(sentinel,filtersBar);var sio=new IntersectionObserver(function(entries){filtersBar.classList.toggle('stuck',!entries[0].isIntersecting)},{threshold:0});sio.observe(sentinel)}
+
+  /* Filters */
+  var catSelect=document.getElementById('filterCategory');
+  var citySelect=document.getElementById('filterCity');
+  var resetBtn=document.getElementById('filterReset');
+  var allCards=document.querySelectorAll('.ppl-card');
+
+  function applyFilters(){
+    var cat=catSelect.value;var city=citySelect.value;
+    var anyActive=cat!=='all'||city!=='all';
+    resetBtn.hidden=!anyActive;
+    allCards.forEach(function(card){
+      var matchCat=cat==='all'||card.getAttribute('data-category')===cat;
+      var matchCity=city==='all'||card.getAttribute('data-city')===city;
+      if(matchCat&&matchCity){card.style.display='';card.classList.add('revealed')}else{card.style.display='none'}
+    });
+  }
+  catSelect.addEventListener('change',applyFilters);
+  citySelect.addEventListener('change',applyFilters);
+  resetBtn.addEventListener('click',function(){catSelect.value='all';citySelect.value='all';applyFilters()});
+
+  /* Newsletter */
+  var nlForm=document.getElementById('nlForm');var nlBtn=document.getElementById('nlBtn');var nlOk=document.getElementById('nlOk');
+  if(nlForm){nlForm.addEventListener('submit',function(e){e.preventDefault();nlBtn.disabled=true;nlBtn.innerHTML='<span>Subscribing&hellip;</span>';setTimeout(function(){nlForm.style.display='none';nlOk.hidden=false},800)})}
+})();
+</script>
+</body>
+</html>

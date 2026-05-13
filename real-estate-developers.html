@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>Real Estate Developers - GHAR.tv</title>
+  <meta name="description" content="India's leading real estate developers — explore top developers across Mumbai, Delhi NCR, Bengaluru, Pune, Hyderabad, Chennai and beyond.">
+  <link rel="canonical" href="https://ghar.tv/real-estate-developers">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+
+  <style>
+    @font-face{font-family:'Gazpacho';src:url('community/fonts/Gazpacho-Bold.woff2') format('woff2'),url('community/fonts/Gazpacho-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+
+    :root{--bg:#ffffff;--ink:#111111;--ink2:#4b5563;--faint:#9ca3af;--rule:#e8e8e8;--accent:#ee324b;--surface:#f7f7f7;--ff-display:'Gazpacho',Georgia,serif;--ff-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--ease:cubic-bezier(.4,0,.2,1);--max-w:1600px;--pad-h:clamp(24px,3vw,80px);--pad-v:clamp(80px,9vw,120px);--sh-sm:0 1px 3px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.04)}
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:var(--ff-sans);background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
+    .cont{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h)}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);box-shadow:var(--sh-sm)}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-logo{display:flex;align-items:baseline;flex-shrink:0}.nav-logo-img{height:28px;width:auto}
+    .nav-logo-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-left:10px}
+    .nav-links{display:none;align-items:center;justify-content:center;gap:2px;list-style:none;flex:1}
+    .nav-links a{font-size:13.5px;font-weight:500;color:var(--ink2);padding:6px 11px;border-radius:7px;white-space:nowrap;transition:background .16s,color .16s}
+    .nav-links a:hover{background:var(--surface);color:var(--ink)}.nav-links a.active{background:var(--surface);color:var(--ink);font-weight:600}
+    .nav-right{display:none;align-items:center;gap:8px;flex-shrink:0}
+    .nav-btn-join{font-size:13px;font-weight:600;color:#fff;padding:8px 20px;border-radius:8px;background:var(--ink);display:inline-flex;align-items:center;transition:background .18s,transform .18s}
+    .nav-btn-join:hover{background:var(--accent);transform:translateY(-1px)}
+    .nav-hamburger{display:flex;flex-direction:column;gap:5px;padding:6px;background:none;border:none;z-index:901}
+    .nav-hamburger span{display:block;width:20px;height:1.5px;background:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+    .nav-hamburger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .nav-hamburger.active span:nth-child(2){opacity:0}
+    .nav-hamburger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .mob-menu{position:fixed;inset:0;background:var(--bg);z-index:850;transform:translateX(100%);transition:transform .42s var(--ease);padding:88px 28px 48px}
+    .mob-menu.open{transform:translateX(0)}
+    .mob-links{list-style:none}.mob-links li{border-bottom:1px solid var(--rule)}
+    .mob-links a{display:block;padding:15px 0;font-family:var(--ff-display);font-size:24px;font-weight:700;color:var(--ink)}
+    .mob-links .mob-accent{color:var(--accent)}
+
+    /* HERO */
+    .hero{position:relative;overflow:hidden;display:flex;align-items:center}
+    .hero-bg{position:absolute;inset:0;pointer-events:none;background:var(--bg)}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .hero-grid::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(17,17,17,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,17,.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%)}
+    .hero-split{display:block;max-width:var(--max-w);margin:0 auto;padding:clamp(40px,5vw,60px) var(--pad-h) clamp(16px,2vw,24px);width:100%;position:relative;z-index:2}
+    .hero-left{text-align:center;max-width:760px;margin:0 auto}
+    .hero-eyebrow,.hero-title,.hero-sub,.hero-ctas{opacity:0;transform:translateY(24px);animation:dvFadeUp .8s var(--ease) forwards}
+    .hero-eyebrow{animation-delay:.1s}.hero-title{animation-delay:.25s}.hero-sub{animation-delay:.4s}.hero-ctas{animation-delay:.55s}
+    @keyframes dvFadeUp{to{opacity:1;transform:none}}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;padding:8px 20px;border:1px solid rgba(238,50,75,.15);border-radius:24px;background:rgba(238,50,75,.04)}
+    .hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dvDotPulse 2s ease-in-out infinite}
+    @keyframes dvDotPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(238,50,75,.3)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(238,50,75,0)}}
+    .hero-title{font-family:var(--ff-display);font-size:clamp(28px,7vw,76px);font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--ink);margin-bottom:20px;white-space:nowrap}
+    .hero-title span{display:block}
+    .hero-sub{font-size:clamp(15px,1.3vw,18px);line-height:1.75;color:var(--ink2);max-width:640px;margin:0 auto 36px}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:16px 32px;border-radius:10px;font-size:15px;font-weight:600;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(17,17,17,.2)}
+    .btn-primary::after{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity .25s}
+    .btn-primary:hover::after{opacity:1}
+    .btn-primary span{position:relative;z-index:1}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--rule);color:var(--ink);padding:16px 32px;border-radius:10px;font-size:15px;font-weight:500;background:none;transition:border-color .25s,background .25s}
+    .btn-outline:hover{border-color:var(--ink);background:var(--surface)}
+
+    /* HERO SEARCH */
+    .hero-search{max-width:640px;margin:0 auto;display:flex;flex-direction:column;opacity:0;transform:translateY(24px);animation:dvFadeUp .8s var(--ease) .55s forwards}
+    .hero-search__field{position:relative;display:flex;align-items:center;background:#fff;border:1.5px solid var(--rule);border-radius:14px;padding:0 16px 0 18px;height:60px;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:border-color .2s,box-shadow .2s}
+    .hero-search__field:focus-within{border-color:var(--ink);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .hero-search__icon{width:20px;height:20px;color:var(--faint);flex-shrink:0;margin-right:12px}
+    .hero-search__input{flex:1;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:var(--ink);min-width:0}
+    .hero-search__input::placeholder{color:var(--faint)}
+    .hero-search__input::-webkit-search-cancel-button{display:none}
+    .hero-search__clear{width:30px;height:30px;border:none;background:var(--surface);color:var(--ink2);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;flex-shrink:0;transition:background .15s,color .15s}
+    .hero-search__clear:hover{background:var(--rule);color:var(--ink)}
+    .hero-search__suggest{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--faint);margin-top:14px}
+    .hero-search__suggest-label{font-weight:500}
+    .hero-search__chip{font-family:inherit;font-size:13px;font-weight:500;color:var(--ink2);background:rgba(17,17,17,.04);border:1px solid transparent;padding:5px 12px;border-radius:18px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+    .hero-search__chip:hover{background:#fff;border-color:var(--rule);color:var(--ink)}
+    @media(max-width:520px){.hero-search__field{height:54px;padding:0 14px;font-size:15px}.hero-search__input{font-size:15px}.hero-search__suggest{font-size:12px}.hero-search__chip{font-size:12px;padding:4px 10px}}
+
+    /* Hero right SVG */
+    .hero-right{display:flex;align-items:center;justify-content:center;position:relative;min-height:340px;opacity:0;animation:dvFadeUp 1s .3s forwards}
+    .hero-svg{width:100%;max-width:460px;height:auto}
+    .dv-fade{opacity:0;animation:dvFillIn .5s ease-out forwards}
+    .dv-1{animation-delay:.5s}.dv-2{animation-delay:.7s}.dv-3{animation-delay:.9s}.dv-4{animation-delay:1.1s}.dv-5{animation-delay:1.3s}.dv-6{animation-delay:1.5s}
+    @keyframes dvFillIn{to{opacity:1}}
+    @media(max-width:899px){.hero-right{display:none}}
+    @media(max-width:480px){.hero-ctas{flex-direction:column}.btn-primary,.btn-outline{width:100%;justify-content:center}}
+
+    /* BREADCRUMB */
+    .bc{padding:14px 0 16px;display:flex;align-items:center;gap:8px}
+    .bc a{font-size:12px;color:var(--faint);font-weight:500}.bc a:hover{color:var(--ink)}
+    .bc-sep{font-size:11px;color:var(--faint)}.bc-cur{font-size:12px;color:var(--ink);font-weight:600}
+
+    /* STICKY SEARCH — integrated with hero when at rest, sticks on scroll */
+    .search-bar{position:sticky;top:56px;z-index:880;background:transparent;padding:12px 0;border-bottom:1px solid transparent;transition:background .2s,border-color .2s,box-shadow .2s;will-change:transform}
+    .search-bar.stuck{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--rule);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    .search-bar .hero-search{margin:0 auto;animation:none;opacity:1;transform:none}
+    .search-bar.stuck .hero-search__suggest{display:none}
+
+    /* SECTION */
+    .sec{padding:80px 0;position:relative}
+    .sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:16px;flex-wrap:wrap}
+    .sec-header__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.15;color:var(--ink)}
+    .sec-header__count{font-size:13px;color:var(--faint);font-weight:500}
+
+    /* DEVELOPER GRID */
+    .dev-grid{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:520px){.dev-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.dev-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:1200px){.dev-grid{grid-template-columns:repeat(4,1fr)}}
+
+    /* DEVELOPER CARD */
+    .dev-card{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--rule);border-radius:16px;overflow:hidden;transition:border-color .22s var(--ease),box-shadow .22s var(--ease),transform .22s var(--ease)}
+    .dev-card:hover{border-color:rgba(17,17,17,.18);box-shadow:0 8px 32px rgba(0,0,0,.08),0 2px 8px rgba(0,0,0,.04);transform:translateY(-3px)}
+    .dev-card__logo-wrap{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--surface);display:flex;align-items:center;justify-content:center}
+    .dev-card__logo{max-width:60%;max-height:50%;object-fit:contain;transition:transform .4s var(--ease)}
+    .dev-card:hover .dev-card__logo{transform:scale(1.06)}
+    .dev-card__body{padding:20px;display:flex;flex-direction:column;flex:1}
+    .dev-card__name{font-family:var(--ff-display);font-size:18px;font-weight:700;line-height:1.2;color:var(--ink);margin-bottom:4px}
+    .dev-card__type{font-size:13px;font-weight:500;color:var(--ink2);line-height:1.5;margin-bottom:12px}
+    .dev-card__meta{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);font-weight:500;margin-top:auto}
+    .dev-card__meta-icon{width:13px;height:13px;flex-shrink:0;color:var(--faint)}
+    .dev-card__arrow{margin-left:auto;color:var(--rule);transition:color .2s,transform .2s}
+    .dev-card:hover .dev-card__arrow{color:var(--ink);transform:translateX(3px)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+    .reveal.revealed{opacity:1;transform:none}
+    .reveal-item{opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+    .reveal-item.revealed{opacity:1;transform:none}
+    .reveal-item:nth-child(2).revealed{transition-delay:.06s}
+    .reveal-item:nth-child(3).revealed{transition-delay:.12s}
+    .reveal-item:nth-child(4).revealed{transition-delay:.18s}
+    .reveal-item:nth-child(5).revealed{transition-delay:.24s}
+    .reveal-item:nth-child(6).revealed{transition-delay:.30s}
+    .reveal-item:nth-child(7).revealed{transition-delay:.36s}
+    .reveal-item:nth-child(8).revealed{transition-delay:.42s}
+
+    /* EMPTY STATE */
+    .empty{text-align:center;padding:64px 24px;display:none}
+    .empty.show{display:block}
+    .empty p{font-size:15px;color:var(--ink2);margin-bottom:16px}
+
+    /* CTA MODERN */
+    .cta-modern{position:relative;overflow:hidden;padding:clamp(64px,8vw,100px) 0;background:#111}
+    .cta-modern__bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(238,50,75,.08),transparent 70%),radial-gradient(ellipse 40% 40% at 80% 60%,rgba(59,130,246,.06),transparent 70%)}
+    .cta-modern__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);display:grid;grid-template-columns:1fr;gap:48px;position:relative;z-index:1}
+    @media(min-width:900px){.cta-modern__inner{grid-template-columns:1fr 1fr;gap:64px;align-items:center}}
+    .cta-modern__eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#ee324b;margin-bottom:20px}
+    .cta-modern__eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#ee324b}
+    .cta-modern__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.1;color:#fff;margin-bottom:16px}
+    .cta-modern__desc{font-size:15px;line-height:1.75;color:rgba(255,255,255,.55);margin-bottom:28px;max-width:480px}
+    .cta-modern__features{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
+    .cta-modern__feature{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,.7)}
+    .cta-modern__feature svg{color:#ee324b;flex-shrink:0}
+    .cta-modern__form-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:clamp(28px,4vw,40px)}
+    .cta-modern__form{display:flex;flex-direction:column;gap:14px}
+    .cta-modern__input-row{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:500px){.cta-modern__input-row{grid-template-columns:1fr 1fr}}
+    .cta-modern__inp{font-family:var(--ff-sans);font-size:14px;padding:14px 18px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#fff;transition:border-color .2s}
+    .cta-modern__inp::placeholder{color:rgba(255,255,255,.3)}
+    .cta-modern__inp:focus{outline:none;border-color:rgba(255,255,255,.25)}
+    .cta-modern__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--ff-sans);font-size:15px;font-weight:600;color:#111;background:#fff;padding:15px 28px;border-radius:10px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
+    .cta-modern__btn:hover{background:#ee324b;color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(238,50,75,.25)}
+    .cta-modern__note{font-size:11.5px;color:rgba(255,255,255,.3);text-align:center}
+    .cta-modern__ok{text-align:center;padding:20px 0}
+    .cta-modern__ok-icon{font-size:36px;color:#22c55e;margin-bottom:12px}
+    .cta-modern__ok p{font-size:15px;color:rgba(255,255,255,.7)}
+
+    /* FOOTER */
+    .footer{background:#111;border-top:none;padding:36px 0}
+    .ft-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h)}
+    .ft-top{display:flex;flex-direction:column;gap:24px;padding-bottom:32px;border-bottom:1px solid #1a1a1a;margin-bottom:24px}
+    @media(min-width:744px){.ft-top{flex-direction:row;align-items:flex-start;justify-content:space-between}}
+    .ft-logo-img{height:24px;width:auto;margin-bottom:8px;filter:brightness(0) invert(1)}
+    .ft-tag{font-size:12px;color:rgba(255,255,255,.3)}
+    .ft-nav{display:flex;gap:24px;flex-wrap:wrap}.ft-nav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.45)}.ft-nav a:hover{color:#fff}
+    .ft-bot{display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(255,255,255,.2)}
+    @media(min-width:744px){.ft-bot{flex-direction:row;justify-content:space-between}}
+    .ft-bot-links{display:flex;gap:16px}.ft-bot-links a{font-size:12px;color:rgba(255,255,255,.2)}.ft-bot-links a:hover{color:rgba(255,255,255,.6)}
+
+    @media(min-width:1200px){.nav-inner{padding:0 32px;height:62px;gap:32px}.nav-links{display:flex}.nav-right{display:flex}.nav-hamburger{display:none}.search-bar{top:62px}}
+  </style>
+</head>
+
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="community/logo.svg" alt="GHAR.tv" class="nav-logo-img"><span class="nav-logo-tag">Developers</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="/intelligence">Intelligence</a></li>
+      <li><a href="/design">Design</a></li>
+      <li><a href="/community">Community</a></li>
+      <li><a href="/ghartalks">GharTalks</a></li>
+      <li><a href="/videoworks">VideoWorks</a></li>
+      <li><a href="/gharevents">GharEvents</a></li>
+      <li><a href="/industry-voices">Industry Voices</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/join" class="nav-btn-join">Join Now</a>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <ul class="mob-links">
+    <li><a href="/intelligence">Intelligence</a></li>
+    <li><a href="/design">Design</a></li>
+    <li><a href="/community">Community</a></li>
+    <li><a href="/ghartalks">GharTalks</a></li>
+    <li><a href="/videoworks">VideoWorks</a></li>
+    <li><a href="/gharevents">GharEvents</a></li>
+    <li><a href="/industry-voices">Industry Voices</a></li>
+    <li><a href="/join" class="mob-accent">Join Now &rarr;</a></li>
+  </ul>
+</div>
+
+
+<!-- Breadcrumb -->
+<div class="cont" style="padding-top:72px;">
+  <nav class="bc" aria-label="Breadcrumb">
+    <a href="/">GHAR.tv</a>
+    <span class="bc-sep">&rsaquo;</span>
+    <span class="bc-cur">Real Estate Developers</span>
+  </nav>
+</div>
+
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-split">
+    <div class="hero-left">
+      <h1 class="hero-title">Real Estate Developers</h1>
+      <p class="hero-sub">From Mumbai's luxury skyline to Bengaluru's tech corridors &mdash; explore India's leading developers shaping how millions live, work, and invest.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Sticky search (sibling of hero — sticks through directory scroll) -->
+<div class="search-bar" id="searchBar">
+  <div class="cont">
+    <div class="hero-search">
+      <label class="hero-search__field" for="heroSearch">
+        <svg class="hero-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" id="heroSearch" class="hero-search__input" placeholder="Search by developer name or city&hellip;" autocomplete="off" aria-label="Search developers">
+        <button type="button" class="hero-search__clear" id="heroSearchClear" aria-label="Clear search" hidden>&times;</button>
+      </label>
+      <div class="hero-search__suggest">
+        <span class="hero-search__suggest-label">Popular:</span>
+        <button type="button" class="hero-search__chip" data-q="Mumbai">Mumbai</button>
+        <button type="button" class="hero-search__chip" data-q="Bengaluru">Bengaluru</button>
+        <button type="button" class="hero-search__chip" data-q="Delhi">Delhi NCR</button>
+        <button type="button" class="hero-search__chip" data-q="Pune">Pune</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- DEVELOPERS LISTING -->
+<section class="sec" id="dev-listing">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div class="sec-header__count" id="resultCount">36 developers across India</div>
+    </div>
+
+    <!-- Developer Grid -->
+    <div class="dev-grid" id="devGrid">
+
+      <!-- Mumbai -->
+      <a href="community/brands/godrej-properties.html" class="dev-card reveal-item" data-city="mumbai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/godrejproperties.com" alt="Godrej Properties" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Godrej Properties</h3>
+          <p class="dev-card__type">250+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Nashik · Thane · Bengaluru
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="mumbai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/oberoirealty.com" alt="Oberoi Realty" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Oberoi Realty</h3>
+          <p class="dev-card__type">25+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Goa · Pune
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="mumbai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/lodhagroup.com" alt="Lodha Group" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Macrotech (Lodha)</h3>
+          <p class="dev-card__type">25+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Pune · Delhi NCR
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="mumbai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/hiranandani.com" alt="Hiranandani" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Hiranandani Group</h3>
+          <p class="dev-card__type">60+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Pune · Nashik · Goa
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="mumbai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/rustomjee.com" alt="Rustomjee" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Rustomjee Group</h3>
+          <p class="dev-card__type">50+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Delhi NCR · Thane · Pune
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="mumbai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/kalpataru.com" alt="Kalpataru" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Kalpataru Limited</h3>
+          <p class="dev-card__type">50+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Pune · Bengaluru · Delhi NCR
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Delhi NCR -->
+      <a href="#" class="dev-card reveal-item" data-city="delhi">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/dlf.in" alt="DLF" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">DLF Limited</h3>
+          <p class="dev-card__type">120+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Delhi NCR · Gurugram · Noida · Lucknow
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="delhi">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/m3mindia.com" alt="M3M India" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">M3M India</h3>
+          <p class="dev-card__type">75+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Delhi NCR · Lucknow · Bengaluru
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="delhi">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/sobha.com" alt="Sobha" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Sobha Limited</h3>
+          <p class="dev-card__type">40+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Delhi NCR · Gurugram · Lucknow · Bengaluru
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="delhi">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/emaarindia.com" alt="Emaar India" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Emaar India</h3>
+          <p class="dev-card__type">100+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Delhi NCR · Lucknow · Gurugram · Mumbai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="delhi">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/sscgroup.in" alt="SSC Group" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Signature Global</h3>
+          <p class="dev-card__type">40+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Delhi NCR · Lucknow · Bengaluru · Gurugram
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="delhi">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/maxestates.in" alt="Max Estates" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Max Estates</h3>
+          <p class="dev-card__type">60+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Delhi NCR · Noida · Gurugram
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Bengaluru -->
+      <a href="#" class="dev-card reveal-item" data-city="bengaluru">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/prestigeconstructions.com" alt="Prestige" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Prestige Group</h3>
+          <p class="dev-card__type">180+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Bengaluru · Goa · Hyderabad · Mumbai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="bengaluru">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/embassyindia.com" alt="Embassy" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Embassy Group</h3>
+          <p class="dev-card__type">25+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Bengaluru · Mumbai · Hyderabad
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="bengaluru">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/brigadegroup.com" alt="Brigade" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Brigade Group</h3>
+          <p class="dev-card__type">40+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Bengaluru · Goa · Chennai · Pune
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="bengaluru">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/puravankara.com" alt="Puravankara" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Puravankara</h3>
+          <p class="dev-card__type">40+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Bengaluru · Pune · Hyderabad · Chennai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="bengaluru">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/salarpuria.com" alt="Salarpuria Sattva" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Salarpuria Sattva</h3>
+          <p class="dev-card__type">25+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Bengaluru · Goa · Hyderabad
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Pune -->
+      <a href="#" class="dev-card reveal-item" data-city="pune">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/kolte-patil.com" alt="Kolte-Patil" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Kolte-Patil Developers</h3>
+          <p class="dev-card__type">120+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Pune · Bengaluru · Mumbai · Goa
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="pune">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/panchshil.com" alt="Panchshil" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Panchshil Realty</h3>
+          <p class="dev-card__type">100+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Pune · Mumbai · Bengaluru · Goa
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="pune">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/marvelrealtors.com" alt="Marvel Realtors" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Marvel Realtors</h3>
+          <p class="dev-card__type">20+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Pune · Goa · Bengaluru
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Hyderabad -->
+      <a href="#" class="dev-card reveal-item" data-city="hyderabad">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/myhomeconstructions.com" alt="My Home" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">My Home Group</h3>
+          <p class="dev-card__type">60+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Hyderabad · Pune · Chennai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="hyderabad">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/aparnaconstructions.com" alt="Aparna" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Aparna Constructions</h3>
+          <p class="dev-card__type">50+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Hyderabad · Pune · Vizag · Chennai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="hyderabad">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/rainbowestates.in" alt="Rainbow Estates" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Rainbow Estates</h3>
+          <p class="dev-card__type">100+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Hyderabad · Vizag · Chennai · Bengaluru
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Chennai -->
+      <a href="#" class="dev-card reveal-item" data-city="chennai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/casagrand.co.in" alt="Casagrand" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Casagrand</h3>
+          <p class="dev-card__type">80+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Chennai · Hyderabad · Coimbatore · Bengaluru
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="chennai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/rmzcorp.com" alt="RMZ Corp" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Mahindra Lifespaces</h3>
+          <p class="dev-card__type">50+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Chennai · Bengaluru · Coimbatore · Hyderabad
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="chennai">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/akshaya.com" alt="Akshaya" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Akshaya Pvt Ltd</h3>
+          <p class="dev-card__type">40+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Chennai · Mumbai · Hyderabad
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Kolkata -->
+      <a href="#" class="dev-card reveal-item" data-city="kolkata">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/merlingroup.com" alt="Merlin Group" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Merlin Group</h3>
+          <p class="dev-card__type">200+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Kolkata · Delhi NCR · Mumbai · Bhubaneswar
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="kolkata">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/srijanrealty.com" alt="Srijan" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Srijan Realty</h3>
+          <p class="dev-card__type">60+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Kolkata · Delhi NCR · Bhubaneswar · Mumbai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Ahmedabad -->
+      <a href="#" class="dev-card reveal-item" data-city="ahmedabad">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/adani.com" alt="Adani Realty" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Adani Realty</h3>
+          <p class="dev-card__type">40+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Ahmedabad · Mumbai · Surat · Vadodara
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="ahmedabad">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/savvyinfra.com" alt="Savvy Infrastructures" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Savvy Group</h3>
+          <p class="dev-card__type">25+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Ahmedabad · Vadodara · Mumbai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Pan India -->
+      <a href="#" class="dev-card reveal-item" data-city="pan-india">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/tatahousing.in" alt="Tata Housing" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Tata Housing</h3>
+          <p class="dev-card__type">250+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Hyderabad · Delhi NCR · Pune
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="pan-india">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/k-raheja.com" alt="K Raheja Corp" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">K Raheja Corp</h3>
+          <p class="dev-card__type">50+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Delhi NCR · Pune
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="pan-india">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/shapoorjipallonji.com" alt="Shapoorji Pallonji" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Shapoorji Pallonji RE</h3>
+          <p class="dev-card__type">40+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Pune · Chennai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="pan-india">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/mahindralifespaces.com" alt="Mahindra Lifespaces" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Mahindra Lifespaces</h3>
+          <p class="dev-card__type">60+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Chennai · Hyderabad · Pune
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="pan-india">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/raymond.in" alt="Raymond Realty" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Raymond Realty</h3>
+          <p class="dev-card__type">50+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Hyderabad · Delhi NCR · Chennai
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="dev-card reveal-item" data-city="pan-india">
+        <div class="dev-card__logo-wrap">
+          <img class="dev-card__logo" src="https://logo.clearbit.com/birlaestates.com" alt="Birla Estates" loading="lazy">
+        </div>
+        <div class="dev-card__body">
+          <h3 class="dev-card__name">Birla Estates</h3>
+          <p class="dev-card__type">35+ Projects</p>
+          <div class="dev-card__meta">
+            <svg class="dev-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+            Mumbai · Pune · Hyderabad
+            <svg class="dev-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty" id="emptyState">
+      <p>No developers match the selected filters.</p>
+      <button class="btn-outline" id="emptyReset">Clear filters</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-modern" id="newsletter">
+  <div class="cta-modern__bg" aria-hidden="true"></div>
+  <div class="cta-modern__inner">
+    <div>
+      <span class="cta-modern__eyebrow"><span class="cta-modern__eyebrow-dot"></span> Are you a Developer?</span>
+      <h2 class="cta-modern__title">Get Featured on GHAR.tv</h2>
+      <p class="cta-modern__desc">Get your projects in front of India's most engaged real estate audience &mdash; through editorial features, video walkthroughs, and rankings.</p>
+      <div class="cta-modern__features">
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Editorial coverage</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> VideoWorks production</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Project rankings</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Qualified leads</span>
+      </div>
+    </div>
+    <div class="cta-modern__form-wrap">
+      <form class="cta-modern__form" id="nlForm" novalidate>
+        <div class="cta-modern__input-row">
+          <input type="text" class="cta-modern__inp" placeholder="Your name" autocomplete="name" required aria-label="Your name">
+          <input type="email" class="cta-modern__inp" placeholder="Work email" autocomplete="email" required id="nlEmailField" aria-label="Work email">
+        </div>
+        <input type="text" class="cta-modern__inp" placeholder="Developer / company name" required aria-label="Developer or company name">
+        <button type="submit" class="cta-modern__btn" id="nlBtn">
+          <span>Request a Mandate</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <p class="cta-modern__note">We respond within 24 hours. Confidential.</p>
+      </form>
+      <div class="cta-modern__ok" id="nlOk" hidden>
+        <div class="cta-modern__ok-icon">&check;</div>
+        <p>Thanks! We'll be in touch shortly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div><img src="community/logo.svg" alt="GHAR.tv" class="ft-logo-img"><p class="ft-tag">India's AI-Native Real Estate Intelligence</p></div>
+      <nav class="ft-nav">
+        <a href="/intelligence">Intelligence</a>
+        <a href="/design">Design</a>
+        <a href="/community">Community</a>
+        <a href="/ghartalks">GharTalks</a>
+        <a href="/videoworks">VideoWorks</a>
+        <a href="/gharevents">GharEvents</a>
+        <a href="/industry-voices">Industry Voices</a>
+      </nav>
+    </div>
+    <div class="ft-bot">
+      <p>&copy; 2026 Ghar.tv &middot; Zybeq Ventures Pvt Ltd</p>
+      <div class="ft-bot-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  'use strict';
+
+  /* Hamburger */
+  var btn=document.getElementById('hamburgerBtn'),menu=document.getElementById('mobMenu');
+  btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.classList.toggle('active',o);btn.setAttribute('aria-expanded',o);menu.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.classList.remove('active');btn.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow=''})});
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');var t=id.length>1&&document.querySelector(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+
+  /* Reveal */
+  var reveals=document.querySelectorAll('.reveal,.reveal-item');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -32px 0px'});reveals.forEach(function(el){io.observe(el)})}else{reveals.forEach(function(el){el.classList.add('revealed')})}
+
+  /* Sticky search bar */
+  var searchBar=document.getElementById('searchBar');
+  if(searchBar&&'IntersectionObserver' in window){var sentinel=document.createElement('div');sentinel.style.height='1px';sentinel.style.marginBottom='-1px';searchBar.parentNode.insertBefore(sentinel,searchBar);var sio=new IntersectionObserver(function(entries){searchBar.classList.toggle('stuck',!entries[0].isIntersecting)},{threshold:0});sio.observe(sentinel)}
+
+  /* Search */
+  var emptyResetBtn=document.getElementById('emptyReset');
+  var emptyState=document.getElementById('emptyState');
+  var resultCount=document.getElementById('resultCount');
+  var allCards=document.querySelectorAll('.dev-card');
+  var heroSearch=document.getElementById('heroSearch');
+  var heroSearchClear=document.getElementById('heroSearchClear');
+  var heroChips=document.querySelectorAll('.hero-search__chip');
+
+  // Build searchable text per card once (name + type + city)
+  allCards.forEach(function(card){
+    var name=(card.querySelector('.dev-card__name')||{}).textContent||'';
+    var type=(card.querySelector('.dev-card__type')||{}).textContent||'';
+    var city=card.getAttribute('data-city')||'';
+    card.dataset.searchText=(name+' '+type+' '+city).toLowerCase();
+  });
+
+  function applyFilters(){
+    var q=(heroSearch?heroSearch.value:'').trim().toLowerCase();
+    var anyActive=q.length>0;
+    if(heroSearchClear)heroSearchClear.hidden=q.length===0;
+    var visible=0;
+    allCards.forEach(function(card){
+      var matchQ=q===''||card.dataset.searchText.indexOf(q)!==-1;
+      if(matchQ){card.style.display='';card.classList.add('revealed');visible++}else{card.style.display='none'}
+    });
+    if(visible===0){emptyState.classList.add('show')}else{emptyState.classList.remove('show')}
+    resultCount.textContent=visible+' developer'+(visible===1?'':'s')+(anyActive?' matching':' across India');
+  }
+  function resetFilters(){if(heroSearch)heroSearch.value='';applyFilters()}
+  if(emptyResetBtn)emptyResetBtn.addEventListener('click',resetFilters);
+
+  // Hero search
+  if(heroSearch){
+    var searchTimer;
+    heroSearch.addEventListener('input',function(){clearTimeout(searchTimer);searchTimer=setTimeout(applyFilters,120)});
+    heroSearch.addEventListener('search',applyFilters);
+  }
+  if(heroSearchClear)heroSearchClear.addEventListener('click',function(){heroSearch.value='';heroSearch.focus();applyFilters()});
+  heroChips.forEach(function(chip){chip.addEventListener('click',function(){var q=chip.getAttribute('data-q');heroSearch.value=q;applyFilters();var listing=document.getElementById('dev-listing');if(listing)listing.scrollIntoView({behavior:'smooth',block:'start'})})});
+
+  /* Newsletter */
+  var nlForm=document.getElementById('nlForm');var nlBtn=document.getElementById('nlBtn');var nlOk=document.getElementById('nlOk');
+  if(nlForm){nlForm.addEventListener('submit',function(e){e.preventDefault();nlBtn.disabled=true;nlBtn.querySelector('span').textContent='Submitting\u2026';setTimeout(function(){nlForm.style.display='none';nlOk.hidden=false},800)})}
+})();
+</script>
+</body>
+</html>

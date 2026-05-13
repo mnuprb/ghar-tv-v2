@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>GharEvents - GHAR.tv</title>
+  <meta name="description" content="Where India's real estate industry meets. Flagship expos, category showcases, and year-round virtual programming by Ghar.tv.">
+  <link rel="canonical" href="https://ghar.tv/gharevents">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+
+  <style>
+    @font-face{font-family:'Gazpacho';src:url('fonts/Gazpacho-Bold.woff2') format('woff2'),url('fonts/Gazpacho-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+
+    :root{
+      --bg:#ffffff;--ink:#111111;--ink2:#4b5563;--faint:#9ca3af;--rule:#e8e8e8;--accent:#ee324b;--surface:#f7f7f7;
+      --ff-display:'Gazpacho',Georgia,serif;--ff-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --ease:cubic-bezier(.4,0,.2,1);--max-w:1600px;--pad-h:clamp(24px,3vw,80px);
+      --sh-sm:0 1px 3px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.04);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:var(--ff-sans);background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);box-shadow:var(--sh-sm)}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-logo{display:flex;align-items:baseline;flex-shrink:0}.nav-logo-img{height:28px;width:auto}
+    .nav-logo-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-left:10px}
+    .nav-links{display:none;align-items:center;justify-content:center;gap:2px;list-style:none;flex:1}
+    .nav-links a{font-size:13.5px;font-weight:500;color:var(--ink2);padding:6px 11px;border-radius:7px;transition:background .16s,color .16s}
+    .nav-links a:hover{background:var(--surface);color:var(--ink)}
+    .nav-links a.active{background:var(--surface);color:var(--ink);font-weight:600}
+    .nav-right{display:none;align-items:center;gap:8px;flex-shrink:0}
+    .nav-dropdown{position:relative}
+    .nav-dropdown__toggle{font-size:13px;font-weight:500;color:var(--ink2);padding:7px 14px;border-radius:7px;border:1.5px solid rgba(17,17,17,.15);background:none;cursor:pointer;font-family:var(--ff-sans);display:inline-flex;align-items:center;gap:6px;transition:border-color .18s,color .18s}
+    .nav-dropdown__toggle:hover{border-color:var(--ink);color:var(--ink)}
+    .nav-dropdown__arrow{width:10px;height:10px;transition:transform .2s}
+    .nav-dropdown.open .nav-dropdown__arrow{transform:rotate(180deg)}
+    .nav-dropdown__menu{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:6px;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.1);opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .2s,visibility .2s,transform .2s;z-index:910}
+    .nav-dropdown.open .nav-dropdown__menu{opacity:1;visibility:visible;transform:none}
+    .nav-dropdown__item{display:block;padding:10px 14px;border-radius:7px;font-size:13.5px;font-weight:500;color:var(--ink);transition:background .15s}
+    .nav-dropdown__item:hover{background:var(--surface)}
+    .nav-dropdown__item-sub{font-size:11px;color:var(--faint);margin-top:2px;display:block}
+    .nav-btn-join{font-size:13px;font-weight:600;color:#fff;padding:8px 20px;border-radius:8px;background:var(--ink);display:inline-flex;align-items:center;transition:background .18s,transform .18s}
+    .nav-btn-join:hover{background:var(--accent);transform:translateY(-1px)}
+    .nav-hamburger{display:flex;flex-direction:column;gap:5px;padding:6px;background:none;border:none;z-index:901}
+    .nav-hamburger span{display:block;width:20px;height:1.5px;background:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+    .nav-hamburger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .nav-hamburger.active span:nth-child(2){opacity:0}
+    .nav-hamburger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .mob-menu{position:fixed;inset:0;background:var(--bg);z-index:850;transform:translateX(100%);transition:transform .42s var(--ease);padding:88px 28px 48px}
+    .mob-menu.open{transform:translateX(0)}
+    .mob-links{list-style:none}.mob-links li{border-bottom:1px solid var(--rule)}
+    .mob-links a{display:block;padding:15px 0;min-height:44px;font-family:var(--ff-display);font-size:24px;font-weight:700;color:var(--ink)}
+    .mob-links .mob-accent{color:var(--accent)}
+
+    /* PAGE */
+    .page{padding-top:72px}
+    .cont{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h)}
+
+    /* HERO — left/right split */
+    .hero{position:relative;overflow:hidden;min-height:75vh;display:flex;align-items:center}
+    .hero-bg{position:absolute;inset:0;pointer-events:none;background:var(--bg)}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .hero-grid::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(17,17,17,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,17,.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%)}
+    .hero-split{display:grid;grid-template-columns:1fr;gap:40px;max-width:var(--max-w);margin:0 auto;padding:clamp(40px,5vw,60px) var(--pad-h);width:100%;position:relative;z-index:2;align-items:center}
+    @media(min-width:900px){.hero-split{grid-template-columns:1fr 1fr;gap:64px}}
+    .hero-left{text-align:center}
+    @media(min-width:900px){.hero-left{text-align:left}}
+    .hero-eyebrow,.hero-title,.hero-sub,.hero-ctas{opacity:0;transform:translateY(24px);animation:geFadeUp .8s var(--ease) forwards}
+    .hero-eyebrow{animation-delay:.1s}.hero-title{animation-delay:.25s}.hero-sub{animation-delay:.4s}.hero-ctas{animation-delay:.55s}
+    @keyframes geFadeUp{to{opacity:1;transform:none}}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;padding:8px 20px;border:1px solid rgba(238,50,75,.15);border-radius:24px;background:rgba(238,50,75,.04)}
+    .hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:geDotPulse 2s ease-in-out infinite}
+    @keyframes geDotPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(238,50,75,.3)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(238,50,75,0)}}
+    .hero-title{font-family:var(--ff-display);font-size:clamp(40px,6vw,76px);font-weight:700;line-height:.98;letter-spacing:-.04em;color:var(--ink);margin-bottom:20px}
+    .hero-title span{display:block;color:var(--ink)}
+    .hero-sub{font-size:clamp(15px,1.3vw,18px);line-height:1.75;color:var(--ink2);max-width:480px;margin-bottom:36px}
+    @media(min-width:900px){.hero-sub{margin-left:0;margin-right:auto}}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+    @media(min-width:900px){.hero-ctas{justify-content:flex-start}}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:16px 32px;border-radius:10px;font-size:15px;font-weight:600;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(17,17,17,.2)}
+    .btn-primary::after{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity .25s}
+    .btn-primary:hover::after{opacity:1}
+    .btn-primary span{position:relative;z-index:1}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--rule);color:var(--ink);padding:16px 32px;border-radius:10px;font-size:15px;font-weight:500;background:none;transition:border-color .25s,background .25s}
+    .btn-outline:hover{border-color:var(--ink);background:var(--surface)}
+    /* Right — SVG */
+    .hero-right{display:flex;align-items:center;justify-content:center;position:relative;min-height:340px;opacity:0;animation:geFadeUp 1s .3s forwards}
+    .hero-svg{width:100%;max-width:480px;height:auto}
+    .ge-fade{opacity:0;animation:geFillIn .5s ease-out forwards}
+    .ge-1{animation-delay:.5s}.ge-2{animation-delay:.7s}.ge-3{animation-delay:.9s}.ge-4{animation-delay:1.1s}.ge-5{animation-delay:1.3s}.ge-6{animation-delay:1.5s}.ge-7{animation-delay:1.7s}
+    @keyframes geFillIn{to{opacity:1}}
+    @keyframes geOrbit{to{transform:rotate(360deg)}}
+    @media(max-width:900px){.hero-right{min-height:280px}.hero-ctas{justify-content:center}}
+    @media(max-width:480px){.hero-ctas{flex-direction:column}.btn-primary,.btn-outline{width:100%;justify-content:center}}
+
+    /* ═══ EVENTS SECTION ═══ */
+    .events-section{padding:0 0 80px}
+    .events-section__header{display:flex;align-items:baseline;gap:16px;margin-bottom:48px}
+    .events-section__num{font-family:var(--ff-display);font-size:72px;font-weight:700;line-height:.85;letter-spacing:-.04em;-webkit-text-stroke:1.5px rgba(17,17,17,.06);color:transparent;user-select:none}
+    .events-section__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--ink)}
+
+    /* EVENT GRID — 2-column cards */
+    .event-grid{display:grid;grid-template-columns:1fr;gap:24px}
+    @media(min-width:768px){.event-grid{grid-template-columns:repeat(2,1fr)}}
+
+    .event-card{
+      border:1px solid var(--rule);border-radius:16px;padding:32px;
+      display:flex;flex-direction:column;position:relative;overflow:hidden;
+      transition:border-color .25s,box-shadow .25s,transform .25s;
+    }
+    .event-card::before{content:'';position:absolute;inset:0;opacity:1;transition:opacity .3s;pointer-events:none;border-radius:16px}
+    .event-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateY(-3px)}
+    .event-card:hover::before{opacity:0}
+    /* Per-card background tints */
+    .event-card--red::before{background:linear-gradient(135deg,rgba(238,50,75,.04),rgba(238,50,75,.01))}
+    .event-card--blue::before{background:linear-gradient(135deg,rgba(59,130,246,.04),rgba(59,130,246,.01))}
+    .event-card--green::before{background:linear-gradient(135deg,rgba(16,185,129,.04),rgba(16,185,129,.01))}
+    .event-card--purple::before{background:linear-gradient(135deg,rgba(139,92,246,.04),rgba(139,92,246,.01))}
+    .event-card__svg{position:absolute;bottom:16px;right:16px;width:120px;height:120px;opacity:.12;pointer-events:none;transition:opacity .3s,transform .3s}
+    .event-card:hover .event-card__svg{opacity:.22;transform:scale(1.06)}
+    @keyframes geRotate{to{transform:rotate(360deg)}}
+    @keyframes gePulse{0%,100%{opacity:.2;r:3}50%{opacity:.5;r:5}}
+    @keyframes geFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .event-card__badge{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:16px;
+    }
+    .event-card__badge-dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+    .event-card__name{font-family:var(--ff-display);font-size:clamp(22px,3vw,28px);font-weight:700;line-height:1.15;color:var(--ink);margin-bottom:12px}
+    .event-card__desc{font-size:14px;line-height:1.8;color:var(--ink2);margin-bottom:24px;flex:1}
+    .event-card__meta{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .event-card__meta-item{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;color:var(--ink2)}
+    .event-card__meta-icon{width:14px;height:14px;color:var(--faint);flex-shrink:0}
+    .event-card__format{
+      display:inline-flex;align-items:center;gap:5px;align-self:flex-start;
+      font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      padding:4px 10px;border-radius:5px;margin-bottom:20px;
+    }
+    .event-card__format--physical{color:#16a34a;background:rgba(22,163,74,.08)}
+    .event-card__format--virtual{color:#2563eb;background:rgba(37,99,235,.08)}
+    .event-card__cta{
+      display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
+      font-size:13.5px;font-weight:600;color:var(--ink);
+      padding:11px 24px;border-radius:8px;border:1.5px solid var(--rule);
+      transition:border-color .18s,background .18s;
+    }
+    .event-card__cta:hover{border-color:var(--ink);background:var(--surface)}
+
+    /* ═══ ALWAYS-ON ═══ */
+    .ao-section{padding:0 0 80px}
+    .ao-section__header{display:flex;align-items:baseline;gap:16px;margin-bottom:40px}
+    .ao-section__num{font-family:var(--ff-display);font-size:72px;font-weight:700;line-height:.85;letter-spacing:-.04em;-webkit-text-stroke:1.5px rgba(17,17,17,.06);color:transparent;user-select:none}
+    .ao-section__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--ink)}
+    .ao-grid{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:768px){.ao-grid{grid-template-columns:repeat(2,1fr)}}
+    .ao-card{background:var(--surface);border-radius:14px;padding:32px;transition:box-shadow .2s}
+    .ao-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06)}
+    .ao-card__icon{width:40px;height:40px;border-radius:10px;background:rgba(238,50,75,.08);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+    .ao-card__icon svg{width:20px;height:20px;color:var(--accent)}
+    .ao-card__title{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px}
+    .ao-card__desc{font-size:14px;line-height:1.75;color:var(--ink2)}
+
+    /* ═══ MODERN CTA ═══ */
+    .cta-modern{position:relative;overflow:hidden;padding:clamp(64px,8vw,100px) 0;background:#111}
+    .cta-modern__bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(238,50,75,.08),transparent 70%),radial-gradient(ellipse 40% 40% at 80% 60%,rgba(59,130,246,.06),transparent 70%)}
+    .cta-modern__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);display:grid;grid-template-columns:1fr;gap:48px;position:relative;z-index:1}
+    @media(min-width:900px){.cta-modern__inner{grid-template-columns:1fr 1fr;gap:64px;align-items:center}}
+    .cta-modern__eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#ee324b;margin-bottom:20px}
+    .cta-modern__eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#ee324b;animation:geDotPulse 2s ease-in-out infinite}
+    .cta-modern__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.1;color:#fff;margin-bottom:16px}
+    .cta-modern__desc{font-size:15px;line-height:1.75;color:rgba(255,255,255,.55);margin-bottom:28px;max-width:480px}
+    .cta-modern__features{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
+    .cta-modern__feature{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,.7)}
+    .cta-modern__feature svg{color:#ee324b;flex-shrink:0}
+    .cta-modern__form-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:clamp(28px,4vw,40px)}
+    .cta-modern__form{display:flex;flex-direction:column;gap:14px}
+    .cta-modern__input-row{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:500px){.cta-modern__input-row{grid-template-columns:1fr 1fr}}
+    .cta-modern__inp{font-family:var(--ff-sans);font-size:14px;padding:14px 18px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#fff;transition:border-color .2s}
+    .cta-modern__inp::placeholder{color:rgba(255,255,255,.3)}
+    .cta-modern__inp:focus{outline:none;border-color:rgba(255,255,255,.25)}
+    .cta-modern__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--ff-sans);font-size:15px;font-weight:600;color:#111;background:#fff;padding:15px 28px;border-radius:10px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
+    .cta-modern__btn:hover{background:#ee324b;color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(238,50,75,.25)}
+    .cta-modern__note{font-size:11.5px;color:rgba(255,255,255,.3);text-align:center}
+    .cta-modern__ok{text-align:center;padding:20px 0}
+    .cta-modern__ok-icon{font-size:36px;color:#22c55e;margin-bottom:12px}
+    .cta-modern__ok p{font-size:15px;color:rgba(255,255,255,.7)}
+
+    /* ═══ NEWSLETTER ═══ */
+    .nl-sec{padding:clamp(64px,8vw,100px) 0;background:var(--surface)}
+    .nl-wrap{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);display:grid;grid-template-columns:1fr;gap:48px}
+    @media(min-width:700px){.nl-wrap{grid-template-columns:1fr 1fr;gap:56px;align-items:center}}
+    .nl-eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block}
+    .nl-title{font-family:var(--ff-display);font-size:clamp(24px,3.5vw,36px);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:12px}
+    .nl-body{font-size:14px;line-height:1.7;color:var(--ink2)}
+    .nl-form{display:flex;flex-direction:column;gap:12px}
+    .nl-inp{font-family:var(--ff-sans);font-size:14px;padding:12px 16px;border-radius:8px;border:1.5px solid var(--rule);background:var(--bg);transition:border-color .18s}
+    .nl-inp:focus{outline:none;border-color:var(--ink)}
+    .nl-btn{font-family:var(--ff-sans);font-size:14px;font-weight:600;color:#fff;background:var(--ink);padding:12px 24px;border-radius:8px;border:none;cursor:pointer;transition:background .18s}
+    .nl-btn:hover{background:var(--accent)}
+    .nl-note{font-size:11.5px;color:var(--faint);text-align:center}
+    .nl-ok{text-align:center}.nl-ok-icon{font-size:32px;color:#16a34a;margin-bottom:12px}
+
+    /* ═══ FOOTER ═══ */
+    .footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:48px 0 32px;color:rgba(255,255,255,.5)}
+    .ft-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h)}
+    .ft-top{display:flex;flex-direction:column;gap:24px;padding-bottom:32px;border-bottom:1px solid var(--rule);margin-bottom:24px}
+    @media(min-width:744px){.ft-top{flex-direction:row;align-items:flex-start;justify-content:space-between}}
+    .ft-logo-img{height:24px;width:auto;margin-bottom:8px;filter:brightness(0) invert(1)}
+    .ft-tag{font-size:12px;color:rgba(255,255,255,.3)}
+    .ft-nav{display:flex;gap:24px;flex-wrap:wrap}.ft-nav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.45)}.ft-nav a:hover{color:#fff}
+    .ft-top{border-bottom-color:#1a1a1a}
+    .ft-bot{display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(255,255,255,.2)}
+    @media(min-width:744px){.ft-bot{flex-direction:row;justify-content:space-between}}
+    .ft-bot-links{display:flex;gap:16px}.ft-bot-links a{font-size:12px;color:rgba(255,255,255,.2)}.ft-bot-links a:hover{color:rgba(255,255,255,.6)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+    .reveal.revealed{opacity:1;transform:none}
+
+    @media(min-width:1024px){.nav-inner{padding:0 32px;height:62px;gap:32px}.nav-links{display:flex}.nav-right{display:flex}.nav-hamburger{display:none}.page{padding-top:78px}}
+    @media(max-width:480px){.hero-ctas,.cta-strip__btns{flex-direction:column}.btn-primary,.btn-outline{width:100%;justify-content:center}}
+  </style>
+</head>
+
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="logo.svg" alt="GHAR.tv" class="nav-logo-img"><span class="nav-logo-tag">Events</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="/intelligence">Intelligence</a></li>
+      <li><a href="/design">Design</a></li>
+      <li><a href="/people">People</a></li>
+      <li><a href="/ghartalks">GharTalks</a></li>
+      <li><a href="/videoworks">VideoWorks</a></li>
+      <li><a href="/gharevents" class="active">GharEvents</a></li>
+      <li><a href="/industry-voices">Industry Voices</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-dropdown" id="postDropdown">
+        <button class="nav-dropdown__toggle" aria-expanded="false">Post <svg class="nav-dropdown__arrow" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown__menu">
+          <a href="/post-property" class="nav-dropdown__item">Post Property<span class="nav-dropdown__item-sub">List your property for sale or rent</span></a>
+          <a href="/post-requirement" class="nav-dropdown__item">Post Requirement<span class="nav-dropdown__item-sub">Tell us what you're looking for</span></a>
+        </div>
+      </div>
+      <a href="/join" class="nav-btn-join">Join Now</a>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <ul class="mob-links">
+    <li><a href="/intelligence">Intelligence</a></li>
+    <li><a href="/design">Design</a></li>
+    <li><a href="/people">People</a></li>
+    <li><a href="/ghartalks">GharTalks</a></li>
+    <li><a href="/videoworks">VideoWorks</a></li>
+    <li><a href="/gharevents" class="mob-accent">GharEvents</a></li>
+    <li><a href="/industry-voices">Industry Voices</a></li>
+    <li><a href="/post-property">Post Property</a></li>
+    <li><a href="/post-requirement">Post Requirement</a></li>
+    <li><a href="/join" class="mob-accent">Join Now &rarr;</a></li>
+  </ul>
+</div>
+
+
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <div class="hero-split">
+      <!-- LEFT -->
+      <div class="hero-left">
+        <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> GharEvents</div>
+        <h1 class="hero-title">Where India's Real Estate<span>Industry Meets</span></h1>
+        <p class="hero-sub">Flagship expos, category showcases, and year-round virtual programming.</p>
+        <div class="hero-ctas">
+          <a href="#events" class="btn-primary"><span>Explore Events &rarr;</span></a>
+          <a href="#" class="btn-outline">Partner with Us</a>
+        </div>
+      </div>
+
+      <!-- RIGHT — Calendar/Stage SVG -->
+      <div class="hero-right">
+        <svg class="hero-svg" viewBox="0 0 440 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- ═══ CONNECTION LINES between cities ═══ -->
+          <g class="ge-fade ge-2" stroke="#e5e7eb" stroke-width=".8">
+            <!-- Mumbai to Dubai -->
+            <path d="M180 195 Q120 130 100 90" fill="none" stroke-dasharray="4 4"/>
+            <!-- Mumbai to Singapore -->
+            <path d="M180 195 Q280 170 350 120" fill="none" stroke-dasharray="4 4"/>
+            <!-- Mumbai to London -->
+            <path d="M180 195 Q100 200 50 155" fill="none" stroke-dasharray="4 4"/>
+            <!-- Mumbai to Delhi -->
+            <path d="M180 195 Q220 130 270 80" fill="none" stroke-dasharray="4 4"/>
+            <!-- Dubai to Oman -->
+            <path d="M100 90 Q60 110 40 140" fill="none" stroke-dasharray="4 4"/>
+            <!-- Singapore to Bahrain -->
+            <path d="M350 120 Q380 170 400 210" fill="none" stroke-dasharray="4 4"/>
+          </g>
+
+          <!-- ═══ ANIMATED FLIGHT PATHS ═══ -->
+          <circle r="3" fill="#ee324b" opacity=".6">
+            <animateMotion dur="4s" repeatCount="indefinite" path="M180,195 Q120,130 100,90"/>
+          </circle>
+          <circle r="2.5" fill="#3b82f6" opacity=".5">
+            <animateMotion dur="5s" repeatCount="indefinite" path="M180,195 Q280,170 350,120"/>
+          </circle>
+          <circle r="2" fill="#10b981" opacity=".5">
+            <animateMotion dur="4.5s" repeatCount="indefinite" path="M180,195 Q220,130 270,80"/>
+          </circle>
+
+          <!-- ═══ CITY PINS ═══ -->
+
+          <!-- MUMBAI — Central hub (largest) -->
+          <g class="ge-fade ge-3">
+            <circle cx="180" cy="195" r="24" fill="rgba(238,50,75,.05)" stroke="#ee324b" stroke-width="1"/>
+            <circle cx="180" cy="195" r="10" fill="#ee324b"/>
+            <path d="M180 190a3 3 0 0 0-3 3c0 3 3 6 3 6s3-3 3-6a3 3 0 0 0-3-3Zm0 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" fill="#fff"/>
+            <text x="180" y="236" text-anchor="middle" font-size="14.0" font-weight="700" fill="#ee324b" font-family="Inter,sans-serif">Mumbai</text>
+            <text x="180" y="252" text-anchor="middle" font-size="9.8" fill="#9ca3af" font-family="Inter,sans-serif">HQ &middot; 4 Events</text>
+            <!-- Pulsing ring -->
+            <circle cx="180" cy="195" r="24" fill="none" stroke="#ee324b" opacity="0">
+              <animate attributeName="r" values="24;45" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values=".2;0" dur="3s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <!-- DUBAI -->
+          <g class="ge-fade ge-4">
+            <circle cx="100" cy="90" r="18" fill="rgba(59,130,246,.05)" stroke="#d1d5db" stroke-width="1"/>
+            <circle cx="100" cy="90" r="7" fill="#3b82f6"/>
+            <path d="M100 86a2.5 2.5 0 0 0-2.5 2.5c0 2.5 2.5 5 2.5 5s2.5-2.5 2.5-5A2.5 2.5 0 0 0 100 86Z" fill="#fff"/>
+            <text x="100" y="122" text-anchor="middle" font-size="12.6" font-weight="700" fill="#3b82f6" font-family="Inter,sans-serif">Dubai</text>
+            <text x="100" y="136" text-anchor="middle" font-size="9.8" fill="#9ca3af" font-family="Inter,sans-serif">TIPS 2025</text>
+          </g>
+
+          <!-- SINGAPORE -->
+          <g class="ge-fade ge-4">
+            <circle cx="350" cy="120" r="16" fill="rgba(16,185,129,.05)" stroke="#d1d5db" stroke-width="1"/>
+            <circle cx="350" cy="120" r="6" fill="#10b981"/>
+            <path d="M350 116.5a2 2 0 0 0-2 2c0 2 2 4 2 4s2-2 2-4a2 2 0 0 0-2-2Z" fill="#fff"/>
+            <text x="350" y="150" text-anchor="middle" font-size="12.6" font-weight="700" fill="#10b981" font-family="Inter,sans-serif">Singapore</text>
+            <text x="350" y="164" text-anchor="middle" font-size="9.8" fill="#9ca3af" font-family="Inter,sans-serif">TIPS 2026</text>
+          </g>
+
+          <!-- DELHI -->
+          <g class="ge-fade ge-5">
+            <circle cx="270" cy="80" r="15" fill="rgba(249,115,22,.05)" stroke="#d1d5db" stroke-width="1"/>
+            <circle cx="270" cy="80" r="6" fill="#f97316"/>
+            <path d="M270 76.5a2 2 0 0 0-2 2c0 2 2 4 2 4s2-2 2-4a2 2 0 0 0-2-2Z" fill="#fff"/>
+            <text x="270" y="110" text-anchor="middle" font-size="12.6" font-weight="700" fill="#f97316" font-family="Inter,sans-serif">Delhi NCR</text>
+            <text x="270" y="124" text-anchor="middle" font-size="9.8" fill="#9ca3af" font-family="Inter,sans-serif">PropTech Expo</text>
+          </g>
+
+          <!-- LONDON -->
+          <g class="ge-fade ge-5">
+            <circle cx="50" cy="155" r="13" fill="rgba(139,92,246,.05)" stroke="#d1d5db" stroke-width="1"/>
+            <circle cx="50" cy="155" r="5" fill="#8b5cf6"/>
+            <path d="M50 152a1.8 1.8 0 0 0-1.8 1.8c0 1.8 1.8 3.5 1.8 3.5s1.8-1.8 1.8-3.5A1.8 1.8 0 0 0 50 152Z" fill="#fff"/>
+            <text x="50" y="182" text-anchor="middle" font-size="11.2" font-weight="700" fill="#8b5cf6" font-family="Inter,sans-serif">London</text>
+            <text x="50" y="195" text-anchor="middle" font-size="9.1" fill="#9ca3af" font-family="Inter,sans-serif">TIPS 2026</text>
+          </g>
+
+          <!-- OMAN -->
+          <g class="ge-fade ge-6">
+            <circle cx="40" cy="140" r="10" fill="rgba(236,72,153,.05)" stroke="#d1d5db" stroke-width=".8"/>
+            <circle cx="40" cy="140" r="4" fill="#ec4899"/>
+            <text x="18" y="148" text-anchor="middle" font-size="9.8" font-weight="600" fill="#ec4899" font-family="Inter,sans-serif">Oman</text>
+          </g>
+
+          <!-- BAHRAIN -->
+          <g class="ge-fade ge-6">
+            <circle cx="400" cy="210" r="10" fill="rgba(20,184,166,.05)" stroke="#d1d5db" stroke-width=".8"/>
+            <circle cx="400" cy="210" r="4" fill="#14b8a6"/>
+            <text x="420" y="218" text-anchor="start" font-size="9.8" font-weight="600" fill="#14b8a6" font-family="Inter,sans-serif">Bahrain</text>
+          </g>
+
+          <!-- ═══ EVENT CARDS floating ═══ -->
+          <g class="ge-fade ge-5">
+            <rect x="290" y="250" width="140" height="50" rx="12" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+            <circle cx="310" cy="275" r="10" fill="rgba(238,50,75,.06)"/>
+            <text x="310" y="278" text-anchor="middle" font-size="11.2" font-weight="700" fill="#ee324b" font-family="Inter,sans-serif">G</text>
+            <text x="328" y="270" font-size="12.6" font-weight="700" fill="#111" font-family="Inter,sans-serif">Luxury Show</text>
+            <text x="328" y="283" font-size="9.8" fill="#9ca3af" font-family="Inter,sans-serif">Mumbai &middot; Nov 2026</text>
+          </g>
+          <g class="ge-fade ge-6">
+            <rect x="10" y="270" width="135" height="50" rx="12" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+            <circle cx="30" cy="295" r="10" fill="rgba(139,92,246,.06)"/>
+            <text x="30" y="298" text-anchor="middle" font-size="11.2" font-weight="700" fill="#8b5cf6" font-family="Inter,sans-serif">S</text>
+            <text x="48" y="290" font-size="12.6" font-weight="700" fill="#111" font-family="Inter,sans-serif">Senior Living</text>
+            <text x="48" y="303" font-size="9.8" fill="#9ca3af" font-family="Inter,sans-serif">Multi-city &middot; 2026</text>
+          </g>
+
+          <!-- Decorative particles -->
+          <circle cx="300" cy="60" r="2" fill="#ee324b" opacity=".08" class="ge-fade ge-4"/>
+          <circle cx="420" cy="160" r="1.5" fill="#3b82f6" opacity=".08" class="ge-fade ge-5"/>
+          <circle cx="140" cy="300" r="2" fill="#10b981" opacity=".08" class="ge-fade ge-6"/>
+
+          <!-- Orbiting dot -->
+          <circle cx="180" cy="120" r="4" fill="#ee324b" opacity=".5" style="animation:geOrbit 18s linear infinite;transform-origin:220px 180px;will-change:transform"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="cont">
+
+    <!-- ═══ EVENTS ═══ -->
+    <section class="events-section" id="events">
+      <div class="events-section__header reveal">
+        <h2 class="events-section__title">Upcoming Events</h2>
+      </div>
+
+      <div class="event-grid">
+
+        <!-- The India Property Show -->
+        <div class="event-card event-card--red reveal">
+          <!-- Globe + buildings SVG (red, animated) -->
+          <svg class="event-card__svg" viewBox="0 0 120 120" fill="none">
+            <!-- Orbiting ring -->
+            <circle cx="60" cy="60" r="52" stroke="#ee324b" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <g style="animation:geRotate 20s linear infinite;transform-origin:60px 60px;will-change:transform">
+              <circle cx="60" cy="8" r="3" fill="#ee324b" opacity=".4"/>
+            </g>
+            <!-- Globe -->
+            <circle cx="60" cy="60" r="38" stroke="#ee324b" stroke-width="1.5"/>
+            <ellipse cx="60" cy="60" rx="16" ry="38" stroke="#ee324b" stroke-width=".8"/>
+            <line x1="22" y1="60" x2="98" y2="60" stroke="#ee324b" stroke-width=".8"/>
+            <line x1="26" y1="40" x2="94" y2="40" stroke="#ee324b" stroke-width=".5"/>
+            <line x1="26" y1="80" x2="94" y2="80" stroke="#ee324b" stroke-width=".5"/>
+            <!-- Buildings -->
+            <rect x="42" y="42" width="14" height="28" rx="2" fill="#ee324b" opacity=".2"/>
+            <rect x="58" y="48" width="12" height="22" rx="2" fill="#ee324b" opacity=".15"/>
+            <rect x="72" y="54" width="10" height="16" rx="2" fill="#ee324b" opacity=".1"/>
+            <!-- Windows -->
+            <rect x="45" y="46" width="3" height="3" rx=".5" fill="#ee324b" opacity=".3"/>
+            <rect x="50" y="46" width="3" height="3" rx=".5" fill="#ee324b" opacity=".3"/>
+            <rect x="45" y="52" width="3" height="3" rx=".5" fill="#ee324b" opacity=".3"/>
+            <rect x="50" y="52" width="3" height="3" rx=".5" fill="#ee324b" opacity=".3"/>
+            <rect x="45" y="58" width="3" height="3" rx=".5" fill="#ee324b" opacity=".3"/>
+            <rect x="61" y="52" width="3" height="3" rx=".5" fill="#ee324b" opacity=".25"/>
+            <rect x="65" y="52" width="3" height="3" rx=".5" fill="#ee324b" opacity=".25"/>
+            <rect x="61" y="58" width="3" height="3" rx=".5" fill="#ee324b" opacity=".25"/>
+            <!-- Location pins -->
+            <circle cx="30" cy="50" r="2.5" fill="#ee324b" opacity=".3" style="animation:gePulse 2s ease-in-out infinite"/>
+            <circle cx="85" cy="65" r="2" fill="#ee324b" opacity=".25" style="animation:gePulse 2.5s ease-in-out .5s infinite"/>
+            <!-- Plane -->
+            <path d="M20 35 L28 32 L24 36Z" fill="#ee324b" opacity=".3" style="animation:geFloat 3s ease-in-out infinite"/>
+          </svg>
+          <div class="event-card__badge"><span class="event-card__badge-dot"></span> Flagship</div>
+          <h3 class="event-card__name">The India Property Show</h3>
+          <p class="event-card__desc">India's largest property expo connecting NRIs and global investors with top developers, luxury projects, and investment opportunities across multiple international cities.</p>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item">
+              <svg class="event-card__meta-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2.67" width="12" height="10.67" rx="1.33" stroke="currentColor" stroke-width="1.2"/><path d="M2 6h12M5.33 1.33v2.67M10.67 1.33v2.67" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              2025 &ndash; 2026 &middot; Multiple Editions
+            </span>
+            <span class="event-card__meta-item">
+              <svg class="event-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+              Dubai, Oman, Singapore, London
+            </span>
+          </div>
+          <span class="event-card__format event-card__format--physical">Physical + Virtual</span>
+          <a href="https://www.theindiapropertyshow.com/" class="event-card__cta" target="_blank" rel="noopener">Visit Website &rarr;</a>
+        </div>
+
+        <!-- India Luxury Property Show -->
+        <div class="event-card event-card--blue reveal">
+          <!-- Diamond / luxury SVG (blue, animated) -->
+          <svg class="event-card__svg" viewBox="0 0 120 120" fill="none">
+            <!-- Sparkle particles -->
+            <circle cx="20" cy="20" r="2" fill="#3b82f6" opacity=".2" style="animation:gePulse 2s ease-in-out infinite"/>
+            <circle cx="100" cy="25" r="1.5" fill="#3b82f6" opacity=".15" style="animation:gePulse 2.5s ease-in-out .8s infinite"/>
+            <circle cx="15" cy="70" r="1.5" fill="#3b82f6" opacity=".15" style="animation:gePulse 3s ease-in-out .4s infinite"/>
+            <circle cx="105" cy="80" r="2" fill="#3b82f6" opacity=".2" style="animation:gePulse 2.2s ease-in-out 1.2s infinite"/>
+            <!-- Large diamond -->
+            <path d="M60 10 L95 40 L60 105 L25 40 Z" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="25" y1="40" x2="95" y2="40" stroke="#3b82f6" stroke-width="1.2"/>
+            <line x1="60" y1="10" x2="42" y2="40" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="60" y1="10" x2="78" y2="40" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="42" y1="40" x2="60" y2="105" stroke="#3b82f6" stroke-width=".8"/>
+            <line x1="78" y1="40" x2="60" y2="105" stroke="#3b82f6" stroke-width=".8"/>
+            <!-- Diamond fills -->
+            <path d="M42 40 L60 10 L78 40 Z" fill="#3b82f6" opacity=".08"/>
+            <path d="M42 40 L60 105 L25 40 Z" fill="#3b82f6" opacity=".05"/>
+            <path d="M78 40 L60 105 L95 40 Z" fill="#3b82f6" opacity=".05"/>
+            <!-- Center gem -->
+            <circle cx="60" cy="40" r="5" fill="#3b82f6" opacity=".15"/>
+            <circle cx="60" cy="40" r="2" fill="#3b82f6" opacity=".3"/>
+            <!-- Crown above diamond -->
+            <path d="M45 8 L52 15 L60 5 L68 15 L75 8" stroke="#3b82f6" stroke-width="1" fill="none" opacity=".2" style="animation:geFloat 4s ease-in-out infinite"/>
+          </svg>
+          <div class="event-card__badge"><span class="event-card__badge-dot"></span> Luxury</div>
+          <h3 class="event-card__name">India Luxury Property Show</h3>
+          <p class="event-card__desc">Ultra-premium projects and India's most exclusive addresses &mdash; curated for HNIs and NRI investors. Properties above &#8377;4 crore, personalised consultations, and panel discussions.</p>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item">
+              <svg class="event-card__meta-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2.67" width="12" height="10.67" rx="1.33" stroke="currentColor" stroke-width="1.2"/><path d="M2 6h12M5.33 1.33v2.67M10.67 1.33v2.67" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              2026 &middot; Multiple Cities
+            </span>
+            <span class="event-card__meta-item">
+              <svg class="event-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+              Mumbai, Delhi, Dubai, Singapore
+            </span>
+          </div>
+          <span class="event-card__format event-card__format--physical">Physical</span>
+          <a href="https://www.indialuxurypropertyshow.com/" class="event-card__cta" target="_blank" rel="noopener">Visit Website &rarr;</a>
+        </div>
+
+        <!-- India PropTech Expo -->
+        <div class="event-card event-card--green reveal">
+          <!-- Circuit / tech SVG (green, animated) -->
+          <svg class="event-card__svg" viewBox="0 0 120 120" fill="none">
+            <!-- Main chip -->
+            <rect x="30" y="20" width="60" height="80" rx="6" stroke="#10b981" stroke-width="2"/>
+            <rect x="38" y="28" width="44" height="22" rx="3" fill="#10b981" opacity=".1" stroke="#10b981" stroke-width=".8"/>
+            <!-- Chip details -->
+            <circle cx="48" cy="65" r="5" fill="#10b981" opacity=".15" stroke="#10b981" stroke-width=".8"/>
+            <circle cx="72" cy="65" r="5" fill="#10b981" opacity=".15" stroke="#10b981" stroke-width=".8"/>
+            <rect x="42" y="78" width="36" height="4" rx="2" fill="#10b981" opacity=".1"/>
+            <rect x="42" y="86" width="24" height="4" rx="2" fill="#10b981" opacity=".08"/>
+            <!-- Connection pins left -->
+            <line x1="8" y1="38" x2="30" y2="38" stroke="#10b981" stroke-width="1.2"/>
+            <line x1="8" y1="52" x2="30" y2="52" stroke="#10b981" stroke-width="1.2"/>
+            <line x1="8" y1="66" x2="30" y2="66" stroke="#10b981" stroke-width="1.2"/>
+            <line x1="8" y1="80" x2="30" y2="80" stroke="#10b981" stroke-width="1.2"/>
+            <!-- Connection pins right -->
+            <line x1="90" y1="38" x2="112" y2="38" stroke="#10b981" stroke-width="1.2"/>
+            <line x1="90" y1="52" x2="112" y2="52" stroke="#10b981" stroke-width="1.2"/>
+            <line x1="90" y1="66" x2="112" y2="66" stroke="#10b981" stroke-width="1.2"/>
+            <line x1="90" y1="80" x2="112" y2="80" stroke="#10b981" stroke-width="1.2"/>
+            <!-- Animated data nodes -->
+            <circle cx="8" cy="38" r="3" fill="#10b981" opacity=".3" style="animation:gePulse 2s ease-in-out infinite"/>
+            <circle cx="112" cy="52" r="3" fill="#10b981" opacity=".3" style="animation:gePulse 2.5s ease-in-out .5s infinite"/>
+            <circle cx="8" cy="66" r="3" fill="#10b981" opacity=".3" style="animation:gePulse 2s ease-in-out 1s infinite"/>
+            <circle cx="112" cy="80" r="3" fill="#10b981" opacity=".3" style="animation:gePulse 2.5s ease-in-out 1.5s infinite"/>
+            <!-- Signal waves from chip -->
+            <path d="M60 12 Q55 6 60 0" stroke="#10b981" stroke-width=".8" fill="none" opacity=".2" style="animation:geFloat 3s ease-in-out infinite"/>
+            <path d="M55 14 Q48 6 55 -2" stroke="#10b981" stroke-width=".6" fill="none" opacity=".15" style="animation:geFloat 3s ease-in-out .5s infinite"/>
+            <path d="M65 14 Q72 6 65 -2" stroke="#10b981" stroke-width=".6" fill="none" opacity=".15" style="animation:geFloat 3s ease-in-out 1s infinite"/>
+          </svg>
+          <div class="event-card__badge"><span class="event-card__badge-dot"></span> Innovation</div>
+          <h3 class="event-card__name">India PropTech Expo</h3>
+          <p class="event-card__desc">The platform for PropTech in India &mdash; startups, investors, and the tools reshaping how property is built, bought, and managed. Keynotes, startup pavilion, and awards.</p>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item">
+              <svg class="event-card__meta-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2.67" width="12" height="10.67" rx="1.33" stroke="currentColor" stroke-width="1.2"/><path d="M2 6h12M5.33 1.33v2.67M10.67 1.33v2.67" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              October 2025
+            </span>
+            <span class="event-card__meta-item">
+              <svg class="event-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+              Bombay Exhibition Centre, Mumbai
+            </span>
+          </div>
+          <span class="event-card__format event-card__format--physical">Physical + Virtual</span>
+          <a href="https://www.indiaproptechexpo.com/" class="event-card__cta" target="_blank" rel="noopener">Visit Website &rarr;</a>
+        </div>
+
+        <!-- India Senior Living Show -->
+        <div class="event-card event-card--purple reveal">
+          <!-- Heart + home SVG (purple, animated) -->
+          <svg class="event-card__svg" viewBox="0 0 120 120" fill="none">
+            <!-- House -->
+            <path d="M20 65 L60 35 L100 65 L100 100 L20 100 Z" stroke="#8b5cf6" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M20 65 L60 35 L100 65" fill="#8b5cf6" opacity=".05"/>
+            <!-- Door -->
+            <rect x="48" y="78" width="24" height="22" rx="3" stroke="#8b5cf6" stroke-width="1" fill="#8b5cf6" opacity=".06"/>
+            <!-- Windows -->
+            <rect x="28" y="72" width="14" height="12" rx="2" stroke="#8b5cf6" stroke-width=".8" fill="#8b5cf6" opacity=".05"/>
+            <rect x="78" y="72" width="14" height="12" rx="2" stroke="#8b5cf6" stroke-width=".8" fill="#8b5cf6" opacity=".05"/>
+            <!-- Heart above -->
+            <path d="M60 8 C54 8 48 14 48 20 C48 32 60 42 60 42 C60 42 72 32 72 20 C72 14 66 8 60 8Z" stroke="#8b5cf6" stroke-width="1.5" fill="#8b5cf6" opacity=".12" style="animation:geFloat 3s ease-in-out infinite"/>
+            <!-- Heartbeat line -->
+            <polyline points="35 52 45 52 50 44 55 58 60 48 65 52 75 52" stroke="#8b5cf6" stroke-width="1" fill="none" opacity=".2"/>
+            <!-- People silhouettes -->
+            <circle cx="40" cy="108" r="4" fill="#8b5cf6" opacity=".1"/>
+            <circle cx="40" cy="103" r="2.5" fill="#8b5cf6" opacity=".1"/>
+            <circle cx="55" cy="110" r="3.5" fill="#8b5cf6" opacity=".08"/>
+            <circle cx="55" cy="105.5" r="2" fill="#8b5cf6" opacity=".08"/>
+            <circle cx="70" cy="108" r="4" fill="#8b5cf6" opacity=".1"/>
+            <circle cx="70" cy="103" r="2.5" fill="#8b5cf6" opacity=".1"/>
+            <!-- Garden elements -->
+            <circle cx="14" cy="98" r="6" fill="#8b5cf6" opacity=".06" stroke="#8b5cf6" stroke-width=".5"/>
+            <line x1="14" y1="104" x2="14" y2="100" stroke="#8b5cf6" stroke-width=".8" opacity=".15"/>
+            <circle cx="106" cy="96" r="5" fill="#8b5cf6" opacity=".05" stroke="#8b5cf6" stroke-width=".5"/>
+            <line x1="106" y1="101" x2="106" y2="98" stroke="#8b5cf6" stroke-width=".8" opacity=".12"/>
+            <!-- Pulsing care dot -->
+            <circle cx="60" cy="24" r="3" fill="#8b5cf6" opacity=".2" style="animation:gePulse 2s ease-in-out infinite"/>
+          </svg>
+          <div class="event-card__badge"><span class="event-card__badge-dot"></span> Senior Living</div>
+          <h3 class="event-card__name">India Senior Living Show</h3>
+          <p class="event-card__desc">Explore, invest, and innovate in India's growing senior living market &mdash; projected to reach $12 billion by 2030. Developers, healthcare providers, and investors under one roof.</p>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item">
+              <svg class="event-card__meta-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2.67" width="12" height="10.67" rx="1.33" stroke="currentColor" stroke-width="1.2"/><path d="M2 6h12M5.33 1.33v2.67M10.67 1.33v2.67" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              2026 &middot; Dates TBA
+            </span>
+            <span class="event-card__meta-item">
+              <svg class="event-card__meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>
+              Major Metros &amp; Key Cities
+            </span>
+          </div>
+          <span class="event-card__format event-card__format--physical">Physical</span>
+          <a href="https://www.indiaseniorlivingshow.com/" class="event-card__cta" target="_blank" rel="noopener">Visit Website &rarr;</a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══ ALWAYS-ON ═══ -->
+    <section class="ao-section reveal">
+      <div class="ao-section__header">
+        <h2 class="ao-section__title">Year-Round Programming</h2>
+      </div>
+      <div class="ao-grid">
+        <div class="ao-card">
+          <div class="ao-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="ao-card__title">Webinars &amp; Masterclasses</h3>
+          <p class="ao-card__desc">Market outlook panels, investment masterclasses, and legal explainers &mdash; ongoing knowledge sessions throughout the year for buyers, investors, and industry professionals.</p>
+        </div>
+        <div class="ao-card">
+          <div class="ao-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          </div>
+          <h3 class="ao-card__title">Virtual Events &mdash; 365 Days</h3>
+          <p class="ao-card__desc">Always-on digital expo &mdash; developer booths, AI property matchmaking, VR tours, and live sessions. Access the future of property discovery, any day of the year.</p>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+
+
+<!-- CTA — Modern Dark -->
+<section class="cta-modern reveal">
+  <div class="cta-modern__bg" aria-hidden="true"></div>
+  <div class="cta-modern__inner">
+    <div class="cta-modern__content">
+      <span class="cta-modern__eyebrow"><span class="cta-modern__eyebrow-dot"></span> GharEvents Updates</span>
+      <h2 class="cta-modern__title">Stay Updated on Upcoming Events</h2>
+      <p class="cta-modern__desc">Early-bird registration, speaker announcements, and exclusive event access &mdash; delivered to your inbox.</p>
+      <div class="cta-modern__features">
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Flagship expo updates</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Speaker announcements</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Early-bird registration</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Partner &amp; exhibit opportunities</span>
+      </div>
+    </div>
+    <div class="cta-modern__form-wrap">
+      <form class="cta-modern__form" id="nlForm" novalidate>
+        <div class="cta-modern__input-row">
+          <input type="text" class="cta-modern__inp" placeholder="Your name" autocomplete="name" required>
+          <input type="email" class="cta-modern__inp" placeholder="Your email address" autocomplete="email" required>
+        </div>
+        <button type="submit" class="cta-modern__btn" id="nlBtn">
+          <span>Subscribe to GharEvents</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <p class="cta-modern__note">Free. No spam. Unsubscribe anytime.</p>
+      </form>
+      <div class="cta-modern__ok" id="nlOk" hidden>
+        <div class="cta-modern__ok-icon">&check;</div>
+        <p>You're subscribed. See you at the next event.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div><img src="logo.svg" alt="GHAR.tv" class="ft-logo-img"><p class="ft-tag">India's AI-Native Real Estate Intelligence</p></div>
+      <nav class="ft-nav">
+        <a href="/intelligence">Intelligence</a>
+        <a href="/design">Design</a>
+        <a href="/people">People</a>
+        <a href="/ghartalks">GharTalks</a>
+        <a href="/gharevents">GharEvents</a>
+        <a href="/industry-voices">Industry Voices</a>
+      </nav>
+    </div>
+    <div class="ft-bot">
+      <p>&copy; 2026 Ghar.tv &middot; Zybeq Ventures Pvt Ltd</p>
+      <div class="ft-bot-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var btn=document.getElementById('hamburgerBtn'),menu=document.getElementById('mobMenu');
+  btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.classList.toggle('active',o);btn.setAttribute('aria-expanded',o);menu.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.classList.remove('active');btn.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow=''})});
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href'),t=id.length>1&&document.querySelector(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+  var reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -32px 0px'});reveals.forEach(function(el){io.observe(el)})}else{reveals.forEach(function(el){el.classList.add('revealed')})}
+  var nlForm=document.getElementById('nlForm'),nlBtn=document.getElementById('nlBtn'),nlOk=document.getElementById('nlOk');
+  if(nlForm){nlForm.addEventListener('submit',function(e){e.preventDefault();nlBtn.textContent='...';nlBtn.disabled=true;setTimeout(function(){nlForm.hidden=true;nlOk.hidden=false},800)})}
+  var dd=document.getElementById('postDropdown');
+  if(dd){var ddT=dd.querySelector('.nav-dropdown__toggle');ddT.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();dd.classList.toggle('open');ddT.setAttribute('aria-expanded',String(dd.classList.contains('open')))});dd.addEventListener('click',function(e){e.stopPropagation()});document.addEventListener('click',function(){dd.classList.remove('open');ddT.setAttribute('aria-expanded','false')})}
+})();
+</script>
+</body>

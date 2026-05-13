@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>Rankings - GHAR.tv Intelligence</title>
+  <meta name="description" content="Data-driven rankings of India's top real estate projects, developers, cities, and localities.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    media="print" onload="this.onload=null;this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  </noscript>
+
+  <link rel="stylesheet" href="listing.css">
+  <style>
+    /* ═══ RANKINGS HERO — left/right split ═══ */
+    .hero-split{display:grid;grid-template-columns:1fr;gap:40px;padding:clamp(40px,5vw,60px) 0;align-items:center}
+    @media(min-width:900px){.hero-split{grid-template-columns:1fr 1fr;gap:64px}}
+    .hero-left{text-align:center}
+    @media(min-width:900px){.hero-left{text-align:left}}
+    .hero-left .hero__title{margin-bottom:16px}
+    .hero-left .hero__desc{margin-bottom:32px}
+    @media(min-width:900px){.hero-left .hero__desc{margin-left:0;margin-right:auto}}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+    @media(min-width:900px){.hero-ctas{justify-content:flex-start}}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(17,17,17,.2)}
+    .btn-primary::after{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity .25s}
+    .btn-primary:hover::after{opacity:1}
+    .btn-primary span{position:relative;z-index:1}
+    .hero-right{display:flex;align-items:center;justify-content:center;position:relative;min-height:280px}
+    .hero-svg{width:100%;max-width:420px;height:auto}
+    .rk-fade{opacity:0;animation:rkFadeIn .5s ease-out forwards}
+    .rk-1{animation-delay:.3s}.rk-2{animation-delay:.5s}.rk-3{animation-delay:.7s}.rk-4{animation-delay:.9s}.rk-5{animation-delay:1.1s}.rk-6{animation-delay:1.3s}
+    @keyframes rkFadeIn{to{opacity:1}}
+    @media(max-width:900px){.hero-right{min-height:220px}}
+    @media(max-width:480px){.hero-ctas{flex-direction:column}.btn-primary{width:100%;justify-content:center}}
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="logo.svg" alt="GHAR.tv" class="nav-logo-img">
+      <span class="nav-logo-tag">Intelligence</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="/intelligence" class="active">Intelligence</a></li>
+      <li><a href="/design">Design</a></li>
+      <li><a href="/people">People</a></li>
+      <li><a href="/ghartalks">GharTalks</a></li>
+      <li><a href="/videoworks">VideoWorks</a></li>
+      <li><a href="/gharevents">GharEvents</a></li>
+      <li><a href="/industry-voices">Industry Voices</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-dropdown" id="postDropdown">
+        <button class="nav-dropdown__toggle" aria-expanded="false">Post <svg class="nav-dropdown__arrow" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown__menu">
+          <a href="/post-property" class="nav-dropdown__item">Post Property<span class="nav-dropdown__item-sub">List your property for sale or rent</span></a>
+          <a href="/post-requirement" class="nav-dropdown__item">Post Requirement<span class="nav-dropdown__item-sub">Tell us what you're looking for</span></a>
+        </div>
+      </div>
+      <a href="/join" class="nav-btn-join">Join Now</a>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- SUB-NAV -->
+<nav class="subnav" aria-label="Intelligence sections">
+  <div class="subnav-inner">
+    <a href="ranking.html"       class="subnav-link active">Rankings</a>
+    <a href="reports.html"        class="subnav-link">Reports</a>
+    <a href="analysis.html"       class="subnav-link">Analysis</a>
+    <a href="market.html"                  class="subnav-link">Market</a>
+    <a href="infrastructure.html"          class="subnav-link">Infrastructure</a>
+    <a href="investment.html"     class="subnav-link">Investment</a>
+    <a href="legal.html"          class="subnav-link">Legal</a>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <ul class="mob-links">
+    <li><a href="/intelligence" class="mob-accent">Intelligence</a></li>
+    <li><a href="/design">Design</a></li>
+    <li><a href="/people">People</a></li>
+    <li><a href="/ghartalks">GharTalks</a></li>
+    <li><a href="/videoworks">VideoWorks</a></li>
+    <li><a href="/gharevents">GharEvents</a></li>
+    <li><a href="/industry-voices">Industry Voices</a></li>
+    <li><a href="/post-property">Post Property</a></li>
+    <li><a href="/post-requirement">Post Requirement</a></li>
+    <li><a href="/join" class="mob-accent">Join Now &rarr;</a></li>
+  </ul>
+</div>
+
+<div class="page-wrap">
+  <div class="cont">
+
+    <!-- Breadcrumb -->
+    <nav class="bc" aria-label="Breadcrumb">
+      <a href="/">GHAR.tv</a>
+      <span class="bc-sep">&rsaquo;</span>
+      <a href="intelligence.html">Intelligence</a>
+      <span class="bc-sep">&rsaquo;</span>
+      <span class="bc-cur">Rankings</span>
+    </nav>
+
+    <!-- HERO — left/right split with SVG -->
+    <div class="hero-split">
+      <div class="hero-left">
+        <h1 class="hero__title">Rankings</h1>
+        <p class="hero__desc">Data-driven rankings of India's top real estate projects, developers, cities, and localities &mdash; editorially curated and updated quarterly.</p>
+        <div class="hero-ctas">
+          <a href="#" class="btn-primary"><span>Explore Rankings &rarr;</span></a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <svg class="hero-svg" viewBox="0 0 380 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Podium base -->
+          <rect x="40" y="270" width="300" height="10" rx="5" fill="#e5e7eb" class="rk-fade rk-1"/>
+
+          <!-- 2nd place podium -->
+          <g class="rk-fade rk-2">
+            <rect x="55" y="180" width="80" height="90" rx="6" fill="#fff" stroke="#d1d5db" stroke-width="1.2"/>
+            <text x="95" y="220" text-anchor="middle" font-size="28" font-weight="700" fill="#d1d5db" font-family="'Gazpacho',Georgia,serif">2</text>
+            <rect x="70" y="245" width="50" height="4" rx="2" fill="#e5e7eb"/>
+            <rect x="78" y="254" width="34" height="3" rx="1.5" fill="#f3f4f6"/>
+          </g>
+
+          <!-- 1st place podium (tallest, accent) -->
+          <g class="rk-fade rk-3">
+            <rect x="150" y="120" width="80" height="150" rx="6" fill="#fff" stroke="#ee324b" stroke-width="1.5"/>
+            <rect x="152" y="122" width="76" height="30" rx="4" fill="rgba(238,50,75,.04)"/>
+            <text x="190" y="168" text-anchor="middle" font-size="32" font-weight="700" fill="#ee324b" font-family="'Gazpacho',Georgia,serif">1</text>
+            <!-- Trophy icon -->
+            <g transform="translate(178,185)">
+              <path d="M4 0h16v8a8 8 0 0 1-16 0V0Z" fill="rgba(238,50,75,.1)" stroke="#ee324b" stroke-width="1"/>
+              <path d="M0 0h4v5a4 4 0 0 1-4-4V0Z" fill="none" stroke="#ee324b" stroke-width=".8"/>
+              <path d="M20 0h4v1a4 4 0 0 1-4 4V0Z" fill="none" stroke="#ee324b" stroke-width=".8"/>
+              <rect x="8" y="16" width="8" height="3" rx="1" fill="#ee324b" opacity=".3"/>
+              <rect x="6" y="19" width="12" height="2" rx="1" fill="#ee324b" opacity=".2"/>
+            </g>
+            <rect x="165" y="240" width="50" height="4" rx="2" fill="#e5e7eb"/>
+            <rect x="173" y="249" width="34" height="3" rx="1.5" fill="#f3f4f6"/>
+          </g>
+
+          <!-- 3rd place podium -->
+          <g class="rk-fade rk-4">
+            <rect x="245" y="200" width="80" height="70" rx="6" fill="#fff" stroke="#d1d5db" stroke-width="1.2"/>
+            <text x="285" y="238" text-anchor="middle" font-size="28" font-weight="700" fill="#d1d5db" font-family="'Gazpacho',Georgia,serif">3</text>
+            <rect x="260" y="252" width="50" height="4" rx="2" fill="#e5e7eb"/>
+          </g>
+
+          <!-- Stars / sparkles around 1st place -->
+          <g class="rk-fade rk-5">
+            <circle cx="145" cy="108" r="3" fill="#ee324b" opacity=".15"/>
+            <circle cx="238" cy="115" r="2.5" fill="#ee324b" opacity=".1"/>
+            <circle cx="190" cy="98" r="2" fill="#ee324b" opacity=".12"/>
+            <!-- Star shape -->
+            <polygon points="190,80 192,86 198,86 193,90 195,96 190,92 185,96 187,90 182,86 188,86" fill="#ee324b" opacity=".15"/>
+          </g>
+
+          <!-- Floating stat badges -->
+          <g class="rk-fade rk-5">
+            <rect x="0" y="100" width="50" height="44" rx="10" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+            <text x="25" y="120" text-anchor="middle" font-size="16" font-weight="700" fill="#ee324b" font-family="Inter,sans-serif">50+</text>
+            <text x="25" y="136" text-anchor="middle" font-size="10" fill="#9ca3af" font-family="Inter,sans-serif">Projects</text>
+          </g>
+          <g class="rk-fade rk-6">
+            <rect x="330" y="130" width="50" height="44" rx="10" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+            <text x="355" y="150" text-anchor="middle" font-size="16" font-weight="700" fill="#3b82f6" font-family="Inter,sans-serif">8+</text>
+            <text x="355" y="166" text-anchor="middle" font-size="10" fill="#9ca3af" font-family="Inter,sans-serif">Cities</text>
+          </g>
+
+        </svg>
+      </div>
+    </div>
+
+    <!-- BODY GRID: Main + Sidebar -->
+    <div class="body-grid">
+
+      <!-- MAIN -->
+      <main>
+
+        <!-- COVER STORY -->
+        <div class="cover reveal">
+          <img class="cover__img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=520&fit=crop&q=80" alt="Top Luxury Real Estate Projects in India" loading="eager">
+          <div class="cover__inner">
+            <div class="cover__eyebrow">Cover Story &middot; Rankings</div>
+            <h2 class="cover__title"><a href="rankings/top-luxury-real-estate-projects-in-india.html">Top Luxury Real Estate Projects in India: The Definitive 2026 Ranking</a></h2>
+            <p class="cover__excerpt">A comprehensive, data-backed ranking of India's most prestigious residential developments &mdash; from sea-facing penthouses in Mumbai to villa estates in Bangalore's tech corridor. Updated quarterly with pricing, delivery status, and buyer sentiment data.</p>
+            <div class="cover__foot">
+              <span class="cover__meta">Mar 20, 2026 &middot; 22 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- POST CARDS — 2-column grid -->
+        <div class="posts">
+
+          <a href="#" class="post-card reveal">
+            <img class="post-card__img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=450&fit=crop&q=75" alt="Top Luxury Villa Projects in Bangalore" loading="lazy">
+            <div class="post-card__body"><div class="post-card__top">
+              <span class="post-card__cat">Villas</span>
+              <span class="post-card__date">Mar 18, 2026</span>
+            </div>
+            <h3 class="post-card__title">Top Luxury Villa Projects in Bangalore</h3>
+            <p class="post-card__summary">Ranking the finest villa developments across Devanahalli, Sarjapur, and Whitefield corridors &mdash; evaluated on plot size, amenities, developer track record, and capital appreciation potential.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read-time">16 min</span>
+              <span class="post-card__cta">Read &rarr;</span>
+            </div>
+            </div>
+          </a>
+
+          <a href="#" class="post-card reveal">
+            <img class="post-card__img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=450&fit=crop&q=75" alt="Top OC-Received Residential Projects in Mumbai" loading="lazy">
+            <div class="post-card__body"><div class="post-card__top">
+              <span class="post-card__cat">OC Ready</span>
+              <span class="post-card__date">Mar 14, 2026</span>
+            </div>
+            <h3 class="post-card__title">Top OC-Received Residential Projects in Mumbai</h3>
+            <p class="post-card__summary">Move-in ready luxury projects across Mumbai that have received Occupancy Certificates &mdash; ranked by construction quality, location premium, and resale value trajectory.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read-time">14 min</span>
+              <span class="post-card__cta">Read &rarr;</span>
+            </div>
+            </div>
+          </a>
+
+          <a href="#" class="post-card reveal">
+            <img class="post-card__img" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=450&fit=crop&q=75" alt="Top Gated Communities in India" loading="lazy">
+            <div class="post-card__body"><div class="post-card__top">
+              <span class="post-card__cat">Communities</span>
+              <span class="post-card__date">Mar 10, 2026</span>
+            </div>
+            <h3 class="post-card__title">Top Gated Communities in India</h3>
+            <p class="post-card__summary">India's best gated communities ranked on safety infrastructure, lifestyle amenities, community governance, and long-term value retention across major metros.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read-time">15 min</span>
+              <span class="post-card__cta">Read &rarr;</span>
+            </div>
+            </div>
+          </a>
+
+          <a href="#" class="post-card reveal">
+            <img class="post-card__img" src="https://images.unsplash.com/photo-1582407947092-87c8c4756011?w=600&h=450&fit=crop&q=75" alt="Top Branded Residences in India" loading="lazy">
+            <div class="post-card__body"><div class="post-card__top">
+              <span class="post-card__cat">Branded Residences</span>
+              <span class="post-card__date">Mar 6, 2026</span>
+            </div>
+            <h3 class="post-card__title">Top Branded Residences in India</h3>
+            <p class="post-card__summary">Hotel-branded residential projects commanding 25-40% premiums over comparable inventory &mdash; ranked by brand pedigree, service quality, and investment returns.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read-time">13 min</span>
+              <span class="post-card__cta">Read &rarr;</span>
+            </div>
+            </div>
+          </a>
+
+          <a href="#" class="post-card reveal">
+            <img class="post-card__img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=450&fit=crop&q=75" alt="Top Real Estate Developers in India" loading="lazy">
+            <div class="post-card__body"><div class="post-card__top">
+              <span class="post-card__cat">Developers</span>
+              <span class="post-card__date">Mar 2, 2026</span>
+            </div>
+            <h3 class="post-card__title">Top Real Estate Developers in India</h3>
+            <p class="post-card__summary">A definitive ranking of India's most trusted developers &mdash; scored on delivery track record, construction quality, financial stability, and buyer satisfaction ratings.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read-time">18 min</span>
+              <span class="post-card__cta">Read &rarr;</span>
+            </div>
+            </div>
+          </a>
+
+          <a href="#" class="post-card reveal">
+            <img class="post-card__img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=450&fit=crop&q=75" alt="Top Real Estate Investment Cities in India" loading="lazy">
+            <div class="post-card__body"><div class="post-card__top">
+              <span class="post-card__cat">Investment</span>
+              <span class="post-card__date">Feb 26, 2026</span>
+            </div>
+            <h3 class="post-card__title">Top Real Estate Investment Cities in India</h3>
+            <p class="post-card__summary">Indian cities ranked by total returns potential &mdash; combining capital appreciation, rental yields, infrastructure development, and economic growth indicators.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read-time">15 min</span>
+              <span class="post-card__cta">Read &rarr;</span>
+            </div>
+            </div>
+          </a>
+
+          <a href="#" class="post-card reveal is-hidden">
+            <img class="post-card__img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=450&fit=crop&q=75" alt="Top Emerging Real Estate Hotspots in India" loading="lazy">
+            <div class="post-card__body"><div class="post-card__top">
+              <span class="post-card__cat">Emerging Hotspots</span>
+              <span class="post-card__date">Feb 22, 2026</span>
+            </div>
+            <h3 class="post-card__title">Top Emerging Real Estate Hotspots in India</h3>
+            <p class="post-card__summary">Localities and micro-markets showing the strongest early-stage growth signals &mdash; ranked by infrastructure investment, price momentum, and developer activity.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read-time">12 min</span>
+              <span class="post-card__cta">Read &rarr;</span>
+            </div>
+            </div>
+          </a>
+
+          <a href="#" class="post-card reveal is-hidden">
+            <img class="post-card__img" src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&h=450&fit=crop&q=75" alt="Top Second-Home Destinations in India" loading="lazy">
+            <div class="post-card__body"><div class="post-card__top">
+              <span class="post-card__cat">Second Homes</span>
+              <span class="post-card__date">Feb 18, 2026</span>
+            </div>
+            <h3 class="post-card__title">Top Second-Home Destinations in India</h3>
+            <p class="post-card__summary">India's most desirable second-home markets ranked by lifestyle value, rental income potential, accessibility from metros, and long-term appreciation trends.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read-time">14 min</span>
+              <span class="post-card__cta">Read &rarr;</span>
+            </div>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- Load More -->
+        <div class="load-more reveal">
+          <button class="load-more__btn">Load more articles &darr;</button>
+        </div>
+
+      </main>
+
+      <!-- SIDEBAR — CTA box only -->
+      <aside class="sidebar">
+
+        <div class="sidebar-cta reveal">
+          <div class="sidebar-cta__eyebrow">Rankings Intelligence Brief</div>
+          <h3 class="sidebar-cta__title">Get rankings delivered to your inbox</h3>
+          <p class="sidebar-cta__desc">Quarterly rankings digest &mdash; data-driven rankings of India's top projects, developers, cities, and localities.</p>
+          <form id="nlForm" novalidate>
+            <input type="email" id="nlEmail" placeholder="your@email.com" autocomplete="email" required
+              style="width:100%;padding:10px 14px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.14);border-radius:8px;color:#fff;font-size:13px;font-family:var(--ff-sans);outline:none;margin-bottom:9px;">
+            <button type="submit" class="sidebar-cta__btn" id="nlBtn">Subscribe</button>
+          </form>
+          <div id="nlOk" hidden style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.65);padding:10px 0;">
+            <span style="width:26px;height:26px;border-radius:50%;background:rgba(40,167,69,.2);color:#4ade80;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;">&check;</span> You're subscribed.
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <img src="logo.svg" alt="GHAR.tv" class="ft-logo-img">
+        <p class="ft-tagline">India's AI-Native Real Estate Intelligence</p>
+      </div>
+      <nav class="ft-nav">
+        <a href="intelligence.html">Intelligence</a>
+        <a href="/design">Design</a>
+        <a href="/industry-voices">Industry Voices</a>
+      </nav>
+    </div>
+    <div class="ft-bot">
+      <p>&copy; 2026 Ghar.tv &middot; Zybeq Ventures Pvt Ltd</p>
+      <div class="ft-bot-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var hBtn = document.getElementById('hamburgerBtn');
+  var mMenu = document.getElementById('mobMenu');
+  hBtn.addEventListener('click', function(){
+    var open = mMenu.classList.toggle('open');
+    hBtn.classList.toggle('open', open);
+    hBtn.setAttribute('aria-expanded', String(open));
+    mMenu.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mMenu.classList.remove('open'); hBtn.classList.remove('open');
+      hBtn.setAttribute('aria-expanded','false'); mMenu.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    });
+  });
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('revealed'); io.unobserve(e.target); } });
+    },{threshold:0.06, rootMargin:'0px 0px -20px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('revealed'); }); }
+  /* Load More — show 2 cards per click */
+  var loadBtn = document.querySelector('.load-more__btn');
+  var loadWrap = document.querySelector('.load-more');
+  if(loadBtn){
+    loadBtn.addEventListener('click', function(){
+      var hidden = document.querySelectorAll('.post-card.is-hidden');
+      var count = Math.min(2, hidden.length);
+      for(var i = 0; i < count; i++){
+        hidden[i].classList.remove('is-hidden');
+        hidden[i].classList.add('revealed');
+      }
+      if(document.querySelectorAll('.post-card.is-hidden').length === 0){
+        loadWrap.classList.add('is-hidden');
+      }
+    });
+  }
+  /* Newsletter */
+  var nlForm = document.getElementById('nlForm');
+  var nlBtn  = document.getElementById('nlBtn');
+  var nlOk   = document.getElementById('nlOk');
+  if(nlForm){ nlForm.addEventListener('submit', function(e){
+    e.preventDefault(); nlBtn.textContent = '...'; nlBtn.disabled = true;
+    setTimeout(function(){ nlForm.hidden = true; nlOk.hidden = false; }, 800);
+  }); }
+  /* Post dropdown */
+  var dd = document.getElementById('postDropdown');
+  if(dd){
+    var ddToggle = dd.querySelector('.nav-dropdown__toggle');
+    ddToggle.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var isOpen = dd.classList.toggle('open');
+      ddToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    dd.addEventListener('click', function(e){ e.stopPropagation(); });
+    document.addEventListener('click', function(){
+      dd.classList.remove('open');
+      ddToggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+})();
+</script>
+</body>
+</html>

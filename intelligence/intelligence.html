@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>Ghar.tv - India's Real Estate Intelligence Platform</title>
+  <meta name="description" content="India's first AI-native real estate intelligence platform. Rankings, research reports, market analysis and investment intelligence for discerning property buyers, investors and developers.">
+  <meta name="keywords" content="India real estate intelligence, luxury property rankings, NRI investment guide, Mumbai real estate, Bangalore villas, property research">
+  <meta property="og:title" content="Ghar.tv - India's Real Estate Intelligence Platform">
+  <meta property="og:description" content="Rankings, research reports, market analysis and investment intelligence for India's most discerning property buyers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ghar.tv">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://ghar.tv">
+
+  <!-- Preconnect for fonts (DNS only - loaded non-blocking below) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- ═══════════════════════════════════════════════
+       CRITICAL CSS - INLINE (Above the fold only)
+       Nav + Hero + Base resets
+       ═══════════════════════════════════════════════ -->
+  <style>
+    @font-face {
+      font-family: 'Gazpacho';
+      src: url('fonts/Gazpacho-Bold.woff2') format('woff2'),
+           url('fonts/Gazpacho-Bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ── Variables — matches listing.css ── */
+    :root {
+      --bg:        #ffffff;
+      --ink:       #111111;
+      --ink2:      #4b5563;
+      --faint:     #9ca3af;
+      --rule:      #e8e8e8;
+      --accent:    #ee324b;
+      --surface:   #f7f7f7;
+      --white:     #fff;
+      --border:    #e8e8e8;
+      --border-md: rgba(17,17,17,.15);
+      --success:   #16a34a;
+      --sh-sm:     0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.04);
+      --sh-md:     0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+      --sh-lg:     0 20px 48px rgba(0,0,0,.10), 0 8px 20px rgba(0,0,0,.06);
+      --ff-display:'Gazpacho', Georgia, serif;
+      --ff-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --ease:      cubic-bezier(.4,0,.2,1);
+      --maxw: 1600px;
+      --max-w: 1600px;
+      --pad-h: clamp(24px, 3vw, 80px);
+      --pad-v: clamp(80px, 9vw, 120px);
+      --r: 20px; --rs: 12px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--ff-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.8;
+      overflow-x: clip;           /* fix: sticky + overflow-x */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img, video { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button { font-family: inherit; }
+
+    /* ══════════════════════════════════
+       MOBILE-FIRST — matches listing.css
+       Default = mobile (≤743px)
+    ══════════════════════════════════ */
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--rule); box-shadow: var(--sh-sm);
+      contain: layout style;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-h);
+      height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .nav-logo {
+      display: flex; align-items: baseline; gap: 0;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo-img { height: 28px; width: auto; display: block; }
+    .nav-logo-tag {
+      font-size: 10px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--faint); margin-left: 10px;
+    }
+    .nav-links { display: none; align-items: center; justify-content: center; gap: 2px; list-style: none; flex: 1; }
+    .nav-links a {
+      font-size: 13.5px; font-weight: 500; color: var(--ink2);
+      text-decoration: none; padding: 6px 11px; border-radius: 7px;
+      transition: background .16s, color .16s;
+    }
+    .nav-links a:hover  { background: var(--surface); color: var(--ink); }
+    .nav-links a.active { background: var(--surface); color: var(--ink); font-weight: 600; }
+    .nav-right { display: none; align-items: center; gap: 8px; flex-shrink: 0; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown__toggle {
+      font-size: 13px; font-weight: 500; color: var(--ink2);
+      padding: 7px 14px; border-radius: 7px;
+      border: 1.5px solid rgba(17,17,17,.15);
+      background: none; cursor: pointer; font-family: var(--ff-sans);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: border-color .18s, color .18s;
+    }
+    .nav-dropdown__toggle:hover { border-color: var(--ink); color: var(--ink); }
+    .nav-dropdown__arrow { width: 10px; height: 10px; transition: transform .2s; }
+    .nav-dropdown.open .nav-dropdown__arrow { transform: rotate(180deg); }
+    .nav-dropdown__menu {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      background: #fff; border: 1px solid var(--rule);
+      border-radius: 10px; padding: 6px; min-width: 200px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.1), 0 2px 8px rgba(0,0,0,.04);
+      opacity: 0; visibility: hidden; transform: translateY(-4px);
+      transition: opacity .2s, visibility .2s, transform .2s;
+      z-index: 910;
+    }
+    .nav-dropdown.open .nav-dropdown__menu { opacity: 1; visibility: visible; transform: none; }
+    .nav-dropdown__item {
+      display: block; padding: 10px 14px; border-radius: 7px;
+      font-size: 13.5px; font-weight: 500; color: var(--ink);
+      text-decoration: none; transition: background .15s;
+    }
+    .nav-dropdown__item:hover { background: var(--surface); }
+    .nav-dropdown__item-sub { font-size: 11px; color: var(--faint); margin-top: 2px; display: block; }
+    .nav-btn-join {
+      font-size: 13px; font-weight: 600; letter-spacing: .01em; color: #fff;
+      padding: 8px 20px; border-radius: 8px; background: var(--ink);
+      text-decoration: none; min-height: 36px;
+      display: inline-flex; align-items: center;
+      transition: background .18s, transform .18s;
+    }
+    .nav-btn-join:hover { background: var(--accent); transform: translateY(-1px); }
+    .nav-hamburger {
+      display: flex; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; background: none; border: none; z-index: 901;
+    }
+    .nav-hamburger span {
+      display: block; width: 20px; height: 1.5px; background: var(--ink);
+      transition: transform .3s var(--ease), opacity .3s var(--ease);
+    }
+    .nav-hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── SUBNAV ── */
+    .subnav {
+      position: fixed; top: 56px; left: 0; right: 0; z-index: 890;
+      background: var(--white); border-bottom: 1px solid var(--rule);
+      contain: layout style;
+    }
+    .subnav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 16px; height: 42px;
+      display: flex; align-items: center; gap: 2px;
+      overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .subnav-inner::-webkit-scrollbar { display: none; }
+    .subnav-link {
+      font-size: 12.5px; font-weight: 500; color: var(--ink2);
+      padding: 6px 13px; border-radius: 6px; white-space: nowrap;
+      text-decoration: none; transition: background .16s, color .16s;
+    }
+    .subnav-link:hover  { background: var(--surface); color: var(--ink); }
+    .subnav-link.active { background: var(--ink); color: var(--white); font-weight: 600; }
+
+    /* ── MOBILE MENU ── */
+    .mob-menu {
+      position: fixed; inset: 0; background: var(--white); z-index: 850;
+      transform: translateX(100%); transition: transform .42s var(--ease);
+      display: flex; flex-direction: column; padding: 88px 28px 48px; gap: 0;
+    }
+    .mob-menu.open { transform: translateX(0); }
+    .mob-links { list-style: none; }
+    .mob-links li { border-bottom: 1px solid var(--rule); }
+    .mob-links a {
+      display: block; padding: 15px 0; min-height: 44px;
+      font-family: var(--ff-display); font-size: 24px; font-weight: 700;
+      color: var(--ink); text-decoration: none; transition: color .2s var(--ease);
+    }
+    .mob-links a:hover, .mob-links .mob-accent { color: var(--accent); }
+
+    /* ── HERO — left/right split with SVG ── */
+    .hero{position:relative;overflow:hidden;min-height:75vh;display:flex;align-items:center}
+    .hero-bg{position:absolute;inset:0;pointer-events:none;background:var(--white)}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .hero-grid::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(17,17,17,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,17,.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%)}
+
+    .hero-split{display:grid;grid-template-columns:1fr;gap:40px;max-width:var(--max-w);margin:0 auto;padding:clamp(40px,5vw,60px) var(--pad-h);width:100%;position:relative;z-index:2;align-items:center}
+    @media(min-width:900px){.hero-split{grid-template-columns:1fr 1fr;gap:64px}}
+
+    .hero-left{text-align:center}
+    @media(min-width:900px){.hero-left{text-align:left}}
+
+    .hero-eyebrow,.hero-title,.hero-sub,.hero-ctas{opacity:0;transform:translateY(24px);animation:intFadeUp .8s var(--ease) forwards}
+    .hero-eyebrow{animation-delay:.1s}.hero-title{animation-delay:.25s}.hero-sub{animation-delay:.4s}.hero-ctas{animation-delay:.55s}
+    @keyframes intFadeUp{to{opacity:1;transform:none}}
+
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;padding:8px 20px;border:1px solid rgba(238,50,75,.15);border-radius:24px;background:rgba(238,50,75,.04)}
+    .hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:intDotPulse 2s ease-in-out infinite}
+    @keyframes intDotPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(238,50,75,.3)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(238,50,75,0)}}
+
+    .hero-title{font-family:var(--ff-display);font-size:clamp(40px,6vw,76px);font-weight:700;line-height:.98;letter-spacing:-.04em;color:var(--ink);margin-bottom:20px}
+    .hero-title span{display:block;color:var(--ink)}
+    .hero-sub{font-size:clamp(15px,1.3vw,18px);line-height:1.75;color:var(--ink2);max-width:480px;margin-bottom:36px}
+    @media(min-width:900px){.hero-sub{margin-left:0;margin-right:auto}}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+    @media(min-width:900px){.hero-ctas{justify-content:flex-start}}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--white);padding:16px 32px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(17,17,17,.2)}
+    .btn-primary::after{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity .25s}
+    .btn-primary:hover::after{opacity:1}
+    .btn-primary span{position:relative;z-index:1}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--rule);color:var(--ink);padding:16px 32px;border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;background:none;transition:border-color .25s,background .25s}
+    .btn-outline:hover{border-color:var(--ink);background:var(--surface)}
+
+    /* Right — SVG animation */
+    .hero-right{display:flex;align-items:center;justify-content:center;position:relative;min-height:300px;opacity:0;animation:intFadeUp 1s .3s forwards}
+
+    .hero-svg{width:100%;max-width:520px;height:auto}
+    .int-draw,.int-draw-2,.int-draw-3,.int-draw-4{opacity:0;animation:intFadeEl .6s ease-out forwards}
+    .int-draw{animation-delay:.4s}.int-draw-2{animation-delay:.6s}.int-draw-3{animation-delay:.8s}.int-draw-4{animation-delay:1s}
+    .int-fill{opacity:0;animation:intFadeEl .5s ease-out forwards}
+    .int-fill-1{animation-delay:.8s}.int-fill-2{animation-delay:1s}.int-fill-3{animation-delay:1.2s}.int-fill-4{animation-delay:1.4s}.int-fill-5{animation-delay:1.6s}
+    @keyframes intFadeEl{to{opacity:1}}
+
+    /* Floating cards */
+    .hero-float{position:absolute;border-radius:12px;border:1px solid rgba(17,17,17,.06);background:rgba(255,255,255,.9);backdrop-filter:blur(8px);padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.04);opacity:0}
+    .hero-float__icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .hero-float__text{font-size:11px;font-weight:600;color:#111;line-height:1.3}
+    .hero-float__sub{font-size:10px;color:#9ca3af;font-weight:500}
+    .hero-float--1{top:5%;right:5%;animation:intFadeUp .6s 2s forwards}
+    .hero-float--2{bottom:12%;left:0;animation:intFadeUp .6s 2.3s forwards}
+    .hero-float--3{top:50%;right:-2%;animation:intFadeUp .6s 2.6s forwards}
+    .hero-float--4{bottom:35%;left:-3%;animation:intFadeUp .6s 2.9s forwards}
+
+    /* Orbit */
+    .hero-orbit{position:absolute;top:50%;left:50%;width:300px;height:300px;margin:-150px 0 0 -150px;border:1px dashed rgba(17,17,17,.05);border-radius:50%;animation:intOrbit 20s linear infinite;pointer-events:none;will-change:transform}
+    .hero-orbit-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--accent);top:-4px;left:50%;margin-left:-4px;box-shadow:0 0 12px rgba(238,50,75,.3)}
+    @keyframes intOrbit{to{transform:rotate(360deg)}}
+
+    @media(max-width:900px){.hero-right{min-height:250px}.hero-ctas{justify-content:center}}
+    @media(max-width:767px){.hero-float{display:none}}
+    @media(max-width:480px){.hero-ctas{flex-direction:column}.btn-primary,.btn-outline{width:100%;justify-content:center}}
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 744px) {
+      .subnav-inner { padding: 0 32px; height: 46px; }
+    }
+    @media (min-width: 1024px) {
+      .nav-inner { padding: 0 32px; height: 62px; gap: 32px; }
+      .nav-links { display: flex; }
+      .nav-right { display: flex; }
+      .nav-hamburger { display: none; }
+      .subnav { top: 62px; }
+    }
+
+    /* ── BREADCRUMB ── */
+    .bc { padding: 14px 0 16px; display: flex; align-items: center; gap: 8px; }
+    .bc a { font-size: 12px; color: var(--faint); font-weight: 500; text-decoration: none; }
+    .bc a:hover { color: var(--ink); }
+    .bc-sep { font-size: 11px; color: var(--faint); }
+    .bc-cur { font-size: 12px; color: var(--ink); font-weight: 600; }
+
+    /* ══ SECTION COMPONENTS ══ */
+    .sec { padding: 80px 0; position: relative; }
+    .sec + .sec { border-top: none; }
+    .sec--alt { background: var(--surface); }
+    .cont { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-h); }
+
+    /* ── Section header — modern watermark number ── */
+    .sec-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 40px; padding-bottom: 0; border-bottom: none;
+      position: relative;
+    }
+    .sec-header__left {
+      display: flex; align-items: flex-end; gap: 0; position: relative;
+    }
+    .sec-header__num {
+      font-family: var(--ff-display); font-size: 100px; font-weight: 700;
+      color: transparent; line-height: .8; letter-spacing: -.04em; user-select: none;
+      -webkit-text-stroke: 1.5px rgba(17,17,17,.07);
+      position: absolute; left: -8px; bottom: -10px;
+      z-index: 0;
+    }
+    .sec--alt .sec-header__num {
+      -webkit-text-stroke-color: rgba(17,17,17,.06);
+    }
+    .sec-header__title {
+      font-family: var(--ff-display); font-size: 26px; font-weight: 700;
+      color: var(--ink); letter-spacing: -.02em; position: relative; z-index: 1;
+      padding-left: 4px;
+    }
+    .sec-header__title::after {
+      content: ''; display: block; width: 32px; height: 3px;
+      background: var(--accent); border-radius: 2px; margin-top: 8px;
+    }
+    .sec-header__link {
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      text-decoration: none; white-space: nowrap;
+      transition: color .16s, gap .2s;
+      display: inline-flex; align-items: center; gap: 4px;
+      position: relative; z-index: 1;
+    }
+    .sec-header__link:hover { color: #d52540; gap: 8px; }
+
+    /* ── Section grid: 3-column modern layout ── */
+    .sec-grid {
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+    }
+
+    /* ── Featured cover card — glassmorphism style ── */
+    .sec-cover {
+      display: block; position: relative; border-radius: 20px;
+      overflow: hidden; text-decoration: none;
+      min-height: 340px;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+    }
+    .sec-cover:hover {
+      transform: translateY(-5px) scale(1.005);
+      box-shadow: 0 20px 50px rgba(0,0,0,.18), 0 8px 20px rgba(0,0,0,.08);
+    }
+    .sec-cover__img {
+      width: 100%; height: 100%; object-fit: cover;
+      position: absolute; inset: 0;
+      transition: transform .6s var(--ease);
+    }
+    .sec-cover:hover .sec-cover__img { transform: scale(1.05); }
+    .sec-cover__body {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 32px 28px; height: 100%;
+      background: linear-gradient(to top,
+        rgba(17,17,17,.78) 0%,
+        rgba(17,17,17,.38) 40%,
+        rgba(17,17,17,.08) 70%,
+        transparent 100%);
+    }
+    .sec-cover__cat {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: #fff;
+      background: var(--accent);
+      padding: 4px 10px; border-radius: 4px;
+      display: inline-block; width: fit-content; margin-bottom: 14px;
+    }
+    .sec-cover__title {
+      font-family: var(--ff-display); font-size: 24px; font-weight: 700;
+      color: #fff; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px;
+    }
+    .sec-cover__excerpt {
+      font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.8);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .sec-cover__meta {
+      font-size: 11px; font-weight: 500; color: rgba(255,255,255,.45);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sec-cover__meta::before {
+      content: ''; width: 16px; height: 1px; background: var(--accent); display: inline-block;
+    }
+
+    /* ── Side cards — modern glass style ── */
+    .sec-side { display: flex; flex-direction: column; gap: 16px; }
+    .sec-card {
+      display: flex; flex-direction: column;
+      padding: 28px; border: 1px solid transparent;
+      border-radius: var(--r); text-decoration: none;
+      background: var(--bg);
+      box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
+      transition: all .3s var(--ease);
+      flex: 1; position: relative; overflow: hidden;
+    }
+    .sec--alt .sec-card { background: var(--white); }
+    .sec-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--accent); border-radius: 0 3px 3px 0;
+      opacity: 0; transform: scaleY(0);
+      transition: opacity .25s, transform .25s var(--ease);
+    }
+    .sec-card:hover {
+      border-color: rgba(238,50,75,.12);
+      box-shadow: 0 4px 20px rgba(238,50,75,.08), 0 8px 30px rgba(0,0,0,.06);
+      transform: translateY(-4px);
+    }
+    .sec-card:hover::before { opacity: 1; transform: scaleY(1); }
+    .sec-card__cat {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .sec-card__title {
+      font-family: var(--ff-display); font-size: 18px; font-weight: 700;
+      color: var(--ink); line-height: 1.3; letter-spacing: -.015em; margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .sec-card:hover .sec-card__title { color: var(--ink2); }
+    .sec-card__excerpt {
+      font-size: 13.5px; line-height: 1.65; color: var(--ink2);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      flex: 1;
+    }
+    .sec-card__meta {
+      font-size: 11px; font-weight: 500; color: var(--faint); margin-top: 16px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sec-card__meta::before {
+      content: ''; width: 12px; height: 1px; background: var(--faint); display: inline-block;
+    }
+
+    /* ── V2 trial: featured image card + text-only side cards ── */
+    .sec-grid--v2 {
+      grid-template-columns: 1fr; gap: 24px;
+    }
+    .sec-side2 { display: flex; flex-direction: column; gap: 20px; }
+
+    /* Shared card base */
+    .sec-card2 {
+      display: flex; flex-direction: column;
+      border-radius: 20px; overflow: hidden;
+      text-decoration: none; position: relative;
+      transition: all .35s var(--ease);
+    }
+
+    /* ── Featured card (with image) ── */
+    .sec-card2--featured {
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .sec--alt .sec-card2--featured { background: var(--white); }
+    .sec-card2--featured:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.04);
+      border-color: transparent;
+    }
+    .sec-card2__img-wrap {
+      position: relative; overflow: hidden;
+      aspect-ratio: 16 / 8;
+    }
+    .sec-card2__img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s var(--ease);
+    }
+    .sec-card2--featured:hover .sec-card2__img { transform: scale(1.05); }
+    .sec-card2--featured .sec-card2__body { padding: 28px 28px 24px; }
+    .sec-card2--featured .sec-card2__title { font-size: 22px; }
+
+    /* ── Text-only cards ── */
+    .sec-card2--text {
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      flex: 1; position: relative; overflow: hidden;
+    }
+    .sec--alt .sec-card2--text { background: var(--white); }
+    .sec-card2--text::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(238,50,75,.03) 0%, transparent 60%);
+      pointer-events: none; opacity: 0;
+      transition: opacity .3s;
+    }
+    .sec-card2--text:hover::after { opacity: 1; }
+    .sec-card2--text:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.03);
+      border-color: rgba(238,50,75,.15);
+    }
+    .sec-card2--text .sec-card2__body {
+      padding: 28px; position: relative; z-index: 1;
+    }
+
+    /* Decorative large number watermark on text cards */
+    .sec-card2__num {
+      font-family: var(--ff-display); font-size: 80px; font-weight: 700;
+      color: transparent; -webkit-text-stroke: 1.2px rgba(238,50,75,.08);
+      position: absolute; top: -12px; right: 16px;
+      line-height: 1; user-select: none; pointer-events: none;
+      transition: -webkit-text-stroke-color .3s;
+    }
+    .sec-card2--text:hover .sec-card2__num {
+      -webkit-text-stroke-color: rgba(238,50,75,.14);
+    }
+
+    /* Shared card inner elements */
+    .sec-card2__body {
+      display: flex; flex-direction: column; flex: 1;
+    }
+    .sec-card2__cat {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .sec-card2__title {
+      font-family: var(--ff-display); font-size: 19px; font-weight: 700;
+      color: var(--ink); line-height: 1.25; letter-spacing: -.02em; margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .sec-card2:hover .sec-card2__title { color: var(--ink2); }
+    .sec-card2__excerpt {
+      font-size: 13.5px; line-height: 1.65; color: var(--ink2);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      flex: 1;
+    }
+    .sec-card2__meta {
+      font-size: 11px; font-weight: 500; color: var(--faint); margin-top: 14px;
+    }
+    .sec-card2__arrow {
+      position: absolute; bottom: 20px; right: 24px;
+      font-size: 18px; color: var(--faint);
+      transition: color .2s, transform .2s;
+    }
+    .sec-card2:hover .sec-card2__arrow {
+      color: var(--accent); transform: translateX(4px);
+    }
+
+    /* ══ SECTION-SPECIFIC DESIGNS ══ */
+
+    /* Infrastructure list — horizontal row cards like Guides */
+    .infra-list{display:flex;flex-direction:column;gap:16px}
+    @media(min-width:600px){
+      .infra-list .sec-card2__hz-img{width:260px;flex-shrink:0}
+      .infra-list .sec-card2--hz .sec-card2__body{flex:1}
+    }
+
+    /* Horizontal card — image 30% left, content right */
+    .sec-card2--hz{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--rule);border-radius:var(--r,20px);overflow:hidden;text-decoration:none;transition:all .35s var(--ease)}
+    .sec-card2--hz:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.1);border-color:transparent}
+    .sec-card2__hz-img{overflow:hidden;flex-shrink:0}
+    .sec-card2__hz-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+    .sec-card2--hz:hover .sec-card2__hz-img img{transform:scale(1.04)}
+    .sec-card2--hz .sec-card2__body{padding:20px 24px}
+    @media(min-width:600px){
+      .sec-card2--hz{flex-direction:row}
+      .sec-card2__hz-img{width:30%;min-height:100%}
+      .sec-card2--hz .sec-card2__body{width:70%;padding:24px 28px;display:flex;flex-direction:column;justify-content:center}
+    }
+
+    /* 02 Reports — Blueprint grid pattern */
+    .sec--reports {
+      background:
+        linear-gradient(rgba(200,210,220,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,210,220,.06) 1px, transparent 1px),
+        var(--white);
+      background-size: 40px 40px;
+    }
+    .sec--reports .sec-card2__img-wrap { aspect-ratio: 21 / 8; }
+    .sec--reports .sec-card2__cat {
+      font-family: var(--ff-sans); letter-spacing: .08em; color: var(--faint);
+    }
+    .sec--reports .sec-card2--text:hover { border-color: var(--ink); }
+    .sec--reports .sec-card2:hover .sec-card2__title { color: var(--ink); }
+    .sec--reports .sec-card2--text::after {
+      background: linear-gradient(135deg, rgba(17,17,17,.02) 0%, transparent 60%);
+    }
+    .sec--reports .sec-card2__num { -webkit-text-stroke-color: rgba(17,17,17,.05); }
+
+    /* 04 Market — Immersive bg image + frosted glass */
+    .sec--market {
+      background:
+        linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.75)),
+        url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1400&h=600&fit=crop&q=50');
+      background-size: cover; background-position: center;
+      color: var(--white);
+    }
+    .sec--market .sec-header__num { -webkit-text-stroke-color: rgba(255,255,255,.06); }
+    .sec--market .sec-header__title { color: var(--white); }
+    .sec--market .sec-header__link { color: rgba(255,255,255,.6); }
+    .sec--market .sec-header__link:hover { color: var(--white); }
+    .sec--market .sec-card2--featured {
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-color: rgba(255,255,255,.3);
+    }
+    .sec--market .sec-card2--featured .sec-card2__title { color: var(--ink); }
+    .sec--market .sec-card2--featured .sec-card2__excerpt { color: var(--ink2); }
+    .sec--market .sec-card2--featured .sec-card2__meta { color: var(--faint); }
+    .sec--market .sec-card2--featured:hover {
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .sec--market .sec-card2--text {
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-color: rgba(255,255,255,.12);
+    }
+    .sec--market .sec-card2--text:hover {
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.25);
+      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+    }
+    .sec--market .sec-card2--text .sec-card2__cat { color: rgba(255,255,255,.5); }
+    .sec--market .sec-card2--text .sec-card2__title { color: var(--white); }
+    .sec--market .sec-card2--text:hover .sec-card2__title { color: var(--white); }
+    .sec--market .sec-card2--text .sec-card2__excerpt { color: rgba(255,255,255,.6); }
+    .sec--market .sec-card2--text .sec-card2__meta { color: rgba(255,255,255,.35); }
+    .sec--market .sec-card2--text .sec-card2__arrow { color: rgba(255,255,255,.3); }
+    .sec--market .sec-card2--text:hover .sec-card2__arrow { color: var(--white); }
+    .sec--market .sec-card2__num { -webkit-text-stroke-color: rgba(255,255,255,.08); }
+    .sec--market .sec-card2--text::after { display: none; }
+
+    /* 05 Infrastructure — Clean index rows */
+    .sec--infra { background: var(--white); }
+    .sec--infra .sec-header__title::after { background: var(--ink); }
+    .guide-list { display: flex; flex-direction: column; }
+    .guide-row {
+      display: flex; align-items: flex-start; gap: 24px;
+      padding: 28px 0; border-bottom: 1px solid var(--rule);
+      text-decoration: none; transition: background .2s;
+    }
+    .guide-row:first-child { border-top: 1px solid var(--rule); }
+    .guide-row:hover { background: var(--surface); margin: 0 -16px; padding: 28px 16px; }
+    .guide-row__num {
+      font-family: var(--ff-display); font-size: 48px; font-weight: 700;
+      color: rgba(17,17,17,.06); line-height: 1; letter-spacing: -.03em;
+      flex-shrink: 0; width: 60px; text-align: center;
+      transition: color .25s;
+    }
+    .guide-row:hover .guide-row__num { color: rgba(238,50,75,.15); }
+    .guide-row__body { flex: 1; min-width: 0; }
+    .guide-row__cat {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 6px; display: block;
+    }
+    .guide-row__title {
+      font-family: var(--ff-display); font-size: 20px; font-weight: 700;
+      color: var(--ink); line-height: 1.25; letter-spacing: -.02em; margin-bottom: 8px;
+      transition: color .2s;
+    }
+    .guide-row:hover .guide-row__title { color: var(--ink2); }
+    .guide-row__excerpt {
+      font-size: 13.5px; line-height: 1.65; color: var(--ink2);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .guide-row__right {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+      flex-shrink: 0;
+    }
+    .guide-row__meta { font-size: 11px; font-weight: 500; color: var(--faint); white-space: nowrap; }
+    .guide-row__arrow {
+      font-size: 18px; color: var(--faint); transition: color .2s, transform .2s;
+    }
+    .guide-row:hover .guide-row__arrow { color: var(--ink); transform: translateX(4px); }
+
+    /* 06 Investment — Dark section with horizontal featured card */
+    .sec--investment {
+      background: var(--ink); color: var(--white);
+    }
+    .sec--investment .sec-header__num { -webkit-text-stroke-color: rgba(255,255,255,.05); }
+    .sec--investment .sec-header__title { color: var(--white); }
+    .sec--investment .sec-header__link { color: rgba(255,255,255,.5); }
+    .sec--investment .sec-header__link:hover { color: var(--white); }
+    .sec--investment .sec-grid { grid-template-columns: 1fr; }
+    .sec--investment .sec-card2--fullspan { grid-column: 1 / -1; }
+    .sec--investment .sec-card2--fullspan {
+      background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.08);
+    }
+    .sec--investment .sec-card2--fullspan:hover {
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 16px 48px rgba(0,0,0,.3);
+    }
+    .sec--investment .sec-card2__cat { color: rgba(255,255,255,.5); }
+    .sec--investment .sec-card2__title { color: var(--white); }
+    .sec--investment .sec-card2:hover .sec-card2__title { color: rgba(255,255,255,.7); }
+    .sec--investment .sec-card2__excerpt { color: rgba(255,255,255,.55); }
+    .sec--investment .sec-card2__meta { color: rgba(255,255,255,.3); }
+    .sec--investment .sec-card2__arrow { color: rgba(255,255,255,.25); }
+    .sec--investment .sec-card2:hover .sec-card2__arrow { color: rgba(255,255,255,.6); }
+    .sec--investment .sec-side2 {
+      grid-column: 1 / -1; display: grid;
+      grid-template-columns: 1fr; gap: 16px;
+    }
+    @media(min-width:768px){
+      .sec--investment .sec-side2{grid-template-columns:1fr 1fr;gap:20px}
+    }
+    .sec--investment .sec-card2--text,
+    .sec--investment .sec-card2--hz {
+      background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08);
+    }
+    .sec--investment .sec-card2--text:hover,
+    .sec--investment .sec-card2--hz:hover {
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 8px 32px rgba(0,0,0,.25);
+    }
+    .sec--investment .sec-card2--text::after { display: none; }
+    .sec--investment .sec-card2__num { -webkit-text-stroke-color: rgba(255,255,255,.05); }
+    .sec--investment .sec-card2--text:hover .sec-card2__num { -webkit-text-stroke-color: rgba(255,255,255,.1); }
+
+    /* Shared 3-col equal cards with images — used by Analysis + Legal */
+    .sec--trio .sec-card2--featured {
+      border-radius: 24px; background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .sec--trio .sec-card2--featured:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,.08);
+    }
+
+    /* ── Tablet (≥744px) — section components ── */
+    @media (min-width: 744px) {
+      .cont { padding: 0 32px; }
+      .sec-grid { grid-template-columns: 3fr 2fr; gap: 24px; }
+      .sec-grid--v2 { grid-template-columns: 3fr 2fr; gap: 28px; }
+      .sec-grid--trio { grid-template-columns: repeat(3, 1fr); }
+      .sec-cover { min-height: 400px; }
+      .sec-cover__title { font-size: 28px; }
+      .sec-cover__body { padding: 40px 36px; }
+      .sec-header__num { font-size: 120px; }
+
+      /* Featured card horizontal layout (image 45%) — shared across split sections */
+      .sec--split .sec-card2--featured {
+        flex-direction: row; align-items: stretch;
+      }
+      .sec--split .sec-card2--featured .sec-card2__img-wrap {
+        width: 45%; flex-shrink: 0; aspect-ratio: auto;
+      }
+      .sec--split .sec-card2--featured .sec-card2__img-wrap img {
+        height: 100%; object-fit: cover;
+      }
+      .sec--split .sec-card2--featured .sec-card2__body {
+        flex: 1; display: flex; flex-direction: column; justify-content: center;
+        padding: 32px 36px;
+      }
+    }
+
+    /* ── Desktop (≥1024px) — section components ── */
+    @media (min-width: 1024px) {
+      .sec { padding: 96px 0; }
+      .sec-cover { min-height: 450px; }
+      .sec-cover__title { font-size: 30px; }
+      .sec-header__num { font-size: 140px; left: -12px; }
+      .sec-header__title { font-size: 28px; }
+      /* Investment horizontal featured card */
+      .sec--investment .sec-card2--fullspan { flex-direction: row; }
+      .sec--investment .sec-card2--fullspan .sec-card2__img-wrap { width: 55%; flex-shrink: 0; aspect-ratio: auto; }
+      .sec--investment .sec-card2--fullspan .sec-card2__body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 32px 36px; }
+      /* Guide rows */
+      .guide-row__num { font-size: 56px; width: 72px; }
+      .guide-row__title { font-size: 22px; }
+    }
+
+    /* ══ NEWSLETTER & FOOTER OVERRIDES ══ */
+    /* Fix: nl-btn needs explicit styles since styles.css uses --secondary */
+    .nl-btn {
+      background: var(--accent) !important; color: var(--white) !important;
+      border: none; border-radius: 9px; font-size: 14px; font-weight: 600;
+      letter-spacing: .01em; min-height: 44px; cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .nl-btn:hover { background: #d52540 !important; transform: translateY(-1px); }
+
+    /* Fix: footer — override styles.css grid footer with simple inline layout */
+    .footer {
+      background: var(--ink) !important; padding: 36px 0 !important;
+    }
+    .footer .ft-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
+    }
+    .footer .ft-top {
+      display: flex !important; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+      grid-template-columns: unset !important;
+      padding-bottom: 22px; margin-bottom: 22px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .footer .ft-logo-img { height: 28px; width: auto; filter: brightness(0) invert(1); }
+    .footer .ft-tagline {
+      font-size: 12px; color: rgba(255,255,255,.35); margin-top: 4px;
+    }
+    .footer .ft-nav {
+      display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+    }
+    .footer .ft-nav a {
+      font-size: 13px; font-weight: 500; color: rgba(255,255,255,.5);
+      padding: 6px 12px; border-radius: 6px; text-decoration: none;
+    }
+    .footer .ft-nav a:hover { color: var(--white); background: rgba(255,255,255,.06); }
+    .footer .ft-bot {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer .ft-bot p { font-size: 11px; color: rgba(255,255,255,.22); }
+    .footer .ft-bot-links { display: flex; gap: 18px; }
+    .footer .ft-bot-links a {
+      font-size: 11.5px; color: rgba(255,255,255,.25); text-decoration: none;
+    }
+    .footer .ft-bot-links a:hover { color: rgba(255,255,255,.5); }
+    @media (max-width: 768px) {
+      .footer .ft-top { flex-direction: column; align-items: flex-start; }
+      .footer .ft-bot { flex-direction: column; align-items: flex-start; }
+      .footer .ft-inner { padding: 0 var(--pad-h); }
+    }
+
+    /* ═══ MODERN CTA / NEWSLETTER ═══ */
+    .cta-modern{position:relative;overflow:hidden;padding:clamp(64px,8vw,100px) 0;background:#111}
+    .cta-modern__bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(238,50,75,.08),transparent 70%),radial-gradient(ellipse 40% 40% at 80% 60%,rgba(59,130,246,.06),transparent 70%)}
+    .cta-modern__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-h);display:grid;grid-template-columns:1fr;gap:48px;position:relative;z-index:1}
+    @media(min-width:900px){.cta-modern__inner{grid-template-columns:1fr 1fr;gap:64px;align-items:center}}
+    .cta-modern__eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#ee324b;margin-bottom:20px}
+    .cta-modern__eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#ee324b;animation:intDotPulse 2s ease-in-out infinite}
+    .cta-modern__title{font-family:var(--ff-display);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.1;color:#fff;margin-bottom:16px}
+    .cta-modern__desc{font-size:15px;line-height:1.75;color:rgba(255,255,255,.55);margin-bottom:28px;max-width:480px}
+    .cta-modern__features{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
+    .cta-modern__feature{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,.7)}
+    .cta-modern__feature svg{color:#ee324b;flex-shrink:0}
+    .cta-modern__form-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:clamp(28px,4vw,40px)}
+    .cta-modern__form{display:flex;flex-direction:column;gap:14px}
+    .cta-modern__input-row{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:500px){.cta-modern__input-row{grid-template-columns:1fr 1fr}}
+    .cta-modern__inp{font-family:var(--ff-sans);font-size:14px;padding:14px 18px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#fff;transition:border-color .2s}
+    .cta-modern__inp::placeholder{color:rgba(255,255,255,.3)}
+    .cta-modern__inp:focus{outline:none;border-color:rgba(255,255,255,.25)}
+    .cta-modern__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--ff-sans);font-size:15px;font-weight:600;color:#111;background:#fff;padding:15px 28px;border-radius:10px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
+    .cta-modern__btn:hover{background:#ee324b;color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(238,50,75,.25)}
+    .cta-modern__note{font-size:11.5px;color:rgba(255,255,255,.3);text-align:center}
+    .cta-modern__ok{text-align:center;padding:20px 0}
+    .cta-modern__ok-icon{font-size:36px;color:#22c55e;margin-bottom:12px}
+    .cta-modern__ok p{font-size:15px;color:rgba(255,255,255,.7)}
+  </style>
+
+  <!-- Below-fold CSS - non-blocking (print trick → switches to all on load) -->
+  <link rel="stylesheet" href="styles.css" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
+
+  <!-- Google Fonts - non-blocking -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        media="print" onload="this.onload=null;this.media='all'">
+</head>
+
+<body>
+
+<!-- ════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="logo.svg" alt="GHAR.tv" class="nav-logo-img">
+      <span class="nav-logo-tag">Intelligence</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="/intelligence" class="active">Intelligence</a></li>
+      <li><a href="/design">Design</a></li>
+      <li><a href="/people">People</a></li>
+      <li><a href="/ghartalks">GharTalks</a></li>
+      <li><a href="/videoworks">VideoWorks</a></li>
+      <li><a href="/gharevents">GharEvents</a></li>
+      <li><a href="/industry-voices">Industry Voices</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-dropdown" id="postDropdown">
+        <button class="nav-dropdown__toggle" aria-expanded="false">Post <svg class="nav-dropdown__arrow" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown__menu">
+          <a href="/post-property" class="nav-dropdown__item">Post Property<span class="nav-dropdown__item-sub">List your property for sale or rent</span></a>
+          <a href="/post-requirement" class="nav-dropdown__item">Post Requirement<span class="nav-dropdown__item-sub">Tell us what you're looking for</span></a>
+        </div>
+      </div>
+      <a href="/join" class="nav-btn-join">Join Now</a>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- SUB-NAV -->
+<nav class="subnav" aria-label="Intelligence sections">
+  <div class="subnav-inner">
+    <a href="ranking.html"         class="subnav-link">Rankings</a>
+    <a href="reports.html"         class="subnav-link">Reports</a>
+    <a href="analysis.html"        class="subnav-link">Analysis</a>
+    <a href="market.html"          class="subnav-link">Market</a>
+    <a href="infrastructure.html"  class="subnav-link">Infrastructure</a>
+    <a href="investment.html"      class="subnav-link">Investment</a>
+    <a href="legal.html"           class="subnav-link">Legal</a>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <ul class="mob-links">
+    <li><a href="/intelligence" class="mob-accent">Intelligence</a></li>
+    <li><a href="/design">Design</a></li>
+    <li><a href="/people">People</a></li>
+    <li><a href="/ghartalks">GharTalks</a></li>
+    <li><a href="/videoworks">VideoWorks</a></li>
+    <li><a href="/gharevents">GharEvents</a></li>
+    <li><a href="/industry-voices">Industry Voices</a></li>
+    <li><a href="/post-property">Post Property</a></li>
+    <li><a href="/post-requirement">Post Requirement</a></li>
+    <li><a href="/join" class="mob-accent">Join Now &rarr;</a></li>
+  </ul>
+</div>
+
+<!-- Breadcrumb -->
+<div class="cont" style="padding-top:112px;">
+  <nav class="bc" aria-label="Breadcrumb">
+    <a href="/">GHAR.tv</a>
+    <span class="bc-sep">&rsaquo;</span>
+    <span class="bc-cur">Intelligence</span>
+  </nav>
+</div>
+
+<!-- ════════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-split">
+    <!-- LEFT — Text -->
+    <div class="hero-left">
+      <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> Intelligence</div>
+      <h1 class="hero-title">Where Data Becomes<span>Conviction</span></h1>
+      <p class="hero-sub">Rankings, research reports, market analysis and investment intelligence &mdash; curated for India's most discerning property buyers, investors and developers.</p>
+      <div class="hero-ctas">
+        <a href="#rankings" class="btn-primary"><span>Explore &rarr;</span></a>
+        <a href="#reports" class="btn-outline">View Reports</a>
+      </div>
+    </div>
+
+    <!-- RIGHT — SVG data visualization -->
+    <div class="hero-right">
+      <div class="hero-orbit" aria-hidden="true"><span class="hero-orbit-dot"></span></div>
+
+      <svg class="hero-svg" viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid base -->
+        <line x1="60" y1="300" x2="380" y2="300" stroke="#e5e7eb" stroke-width="1" class="int-draw"/>
+        <line x1="60" y1="300" x2="60" y2="40" stroke="#e5e7eb" stroke-width="1" class="int-draw"/>
+        <!-- Grid horizontal lines -->
+        <line x1="60" y1="235" x2="380" y2="235" stroke="#f3f4f6" stroke-width=".5" class="int-draw-2"/>
+        <line x1="60" y1="170" x2="380" y2="170" stroke="#f3f4f6" stroke-width=".5" class="int-draw-2"/>
+        <line x1="60" y1="105" x2="380" y2="105" stroke="#f3f4f6" stroke-width=".5" class="int-draw-2"/>
+
+        <!-- Bar chart -->
+        <rect x="90" y="200" width="32" height="100" rx="4" fill="rgba(238,50,75,.08)" stroke="#d1d5db" stroke-width="1" class="int-fill int-fill-1"/>
+        <rect x="140" y="150" width="32" height="150" rx="4" fill="rgba(238,50,75,.12)" stroke="#d1d5db" stroke-width="1" class="int-fill int-fill-2"/>
+        <rect x="190" y="110" width="32" height="190" rx="4" fill="rgba(238,50,75,.18)" stroke="#d1d5db" stroke-width="1" class="int-fill int-fill-3"/>
+        <rect x="240" y="80" width="32" height="220" rx="4" fill="rgba(238,50,75,.22)" stroke="#ee324b" stroke-width="1.2" class="int-fill int-fill-4"/>
+
+        <!-- Trend line -->
+        <polyline points="106,195 156,145 206,105 256,75 310,60 360,50" stroke="#ee324b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" class="int-draw-3"/>
+        <!-- Trend area fill -->
+        <polygon points="106,195 156,145 206,105 256,75 310,60 360,50 360,300 106,300" fill="rgba(238,50,75,.03)" class="int-fill int-fill-4"/>
+
+        <!-- Data points on trend line -->
+        <circle cx="106" cy="195" r="4" fill="#fff" stroke="#ee324b" stroke-width="1.5" class="int-fill int-fill-2"/>
+        <circle cx="156" cy="145" r="4" fill="#fff" stroke="#ee324b" stroke-width="1.5" class="int-fill int-fill-3"/>
+        <circle cx="206" cy="105" r="4" fill="#fff" stroke="#ee324b" stroke-width="1.5" class="int-fill int-fill-3"/>
+        <circle cx="256" cy="75" r="5" fill="#ee324b" stroke="#fff" stroke-width="2" class="int-fill int-fill-4"/>
+        <circle cx="310" cy="60" r="4" fill="#fff" stroke="#ee324b" stroke-width="1.5" class="int-fill int-fill-5"/>
+        <circle cx="360" cy="50" r="4" fill="#fff" stroke="#d1d5db" stroke-width="1.5" class="int-fill int-fill-5"/>
+
+        <!-- Pie chart (small) -->
+        <circle cx="340" cy="200" r="30" fill="none" stroke="#e5e7eb" stroke-width="1" class="int-draw-3"/>
+        <circle cx="340" cy="200" r="30" fill="none" stroke="#ee324b" stroke-width="3" stroke-dasharray="75 113" stroke-dashoffset="0" stroke-linecap="round" class="int-fill int-fill-4"/>
+        <circle cx="340" cy="200" r="30" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="38 150" stroke-dashoffset="-75" stroke-linecap="round" class="int-fill int-fill-5"/>
+
+        <!-- Y-axis labels -->
+        <text x="50" y="238" font-size="9" fill="#9ca3af" text-anchor="end" font-family="Inter,sans-serif" class="int-fill int-fill-2">25%</text>
+        <text x="50" y="173" font-size="9" fill="#9ca3af" text-anchor="end" font-family="Inter,sans-serif" class="int-fill int-fill-3">50%</text>
+        <text x="50" y="108" font-size="9" fill="#9ca3af" text-anchor="end" font-family="Inter,sans-serif" class="int-fill int-fill-4">75%</text>
+
+        <!-- Rising arrow indicator -->
+        <path d="M290 55 L290 35 L310 35" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" class="int-fill int-fill-5"/>
+        <text x="292" y="30" font-size="10" fill="#16a34a" font-weight="600" font-family="Inter,sans-serif" class="int-fill int-fill-5">+42%</text>
+      </svg>
+
+      <!-- Floating data cards -->
+      <div class="hero-float hero-float--1">
+        <div class="hero-float__icon" style="background:rgba(238,50,75,.08)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ee324b" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <div class="hero-float__text">Rankings</div>
+          <div class="hero-float__sub">Top developers &amp; projects</div>
+        </div>
+      </div>
+      <div class="hero-float hero-float--2">
+        <div class="hero-float__icon" style="background:rgba(59,130,246,.08)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div>
+          <div class="hero-float__text">Reports</div>
+          <div class="hero-float__sub">Market research &amp; data</div>
+        </div>
+      </div>
+      <div class="hero-float hero-float--3">
+        <div class="hero-float__icon" style="background:rgba(249,115,22,.08)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div>
+          <div class="hero-float__text">Investment</div>
+          <div class="hero-float__sub">ROI &amp; yield analysis</div>
+        </div>
+      </div>
+      <div class="hero-float hero-float--4">
+        <div class="hero-float__icon" style="background:rgba(16,185,129,.08)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        </div>
+        <div>
+          <div class="hero-float__text">Market</div>
+          <div class="hero-float__sub">Price trends &amp; supply</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     ALL BELOW-FOLD SECTIONS
+════════════════════════════════════ -->
+
+
+<!-- ════════ 01 - RANKINGS (default white) ════════ -->
+<section class="sec sec--split" id="rankings">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div class="sec-header__left">
+        <span class="sec-header__num">01</span>
+        <h2 class="sec-header__title">Rankings</h2>
+      </div>
+      <a href="ranking.html" class="sec-header__link">View all &rarr;</a>
+    </div>
+    <div class="sec-grid sec-grid--v2">
+      <a href="ranking.html" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=500&fit=crop&q=75" alt="Luxury real estate project in India" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">RANKING</span>
+          <h3 class="sec-card2__title">Top Luxury Real Estate Projects in India</h3>
+          <p class="sec-card2__excerpt">A comprehensive ranking of India's most prestigious residential developments, evaluated across architecture, amenities, location premium and developer reputation.</p>
+          <span class="sec-card2__meta">Mar 2026 &middot; 12 min read</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <div class="sec-side2">
+        <a href="#" class="sec-card2 sec-card2--hz reveal">
+          <div class="sec-card2__hz-img">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&h=220&fit=crop&q=75" alt="Luxury villas Bangalore" loading="lazy">
+          </div>
+          <div class="sec-card2__body">
+            <span class="sec-card2__cat">BANGALORE</span>
+            <h3 class="sec-card2__title">Top Luxury Villas in Bangalore</h3>
+            <p class="sec-card2__excerpt">North corridor villa market rankings based on architecture, amenities, location premium and developer track record.</p>
+            <span class="sec-card2__meta">Mar 2026 &middot; 8 min</span>
+            <span class="sec-card2__arrow">&rarr;</span>
+          </div>
+        </a>
+        <a href="#" class="sec-card2 sec-card2--hz reveal">
+          <div class="sec-card2__hz-img">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&h=220&fit=crop&q=75" alt="Rental yield localities India" loading="lazy">
+          </div>
+          <div class="sec-card2__body">
+            <span class="sec-card2__cat">RENTAL YIELD</span>
+            <h3 class="sec-card2__title">Top Rental Yield Localities in India</h3>
+            <p class="sec-card2__excerpt">Data-driven locality rankings by rental yield across India's top residential markets.</p>
+            <span class="sec-card2__meta">Feb 2026 &middot; 6 min</span>
+            <span class="sec-card2__arrow">&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ 02 - REPORTS (blueprint grid) ════════ -->
+<section class="sec sec--split sec--reports" id="reports">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div class="sec-header__left">
+        <span class="sec-header__num">02</span>
+        <h2 class="sec-header__title">Reports</h2>
+      </div>
+      <a href="reports.html" class="sec-header__link">View all &rarr;</a>
+    </div>
+    <div class="sec-grid sec-grid--v2">
+      <a href="reports.html" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=500&fit=crop&q=75" alt="India luxury real estate market" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">RESEARCH REPORT</span>
+          <h3 class="sec-card2__title">India Luxury Real Estate Market Report</h3>
+          <p class="sec-card2__excerpt">Comprehensive demand and supply analysis for India's top luxury residential markets in the 10 Cr+ segment. Primary data from developer conversations and field analysis.</p>
+          <span class="sec-card2__meta">Mar 2026 &middot; 18 min read</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <div class="sec-side2">
+        <a href="#" class="sec-card2 sec-card2--hz reveal">
+          <div class="sec-card2__hz-img">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=300&h=220&fit=crop&q=75" alt="Bangalore villa market" loading="lazy">
+          </div>
+          <div class="sec-card2__body">
+            <span class="sec-card2__cat">BANGALORE</span>
+            <h3 class="sec-card2__title">Bangalore Villa Market Report</h3>
+            <p class="sec-card2__excerpt">North corridor infrastructure-led appreciation, developer pipeline and buyer demand analysis.</p>
+            <span class="sec-card2__meta">Feb 2026 &middot; 14 min</span>
+            <span class="sec-card2__arrow">&rarr;</span>
+          </div>
+        </a>
+        <a href="#" class="sec-card2 sec-card2--hz reveal">
+          <div class="sec-card2__hz-img">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&h=220&fit=crop&q=75" alt="Branded residences India" loading="lazy">
+          </div>
+          <div class="sec-card2__body">
+            <span class="sec-card2__cat">BRANDED RESIDENCES</span>
+            <h3 class="sec-card2__title">India Branded Residences Market Report</h3>
+            <p class="sec-card2__excerpt">Hotel-branded residential growth across India's top cities, with pricing premiums and pipeline analysis.</p>
+            <span class="sec-card2__meta">Jan 2026 &middot; 15 min</span>
+            <span class="sec-card2__arrow">&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ 03 - ANALYSIS (3-col equal with images) ════════ -->
+<section class="sec sec--trio" id="analysis">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div class="sec-header__left">
+        <span class="sec-header__num">03</span>
+        <h2 class="sec-header__title">Analysis</h2>
+      </div>
+      <a href="analysis.html" class="sec-header__link">View all &rarr;</a>
+    </div>
+    <div class="sec-grid sec-grid--v2 sec-grid--trio">
+      <a href="analysis.html" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop&q=75" alt="North Bangalore luxury housing" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">EXPERT ANALYSIS</span>
+          <h3 class="sec-card2__title">Why North Bangalore Is Becoming a Luxury Housing Hub</h3>
+          <p class="sec-card2__excerpt">Infrastructure-led growth, Devanahalli Airport proximity and premium project launches are redrawing Bangalore's luxury real estate map northward.</p>
+          <span class="sec-card2__meta">Mar 2026 &middot; 10 min read</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <a href="#" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&q=75" alt="Branded Residences India" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">LUXURY</span>
+          <h3 class="sec-card2__title">The Rise of Branded Residences in India</h3>
+          <p class="sec-card2__excerpt">How hotel brands are reshaping India's luxury residential market with premium pricing and global service standards.</p>
+          <span class="sec-card2__meta">Feb 2026 &middot; 9 min</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <a href="#" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&h=400&fit=crop&q=75" alt="Mumbai Redevelopment" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">MUMBAI</span>
+          <h3 class="sec-card2__title">Mumbai Redevelopment - The Next Big Opportunity</h3>
+          <p class="sec-card2__excerpt">SRA, CRZ and cluster redevelopment are unlocking the next major supply wave in Mumbai's constrained residential market.</p>
+          <span class="sec-card2__meta">Jan 2026 &middot; 11 min</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ 04 - MARKET (immersive bg image) ════════ -->
+<section class="sec sec--split sec--market" id="market">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div class="sec-header__left">
+        <span class="sec-header__num">04</span>
+        <h2 class="sec-header__title">Market</h2>
+      </div>
+      <a href="market.html" class="sec-header__link">View all &rarr;</a>
+    </div>
+    <div class="sec-grid sec-grid--v2">
+      <a href="market.html" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=500&fit=crop&q=75" alt="India real estate market outlook" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">MARKET OUTLOOK</span>
+          <h3 class="sec-card2__title">India Real Estate Market Outlook 2025</h3>
+          <p class="sec-card2__excerpt">Demand fundamentals remain strong across premium segments. HNI buyer confidence at a multi-year high as supply tightens in marquee locations.</p>
+          <span class="sec-card2__meta">Mar 2026 &middot; 14 min read</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <div class="sec-side2">
+        <a href="#" class="sec-card2 sec-card2--hz reveal">
+          <div class="sec-card2__hz-img">
+            <img src="https://images.unsplash.com/photo-1567684014761-b65e2e59b9eb?w=300&h=220&fit=crop&q=75" alt="Mumbai real estate prices" loading="lazy">
+          </div>
+          <div class="sec-card2__body">
+            <span class="sec-card2__cat">MUMBAI PRICES</span>
+            <h3 class="sec-card2__title">Mumbai Real Estate Price Trends Q1 2026</h3>
+            <p class="sec-card2__excerpt">Western suburbs and Thane corridors see sustained appreciation driven by infrastructure and demand compression.</p>
+            <span class="sec-card2__meta">Mar 2026 &middot; 7 min</span>
+            <span class="sec-card2__arrow">&rarr;</span>
+          </div>
+        </a>
+        <a href="#" class="sec-card2 sec-card2--hz reveal">
+          <div class="sec-card2__hz-img">
+            <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=300&h=220&fit=crop&q=75" alt="Bangalore luxury villas" loading="lazy">
+          </div>
+          <div class="sec-card2__body">
+            <span class="sec-card2__cat">BANGALORE VILLAS</span>
+            <h3 class="sec-card2__title">Bangalore Luxury Villa Market Trends</h3>
+            <p class="sec-card2__excerpt">North corridor commanding 40% premium over other Bangalore zones, led by Devanahalli and Hebbal micro-markets.</p>
+            <span class="sec-card2__meta">Feb 2026 &middot; 8 min</span>
+            <span class="sec-card2__arrow">&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ 05 - INFRASTRUCTURE (clean index rows) ════════ -->
+<section class="sec sec--infra" id="infrastructure">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div class="sec-header__left">
+        <span class="sec-header__num">05</span>
+        <h2 class="sec-header__title">Infrastructure</h2>
+      </div>
+      <a href="infrastructure.html" class="sec-header__link">View all &rarr;</a>
+    </div>
+    <div class="infra-list">
+      <a href="infrastructure.html" class="sec-card2 sec-card2--hz reveal">
+        <div class="sec-card2__hz-img">
+          <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=300&h=220&fit=crop&q=75" alt="Bangalore metro expansion" loading="lazy">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">INFRASTRUCTURE</span>
+          <h3 class="sec-card2__title">Bangalore Metro Expansion Impact on Real Estate</h3>
+          <p class="sec-card2__excerpt">How the expanding metro network is reshaping property values along new corridors and creating investment hotspots across Bangalore.</p>
+          <span class="sec-card2__meta">Mar 2026 &middot; 11 min</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <a href="#" class="sec-card2 sec-card2--hz reveal">
+        <div class="sec-card2__hz-img">
+          <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=300&h=220&fit=crop&q=75" alt="Navi Mumbai airport" loading="lazy">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">NAVI MUMBAI</span>
+          <h3 class="sec-card2__title">Navi Mumbai Airport Effect on Property Markets</h3>
+          <p class="sec-card2__excerpt">MTHL and airport acting as double catalyst for residential and commercial real estate in the Navi Mumbai corridor.</p>
+          <span class="sec-card2__meta">Feb 2026 &middot; 9 min</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <a href="#" class="sec-card2 sec-card2--hz reveal">
+        <div class="sec-card2__hz-img">
+          <img src="https://images.unsplash.com/photo-1567684014761-b65e2e59b9eb?w=300&h=220&fit=crop&q=75" alt="Mumbai coastal road" loading="lazy">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">MUMBAI</span>
+          <h3 class="sec-card2__title">Mumbai Coastal Road Impact on Property Prices</h3>
+          <p class="sec-card2__excerpt">Sea-link to Worli corridor analysis tracking how coastal road connectivity is lifting property values in western suburbs.</p>
+          <span class="sec-card2__meta">Jan 2026 &middot; 8 min</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ 06 - INVESTMENT (dark section) ════════ -->
+<section class="sec sec--investment" id="investment">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div class="sec-header__left">
+        <span class="sec-header__num">06</span>
+        <h2 class="sec-header__title">Investment</h2>
+      </div>
+      <a href="investment.html" class="sec-header__link">View all &rarr;</a>
+    </div>
+    <div class="sec-grid sec-grid--v2">
+      <a href="investment.html" class="sec-card2 sec-card2--featured sec-card2--fullspan reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=500&fit=crop&q=75" alt="Real estate investment in India" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">INVESTMENT GUIDE</span>
+          <h3 class="sec-card2__title">Best Cities for Real Estate Investment in India</h3>
+          <p class="sec-card2__excerpt">Data-driven city rankings by ROI potential, infrastructure momentum and demand-supply dynamics for serious property investors.</p>
+          <span class="sec-card2__meta">Mar 2026 &middot; 13 min read</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <div class="sec-side2">
+        <a href="#" class="sec-card2 sec-card2--hz reveal">
+          <div class="sec-card2__hz-img">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&h=220&fit=crop&q=75" alt="Rental yield investment" loading="lazy">
+          </div>
+          <div class="sec-card2__body">
+            <span class="sec-card2__cat">RENTAL YIELD</span>
+            <h3 class="sec-card2__title">Rental Yield Guide: How to Maximize Returns</h3>
+            <p class="sec-card2__excerpt">Yield optimization strategies across property types, cities and tenant profiles for maximum rental income.</p>
+            <span class="sec-card2__meta">Feb 2026 &middot; 10 min</span>
+            <span class="sec-card2__arrow">&rarr;</span>
+          </div>
+        </a>
+        <a href="#" class="sec-card2 sec-card2--hz reveal">
+          <div class="sec-card2__hz-img">
+            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=300&h=220&fit=crop&q=75" alt="NRI property buying India" loading="lazy">
+          </div>
+          <div class="sec-card2__body">
+            <span class="sec-card2__cat">NRI DESK</span>
+            <h3 class="sec-card2__title">NRI Property Buying Guide for India</h3>
+            <p class="sec-card2__excerpt">FEMA, RERA and tax framework explained for non-resident Indians investing in Indian residential real estate.</p>
+            <span class="sec-card2__meta">Jan 2026 &middot; 12 min</span>
+            <span class="sec-card2__arrow">&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ 07 - LEGAL (3-col all images) ════════ -->
+<section class="sec sec--trio" id="legal">
+  <div class="cont">
+    <div class="sec-header reveal">
+      <div class="sec-header__left">
+        <span class="sec-header__num">07</span>
+        <h2 class="sec-header__title">Legal</h2>
+      </div>
+      <a href="legal.html" class="sec-header__link">View all &rarr;</a>
+    </div>
+    <div class="sec-grid sec-grid--v2 sec-grid--trio">
+      <a href="legal.html" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop&q=75" alt="RERA and property law in India" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">LEGAL GUIDE</span>
+          <h3 class="sec-card2__title">What Is RERA and How It Protects Buyers</h3>
+          <p class="sec-card2__excerpt">India's Real Estate Regulation and Development Act explained - mandates, compliance verification and the complaint process for homebuyers.</p>
+          <span class="sec-card2__meta">Mar 2026 &middot; 9 min read</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <a href="#" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop&q=75" alt="Property title verification" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">DUE DILIGENCE</span>
+          <h3 class="sec-card2__title">Property Title Verification: A Complete Checklist</h3>
+          <p class="sec-card2__excerpt">Due diligence steps covering encumbrances, chain of ownership, litigation checks and document verification.</p>
+          <span class="sec-card2__meta">Feb 2026 &middot; 7 min</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+      <a href="#" class="sec-card2 sec-card2--featured reveal">
+        <div class="sec-card2__img-wrap">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&q=75" alt="Stamp duty India" class="sec-card2__img">
+        </div>
+        <div class="sec-card2__body">
+          <span class="sec-card2__cat">STAMP DUTY</span>
+          <h3 class="sec-card2__title">Stamp Duty and Registration Charges by State</h3>
+          <p class="sec-card2__excerpt">State-wise comparison guide covering stamp duty rates, registration fees and payment processes across India.</p>
+          <span class="sec-card2__meta">Jan 2026 &middot; 6 min</span>
+          <span class="sec-card2__arrow">&rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ NEWSLETTER — Modern Dark CTA ════════ -->
+<section class="cta-modern reveal" id="newsletter">
+  <div class="cta-modern__bg" aria-hidden="true"></div>
+  <div class="cta-modern__inner">
+    <div class="cta-modern__content">
+      <span class="cta-modern__eyebrow"><span class="cta-modern__eyebrow-dot"></span> Intelligence Briefing</span>
+      <h2 class="cta-modern__title">Stay Ahead of India's Property Markets</h2>
+      <p class="cta-modern__desc">Weekly briefings on luxury real estate, infrastructure corridors and investment opportunities &mdash; curated for serious buyers and investors.</p>
+      <div class="cta-modern__features">
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Weekly luxury market digest</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Exclusive ranking updates</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Infrastructure corridor alerts</span>
+        <span class="cta-modern__feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> NRI investment insights</span>
+      </div>
+    </div>
+    <div class="cta-modern__form-wrap">
+      <form class="cta-modern__form" id="nlForm" novalidate>
+        <div class="cta-modern__input-row">
+          <input type="text" class="cta-modern__inp" placeholder="Your name" autocomplete="name" required>
+          <input type="email" class="cta-modern__inp" placeholder="Your email address" autocomplete="email" required id="nlEmailField">
+        </div>
+        <button type="submit" class="cta-modern__btn" id="nlBtn">
+          <span>Subscribe to Intelligence Briefing</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <p class="cta-modern__note">Free. No spam. Unsubscribe anytime.</p>
+      </form>
+      <div class="cta-modern__ok" id="nlOk" hidden>
+        <div class="cta-modern__ok-icon">&check;</div>
+        <p>You're subscribed. Welcome to the intelligence community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <img src="logo.svg" alt="GHAR.tv" class="ft-logo-img">
+        <p class="ft-tagline">India's AI-Native Real Estate Intelligence</p>
+      </div>
+      <nav class="ft-nav">
+        <a href="/intelligence">Intelligence</a>
+        <a href="/design">Design</a>
+        <a href="/people">People</a>
+        <a href="/ghartalks">GharTalks</a>
+        <a href="/videoworks">VideoWorks</a>
+        <a href="/gharevents">GharEvents</a>
+        <a href="/industry-voices">Industry Voices</a>
+      </nav>
+    </div>
+    <div class="ft-bot">
+      <p>&copy; 2026 Ghar.tv &middot; Zybeq Ventures Pvt Ltd</p>
+      <div class="ft-bot-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════
+     JAVASCRIPT - inline at end of body
+════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Nav scroll ── */
+  var nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  /* ── Hamburger / mobile menu ── */
+  var btn  = document.getElementById('hamburgerBtn');
+  var menu = document.getElementById('mobMenu');
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    btn.classList.toggle('active', open);
+    btn.setAttribute('aria-expanded', open);
+    menu.setAttribute('aria-hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      menu.classList.remove('open');
+      btn.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      var target = id.length > 1 && document.querySelector(id);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* ── Intersection Observer reveal ── */
+  var reveals = document.querySelectorAll('.reveal, .reveal-item');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('revealed'); });
+  }
+
+  /* ── Lazy-load reCAPTCHA only when user touches the form ── */
+  var rcLoaded = false;
+  function loadRC () {
+    if (rcLoaded) return;
+    rcLoaded = true;
+    var s = document.createElement('script');
+    s.src  = 'https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY';
+    s.async = true; s.defer = true;
+    document.head.appendChild(s);
+  }
+  var nlEmailField = document.getElementById('nlEmailField');
+  if (nlEmailField) nlEmailField.addEventListener('focus', loadRC, { once: true });
+
+  /* ── Newsletter submit ── */
+  var nlForm = document.getElementById('nlForm');
+  var nlBtn  = document.getElementById('nlBtn');
+  var nlOk   = document.getElementById('nlOk');
+  if (nlForm) {
+    nlForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      nlBtn.textContent = 'Subscribing…';
+      nlBtn.disabled = true;
+      /* Replace with real API call */
+      setTimeout(function () {
+        nlForm.hidden = true;
+        nlOk.hidden = false;
+      }, 900);
+    });
+  }
+
+  /* ── Debounced resize ── */
+  var resizeT;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(function () { /* handle if needed */ }, 250);
+  }, { passive: true });
+
+  /* ── Animated Counters ── */
+  var countersAnimated = false;
+  function animateCounters() {
+    if (countersAnimated) return;
+    countersAnimated = true;
+    document.querySelectorAll('.hero-counter__num[data-target]').forEach(function(el) {
+      var target = parseInt(el.getAttribute('data-target'), 10);
+      var suffix = el.getAttribute('data-suffix') || '';
+      var steps = 40;
+      var stepTime = 40; /* ~1.6s total */
+      var current = 0;
+      var increment = target / steps;
+      var timer = setInterval(function() {
+        current += increment;
+        if (current >= target) {
+          el.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          el.textContent = Math.floor(current) + suffix;
+        }
+      }, stepTime);
+    });
+  }
+  /* Trigger on scroll into view or immediately if visible */
+  var counterSection = document.querySelector('.hero-counters');
+  if (counterSection && 'IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { animateCounters(); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    cio.observe(counterSection);
+  }
+  /* Fallback: animate after short delay */
+  if (counterSection) {
+    setTimeout(function() { animateCounters(); }, 500);
+  }
+
+  /* ── Font-ready class ── */
+  if ('fonts' in document) {
+    document.fonts.ready.then(function () { document.documentElement.classList.add('fonts-ready'); });
+  }
+  /* Post dropdown */
+  var dd = document.getElementById('postDropdown');
+  if(dd){
+    var ddToggle = dd.querySelector('.nav-dropdown__toggle');
+    ddToggle.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var isOpen = dd.classList.toggle('open');
+      ddToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    dd.addEventListener('click', function(e){ e.stopPropagation(); });
+    document.addEventListener('click', function(){
+      dd.classList.remove('open');
+      ddToggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

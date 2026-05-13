@@ -1,0 +1,17 @@
+{
+  "name": "ghar-tv",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ghar.tv frontend",
+  "scripts": {
+    "start": "node serve.mjs",
+    "screenshot": "node screenshot.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "^23.11.1"
+  },
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.75"
+  }
+}

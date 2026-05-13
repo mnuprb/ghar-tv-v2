@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">People - GHAR.tv</title>
+<meta name="description" id="pageMeta" content="">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.onload=null;this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
+<style>
+@font-face{font-family:'Gazpacho';src:url('../fonts/Gazpacho-Bold.woff2') format('woff2'),url('../fonts/Gazpacho-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+:root{
+  --bg:#fff;--ink:#222;--ink2:#717171;--ink3:#b0b0b0;
+  --accent:#ff385c;--accent-soft:rgba(255,56,92,.08);--accent-border:rgba(255,56,92,.2);
+  --surface:#f7f7f7;--surface2:#ebebeb;--card:#fff;
+  --ff-d:'Gazpacho',Georgia,serif;
+  --ff:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --r:12px;--rl:16px;--rx:24px;
+  --mw:1280px;--ph:clamp(24px,5vw,80px);
+  --sh-s:0 1px 2px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.1);
+  --sh-m:0 6px 20px rgba(0,0,0,.08);
+  --sh-l:0 12px 40px rgba(0,0,0,.12);
+  --ease:cubic-bezier(.2,0,0,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--ff);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;padding-top:64px}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
+.c{max-width:var(--mw);margin:0 auto;padding:0 var(--ph)}
+
+/* ── NAV — fixed header ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--surface2);padding:0 var(--ph);will-change:transform}
+.nav-i{max-width:var(--mw);margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{display:flex;align-items:baseline;gap:8px;flex-shrink:0}
+.nav-logo img{height:26px;width:auto}
+.nav-logo-tag{font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase}
+.nav-links{display:none;align-items:center;gap:4px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--ink2);padding:8px 14px;border-radius:var(--r);white-space:nowrap;transition:background .15s,color .15s}
+.nav-links a:hover,.nav-links a.active{background:var(--surface);color:var(--ink)}
+.nav-r{display:none;align-items:center;gap:8px}
+.nav-btn{font-size:14px;font-weight:600;color:var(--bg);padding:10px 20px;border-radius:var(--r);background:var(--ink);border:none;transition:transform .15s,box-shadow .15s}
+.nav-btn:hover{transform:scale(1.03);box-shadow:var(--sh-m)}
+.ham{display:flex;flex-direction:column;gap:5px;padding:8px;background:none;border:1px solid var(--surface2);border-radius:var(--r);z-index:901}
+.ham span{display:block;width:16px;height:1.5px;background:var(--ink);transition:transform .25s var(--ease),opacity .25s}
+.ham.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}.ham.active span:nth-child(2){opacity:0}.ham.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob{position:fixed;inset:0;background:var(--bg);z-index:850;transform:translateX(100%);transition:transform .35s var(--ease);padding:88px 24px 48px}
+.mob.open{transform:translateX(0)}.mob ul{list-style:none}.mob li+li{border-top:1px solid var(--surface2)}
+.mob a{display:block;padding:16px 0;font-size:18px;font-weight:600;color:var(--ink)}.mob .ma{color:var(--accent)}
+
+/* ── BREADCRUMB ── */
+.bc{padding:20px 0 8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.bc a,.bc-c{font-size:12px;font-weight:500;color:var(--ink3)}
+.bc a:hover{color:var(--ink);text-decoration:underline}
+.bc-s{font-size:10px;color:var(--ink3)}
+.bc-c{color:var(--ink);font-weight:600}
+
+/* ── HERO — side by side ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,4vw,56px);padding:clamp(24px,3vw,40px) 0 clamp(32px,4vw,48px);align-items:start}
+.hero-photo{position:relative;border-radius:var(--rx);overflow:hidden;background:var(--surface);height:clamp(400px,50vw,600px)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:left top}
+.hero-photo::after{content:'';position:absolute;inset:0;border-radius:var(--rx);box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+.hero-info{display:flex;flex-direction:column;gap:16px;padding-top:clamp(8px,2vw,24px)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:6px 14px;border-radius:20px;width:fit-content}
+.hero-badge svg{width:14px;height:14px}
+.hero-name{font-family:var(--ff-d);font-size:clamp(32px,4.5vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.03em;color:var(--ink)}
+.hero-desig{font-size:16px;color:var(--ink2);line-height:1.5}
+.hero-desig a{font-weight:600;color:var(--ink);border-bottom:1px solid var(--surface2);transition:border-color .2s}
+.hero-desig a:hover{border-color:var(--ink)}
+.hero-tag{font-size:15px;color:var(--ink2);line-height:1.65;max-width:520px}
+.hero-social{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
+.so{width:40px;height:40px;border-radius:50%;border:1px solid var(--surface2);background:var(--bg);display:inline-flex;align-items:center;justify-content:center;color:var(--ink2);transition:all .2s}
+.so:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:scale(1.06)}
+.so svg{width:17px;height:17px}
+.hero-share{display:flex;gap:8px;margin-top:4px}
+.share-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ink);padding:8px 16px;border:1px solid var(--surface2);border-radius:var(--r);background:var(--bg);transition:all .15s}
+.share-btn:hover{border-color:var(--ink);background:var(--surface)}
+.share-btn svg{width:14px;height:14px}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--surface2);margin:0}
+
+/* ── STATS — pill row ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:clamp(24px,3vw,40px) 0;border-top:1px solid var(--surface2)}
+.stat{text-align:center;padding:20px 12px;background:var(--surface);border-radius:var(--rl);transition:transform .2s}
+.stat:hover{transform:translateY(-2px)}
+.stat-v{font-family:var(--ff-d);font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:4px}
+.stat-l{font-size:12px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em}
+.stat-s{font-size:11px;color:var(--ink3);margin-top:4px}
+
+/* ── SECTION HEADER ── */
+.sec-h{font-family:var(--ff-d);font-size:clamp(22px,2.8vw,28px);font-weight:700;color:var(--ink);margin-bottom:clamp(20px,3vw,28px)}
+.sec-label{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+
+/* ── TWO-COL LAYOUT ── */
+.layout{display:grid;grid-template-columns:1fr 340px;gap:clamp(40px,5vw,64px);padding:clamp(40px,5vw,56px) 0;border-top:1px solid var(--surface2)}
+
+/* ── ABOUT — chapters ── */
+.chapter{margin-bottom:40px;opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.chapter.visible{opacity:1;transform:none}
+.chapter-t{font-family:var(--ff-d);font-size:clamp(18px,2.2vw,22px);font-weight:700;color:var(--ink);margin-bottom:14px;line-height:1.25}
+.chapter p{font-size:15px;color:var(--ink2);line-height:1.8;margin-bottom:14px}
+.chapter p:last-child{margin-bottom:0}
+.pull-q{padding:24px 28px;background:var(--surface);border-radius:var(--rl);margin:32px 0;position:relative}
+.pull-q::before{content:'\201C';font-family:var(--ff-d);font-size:48px;color:var(--accent);opacity:.25;position:absolute;top:8px;left:16px;line-height:1}
+.pull-q p{font-family:var(--ff-d);font-size:clamp(16px,1.8vw,20px);font-weight:700;color:var(--ink);line-height:1.5;padding-left:20px}
+
+/* ── TIMELINE ── */
+.timeline{margin-top:20px;display:flex;flex-direction:column;gap:0}
+.tl-item{display:grid;grid-template-columns:64px 1fr;gap:16px;position:relative;padding-bottom:28px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:'';position:absolute;left:31px;top:28px;bottom:0;width:2px;background:var(--surface2)}
+.tl-item:last-child::before{display:none}
+.tl-yr{width:64px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ink);background:var(--surface);border-radius:20px}
+.tl-body{padding-top:2px}
+.tl-t{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.tl-d{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:24px;position:sticky;top:88px}
+.sb-card{background:var(--surface);border-radius:var(--rl);padding:clamp(24px,3vw,32px);width:100%;box-sizing:border-box}
+.sb-card-t{font-family:var(--ff-d);font-size:18px;font-weight:700;color:var(--ink);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--surface2)}
+.info-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04);gap:12px}
+.info-row:last-child{border-bottom:none}
+.info-k{font-size:13px;color:var(--ink3);font-weight:500;flex-shrink:0}
+.info-v{font-size:14px;font-weight:600;color:var(--ink);text-align:right}
+.aw-item{padding:10px 0;border-bottom:1px solid var(--surface)}
+.aw-item:last-child{border-bottom:none}
+.aw-name{font-size:14px;font-weight:600;color:var(--ink)}
+.aw-meta{font-size:12px;color:var(--ink3);margin-top:2px}
+.spec-tags{display:flex;flex-wrap:wrap;gap:8px}
+.spec-tag{font-size:12px;font-weight:600;color:var(--ink2);background:var(--surface);padding:6px 14px;border-radius:20px}
+.pf-item{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--surface)}
+.pf-item:last-child{border-bottom:none}
+.pf-name{font-size:14px;font-weight:600;color:var(--ink)}
+.pf-loc{font-size:12px;color:var(--ink3);margin-top:2px}
+.pf-cat{font-size:11px;font-weight:600;color:var(--accent);white-space:nowrap}
+
+/* ── FULL-WIDTH SECTIONS ── */
+.fw-section{padding:clamp(40px,5vw,56px) 0;border-top:1px solid var(--surface2)}
+
+/* ── GHARTALK ── */
+.gt-card{display:grid;grid-template-columns:280px 1fr;border:1px solid var(--surface2);border-radius:var(--rx);overflow:hidden;transition:box-shadow .25s}
+.gt-card:hover{box-shadow:var(--sh-l)}
+.gt-visual{background:#111;display:flex;align-items:center;justify-content:center;position:relative;min-height:240px;overflow:hidden;cursor:pointer}
+.gt-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease),opacity .25s}
+.gt-visual:hover img{transform:scale(1.04)}
+.gt-visual::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.35) 100%);pointer-events:none;transition:opacity .2s}
+.gt-visual.is-playing::before,.gt-visual.is-playing img,.gt-visual.is-playing .play-btn{opacity:0;visibility:hidden}
+.gt-visual iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
+.play-btn{width:64px;height:64px;border:none;padding:0;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.play-btn:hover{transform:scale(1.1);box-shadow:0 0 0 14px rgba(255,56,92,.18),0 4px 20px rgba(0,0,0,.3)}
+.gt-info{padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;justify-content:center}
+.gt-ep{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.gt-title{font-family:var(--ff-d);font-size:clamp(18px,2vw,22px);font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:10px}
+.gt-desc{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:24px}
+.btn-p{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--bg);background:var(--ink);padding:12px 24px;border-radius:var(--r);transition:all .2s;align-self:flex-start}
+.btn-p:hover{background:var(--accent);transform:translateY(-1px);box-shadow:var(--sh-s)}
+
+/* ── GALLERY ── */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.gallery-grid img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--rl);display:block;transition:transform .3s var(--ease)}
+.gallery-grid img:hover{transform:scale(1.02)}
+
+/* ── NEWS ── */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.news-card{border:1px solid var(--surface2);border-radius:var(--rl);padding:24px;transition:all .2s}
+.news-card:hover{border-color:transparent;box-shadow:var(--sh-m);transform:translateY(-2px)}
+.news-date{font-size:12px;font-weight:600;color:var(--ink3);margin-bottom:8px}
+.news-hl{font-size:16px;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:8px}
+.news-ex{font-size:13px;color:var(--ink2);line-height:1.65}
+.news-read{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--accent);margin-top:12px;transition:gap .2s}
+.news-card:hover .news-read{gap:10px}
+
+/* ── BRANDS ── */
+.brands-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.br-card{display:flex;flex-direction:column;border:1px solid var(--surface2);border-radius:var(--rl);overflow:hidden;transition:all .2s}
+.br-card:hover{border-color:transparent;box-shadow:var(--sh-m);transform:translateY(-2px)}
+.br-logo-wrap{background:var(--surface);height:110px;display:flex;align-items:center;justify-content:center;padding:20px 28px;border-bottom:1px solid var(--surface2)}
+.br-logo{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.br-bottom{display:flex;align-items:center;gap:12px;padding:16px 18px}
+.br-body{flex:1;min-width:0}
+.br-name{font-size:15px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:2px}
+.br-type{font-size:12px;color:var(--ink3)}
+.br-arrow{color:var(--surface2);flex-shrink:0;transition:color .2s,transform .2s}
+.br-card:hover .br-arrow{color:var(--ink);transform:translateX(3px)}
+
+/* ── RELATED ── */
+.rel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.rel-card{text-align:center;padding:28px 16px;border:1px solid var(--surface2);border-radius:var(--rl);transition:all .2s}
+.rel-card:hover{border-color:transparent;box-shadow:var(--sh-m);transform:translateY(-3px)}
+.rel-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 14px;background:var(--surface)}
+.rel-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.rel-role{font-size:12px;color:var(--ink2);line-height:1.4}
+.rel-cat{font-size:11px;font-weight:700;color:var(--accent);margin-top:8px}
+
+/* ── CTA — Contact (dark, shared theme) ── */
+.cta{position:relative;overflow:hidden;padding:clamp(64px,8vw,100px) 0;background:#111;margin-top:clamp(40px,5vw,56px)}
+.cta-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(255,56,92,.08),transparent 70%),radial-gradient(ellipse 40% 40% at 80% 60%,rgba(59,130,246,.06),transparent 70%)}
+.cta-i{max-width:var(--mw);margin:0 auto;padding:0 var(--ph);position:relative;z-index:1;text-align:center}
+.cta-contact{margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:0}
+.cta-e{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.cta-e::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.cta h2{font-family:var(--ff-d);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.1;color:#fff;margin-bottom:16px}
+.cta-d{font-size:15px;line-height:1.75;color:rgba(255,255,255,.6);margin:0 auto 28px;max-width:520px}
+.cta-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-size:15px;font-weight:600;color:#111;background:#fff;padding:14px 28px;border-radius:10px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
+.cta-btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,56,92,.25)}
+.cta-note{font-size:11.5px;color:rgba(255,255,255,.35);margin-top:14px;text-align:center}
+
+/* ── FOOTER ── */
+.ft{background:#111;border-top:none;padding:36px 0}
+.ft-i{max-width:var(--mw);margin:0 auto;padding:0 var(--ph)}
+.ft-top{display:flex;flex-direction:column;gap:24px;padding-bottom:32px;border-bottom:1px solid #1a1a1a;margin-bottom:24px}
+@media(min-width:744px){.ft-top{flex-direction:row;align-items:flex-start;justify-content:space-between}}
+.ft-logo{height:24px;width:auto;margin-bottom:8px;filter:brightness(0) invert(1)}
+.ft-tag{font-size:12px;color:rgba(255,255,255,.3)}
+.ft-nav{display:flex;gap:24px;flex-wrap:wrap}.ft-nav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.45)}.ft-nav a:hover{color:#fff}
+.ft-bot{display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(255,255,255,.2)}
+@media(min-width:744px){.ft-bot{flex-direction:row;justify-content:space-between}}
+.ft-bl{display:flex;gap:16px}.ft-bl a{font-size:12px;color:rgba(255,255,255,.2)}.ft-bl a:hover{color:rgba(255,255,255,.6)}
+
+/* ── HIDDEN ── */
+[hidden]{display:none!important}
+
+/* ── RESPONSIVE ── */
+@media(min-width:1200px){.nav-links{display:flex}.nav-r{display:flex}.ham{display:none}}
+
+/* Tablet */
+@media(max-width:1024px){
+  .hero{gap:32px}
+  .hero-photo{height:clamp(380px,48vw,500px)}
+  .hero-info{gap:12px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:12px}
+  .layout{grid-template-columns:1fr;gap:32px}
+  .sidebar{position:static}
+  .gt-card{grid-template-columns:1fr}.gt-visual{min-height:160px}
+  .news-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .rel-grid{grid-template-columns:repeat(2,1fr)}
+  .brands-grid{grid-template-columns:1fr}
+  .cta-form{flex-direction:column}
+  .ft-i{flex-direction:column;gap:16px;text-align:center}
+  .ft-links{flex-wrap:wrap;justify-content:center}
+}
+
+/* Tablet / small-desktop — stack hero */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;gap:24px;padding:20px 0 28px}
+  .hero-photo{height:clamp(300px,70vw,420px)}
+}
+
+/* Mobile */
+@media(max-width:600px){
+  body{padding-top:56px}
+  .nav-i{height:56px}
+  .nav-logo img{height:22px}
+  .nav-logo-tag{font-size:10px}
+  .bc{padding:14px 0 4px}
+  .hero{gap:20px;padding:16px 0 24px}
+  .hero-photo{height:clamp(280px,75vw,400px);border-radius:var(--rl)}
+  .hero-name{font-size:28px}
+  .hero-desig{font-size:14px}
+  .hero-tag{font-size:14px}
+  .hero-social{gap:6px}
+  .so{width:36px;height:36px}
+  .hero-share{flex-wrap:wrap}
+  .share-btn{font-size:12px;padding:7px 12px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:10px;padding:20px 0}
+  .stat{padding:16px 10px}
+  .stat-v{font-size:22px}
+  .stat-l{font-size:10px}
+  .stat-s{font-size:10px}
+  .chapter-t{font-size:18px}
+  .chapter p{font-size:14px}
+  .pull-q{padding:20px 22px}
+  .pull-q p{font-size:16px}
+  .tl-item{grid-template-columns:56px 1fr;gap:12px}
+  .tl-yr{width:56px;font-size:11px}
+  .tl-t{font-size:14px}
+  .tl-d{font-size:12px}
+  .sb-card{padding:24px}
+  .gt-info{padding:20px}
+  .gt-title{font-size:17px}
+  /* Horizontal scroll for grids on mobile */
+  .gallery-grid,.news-grid,.brands-grid,.rel-grid{
+    display:flex;gap:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none
+  }
+  .gallery-grid::-webkit-scrollbar,.news-grid::-webkit-scrollbar,.brands-grid::-webkit-scrollbar,.rel-grid::-webkit-scrollbar{display:none}
+  .gallery-grid>*,.news-grid>*,.brands-grid>*,.rel-grid>*{scroll-snap-align:start;flex-shrink:0}
+  .gallery-grid>*{flex:0 0 72%;max-width:300px}
+  .news-grid>*{flex:0 0 75%;max-width:310px}
+  .brands-grid>*{flex:0 0 72%;max-width:290px}
+  .rel-grid>*{flex:0 0 42%;max-width:180px}
+  .news-card{padding:20px}
+  .news-hl{font-size:15px}
+  .rel-card{padding:20px 12px}
+  .rel-photo{width:56px;height:56px}
+  .rel-name{font-size:14px}
+  .cta-section{padding:32px 20px;border-radius:var(--rl);margin:32px 0}
+  .cta-section h2{font-size:22px}
+  .mob{padding:72px 20px 40px}
+}
+
+/* ── CONTACT MODAL ── */
+.modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-backdrop{position:absolute;inset:0;background:rgba(17,17,17,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.modal-card{position:relative;background:var(--bg);border-radius:var(--rx);max-width:480px;width:100%;padding:clamp(28px,4vw,40px);max-height:90vh;overflow-y:auto;transform:translateY(20px) scale(.97);transition:transform .3s var(--ease);box-shadow:var(--sh-l)}
+.modal.open .modal-card{transform:none}
+.modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:var(--surface);border-radius:50%;cursor:pointer;color:var(--ink2);transition:all .2s;font-size:20px;line-height:1;padding:0}
+.modal-close:hover{background:var(--surface2);color:var(--ink)}
+.modal-title{font-family:var(--ff-d);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.25;padding-right:32px}
+.modal-sub{font-size:14px;color:var(--ink2);margin-bottom:22px;line-height:1.55}
+.modal-form{display:flex;flex-direction:column;gap:12px}
+.modal-inp{font-family:var(--ff);font-size:14px;padding:12px 16px;border-radius:var(--r);border:1px solid var(--surface2);background:var(--bg);color:var(--ink);transition:border-color .2s;width:100%}
+.modal-inp:focus{outline:none;border-color:var(--ink)}
+.modal-ta{min-height:110px;resize:vertical;font-family:inherit;line-height:1.5}
+.modal-sub-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-size:14px;font-weight:600;color:var(--bg);background:var(--ink);padding:14px 20px;border-radius:var(--r);border:none;cursor:pointer;transition:background .2s,transform .2s;margin-top:6px}
+.modal-sub-btn:hover{background:var(--accent);transform:translateY(-1px)}
+.modal-sub-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.modal-note{font-size:12px;color:var(--ink3);text-align:center;margin-top:8px;line-height:1.5}
+.modal-success{text-align:center;padding:20px 0}
+.modal-success-ic{font-size:42px;color:#22c55e;margin-bottom:14px;line-height:1}
+.modal-success h4{font-family:var(--ff-d);font-size:20px;color:var(--ink);margin-bottom:6px}
+.modal-success p{font-size:14px;color:var(--ink2);line-height:1.55}
+body.modal-open{overflow:hidden}
+
+</style>
+
+<!--
+  ╔══════════════════════════════════════════════════════╗
+  ║  PERSON DATA — Replace with backend data injection  ║
+  ║  All sections auto-hide if their data is missing.   ║
+  ╚══════════════════════════════════════════════════════╝
+-->
+<script>
+window.__PERSON = {
+  "n":"Niranjan Hiranandani",
+  "s":"niranjan-hiranandani",
+  "img":"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop&crop=face&q=80",
+  "cat":"Developer",
+  "loc":"Mumbai",
+  "desig":"Co-Founder & Managing Director",
+  "org":"Hiranandani Group",
+  "orgUrl":"https://www.hiranandani.com",
+  "tag":"One of India\u2019s most influential real estate visionaries, pioneering integrated township development across four decades.",
+  "social":{"linkedin":"https://linkedin.com/in/niranjan-hiranandani","twitter":"https://x.com/hiaboratory","instagram":"https://instagram.com/niranjan.hiranandani","facebook":"https://facebook.com/NiranjanHiranandani","youtube":"https://youtube.com/@hiranandani","whatsapp":"https://wa.me/919876543210","website":"https://www.hiranandani.com"},
+  "meta":["40+ Years Experience","NAREDCO Past President","FRICS"],
+  "heroQuote":"The future of Indian real estate lies in integrated townships that combine living, working, and recreation in sustainable communities.",
+  "stats":[{"v":"100M+","l":"Sq Ft Developed","sub":"Residential + Commercial","red":true},{"v":"25+","l":"Townships","sub":"Across India"},{"v":"50K+","l":"Homes Delivered","sub":"Since 1981"},{"v":"40+","l":"Years","sub":"In real estate"}],
+  "about":[{"title":"The Man Behind India\u2019s Township Revolution","paras":["Dr. Niranjan Hiranandani is the Co-Founder and Managing Director of the Hiranandani Group, one of India\u2019s most respected real estate conglomerates. With a career spanning over four decades, he has been instrumental in transforming Mumbai\u2019s suburban landscape through integrated township developments that set new benchmarks for planned urban living.","Under his leadership, Hiranandani Group has developed over 100 million square feet of real estate across residential, commercial, retail, and hospitality segments. The group\u2019s flagship township in Powai, Mumbai, is widely regarded as India\u2019s first truly integrated community."]},{"title":"Industry Statesman","paras":["Beyond real estate, Dr. Hiranandani is one of the most prominent voices shaping Indian real estate policy. He has served as President of NAREDCO and ASSOCHAM, and is a frequent advisor to government bodies on urban development, housing affordability, and RERA implementation.","He holds a PhD in Economics and is a Fellow of the Royal Institution of Chartered Surveyors (FRICS) \u2014 a rare distinction for an Indian developer."]}],
+  "pullQuote":"India needs 25 million affordable homes. The private sector, combined with government incentives, can make this a reality within a decade.",
+  "facts":[["Education","PhD in Economics"],["University","Sydenham College, Mumbai"],["Designation","FRICS"],["Industry Body","NAREDCO President (2018\u201322)"],["Net Worth","~$3.8 Billion (Forbes)"],["Based In","Mumbai"],["Active Since","1981"]],
+  "awards":[{"n":"Lifetime Achievement in Real Estate","m":"CNBC-TV18 \u00b7 2024"},{"n":"Most Influential Business Leader","m":"Forbes India \u00b7 2023"},{"n":"Real Estate Icon of the Decade","m":"ET RE Congress \u00b7 2021"},{"n":"Knight of the Order of the Star of Italy","m":"Republic of Italy \u00b7 2019"},{"n":"Outstanding Contribution to Indian RE","m":"RICS South Asia \u00b7 2017"}],
+  "specialisations":["Integrated Townships","Luxury Residential","Commercial Campuses","Data Centres","Industrial Parks","Urban Regeneration"],
+  "experience":[{"y":"1981","t":"Co-founds Hiranandani Group","d":"Begins transforming marshland in Powai into what would become India\u2019s first integrated township."},{"y":"1999","t":"Powai township reaches critical mass","d":"Crosses 10 million sq ft. Establishes the blueprint for self-contained urban communities."},{"y":"2010","t":"Thane expansion \u2014 Hiranandani Estate","d":"Launches 350-acre township, bringing the integrated living model to Mumbai\u2019s extended suburbs."},{"y":"2018","t":"Becomes NAREDCO National President","d":"Takes national stage as the voice of Indian real estate at the policy level."},{"y":"2022","t":"Enters data centre business via Yotta","d":"Yotta NM1 becomes India\u2019s largest data centre. Diversifies into digital infrastructure."},{"y":"2025","t":"100M sq ft milestone","d":"Hiranandani Group crosses the 100 million sq ft development mark across all verticals."}],
+  "portfolio":[{"n":"Hiranandani Gardens, Powai","loc":"Mumbai","cat":"Flagship Township"},{"n":"Hiranandani Estate","loc":"Thane","cat":"Integrated Township"},{"n":"Hiranandani Parks","loc":"Chennai","cat":"Industrial Township"},{"n":"Yotta NM1 Data Centre","loc":"Navi Mumbai","cat":"Digital Infra"},{"n":"One Hiranandani Park","loc":"Thane West","cat":"Ultra-Luxury"}],
+  "ghartalk":{"ep":"Episode 18","title":"\u201CWe didn\u2019t build townships. We built a way of life.\u201D","desc":"Niranjan Hiranandani on the Powai experiment, why Indian cities need 50 more townships, the affordable housing gap, and what he\u2019d do differently if starting today.","videoId":"qKAduNir3Ms","url":"https://www.youtube.com/watch?v=qKAduNir3Ms"},
+  "news":[{"date":"Mar 2026","headline":"Hiranandani Group announces \u20b912,000 Cr investment in data centre parks across India","excerpt":"The group\u2019s expansion plan targets Tier-II cities as digital infrastructure demand surges nationwide.","url":"#"},{"date":"Jan 2026","headline":"Why Niranjan Hiranandani is pushing for single-window clearance in housing","excerpt":"At NAREDCO\u2019s annual summit, the veteran developer made a case for policy reform to accelerate affordable housing delivery.","url":"#"},{"date":"Nov 2025","headline":"Hiranandani and Brookfield join forces for western India logistics parks","excerpt":"The joint venture targets 15 million sq ft of Grade-A warehousing across Maharashtra and Gujarat.","url":"#"},{"date":"Aug 2025","headline":"From Powai to a $3.8B empire: The Niranjan Hiranandani story","excerpt":"How one developer\u2019s vision for integrated townships created a new model for Indian urban living.","url":"#"}],
+  "media":["https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop&q=80","https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=400&fit=crop&q=80","https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop&q=80"],
+  "brands":[{"n":"Hiranandani Group","type":"Developer \u00b7 Mumbai","logo":"../brands/godrej-properties-logo.png","href":"#"},{"n":"Yotta Infrastructure","type":"Data Centres \u00b7 Mumbai","logo":"../brands/godrej-properties-logo.png","href":"#"},{"n":"Hiranandani Communities","type":"Developer \u00b7 Chennai","logo":"../brands/godrej-properties-logo.png","href":"#"},{"n":"H-Energy","type":"Energy \u00b7 Mumbai","logo":"../brands/godrej-properties-logo.png","href":"#"}],
+  "related":[{"n":"Pirojsha Godrej","desig":"Executive Chairman, Godrej Properties","img":"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face&q=80","cat":"Developer","href":"#"},{"n":"Abhishek Lodha","desig":"MD & CEO, Macrotech Developers","img":"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face&q=80","cat":"Developer","href":"#"},{"n":"Irfan Razack","desig":"Chairman, Prestige Group","img":"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&crop=face&q=80","cat":"Developer","href":"#"},{"n":"Vikas Oberoi","desig":"Chairman & MD, Oberoi Realty","img":"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face&q=80","cat":"Developer","href":"#"}]
+};
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav"><div class="nav-i">
+  <a href="/" class="nav-logo"><img src="../logo.svg" alt="GHAR.tv"><span class="nav-logo-tag">People</span></a>
+  <ul class="nav-links" role="list"><li><a href="/intelligence">Intelligence</a></li><li><a href="/design">Design</a></li><li><a href="/community" class="active">Community</a></li><li><a href="/ghartalks">GharTalks</a></li><li><a href="/videoworks">VideoWorks</a></li><li><a href="/gharevents">GharEvents</a></li><li><a href="/industry-voices">Industry Voices</a></li></ul>
+  <div class="nav-r"><a href="/join" class="nav-btn">Join Now</a></div>
+  <button class="ham" id="hBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mob" id="mob" aria-hidden="true"><ul><li><a href="/intelligence">Intelligence</a></li><li><a href="/design">Design</a></li><li><a href="/community" class="ma">Community</a></li><li><a href="/ghartalks">GharTalks</a></li><li><a href="/videoworks">VideoWorks</a></li><li><a href="/gharevents">GharEvents</a></li><li><a href="/industry-voices">Industry Voices</a></li><li><a href="/join" class="ma">Join Now &rarr;</a></li></ul></div>
+
+<!-- BREADCRUMB -->
+<div class="c"><nav class="bc"><a href="/">GHAR.tv</a><span class="bc-s">&rsaquo;</span><a href="/community">Community</a><span class="bc-s">&rsaquo;</span><a href="/community/people.html">People</a><span class="bc-s">&rsaquo;</span><span class="bc-c" id="J_bc"></span></nav></div>
+
+<!-- HERO -->
+<div class="c"><section class="hero">
+  <div class="hero-photo" id="J_photo"></div>
+  <div class="hero-info">
+    <div class="hero-badge" id="J_badge"></div>
+    <h1 class="hero-name" id="J_name"></h1>
+    <p class="hero-desig" id="J_desig"></p>
+    <p class="hero-tag" id="J_tag"></p>
+    <div class="hero-social" id="J_social"></div>
+    <div class="hero-share" id="J_share"></div>
+  </div>
+</section></div>
+
+<!-- STATS -->
+<div class="c"><div class="stats" id="J_stats"></div></div>
+
+<!-- MAIN + SIDEBAR -->
+<div class="c"><div class="layout">
+  <main id="J_main"></main>
+  <aside class="sidebar">
+    <div class="sb-card" id="S_facts" hidden><div class="sb-card-t">Quick Facts</div><div id="J_facts"></div></div>
+    <div class="sb-card" id="S_awards" hidden><div class="sb-card-t">Recognition</div><div id="J_awards"></div></div>
+    <div class="sb-card" id="S_specs" hidden><div class="sb-card-t">Specialisations</div><div class="spec-tags" id="J_specs"></div></div>
+    <div class="sb-card" id="S_portfolio" hidden><div class="sb-card-t">Notable Portfolio</div><div id="J_portfolio"></div></div>
+  </aside>
+</div></div>
+
+<!-- GHARTALK -->
+<div class="c" id="S_ghartalk" hidden><section class="fw-section">
+  <div class="sec-label">GharTalks</div>
+  <div class="sec-h" style="margin-bottom:20px">Featured Episode</div>
+  <div class="gt-card">
+    <div class="gt-visual" id="J_gtVisual"><img id="J_gtPoster" alt="" loading="lazy"><button class="play-btn" id="J_gtPlay" type="button" aria-label="Play video"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></button></div>
+    <div class="gt-info"><div class="gt-ep" id="J_gtEp"></div><h3 class="gt-title" id="J_gtTitle"></h3><p class="gt-desc" id="J_gtDesc"></p><a id="J_gtBtn" href="#" target="_blank" class="btn-p">Watch Episode <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  </div>
+</section></div>
+
+<!-- GALLERY -->
+<div class="c" id="S_gallery" hidden><section class="fw-section">
+  <div class="sec-label">Gallery</div>
+  <div class="sec-h">Photos</div>
+  <div class="gallery-grid" id="J_gallery"></div>
+</section></div>
+
+<!-- NEWS -->
+<div class="c" id="S_news" hidden><section class="fw-section">
+  <div class="sec-label">Stories</div>
+  <div class="sec-h">Related Articles</div>
+  <div class="news-grid" id="J_news"></div>
+</section></div>
+
+<!-- BRANDS -->
+<div class="c" id="S_brands" hidden><section class="fw-section">
+  <div class="sec-label">Companies</div>
+  <div class="sec-h">Associated Brands</div>
+  <div class="brands-grid" id="J_brands"></div>
+</section></div>
+
+<!-- RELATED -->
+<div class="c" id="S_related" hidden><section class="fw-section">
+  <div class="sec-label">More People</div>
+  <div class="sec-h">You Might Also Like</div>
+  <div class="rel-grid" id="J_related"></div>
+</section></div>
+
+<!-- CTA — Contact (dark, shared theme across all detail pages) -->
+<section class="cta"><div class="cta-bg" aria-hidden="true"></div><div class="cta-i">
+  <div class="cta-contact">
+    <span class="cta-e">Get in Touch</span>
+    <h2>Connect with <span id="J_ctaName"></span></h2>
+    <p class="cta-d">Send a message and our team at GHAR.tv will route it to <span id="J_ctaName2"></span>. Expect a response within 24 hours.</p>
+    <button type="button" class="cta-btn" id="J_openContact"><span>Send a message</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+    <p class="cta-note">Powered by GHAR.tv. We protect your privacy.</p>
+  </div>
+</div></section>
+
+<!-- Contact Modal -->
+<div class="modal" id="contactModal" aria-hidden="true" role="dialog" aria-labelledby="contactModalTitle">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="document">
+    <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
+    <div id="contactModalBody">
+      <h3 class="modal-title" id="contactModalTitle">Send a message to <span id="J_modalName"></span></h3>
+      <p class="modal-sub">We'll forward your message through GHAR.tv and get back within 24 hours.</p>
+      <form class="modal-form" id="contactForm" novalidate>
+        <input class="modal-inp" name="name" placeholder="Your name" autocomplete="name" required>
+        <input class="modal-inp" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+        <input class="modal-inp" name="phone" type="tel" placeholder="Phone (optional)" autocomplete="tel">
+        <textarea class="modal-inp modal-ta" name="message" placeholder="Your message" required></textarea>
+        <button class="modal-sub-btn" type="submit">Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        <p class="modal-note">Powered by GHAR.tv. We protect your privacy.</p>
+      </form>
+    </div>
+    <div class="modal-success" id="contactSuccess" hidden>
+      <div class="modal-success-ic">✓</div>
+      <h4>Message sent!</h4>
+      <p>We'll connect you with <span id="J_successName"></span> within 24 hours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="ft"><div class="ft-i">
+  <div class="ft-top"><div><img src="../logo.svg" alt="GHAR.tv" class="ft-logo"><p class="ft-tag">India's AI-Native Real Estate Intelligence</p></div>
+  <nav class="ft-nav"><a href="/intelligence">Intelligence</a><a href="/design">Design</a><a href="/community">Community</a><a href="/ghartalks">GharTalks</a><a href="/videoworks">VideoWorks</a><a href="/gharevents">GharEvents</a><a href="/industry-voices">Industry Voices</a></nav></div>
+  <div class="ft-bot"><p>&copy; 2026 Ghar.tv &middot; Zybeq Ventures Pvt Ltd</p><div class="ft-bl"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</div></footer>
+
+<!-- RENDERER -->
+<script>
+(function(){
+  'use strict';
+  var d=window.__PERSON;if(!d)return;
+  function $(id){return document.getElementById(id)}
+  function h(el,s){if(el)el.innerHTML=s}
+  function t(el,s){if(el)el.textContent=s}
+  function show(id){var e=$(id);if(e)e.hidden=false}
+
+  document.title=d.n+' \u2014 '+d.desig+' | GHAR.tv';
+  var pm=$('pageMeta');if(pm)pm.content=d.n+', '+d.desig+' at '+d.org+'. '+d.tag;
+  t($('J_bc'),d.n);
+
+  // Photo
+  var ph=$('J_photo');
+  if(d.img)ph.innerHTML='<img src="'+d.img+'" alt="'+d.n+'" loading="eager">';
+
+  // Badge
+  h($('J_badge'),'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> '+d.cat);
+
+  // Name, desig, tag
+  t($('J_name'),d.n);
+  h($('J_desig'),d.desig+(d.org?' &middot; '+(d.orgUrl?'<a href="'+d.orgUrl+'" target="_blank" rel="noopener">'+d.org+'</a>':d.org):''));
+  t($('J_tag'),d.tag);
+
+  // Quote
+
+  // Social
+  var svgs={
+    linkedin:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>',
+    twitter:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+    instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>',
+    youtube:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l6 3-6 3V9z" fill="currentColor" stroke="none"/></svg>',
+    facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>',
+    whatsapp:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>',
+    website:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/></svg>'
+  };
+  var so=d.social||{},soH='';
+  ['linkedin','twitter','instagram','facebook','youtube','whatsapp','website'].forEach(function(k){if(so[k])soH+='<a href="'+so[k]+'" class="so" target="_blank" rel="noopener" title="'+k+'">'+svgs[k]+'</a>'});
+  h($('J_social'),soH);
+
+  // Copy link
+  var copyIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+  var okIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  h($('J_share'),'<button class="share-btn" id="J_copyBtn" type="button">'+copyIcon+' Copy link</button>');
+  var cBtn=$('J_copyBtn');
+  if(cBtn)cBtn.addEventListener('click',function(){
+    var reset=function(){cBtn.innerHTML=copyIcon+' Copy link'};
+    var ok=function(){cBtn.innerHTML=okIcon+' Copied!';setTimeout(reset,1800)};
+    var fallback=function(){
+      try{var ta=document.createElement('textarea');ta.value=location.href;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok()}catch(e){alert(location.href)}
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(location.href).then(ok).catch(fallback);
+    }else fallback();
+  });
+
+  // Stats
+  if(d.stats&&d.stats.length){
+    h($('J_stats'),d.stats.map(function(s){return '<div class="stat"><div class="stat-v">'+s.v+'</div><div class="stat-l">'+s.l+'</div>'+(s.sub?'<div class="stat-s">'+s.sub+'</div>':'')+'</div>'}).join(''));
+  }
+
+  // Main
+  var m='';
+  if(d.about&&d.about.length){
+    m+='<div class="sec-label">Profile</div>';
+    d.about.forEach(function(ch,i){
+      m+='<div class="chapter">';if(ch.title)m+='<h2 class="chapter-t">'+ch.title+'</h2>';
+      (ch.paras||[]).forEach(function(p){m+='<p>'+p+'</p>'});m+='</div>';
+      if(i===0&&d.pullQuote)m+='<div class="pull-q"><p>'+d.pullQuote+'</p></div>';
+    });
+  }
+  if(d.experience&&d.experience.length){
+    m+='<div class="chapter"><div class="sec-label">Career Timeline</div><div class="timeline">';
+    d.experience.forEach(function(e){m+='<div class="tl-item"><div class="tl-yr">'+e.y+'</div><div class="tl-body"><div class="tl-t">'+e.t+'</div>'+(e.d?'<div class="tl-d">'+e.d+'</div>':'')+'</div></div>'});
+    m+='</div></div>';
+  }
+  h($('J_main'),m);
+
+  // Sidebar
+  if(d.facts&&d.facts.length){h($('J_facts'),d.facts.map(function(f){return '<div class="info-row"><span class="info-k">'+f[0]+'</span><span class="info-v">'+f[1]+'</span></div>'}).join(''));show('S_facts')}
+  if(d.awards&&d.awards.length){h($('J_awards'),d.awards.map(function(a){return '<div class="aw-item"><div class="aw-name">'+a.n+'</div><div class="aw-meta">'+a.m+'</div></div>'}).join(''));show('S_awards')}
+  if(d.specialisations&&d.specialisations.length){h($('J_specs'),d.specialisations.map(function(s){return '<span class="spec-tag">'+s+'</span>'}).join(''));show('S_specs')}
+  if(d.portfolio&&d.portfolio.length){h($('J_portfolio'),d.portfolio.map(function(p){return '<div class="pf-item"><div><div class="pf-name">'+p.n+'</div><div class="pf-loc">'+p.loc+'</div></div><div class="pf-cat">'+p.cat+'</div></div>'}).join(''));show('S_portfolio')}
+
+  // GharTalk
+  if(d.ghartalk){var gt=d.ghartalk;t($('J_gtEp'),'GharTalks \u00b7 '+gt.ep);t($('J_gtTitle'),gt.title);t($('J_gtDesc'),gt.desc);var vid=gt.videoId||'',gtBtn=$('J_gtBtn');if(gtBtn)gtBtn.href=gt.url||(vid?'https://www.youtube.com/watch?v='+vid:'#');var gtVis=$('J_gtVisual'),gtPoster=$('J_gtPoster'),gtPlay=$('J_gtPlay');if(vid&&gtPoster)gtPoster.src='https://img.youtube.com/vi/'+vid+'/maxresdefault.jpg';if(gtVis&&vid){var playVideo=function(e){if(e)e.preventDefault();if(gtVis.classList.contains('is-playing'))return;var ifr=document.createElement('iframe');ifr.src='https://www.youtube.com/embed/'+vid+'?autoplay=1&rel=0';ifr.allow='accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';ifr.allowFullscreen=true;ifr.title=gt.title||'GharTalks video';gtVis.appendChild(ifr);gtVis.classList.add('is-playing')};gtVis.addEventListener('click',playVideo);if(gtPlay)gtPlay.addEventListener('click',playVideo)}show('S_ghartalk')}
+
+  // Gallery
+  if(d.media&&d.media.length){h($('J_gallery'),d.media.map(function(u){return '<img src="'+u+'" alt="" loading="lazy">'}).join(''));show('S_gallery')}
+
+  // News
+  if(d.news&&d.news.length){h($('J_news'),d.news.map(function(n){return '<a href="'+(n.url||'#')+'" class="news-card"><div class="news-date">'+n.date+'</div><div class="news-hl">'+n.headline+'</div>'+(n.excerpt?'<div class="news-ex">'+n.excerpt+'</div>':'')+'<div class="news-read">Read article \u2192</div></a>'}).join(''));show('S_news')}
+
+  // Brands
+  if(d.brands&&d.brands.length){h($('J_brands'),d.brands.map(function(b){return '<a href="'+(b.href||'#')+'" class="br-card"><div class="br-logo-wrap"><img class="br-logo" src="'+b.logo+'" alt="'+b.n+'"></div><div class="br-bottom"><div class="br-body"><div class="br-name">'+b.n+'</div><div class="br-type">'+b.type+'</div></div><svg class="br-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></a>'}).join(''));show('S_brands')}
+
+  // Related
+  if(d.related&&d.related.length){h($('J_related'),d.related.map(function(r){return '<a href="'+(r.href||'#')+'" class="rel-card"><img class="rel-photo" src="'+r.img+'" alt="'+r.n+'" loading="lazy"><div class="rel-name">'+r.n+'</div><div class="rel-role">'+r.desig+'</div>'+(r.cat?'<div class="rel-cat">'+r.cat+'</div>':'')+'</a>'}).join(''));show('S_related')}
+
+  // Hamburger
+  var btn=$('hBtn'),mob=$('mob');
+  btn.addEventListener('click',function(){var o=mob.classList.toggle('open');btn.classList.toggle('active',o);btn.setAttribute('aria-expanded',o);mob.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''});
+  mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open');btn.classList.remove('active');btn.setAttribute('aria-expanded','false');mob.setAttribute('aria-hidden','true');document.body.style.overflow=''})});
+
+  // Chapter reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -32px 0px'});
+  document.querySelectorAll('.chapter').forEach(function(el){io.observe(el)});
+
+  // Contact CTA — populate name placeholders
+  var _entityName=(window.__PERSON&&window.__PERSON.n)||(window.__BRAND&&window.__BRAND.n)||'';
+  ['J_ctaName','J_ctaName2','J_modalName','J_successName'].forEach(function(id){var e=$(id);if(e)e.textContent=_entityName});
+
+  // Contact Modal
+  var _modal=$('contactModal'),_openBtn=$('J_openContact'),_form=$('contactForm'),_body=$('contactModalBody'),_success=$('contactSuccess'),_lastFocus;
+  function _openModal(){_lastFocus=document.activeElement;_modal.classList.add('open');_modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');var fi=_form.querySelector('input');if(fi)setTimeout(function(){fi.focus()},120)}
+  function _closeModal(){_modal.classList.remove('open');_modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');if(_lastFocus)_lastFocus.focus();setTimeout(function(){if(!_success.hidden){_body.hidden=false;_success.hidden=true;_form.reset();var b=_form.querySelector('.modal-sub-btn');if(b){b.disabled=false;b.innerHTML='Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>'}}},320)}
+  if(_openBtn)_openBtn.addEventListener('click',_openModal);
+  if(_modal){_modal.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',_closeModal)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&_modal.classList.contains('open'))_closeModal()})}
+  if(_form)_form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=_form.querySelector('.modal-sub-btn');btn.disabled=true;btn.innerHTML='Sending\u2026';
+    var lead={name:_form.name.value.trim(),email:_form.email.value.trim(),phone:_form.phone.value.trim(),message:_form.message.value.trim(),contactingName:_entityName,contactingType:(window.__PERSON?'person':'brand'),sourceUrl:location.href,timestamp:new Date().toISOString()};
+    // Backend endpoint to be wired by dev team — replace with real POST
+    var submit=function(){return window.__LEAD_API?fetch(window.__LEAD_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}):Promise.resolve({ok:true})};
+    submit().then(function(){_body.hidden=true;_success.hidden=false}).catch(function(){alert('Something went wrong. Please try again or email hello@ghar.tv');btn.disabled=false;btn.innerHTML='Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>'});
+  });
+})();
+</script>
+</body>
+</html>

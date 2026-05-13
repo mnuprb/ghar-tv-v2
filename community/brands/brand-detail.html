@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title id="pageTitle">Brand - GHAR.tv</title>
+  <meta name="description" id="pageMeta" content="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+
+  <style>
+    @font-face{font-family:'Gazpacho';src:url('../fonts/Gazpacho-Bold.woff2') format('woff2'),url('../fonts/Gazpacho-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+    :root{--bg:#fff;--ink:#111;--ink2:#4b5563;--faint:#9ca3af;--rule:#e8e8e8;--accent:#ee324b;--surface:#f7f7f7;--ff-d:'Gazpacho',Georgia,serif;--ff-s:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--ease:cubic-bezier(.4,0,.2,1);--mw:1280px;--ph:clamp(24px,5vw,80px);--sh:0 1px 3px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.04)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:var(--ff-s);background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;padding-top:64px}
+    img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
+    .c{max-width:var(--mw);margin:0 auto;padding:0 var(--ph)}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 var(--ph);will-change:transform}
+    .nav-i{max-width:var(--mw);margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-logo{display:flex;align-items:baseline;flex-shrink:0}.nav-logo img{height:28px;width:auto}
+    .nav-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-left:10px}
+    .nav-l{display:none;align-items:center;justify-content:center;gap:2px;list-style:none;flex:1}
+    .nav-l a{font-size:13.5px;font-weight:500;color:var(--ink2);padding:6px 11px;border-radius:7px;white-space:nowrap;transition:background .16s,color .16s}
+    .nav-l a:hover{background:var(--surface);color:var(--ink)}.nav-l a.active{background:var(--surface);color:var(--ink);font-weight:600}
+    .nav-r{display:none;align-items:center;gap:8px;flex-shrink:0}
+    .nav-join{font-size:13px;font-weight:600;color:#fff;padding:8px 20px;border-radius:8px;background:var(--ink);display:inline-flex;align-items:center;transition:background .18s,transform .18s}
+    .nav-join:hover{background:var(--accent);transform:translateY(-1px)}
+    .ham{display:flex;flex-direction:column;gap:5px;padding:6px;background:none;border:none;z-index:901}
+    .ham span{display:block;width:20px;height:1.5px;background:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+    .ham.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}.ham.active span:nth-child(2){opacity:0}.ham.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .mob{position:fixed;inset:0;background:var(--bg);z-index:850;transform:translateX(100%);transition:transform .42s var(--ease);padding:88px 28px 48px}
+    .mob.open{transform:translateX(0)}.mob ul{list-style:none}.mob li{border-bottom:1px solid var(--rule)}
+    .mob a{display:block;padding:15px 0;font-family:var(--ff-d);font-size:24px;font-weight:700;color:var(--ink)}.mob .ma{color:var(--accent)}
+
+    /* ── BREADCRUMB ── */
+    .bc{padding:20px 0 8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.bc a{font-size:12px;color:var(--faint);font-weight:500}.bc a:hover{color:var(--ink)}
+    .bc-s{font-size:11px;color:var(--faint)}.bc-c{font-size:12px;color:var(--ink);font-weight:600}
+
+    /* ── HERO ── */
+    .bh{padding:clamp(24px,3vw,40px) 0 clamp(32px,4vw,48px)}
+    .bh-g{display:grid;grid-template-columns:1fr;gap:clamp(32px,4vw,56px);align-items:center}
+    @media(min-width:768px){.bh-g{grid-template-columns:1fr 1fr}}
+    .bh-l{display:flex;flex-direction:column;gap:16px}
+    .bh-logo{height:48px;display:flex;align-items:center}.bh-logo img{height:100%;width:auto;object-fit:contain}
+    .bh-badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;line-height:1.2}
+    .badge-cat{background:rgba(238,50,75,.06);color:var(--accent);border:1px solid rgba(238,50,75,.12)}
+    .badge-loc{background:var(--surface);color:var(--ink2);border:1px solid var(--rule)}
+    .bh h1{font-family:var(--ff-d);font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1;letter-spacing:-.03em;color:var(--ink)}
+    .bh-tag{font-size:clamp(15px,1.3vw,18px);line-height:1.7;color:var(--ink2);max-width:500px}
+    .bh-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--faint);font-weight:500}
+    .bh-meta span{display:flex;align-items:center;gap:6px}
+    .bh-meta svg{width:14px;height:14px;flex-shrink:0}
+    .bh-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--accent);transition:gap .2s;width:fit-content}.bh-link:hover{gap:10px}
+    .bh-img{border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:var(--surface)}.bh-img img{width:100%;height:100%;object-fit:cover}
+
+    /* ── HERO SOCIAL — round profile/share icons ── */
+    .hero-social{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
+    .so{width:40px;height:40px;border-radius:50%;border:1px solid var(--rule);background:var(--bg);display:inline-flex;align-items:center;justify-content:center;color:var(--ink2);transition:background .18s,color .18s,border-color .18s,transform .18s}
+    .so:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:scale(1.06)}
+    .so svg{width:17px;height:17px}
+
+    /* ── HERO SHARE — Copy link pill ── */
+    .hero-share{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
+    .share-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ink);padding:8px 16px;border:1px solid var(--rule);border-radius:10px;background:var(--bg);cursor:pointer;transition:border-color .18s,background .18s}
+    .share-btn:hover{border-color:var(--ink);background:var(--surface)}
+    .share-btn svg{width:14px;height:14px;flex-shrink:0}
+
+    /* ── STATS — pill row ── */
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:clamp(24px,3vw,40px) 0}
+    @media(min-width:600px){.stats{grid-template-columns:repeat(4,1fr)}}
+    .stat{text-align:center;padding:20px 12px;background:var(--surface);border-radius:16px;transition:transform .2s}
+    .stat:hover{transform:translateY(-2px)}
+    .stat-v{font-family:var(--ff-d);font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:4px}
+    .stat-l{font-size:12px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em}
+
+    /* ── DIVIDER ── */
+    .divider{height:1px;background:var(--rule);margin:0}
+
+    /* ── SECTIONS ── */
+    .sec{padding:clamp(40px,5vw,56px) 0;position:relative}
+    .sec::before{content:'';position:absolute;top:0;left:0;right:0;margin-left:auto;margin-right:auto;width:calc(100% - 2 * var(--ph));max-width:calc(var(--mw) - 2 * var(--ph));height:1px;background:var(--rule)}
+    .sec-e{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .sec-e::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ink)}
+    .sec-t{font-family:var(--ff-d);font-size:clamp(22px,2.8vw,28px);font-weight:700;line-height:1.2;color:var(--ink);margin-bottom:clamp(20px,3vw,28px)}
+
+    /* ── ABOUT ── */
+    .ab-g{display:grid;grid-template-columns:1fr;gap:40px}@media(min-width:900px){.ab-g{grid-template-columns:1.5fr 1fr;gap:56px}}
+    .ab-t{font-size:16px;line-height:1.85;color:var(--ink2)}.ab-t p+p{margin-top:20px}
+    .fc{background:var(--surface);border-radius:16px;padding:clamp(24px,3vw,32px);align-self:start}
+    .fc-h{font-family:var(--ff-d);font-size:18px;font-weight:700;color:var(--ink);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+    .fc-r{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04);gap:12px}
+    .fc-r:last-child{border-bottom:none}.fc-k{font-size:13px;color:var(--faint);font-weight:500;flex-shrink:0}.fc-v{font-size:14px;font-weight:600;color:var(--ink);text-align:right}
+
+    /* ── PORTFOLIO CARDS ── */
+    /* Mobile: horizontal scroll with snap. Tablet+: grid. */
+    .pg{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+    .pg::-webkit-scrollbar{display:none}
+    .pg>.pc{flex:0 0 78%;max-width:320px;scroll-snap-align:start}
+    @media(min-width:520px){.pg{display:grid;grid-template-columns:repeat(2,1fr);overflow:visible}.pg>.pc{flex:none;max-width:none}}
+    @media(min-width:1024px){.pg{grid-template-columns:repeat(4,1fr)}}
+    .pc{border:1px solid var(--rule);border-radius:16px;overflow:hidden;transition:border-color .22s,box-shadow .22s,transform .22s}
+    .pc:hover{border-color:rgba(17,17,17,.18);box-shadow:0 8px 32px rgba(0,0,0,.08);transform:translateY(-3px)}
+    .pc-i{aspect-ratio:16/10;overflow:hidden;background:var(--surface)}.pc-i img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+    .pc:hover .pc-i img{transform:scale(1.04)}
+    .pc-b{padding:16px 18px}
+    .pc-s{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-bottom:8px;line-height:1.2}
+    .pc-n{font-family:var(--ff-d);font-size:16px;font-weight:700;line-height:1.25;color:var(--ink);margin-bottom:4px}
+    .pc-sub{font-size:12px;color:var(--faint);font-weight:500}.pc-desc{font-size:11px;color:var(--ink2);font-weight:500;margin-top:2px}
+
+    /* ── LEADERS ── */
+    .lg{display:flex;gap:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+    .lg::-webkit-scrollbar{display:none}.lg>.lc{flex:0 0 220px;scroll-snap-align:start}
+    @media(min-width:768px){.lg{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible}.lg>.lc{flex:none}}
+    .lc{text-align:center;padding:clamp(24px,3vw,36px) 20px;border:1px solid var(--rule);border-radius:16px;transition:border-color .22s,box-shadow .22s}
+    .lc:hover{border-color:rgba(17,17,17,.12);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+    .lc-i{width:88px;height:88px;border-radius:50%;overflow:hidden;margin:0 auto 16px;background:var(--surface);border:3px solid #fff;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+    .lc-i img{width:100%;height:100%;object-fit:cover}
+    .lc-n{font-family:var(--ff-d);font-size:17px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:4px}
+    .lc-r{font-size:13px;color:var(--ink2);font-weight:500;line-height:1.4}
+
+    /* ── TIMELINE ── */
+    /* Timeline — shared pill style (matches people-detail) */
+    .timeline{margin-top:20px;display:flex;flex-direction:column;gap:0}
+    .tl-item{display:grid;grid-template-columns:64px 1fr;gap:16px;position:relative;padding-bottom:28px}
+    .tl-item:last-child{padding-bottom:0}
+    .tl-item::before{content:'';position:absolute;left:31px;top:28px;bottom:0;width:2px;background:var(--rule)}
+    .tl-item:last-child::before{display:none}
+    .tl-yr{width:64px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ink);background:var(--surface);border-radius:20px}
+    .tl-body{padding-top:2px}
+    .tl-t{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+    .tl-d{font-size:13px;color:var(--ink2);line-height:1.6}
+
+    /* ── MEDIA GALLERY ── */
+    .mg{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:520px){.mg{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1024px){.mg{grid-template-columns:repeat(3,1fr)}}
+    .mg-item{border-radius:14px;overflow:hidden;border:1px solid var(--rule);transition:border-color .22s,box-shadow .22s}
+    .mg-item:hover{border-color:rgba(17,17,17,.15);box-shadow:0 8px 24px rgba(0,0,0,.07)}
+    .mg-item iframe,.mg-item img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--surface)}
+    .mg-cap{padding:12px 16px;font-size:13px;font-weight:500;color:var(--ink2)}
+
+    /* ── NEWS ── */
+    .nw{display:flex;flex-direction:column;gap:0}
+    .nw-item{display:flex;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--rule)}
+    .nw-item:last-child{border-bottom:none}
+    .nw-date{font-size:12px;font-weight:600;color:var(--faint);white-space:nowrap;min-width:90px}
+    .nw-body{flex:1;min-width:0}
+    .nw-title{font-size:15px;font-weight:600;color:var(--ink);line-height:1.4}
+    .nw-title a{transition:color .18s}.nw-title a:hover{color:var(--accent)}
+    .nw-src{font-size:12px;color:var(--faint);margin-top:2px}
+
+    /* ── RELATED ── */
+    .rg{display:flex;gap:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+    .rg::-webkit-scrollbar{display:none}.rg>.rc{flex:0 0 280px;scroll-snap-align:start}
+    @media(min-width:900px){.rg{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible}.rg>.rc{flex:none}}
+    .rc{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:14px;overflow:hidden;transition:border-color .22s,box-shadow .22s,transform .22s}
+    .rc:hover{border-color:rgba(17,17,17,.15);box-shadow:0 8px 24px rgba(0,0,0,.07);transform:translateY(-2px)}
+    .rc-logo{width:100%;height:80px;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:16px 24px;border-bottom:1px solid var(--rule)}
+    .rc-logo img{max-width:100%;max-height:100%;object-fit:contain}
+    .rc-bot{display:flex;align-items:center;gap:12px;padding:16px 18px}
+    .rc-body{flex:1;min-width:0}
+    .rc-n{font-family:var(--ff-d);font-size:16px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:2px}
+    .rc-type{font-size:12px;color:var(--faint);font-weight:500}
+    .rc-arr{color:var(--rule);transition:color .2s,transform .2s;flex-shrink:0}.rc:hover .rc-arr{color:var(--ink);transform:translateX(3px)}
+
+    /* ── CTA ── */
+    .cta{position:relative;overflow:hidden;padding:clamp(64px,8vw,100px) 0;background:#111}
+    .cta-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(238,50,75,.08),transparent 70%),radial-gradient(ellipse 40% 40% at 80% 60%,rgba(59,130,246,.06),transparent 70%)}
+    .cta-i{max-width:var(--mw);margin:0 auto;padding:0 var(--ph);display:grid;grid-template-columns:1fr;gap:48px;position:relative;z-index:1}
+    @media(min-width:900px){.cta-i{grid-template-columns:1fr 1fr;gap:64px;align-items:center}}
+    .cta-e{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#ee324b;margin-bottom:20px}
+    .cta-e::before{content:'';width:6px;height:6px;border-radius:50%;background:#ee324b}
+    .cta h2{font-family:var(--ff-d);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.1;color:#fff;margin-bottom:16px}
+    .cta-d{font-size:15px;line-height:1.75;color:rgba(255,255,255,.55);margin-bottom:28px;max-width:480px}
+    .cta-f{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
+    .cta-fi{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,.7)}
+    .cta-fi svg{color:#ee324b;flex-shrink:0}
+    .cta-fw{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:clamp(28px,4vw,40px)}
+    .cta-form{display:flex;flex-direction:column;gap:14px}
+    .cta-ir{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:500px){.cta-ir{grid-template-columns:1fr 1fr}}
+    .cta-inp{font-family:var(--ff-s);font-size:14px;padding:14px 18px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#fff;transition:border-color .2s}
+    .cta-inp::placeholder{color:rgba(255,255,255,.3)}.cta-inp:focus{outline:none;border-color:rgba(255,255,255,.25)}
+    .cta-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--ff-s);font-size:15px;font-weight:600;color:#111;background:#fff;padding:15px 28px;border-radius:10px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
+    .cta-btn:hover{background:#ee324b;color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(238,50,75,.25)}
+    .cta-note{font-size:11.5px;color:rgba(255,255,255,.3);text-align:center}
+    .cta-ok{text-align:center;padding:20px 0}.cta-ok p{font-size:15px;color:rgba(255,255,255,.7)}
+
+    /* ── FOOTER ── */
+    .ft{background:#111;border-top:none;padding:36px 0}
+    .ft-i{max-width:var(--mw);margin:0 auto;padding:0 var(--ph)}
+    .ft-top{display:flex;flex-direction:column;gap:24px;padding-bottom:32px;border-bottom:1px solid #1a1a1a;margin-bottom:24px}
+    @media(min-width:744px){.ft-top{flex-direction:row;align-items:flex-start;justify-content:space-between}}
+    .ft-logo{height:24px;width:auto;margin-bottom:8px;filter:brightness(0) invert(1)}
+    .ft-tag{font-size:12px;color:rgba(255,255,255,.3)}
+    .ft-nav{display:flex;gap:24px;flex-wrap:wrap}.ft-nav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.45)}.ft-nav a:hover{color:#fff}
+    .ft-bot{display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(255,255,255,.2)}
+    @media(min-width:744px){.ft-bot{flex-direction:row;justify-content:space-between}}
+    .ft-bl{display:flex;gap:16px}.ft-bl a{font-size:12px;color:rgba(255,255,255,.2)}.ft-bl a:hover{color:rgba(255,255,255,.6)}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+    .reveal.revealed{opacity:1;transform:none}
+    .sec[hidden]{display:none}
+
+    /* ── CONTACT CTA (centered variant on dark bg) ── */
+    .cta-i--center{grid-template-columns:1fr!important;text-align:center}
+    .cta-contact{margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:4px}
+    .cta-contact .cta-e{justify-content:center}
+    .cta-contact .cta-d{margin:0 auto 28px;text-align:center}
+    .cta-btn--light{background:#fff;color:#111;border:none;padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-size:15px;transition:background .2s,transform .2s,box-shadow .2s}
+    .cta-btn--light:hover{background:var(--accent);color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(238,50,75,.25)}
+    .cta-note{font-size:11.5px;color:rgba(255,255,255,.35);margin-top:14px;text-align:center}
+
+    /* ── CONTACT MODAL ── */
+    .modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
+    .modal.open{opacity:1;pointer-events:auto}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(17,17,17,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+    .modal-card{position:relative;background:var(--bg);border-radius:20px;max-width:480px;width:100%;padding:clamp(28px,4vw,40px);max-height:90vh;overflow-y:auto;transform:translateY(20px) scale(.97);transition:transform .3s var(--ease);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+    .modal.open .modal-card{transform:none}
+    .modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:var(--surface);border-radius:50%;cursor:pointer;color:var(--ink2);transition:all .2s;font-size:20px;line-height:1;padding:0}
+    .modal-close:hover{background:var(--rule);color:var(--ink)}
+    .modal-title{font-family:var(--ff-d);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.25;padding-right:32px}
+    .modal-sub{font-size:14px;color:var(--ink2);margin-bottom:22px;line-height:1.55}
+    .modal-form{display:flex;flex-direction:column;gap:12px}
+    .modal-inp{font-family:var(--ff-s);font-size:14px;padding:12px 16px;border-radius:10px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);transition:border-color .2s;width:100%}
+    .modal-inp:focus{outline:none;border-color:var(--ink)}
+    .modal-ta{min-height:110px;resize:vertical;font-family:inherit;line-height:1.5}
+    .modal-sub-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-size:14px;font-weight:600;color:#fff;background:var(--ink);padding:14px 20px;border-radius:10px;border:none;cursor:pointer;transition:background .2s,transform .2s;margin-top:6px}
+    .modal-sub-btn:hover{background:var(--accent);transform:translateY(-1px)}
+    .modal-sub-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
+    .modal-note{font-size:12px;color:var(--faint);text-align:center;margin-top:8px;line-height:1.5}
+    .modal-success{text-align:center;padding:20px 0}
+    .modal-success-ic{font-size:42px;color:#22c55e;margin-bottom:14px;line-height:1}
+    .modal-success h4{font-family:var(--ff-d);font-size:20px;color:var(--ink);margin-bottom:6px}
+    .modal-success p{font-size:14px;color:var(--ink2);line-height:1.55}
+    body.modal-open{overflow:hidden}
+
+    @media(min-width:1200px){.nav-l{display:flex}.nav-r{display:flex}.ham{display:none}}
+  </style>
+
+  <!--
+    ╔══════════════════════════════════════════════════════╗
+    ║  BRAND DATA — Replace with backend data injection   ║
+    ║                                                     ║
+    ║  For PHP:  window.__BRAND = <?= $json; ?>;          ║
+    ║  For Node: window.__BRAND = <%- json %>;            ║
+    ║  For API:  fetch('/api/brand/slug').then(...)        ║
+    ║                                                     ║
+    ║  All sections auto-hide if their data is missing.   ║
+    ║  Optional fields: social, media, news               ║
+    ╚══════════════════════════════════════════════════════╝
+  -->
+  <script>
+  window.__BRAND = {
+    "n":"Kohler India",
+    "s":"kohler-india",
+    "logo":"kohler-logo.png",
+    "cat":"Bath & Kitchen",
+    "loc":"Pune, India",
+    "tag":"A global leader in kitchen and bath design for over 150 years. From luxury faucets and intelligent toilets to designer sinks and shower systems.",
+    "img":"https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=600&fit=crop&q=80",
+    "url":"https://www.kohler.co.in",
+    "meta":["Founded 1873","India entry: 2006"],
+    "stats":[["150+","Years of Innovation"],["50+","Plants Worldwide"],["$8B+","Global Revenue"],["35K+","Team Worldwide"]],
+    "about":["Kohler Co., founded in 1873 in Kohler, Wisconsin, is one of the world\u2019s oldest and most respected names in kitchen and bath design. With a mission rooted in \u201cGracious Living,\u201d Kohler has spent over 150 years crafting products that combine bold design with cutting-edge engineering.","In India, Kohler has rapidly grown since its 2006 entry, establishing a strong presence in the luxury and premium bathroom segments. The company operates a manufacturing facility in Jhagadia, Gujarat, and has over 1,000 retail touchpoints.","Kohler India serves the residential, hospitality, and commercial segments with a portfolio spanning bathroom fixtures, kitchen sinks and faucets, shower systems, and smart home products."],
+    "facts":[["Type","Private (Global)"],["Founded","1873"],["Global HQ","Kohler, Wisconsin, USA"],["India HQ","Pune, Maharashtra"],["Chairman","David Kohler"],["India Head","Salil Sadanandan"],["India Plant","Jhagadia, Gujarat"]],
+    "portfolio":{"t":"Key Product Lines","items":[{"n":"Intelligent Toilets","img":"https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=500&h=320&fit=crop&q=80","badge":["Flagship","red"],"sub":"Numi \u00b7 Veil \u00b7 Innate","desc":"Touchless \u00b7 Heated Seat \u00b7 Bidet"},{"n":"Faucets & Mixers","img":"https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=500&h=320&fit=crop&q=80","badge":["Premium","purple"],"sub":"Composed \u00b7 Purist \u00b7 July","desc":"Bathroom \u00b7 Kitchen \u00b7 Touchless"},{"n":"Shower Systems","img":"https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=500&h=320&fit=crop&q=80","badge":["Innovation","blue"],"sub":"DTV+ \u00b7 Real Rain \u00b7 Anthem","desc":"Digital Valve \u00b7 Multi-Head \u00b7 Steam"},{"n":"Kitchen Sinks","img":"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&h=320&fit=crop&q=80","badge":["Core","green"],"sub":"Whitehaven \u00b7 Stages \u00b7 Prolific","desc":"Farmhouse \u00b7 Under-mount \u00b7 Stainless"}]},
+    "leaders":[{"n":"David Kohler","r":"Chair & CEO, Kohler Co.","img":"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face&q=80"},{"n":"Salil Sadanandan","r":"President, Kohler India & ME","img":"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face&q=80"},{"n":"Laura Kohler","r":"Chief Sustainability Officer","img":"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face&q=80"}],
+    "timeline":[{"y":"1873","t":"John Michael Kohler founded the company in Wisconsin. Created the first enameled cast-iron bathtub."},{"y":"1967","t":"Introduced the Bold Look of Kohler campaign, redefining bathroom fixtures as design objects."},{"y":"2006","t":"Entered the Indian market. Opened first Kohler Experience Center in Mumbai."},{"y":"2015","t":"Launched the Kohler Numi intelligent toilet in India with touchless controls and ambient lighting."},{"y":"2024","t":"Expanded to 1,000+ retail touchpoints across India. Launched Kohler Konnect smart home ecosystem."}],
+    "news":[{"date":"Mar 2026","title":"Kohler launches new Konnect 2.0 smart home ecosystem across 200 cities in India","url":"#","source":"Economic Times"},{"date":"Jan 2026","title":"Kohler India expands Gujarat manufacturing plant with \u20b9800 Cr investment","url":"#","source":"Business Standard"},{"date":"Nov 2025","title":"Kohler wins Red Dot Design Award for Numi 2.0 Intelligent Toilet","url":"#","source":"Architectural Digest India"},{"date":"Sep 2025","title":"Kohler partners with Godrej Properties for exclusive bath fittings in luxury projects","url":"#","source":"LiveMint"}],
+    "related":[{"n":"Asian Paints","type":"Paints & Home Decor \u00b7 Mumbai","logo":"asian-paints-logo.avif","href":"brand-detail.html?slug=asian-paints"},{"n":"Godrej Properties","type":"Developer \u00b7 Mumbai","logo":"godrej-properties-logo.png","href":"brand-detail.html?slug=godrej-properties"},{"n":"Havells India","type":"Electrical & Lighting \u00b7 Delhi NCR","logo":"godrej-properties-logo.png","href":"#"},{"n":"Somany Ceramics","type":"Tiles & Sanitaryware \u00b7 Delhi NCR","logo":"godrej-properties-logo.png","href":"#"}]
+  };
+  </script>
+</head>
+
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 1 — NAVIGATION (static)
+     ════════════════════════════════════════════════════ -->
+<nav class="nav"><div class="nav-i">
+  <a href="/" class="nav-logo"><img src="../logo.svg" alt="GHAR.tv"><span class="nav-tag">Brands</span></a>
+  <ul class="nav-l" role="list"><li><a href="/intelligence">Intelligence</a></li><li><a href="/design">Design</a></li><li><a href="/community" class="active">Community</a></li><li><a href="/ghartalks">GharTalks</a></li><li><a href="/videoworks">VideoWorks</a></li><li><a href="/gharevents">GharEvents</a></li><li><a href="/industry-voices">Industry Voices</a></li></ul>
+  <div class="nav-r"><a href="/join" class="nav-join">Join Now</a></div>
+  <button class="ham" id="hBtn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mob" id="mob" aria-hidden="true"><ul><li><a href="/intelligence">Intelligence</a></li><li><a href="/design">Design</a></li><li><a href="/community" class="ma">Community</a></li><li><a href="/ghartalks">GharTalks</a></li><li><a href="/videoworks">VideoWorks</a></li><li><a href="/gharevents">GharEvents</a></li><li><a href="/industry-voices">Industry Voices</a></li><li><a href="/join" class="ma">Join Now &rarr;</a></li></ul></div>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 2 — BREADCRUMB (dynamic)
+     ════════════════════════════════════════════════════ -->
+<div class="c"><nav class="bc" aria-label="Breadcrumb">
+  <a href="/">GHAR.tv</a><span class="bc-s">&rsaquo;</span><a href="/community">Community</a><span class="bc-s">&rsaquo;</span><a href="/community/brands.html">Brands</a><span class="bc-s">&rsaquo;</span><span class="bc-c" id="J_bc"></span>
+</nav></div>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 3 — HERO (dynamic)
+     Logo, badges, name, tagline, meta, link, share, image
+     ════════════════════════════════════════════════════ -->
+<section class="bh"><div class="c"><div class="bh-g">
+  <div class="bh-l">
+    <div class="bh-logo"><img id="J_logo" alt=""></div>
+    <div class="bh-badges"><span class="badge badge-cat" id="J_cat"></span><span class="badge badge-loc" id="J_loc"></span></div>
+    <h1 id="J_name"></h1>
+    <p class="bh-tag" id="J_tag"></p>
+    <div class="bh-meta" id="J_meta"></div>
+    <a id="J_link" class="bh-link" target="_blank" rel="noopener">Visit Website <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    <div class="hero-social" id="J_social"></div>
+    <div class="hero-share" id="J_share"></div>
+  </div>
+  <div class="bh-img"><img id="J_img" alt="" loading="eager"></div>
+</div></div></section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 4 — STATS ROW (dynamic)
+     4 stat cards: number + label
+     ════════════════════════════════════════════════════ -->
+<div class="c"><div class="stats reveal" id="J_stats"></div></div>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 5 — ABOUT + QUICK FACTS (dynamic)
+     Left: paragraphs  |  Right: key-value facts sidebar
+     ════════════════════════════════════════════════════ -->
+<section class="sec reveal" id="S_about"><div class="c">
+  <div class="sec-e">About</div><h2 class="sec-t">Company Overview</h2>
+  <div class="ab-g"><div class="ab-t" id="J_about"></div><div class="fc"><h3 class="fc-h">Quick Facts</h3><div id="J_facts"></div></div></div>
+</div></section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 6 — PORTFOLIO / PRODUCTS (dynamic)
+     4-column card grid with badges, images, descriptions
+     Auto-hides if no portfolio data
+     ════════════════════════════════════════════════════ -->
+<section class="sec reveal" id="S_portfolio"><div class="c">
+  <div class="sec-e">Portfolio</div><h2 class="sec-t" id="J_ptitle"></h2>
+  <div class="pg" id="J_portfolio"></div>
+</div></section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 7 — MEDIA GALLERY (dynamic, optional)
+     Video/image grid — hidden by default
+     Activate by adding "media" array to JSON data
+     ════════════════════════════════════════════════════ -->
+<section class="sec reveal" id="S_media" hidden><div class="c">
+  <div class="sec-e">Media</div><h2 class="sec-t">Gallery</h2>
+  <div class="mg" id="J_media"></div>
+</div></section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 8 — LEADERSHIP (dynamic)
+     Profile cards — horizontal scroll on mobile, grid on desktop
+     Auto-hides if no leaders data
+     ════════════════════════════════════════════════════ -->
+<section class="sec reveal" id="S_leaders"><div class="c">
+  <div class="sec-e">Leadership</div><h2 class="sec-t">Key People</h2>
+  <div class="lg" id="J_leaders"></div>
+</div></section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 9 — TIMELINE (dynamic)
+     Vertical milestones with year + description
+     Auto-hides if no timeline data
+     ════════════════════════════════════════════════════ -->
+<section class="sec reveal" id="S_timeline"><div class="c">
+  <div class="sec-e">Timeline</div><h2 class="sec-t">Key Milestones</h2>
+  <div class="timeline" id="J_timeline"></div>
+</div></section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 10 — NEWS / UPDATES (dynamic, optional)
+     Recent news list — hidden by default
+     Activate by adding "news" array to JSON data
+     ════════════════════════════════════════════════════ -->
+<section class="sec reveal" id="S_news" hidden><div class="c">
+  <div class="sec-e">News</div><h2 class="sec-t">Latest Updates</h2>
+  <div class="nw" id="J_news"></div>
+</div></section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 11 — RELATED BRANDS (dynamic)
+     4-column horizontal-scroll cards
+     Auto-hides if no related data
+     ════════════════════════════════════════════════════ -->
+<section class="sec reveal" id="S_related"><div class="c">
+  <div class="sec-e">Explore More</div><h2 class="sec-t">Related Brands</h2>
+  <div class="rg" id="J_related"></div>
+</div></section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 12 — CTA (static)
+     Newsletter signup
+     ════════════════════════════════════════════════════ -->
+<section class="cta reveal"><div class="cta-bg"></div><div class="cta-i cta-i--center">
+  <div class="cta-contact">
+    <span class="cta-e">Get in Touch</span>
+    <h2>Connect with <span id="J_ctaName"></span></h2>
+    <p class="cta-d">Send a message and our team at GHAR.tv will route it to <span id="J_ctaName2"></span>. Expect a response within 24 hours.</p>
+    <button type="button" class="cta-btn cta-btn--light" id="J_openContact"><span>Send a message</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+    <p class="cta-note">Powered by GHAR.tv. We protect your privacy.</p>
+  </div>
+</div></section>
+
+<!-- Contact Modal -->
+<div class="modal" id="contactModal" aria-hidden="true" role="dialog" aria-labelledby="contactModalTitle">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="document">
+    <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
+    <div id="contactModalBody">
+      <h3 class="modal-title" id="contactModalTitle">Send a message to <span id="J_modalName"></span></h3>
+      <p class="modal-sub">We'll forward your message through GHAR.tv and get back within 24 hours.</p>
+      <form class="modal-form" id="contactForm" novalidate>
+        <input class="modal-inp" name="name" placeholder="Your name" autocomplete="name" required>
+        <input class="modal-inp" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+        <input class="modal-inp" name="phone" type="tel" placeholder="Phone (optional)" autocomplete="tel">
+        <textarea class="modal-inp modal-ta" name="message" placeholder="Your message" required></textarea>
+        <button class="modal-sub-btn" type="submit">Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        <p class="modal-note">Powered by GHAR.tv. We protect your privacy.</p>
+      </form>
+    </div>
+    <div class="modal-success" id="contactSuccess" hidden>
+      <div class="modal-success-ic">&check;</div>
+      <h4>Message sent!</h4>
+      <p>We'll connect you with <span id="J_successName"></span> within 24 hours.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 13 — FOOTER (static)
+     ════════════════════════════════════════════════════ -->
+<footer class="ft"><div class="ft-i">
+  <div class="ft-top"><div><img src="../logo.svg" alt="GHAR.tv" class="ft-logo"><p class="ft-tag">India's AI-Native Real Estate Intelligence</p></div>
+  <nav class="ft-nav"><a href="/intelligence">Intelligence</a><a href="/design">Design</a><a href="/community">Community</a><a href="/ghartalks">GharTalks</a><a href="/videoworks">VideoWorks</a><a href="/gharevents">GharEvents</a><a href="/industry-voices">Industry Voices</a></nav></div>
+  <div class="ft-bot"><p>&copy; 2026 Ghar.tv &middot; Zybeq Ventures Pvt Ltd</p><div class="ft-bl"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</div></footer>
+
+
+<!-- ════════════════════════════════════════════════════
+     RENDERER — reads window.__BRAND and populates all
+     sections. Sections auto-hide when data is missing.
+     ════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+  var d = window.__BRAND;
+  if (!d) return;
+
+  // ── SVG icons (reused) ──
+  var iCal='<svg viewBox="0 0 16 16" fill="none" style="width:14px;height:14px"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M2 6h12" stroke="currentColor" stroke-width="1.2"/></svg>';
+  var iArr='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+  var iLoc='<svg viewBox="0 0 16 16" fill="none" style="width:11px;height:11px;display:inline;vertical-align:-1px;margin-right:3px"><path d="M8 1.33A4.67 4.67 0 0 0 3.33 6C3.33 9.5 8 14.67 8 14.67s4.67-5.17 4.67-8.67A4.67 4.67 0 0 0 8 1.33Zm0 6.34a1.67 1.67 0 1 1 0-3.34 1.67 1.67 0 0 1 0 3.34Z" fill="currentColor"/></svg>';
+  var bc={red:'rgba(238,50,75,.08)',blue:'rgba(59,130,246,.08)',green:'rgba(22,163,74,.08)',purple:'rgba(139,92,246,.08)'};
+  var tc={red:'#ee324b',blue:'#3b82f6',green:'#16a34a',purple:'#8b5cf6'};
+
+
+  function $(id){return document.getElementById(id)}
+  function h(el,s){if(el)el.innerHTML=s}
+  function t(el,s){if(el)el.textContent=s}
+  function hide(id){var e=$(id);if(e)e.hidden=true}
+  function show(id){var e=$(id);if(e)e.hidden=false}
+
+  // ── Page title & meta ──
+  document.title = d.n + ' - Brands - GHAR.tv';
+  var pm=$('pageMeta'); if(pm) pm.content = d.n + ' profile on GHAR.tv \u2014 ' + d.tag;
+
+  // ── Breadcrumb ──
+  t($('J_bc'), d.n);
+
+  // ── Hero ──
+  var logo=$('J_logo'); if(logo){logo.src=d.logo; logo.alt=d.n+' logo'}
+  t($('J_cat'), d.cat);
+  h($('J_loc'), iLoc+' '+d.loc);
+  t($('J_name'), d.n);
+  t($('J_tag'), d.tag);
+  var lnk=$('J_link'); if(lnk) lnk.href=d.url;
+  var img=$('J_img'); if(img){img.src=d.img; img.alt=d.n}
+
+  // ── Meta items ──
+  h($('J_meta'), (d.meta||[]).map(function(m){return '<span>'+iCal+' '+m+'</span>'}).join(''));
+
+  // ── Share buttons ──
+  // Social (share icons — round .so buttons)
+  var shareIcons={
+    x:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+    linkedin:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>',
+    whatsapp:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
+    copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>',
+    ok:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+  };
+  var pu=encodeURIComponent(location.href);
+  var pt=encodeURIComponent(d.n+' - GHAR.tv Brands');
+  h($('J_social'),
+    '<a class="so" href="https://x.com/intent/tweet?url='+pu+'&text='+pt+'" target="_blank" rel="noopener" aria-label="Share on X" title="Share on X">'+shareIcons.x+'</a>'+
+    '<a class="so" href="https://www.linkedin.com/sharing/share-offsite/?url='+pu+'" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn">'+shareIcons.linkedin+'</a>'+
+    '<a class="so" href="https://wa.me/?text='+pt+'%20'+pu+'" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">'+shareIcons.whatsapp+'</a>'
+  );
+
+  // Copy link (sits on its own line below social)
+  h($('J_share'),'<button class="share-btn" id="J_copyBtn" type="button">'+shareIcons.copy+' Copy link</button>');
+  var cBtn=$('J_copyBtn');
+  if(cBtn)cBtn.addEventListener('click',function(){
+    var reset=function(){cBtn.innerHTML=shareIcons.copy+' Copy link'};
+    var ok=function(){cBtn.innerHTML=shareIcons.ok+' Copied!';setTimeout(reset,1800)};
+    var fallback=function(){
+      try{var ta=document.createElement('textarea');ta.value=location.href;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok()}catch(e){alert(location.href)}
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(location.href).then(ok).catch(fallback);
+    }else fallback();
+  });
+
+  // ── Stats ──
+  h($('J_stats'), (d.stats||[]).map(function(s){return '<div class="stat"><div class="stat-v">'+s[0]+'</div><div class="stat-l">'+s[1]+'</div></div>'}).join(''));
+
+  // ── About ──
+  h($('J_about'), (d.about||[]).map(function(p){return '<p>'+p+'</p>'}).join(''));
+
+  // ── Facts ──
+  h($('J_facts'), (d.facts||[]).map(function(f){return '<div class="fc-r"><span class="fc-k">'+f[0]+'</span><span class="fc-v">'+f[1]+'</span></div>'}).join(''));
+
+  // ── Portfolio ──
+  var pf=d.portfolio;
+  if(pf&&pf.items&&pf.items.length){
+    t($('J_ptitle'), pf.t||'Portfolio');
+    h($('J_portfolio'), pf.items.map(function(p){
+      return '<div class="pc"><div class="pc-i"><img src="'+p.img+'" alt="'+p.n+'" loading="lazy"></div><div class="pc-b"><div class="pc-n">'+p.n+'</div></div></div>';
+    }).join(''));
+  } else hide('S_portfolio');
+
+  // ── Media Gallery (optional) ──
+  if(d.media&&d.media.length){
+    h($('J_media'), d.media.map(function(m){
+      var content=m.type==='video'
+        ?'<iframe src="'+m.url+'" frameborder="0" allowfullscreen loading="lazy"></iframe>'
+        :'<img src="'+m.url+'" alt="'+(m.title||'')+'" loading="lazy">';
+      return '<div class="mg-item">'+content+(m.title?'<div class="mg-cap">'+m.title+'</div>':'')+'</div>';
+    }).join(''));
+    show('S_media');
+  }
+
+  // ── Leaders ──
+  if(d.leaders&&d.leaders.length){
+    h($('J_leaders'), d.leaders.map(function(l){return '<div class="lc"><div class="lc-i"><img src="'+l.img+'" alt="'+l.n+'" loading="lazy"></div><div class="lc-n">'+l.n+'</div><div class="lc-r">'+l.r+'</div></div>'}).join(''));
+  } else hide('S_leaders');
+
+  // ── Timeline ──
+  if(d.timeline&&d.timeline.length){
+    h($('J_timeline'), d.timeline.map(function(m){return '<div class="tl-item"><div class="tl-yr">'+m.y+'</div><div class="tl-body">'+(m.title?'<div class="tl-t">'+m.title+'</div>':'')+'<div class="tl-d">'+m.t+'</div></div></div>'}).join(''));
+  } else hide('S_timeline');
+
+  // ── News (optional) ──
+  if(d.news&&d.news.length){
+    h($('J_news'), d.news.map(function(n){
+      return '<div class="nw-item"><span class="nw-date">'+n.date+'</span><div class="nw-body"><div class="nw-title">'+(n.url?'<a href="'+n.url+'" target="_blank" rel="noopener">'+n.title+'</a>':n.title)+'</div>'+(n.source?'<div class="nw-src">'+n.source+'</div>':'')+'</div></div>';
+    }).join(''));
+    show('S_news');
+  }
+
+  // ── Related ──
+  if(d.related&&d.related.length){
+    h($('J_related'), d.related.map(function(r){
+      return '<a href="'+(r.href||'#')+'" class="rc"><div class="rc-logo"><img src="'+r.logo+'" alt="'+r.n+'"></div><div class="rc-bot"><div class="rc-body"><div class="rc-n">'+r.n+'</div><div class="rc-type">'+r.type+'</div></div>'+iArr+'</div></a>';
+    }).join(''));
+  } else hide('S_related');
+
+  // ── Hamburger menu ──
+  var btn=$('hBtn'),mob=$('mob');
+  btn.addEventListener('click',function(){var o=mob.classList.toggle('open');btn.classList.toggle('active',o);btn.setAttribute('aria-expanded',o);mob.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''});
+  mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open');btn.classList.remove('active');btn.setAttribute('aria-expanded','false');mob.setAttribute('aria-hidden','true');document.body.style.overflow=''})});
+
+  // ── Reveal animations ──
+  var rv=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('revealed');io.unobserve(en.target)}})},{threshold:.08,rootMargin:'0px 0px -32px 0px'});rv.forEach(function(el){if(!el.hidden)io.observe(el)})}else rv.forEach(function(el){el.classList.add('revealed')});
+
+  // ── Contact CTA — populate name placeholders ──
+  var _entityName=(window.__PERSON&&window.__PERSON.n)||(window.__BRAND&&window.__BRAND.n)||'';
+  ['J_ctaName','J_ctaName2','J_modalName','J_successName'].forEach(function(id){var e=$(id);if(e)e.textContent=_entityName});
+
+  // ── Contact Modal ──
+  var _modal=$('contactModal'),_openBtn=$('J_openContact'),_form=$('contactForm'),_body=$('contactModalBody'),_success=$('contactSuccess'),_lastFocus;
+  var _sendBtnHTML='Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+  function _openModal(){_lastFocus=document.activeElement;_modal.classList.add('open');_modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');var fi=_form.querySelector('input');if(fi)setTimeout(function(){fi.focus()},120)}
+  function _closeModal(){_modal.classList.remove('open');_modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');if(_lastFocus)_lastFocus.focus();setTimeout(function(){if(!_success.hidden){_body.hidden=false;_success.hidden=true;_form.reset();var b=_form.querySelector('.modal-sub-btn');if(b){b.disabled=false;b.innerHTML=_sendBtnHTML}}},320)}
+  if(_openBtn)_openBtn.addEventListener('click',_openModal);
+  if(_modal){_modal.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',_closeModal)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&_modal.classList.contains('open'))_closeModal()})}
+  if(_form)_form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=_form.querySelector('.modal-sub-btn');btn.disabled=true;btn.innerHTML='Sending\u2026';
+    var lead={name:_form.name.value.trim(),email:_form.email.value.trim(),phone:_form.phone.value.trim(),message:_form.message.value.trim(),contactingName:_entityName,contactingType:(window.__PERSON?'person':'brand'),sourceUrl:location.href,timestamp:new Date().toISOString()};
+    var submit=function(){return window.__LEAD_API?fetch(window.__LEAD_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}):Promise.resolve({ok:true})};
+    submit().then(function(){_body.hidden=true;_success.hidden=false}).catch(function(){alert('Something went wrong. Please try again or email hello@ghar.tv');btn.disabled=false;btn.innerHTML=_sendBtnHTML});
+  });
+})();
+</script>
+</body>
+</html>
