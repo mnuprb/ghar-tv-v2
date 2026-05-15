@@ -883,78 +883,76 @@
     }
     @media(max-width:767px){.hero-v2__float{display:none}}
 
-    /* ─── Hero category carousel ───────────────────────────────────────
-       Replaces the old animated SVG illustration. Rounded house-mask
-       (same .cc-card silhouette) holds a category image; label sits below.
-       Horizontal scroller with scroll-snap + auto-advance while in view. */
+    /* ─── Hero shape slideshow ─────────────────────────────────────────
+       One big sand-colored tile (Ghar Shape Library #3 — Peak-right).
+       A house-shaped CSS mask cuts through the tile; inside the mask, a
+       horizontal track of background-image slides cycles via translateX.
+       Drag, prev/next, and auto-advance all drive the same translateX. */
     .hero-v2__right { min-width: 0; }
-    .hero-cats { width: 100%; min-width: 0; position: relative; }
-    .hero-cats-track {
-      position: relative;
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      padding: 4px 0 12px;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      overscroll-behavior-x: contain;
-    }
-    .hero-cats-track::-webkit-scrollbar { display: none; }
-    .hero-cat {
-      flex: 0 0 82%;
-      max-width: 480px;
-      scroll-snap-align: start;
-      text-decoration: none;
+    .hero-shape-card {
+      background: #d4b896;
+      border-radius: 36px;
+      padding: 24px 24px 22px;
       display: flex;
       flex-direction: column;
       gap: 22px;
-    }
-    .hero-cat__shape {
-      position: relative;
       width: 100%;
-      aspect-ratio: 1;
-      border-radius: 32px;
-      padding: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      max-width: 520px;
+      margin: 0 auto;
       transition: transform .5s cubic-bezier(.4,0,.2,1);
     }
-    .hero-cat__shape svg {
-      width: 100%;
-      height: auto;
+    .hero-shape-card:hover { transform: translateY(-4px); }
+    .hero-shape-mask {
       display: block;
-      filter: drop-shadow(0 10px 26px rgba(0,0,0,.18));
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M 138,38 L 176,68 L 176,170 L 24,170 L 24,82 Z' fill='white' stroke='white' stroke-width='28' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+              mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M 138,38 L 176,68 L 176,170 L 24,170 L 24,82 Z' fill='white' stroke='white' stroke-width='28' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
     }
-    .hero-cat__label {
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: .005em;
+    .hero-shape-mask.is-dragging { cursor: grabbing; }
+    .hero-shape-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform .7s cubic-bezier(.4, 0, .2, 1);
+      will-change: transform;
+    }
+    .hero-shape-track.is-dragging { transition: none; }
+    .hero-shape-slide {
+      flex: 0 0 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      -webkit-user-drag: none;
+    }
+    .hero-shape-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 4px;
+    }
+    .hero-shape-label {
+      font-family: 'Gazpacho', Georgia, serif;
+      font-size: clamp(17px, 1.6vw, 22px);
+      font-weight: 700;
       color: var(--ink);
-      text-align: center;
-      line-height: 1.3;
+      line-height: 1.2;
     }
-    .hero-cat:hover .hero-cat__shape { transform: translateY(-4px); }
-    .hero-cat--turmeric   .hero-cat__shape { background: #d4a048; }
-    .hero-cat--terracotta .hero-cat__shape { background: #c4775a; }
-    .hero-cat--sage       .hero-cat__shape { background: #a8b5a0; }
-    .hero-cat--sand       .hero-cat__shape { background: #d4b896; }
     .hero-cats-nav {
       display: flex;
       justify-content: flex-end;
       gap: 10px;
-      margin-top: 16px;
+      flex-shrink: 0;
     }
-    .hero-cats-track { cursor: grab; }
-    .hero-cats-track.is-dragging { cursor: grabbing; scroll-behavior: auto; scroll-snap-type: none; }
-    .hero-cats-track.is-dragging .hero-cat { pointer-events: none; }
     @media(max-width:767px){
       .hero-v2__right { display: block; min-height: 0; max-width: 100%; margin-top: 8px; }
-      .hero-cat { max-width: 320px; }
-      .hero-cat__shape { border-radius: 26px; padding: 18px; }
-      .hero-cat__label { font-size: 15px; }
+      .hero-shape-card { max-width: 360px; border-radius: 28px; padding: 18px 18px 16px; gap: 18px; }
+      .hero-shape-label { font-size: 16px; }
     }
     @media(max-width:480px){.hero-v2__ctas{flex-direction:column}.hero-v2__btn-primary,.hero-v2__btn-outline{width:100%;justify-content:center}}
 
@@ -1454,81 +1452,33 @@
         </div>
       </div>
 
-      <!-- RIGHT — Category carousel (shape-mask cards) -->
+      <!-- RIGHT — Single shape (Ghar Shape #3 · Peak-right · Sand) with image
+           slideshow masked into the silhouette. Category label + nav arrows
+           below. The whole sand tile is one card; the carousel happens INSIDE
+           the mask, not as multiple cards. -->
       <div class="hero-v2__right">
-        <div class="hero-cats" aria-label="Browse design categories">
-          <div class="hero-cats-track" id="heroCatsTrack">
-            <a href="#architecture" class="hero-cat hero-cat--turmeric">
-              <div class="hero-cat__shape">
-                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <defs><mask id="hc1"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
-                  <image href="https://images.unsplash.com/photo-1518005068251-37900150dfca?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc1)" preserveAspectRatio="xMidYMid slice"/>
-                </svg>
-              </div>
-              <span class="hero-cat__label">Architecture</span>
-            </a>
-            <a href="#interiors" class="hero-cat hero-cat--terracotta">
-              <div class="hero-cat__shape">
-                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <defs><mask id="hc2"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
-                  <image href="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc2)" preserveAspectRatio="xMidYMid slice"/>
-                </svg>
-              </div>
-              <span class="hero-cat__label">Interiors</span>
-            </a>
-            <a href="#home-tours-shape" class="hero-cat hero-cat--sage">
-              <div class="hero-cat__shape">
-                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <defs><mask id="hc3"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
-                  <image href="https://images.unsplash.com/photo-1600573472556-e636c2acda88?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc3)" preserveAspectRatio="xMidYMid slice"/>
-                </svg>
-              </div>
-              <span class="hero-cat__label">Home Tours</span>
-            </a>
-            <a href="#vastu" class="hero-cat hero-cat--sand">
-              <div class="hero-cat__shape">
-                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <defs><mask id="hc4"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
-                  <image href="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc4)" preserveAspectRatio="xMidYMid slice"/>
-                </svg>
-              </div>
-              <span class="hero-cat__label">Vastu</span>
-            </a>
-            <a href="#designers" class="hero-cat hero-cat--turmeric">
-              <div class="hero-cat__shape">
-                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <defs><mask id="hc5"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
-                  <image href="sanjay-puri.jpg" width="200" height="200" mask="url(#hc5)" preserveAspectRatio="xMidYMid slice"/>
-                </svg>
-              </div>
-              <span class="hero-cat__label">Architects &amp; Founders</span>
-            </a>
-            <a href="#guides" class="hero-cat hero-cat--terracotta">
-              <div class="hero-cat__shape">
-                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <defs><mask id="hc6"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
-                  <image href="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc6)" preserveAspectRatio="xMidYMid slice"/>
-                </svg>
-              </div>
-              <span class="hero-cat__label">Guides</span>
-            </a>
-            <a href="#featured" class="hero-cat hero-cat--sage">
-              <div class="hero-cat__shape">
-                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <defs><mask id="hc7"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
-                  <image href="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc7)" preserveAspectRatio="xMidYMid slice"/>
-                </svg>
-              </div>
-              <span class="hero-cat__label">Featured Homes</span>
-            </a>
-          </div>
-          <div class="hero-cats-nav" aria-label="Hero carousel controls">
-            <button type="button" class="ds-nav__arrow" data-hero-dir="prev" aria-label="Previous category">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            </button>
-            <button type="button" class="ds-nav__arrow" data-hero-dir="next" aria-label="Next category">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
+        <div class="hero-shape-card" id="heroShapeCard">
+          <a href="#architecture" id="heroShapeLink" class="hero-shape-mask" aria-label="Browse design categories">
+            <div class="hero-shape-track" id="heroShapeTrack">
+              <div class="hero-shape-slide" data-label="Architecture" data-href="#architecture" style="background-image:url('https://images.unsplash.com/photo-1518005068251-37900150dfca?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Interiors" data-href="#interiors" style="background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Home Tours" data-href="#home-tours-shape" style="background-image:url('https://images.unsplash.com/photo-1600573472556-e636c2acda88?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Vastu" data-href="#vastu" style="background-image:url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Architects &amp; Founders" data-href="#designers" style="background-image:url('sanjay-puri.jpg')"></div>
+              <div class="hero-shape-slide" data-label="Guides" data-href="#guides" style="background-image:url('https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Featured Homes" data-href="#featured" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+            </div>
+          </a>
+          <div class="hero-shape-footer">
+            <span class="hero-shape-label" id="heroShapeLabel">Architecture</span>
+            <div class="hero-cats-nav" aria-label="Hero carousel controls">
+              <button type="button" class="ds-nav__arrow" data-hero-dir="prev" aria-label="Previous category">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <button type="button" class="ds-nav__arrow" data-hero-dir="next" aria-label="Next category">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -2375,24 +2325,29 @@
     }, true);
   });
 
-  /* ─── Hero category carousel — auto-advance ─────────────────────────
-     Snap-scrolls one card every 3.5s while the track is in view. Pauses
-     on hover, touch, and focus. Resyncs idx after manual user scroll. */
-  var heroTrack = document.getElementById('heroCatsTrack');
-  if(heroTrack){
-    var heroCards = heroTrack.querySelectorAll('.hero-cat');
-    if(heroCards.length > 1){
+  /* ─── Hero shape slideshow ───────────────────────────────────────────
+     Single house-mask tile; image slides cycle behind the mask via CSS
+     transform translateX on the inner track. Drag (mouse + touch),
+     prev/next buttons, and auto-advance all converge on setIdx(i). */
+  var heroTrack = document.getElementById('heroShapeTrack');
+  var heroMask  = heroTrack && heroTrack.parentNode;
+  var heroLabel = document.getElementById('heroShapeLabel');
+  var heroLink  = document.getElementById('heroShapeLink');
+  var heroCard  = document.getElementById('heroShapeCard');
+  if(heroTrack && heroMask && heroLabel && heroLink){
+    var heroSlides = heroTrack.querySelectorAll('.hero-shape-slide');
+    if(heroSlides.length > 1){
       var heroIdx = 0, heroTimer = null, heroPaused = false, heroInView = false;
-      function heroScrollTo(i){
-        var c = heroCards[i];
-        if(c) heroTrack.scrollTo({ left: c.offsetLeft - heroTrack.offsetLeft, behavior: 'smooth' });
+      function setHero(i, animate){
+        heroIdx = ((i % heroSlides.length) + heroSlides.length) % heroSlides.length;
+        heroTrack.style.transition = animate === false ? 'none' : '';
+        heroTrack.style.transform = 'translateX(' + (-heroIdx * 100) + '%)';
+        var s = heroSlides[heroIdx];
+        heroLabel.textContent = s.getAttribute('data-label') || '';
+        heroLink.setAttribute('href', s.getAttribute('data-href') || '#');
       }
-      function heroStep(){
-        if(heroPaused || !heroInView) return;
-        heroIdx = (heroIdx + 1) % heroCards.length;
-        heroScrollTo(heroIdx);
-      }
-      function heroStart(){ if(heroTimer) return; heroTimer = setInterval(heroStep, 3500); }
+      function heroStep(){ if(!heroPaused && heroInView) setHero(heroIdx + 1); }
+      function heroStart(){ if(!heroTimer) heroTimer = setInterval(heroStep, 4000); }
       function heroStop(){ if(heroTimer){ clearInterval(heroTimer); heroTimer = null; } }
       if('IntersectionObserver' in window){
         new IntersectionObserver(function(entries){
@@ -2400,71 +2355,57 @@
             heroInView = e.isIntersecting;
             if(heroInView && !heroPaused) heroStart(); else heroStop();
           });
-        }, { threshold: 0.15 }).observe(heroTrack);
+        }, { threshold: 0.15 }).observe(heroCard);
       } else { heroInView = true; heroStart(); }
-      ['mouseenter','touchstart','focusin'].forEach(function(ev){
-        heroTrack.addEventListener(ev, function(){ heroPaused = true; heroStop(); }, {passive:true});
-      });
-      ['mouseleave','touchend','focusout'].forEach(function(ev){
-        heroTrack.addEventListener(ev, function(){ heroPaused = false; if(heroInView) heroStart(); }, {passive:true});
-      });
-      var heroScrollDeb;
-      heroTrack.addEventListener('scroll', function(){
-        clearTimeout(heroScrollDeb);
-        heroScrollDeb = setTimeout(function(){
-          var sl = heroTrack.scrollLeft, best = 0, min = Infinity;
-          heroCards.forEach(function(c, i){
-            var d = Math.abs(c.offsetLeft - heroTrack.offsetLeft - sl);
-            if(d < min){ min = d; best = i; }
-          });
-          heroIdx = best;
-        }, 160);
-      }, {passive:true});
-      /* Prev/Next buttons — wrap-around. Restart auto-advance after a brief
-         delay so a clicked direction gets to settle before the next tick. */
+      heroCard.addEventListener('mouseenter', function(){ heroPaused = true; heroStop(); });
+      heroCard.addEventListener('mouseleave', function(){ heroPaused = false; if(heroInView) heroStart(); });
+      /* Prev / next — wrap-around, pause auto-advance for 4.5s after click */
       document.querySelectorAll('[data-hero-dir]').forEach(function(btn){
-        btn.addEventListener('click', function(){
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
           heroStop();
-          var dir = btn.getAttribute('data-hero-dir') === 'next' ? 1 : -1;
-          heroIdx = (heroIdx + dir + heroCards.length) % heroCards.length;
-          heroScrollTo(heroIdx);
-          setTimeout(function(){ if(heroInView && !heroPaused) heroStart(); }, 4000);
+          setHero(heroIdx + (btn.getAttribute('data-hero-dir') === 'next' ? 1 : -1));
+          setTimeout(function(){ if(heroInView && !heroPaused) heroStart(); }, 4500);
         });
       });
-      /* Click-and-drag horizontal scroll for the hero carousel.
-         Mirrors the .ds-grid drag pattern — disables snap mid-drag so
-         scrollLeft tracks the pointer 1:1, then re-enables snap on release
-         so the carousel settles on the nearest card. Suppresses link click
-         if the user dragged more than a few pixels. */
-      (function(){
-        var down = false, startX = 0, startScroll = 0, moved = 0;
-        function endDrag(){
-          if(!down) return;
-          down = false;
-          requestAnimationFrame(function(){ heroTrack.classList.remove('is-dragging'); });
-        }
-        heroTrack.addEventListener('mousedown', function(e){
-          down = true; moved = 0;
-          startX = e.pageX; startScroll = heroTrack.scrollLeft;
-          heroPaused = true; heroStop();
-          e.preventDefault();
-        });
-        window.addEventListener('mouseup', function(){
-          endDrag();
-          setTimeout(function(){ heroPaused = false; if(heroInView) heroStart(); }, 4000);
-        });
-        heroTrack.addEventListener('mouseleave', endDrag);
-        heroTrack.addEventListener('mousemove', function(e){
-          if(!down) return;
-          var dx = e.pageX - startX;
-          moved = Math.abs(dx);
-          if(moved > 4) heroTrack.classList.add('is-dragging');
-          heroTrack.scrollLeft = startScroll - dx;
-        });
-        heroTrack.addEventListener('click', function(e){
-          if(moved > 6){ e.preventDefault(); e.stopPropagation(); }
-        }, true);
-      })();
+      /* Drag — pointer moves the track 1:1 while held, then snaps to nearest
+         slide on release. Threshold of 15% of width to commit a slide change. */
+      var down = false, startX = 0, dragDx = 0, dragWidth = 0;
+      function endDrag(){
+        if(!down) return;
+        down = false;
+        heroMask.classList.remove('is-dragging');
+        heroTrack.classList.remove('is-dragging');
+        var commit = Math.abs(dragDx) > dragWidth * 0.15;
+        if(commit) setHero(heroIdx + (dragDx < 0 ? 1 : -1));
+        else setHero(heroIdx);
+        setTimeout(function(){ heroPaused = false; if(heroInView) heroStart(); }, 4500);
+      }
+      function startDrag(x){
+        down = true; startX = x; dragDx = 0;
+        dragWidth = heroTrack.offsetWidth || 1;
+        heroPaused = true; heroStop();
+        heroMask.classList.add('is-dragging');
+        heroTrack.classList.add('is-dragging');
+      }
+      function moveDrag(x){
+        if(!down) return;
+        dragDx = x - startX;
+        var pct = -heroIdx * 100 + (dragDx / dragWidth) * 100;
+        heroTrack.style.transform = 'translateX(' + pct + '%)';
+      }
+      heroMask.addEventListener('mousedown', function(e){ startDrag(e.pageX); e.preventDefault(); });
+      window.addEventListener('mouseup', endDrag);
+      heroMask.addEventListener('mouseleave', endDrag);
+      heroMask.addEventListener('mousemove', function(e){ moveDrag(e.pageX); });
+      heroMask.addEventListener('touchstart', function(e){ startDrag(e.touches[0].pageX); }, {passive:true});
+      heroMask.addEventListener('touchmove', function(e){ moveDrag(e.touches[0].pageX); }, {passive:true});
+      heroMask.addEventListener('touchend', endDrag);
+      heroMask.addEventListener('touchcancel', endDrag);
+      /* Suppress the anchor click if the drag moved meaningfully */
+      heroMask.addEventListener('click', function(e){
+        if(Math.abs(dragDx) > 6){ e.preventDefault(); e.stopPropagation(); }
+      }, true);
     }
   }
 })();
