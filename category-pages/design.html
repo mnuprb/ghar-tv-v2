@@ -892,7 +892,7 @@
     .hero-cats-track {
       position: relative;
       display: flex;
-      gap: 0;
+      gap: 14px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
@@ -903,18 +903,17 @@
     }
     .hero-cats-track::-webkit-scrollbar { display: none; }
     .hero-cat {
-      flex: 0 0 100%;
-      scroll-snap-align: center;
+      flex: 0 0 82%;
+      max-width: 480px;
+      scroll-snap-align: start;
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 22px;
     }
     .hero-cat__shape {
       position: relative;
       width: 100%;
-      max-width: 400px;
       aspect-ratio: 1;
       border-radius: 32px;
       padding: 22px;
@@ -942,9 +941,16 @@
     .hero-cat--terracotta .hero-cat__shape { background: #c4775a; }
     .hero-cat--sage       .hero-cat__shape { background: #a8b5a0; }
     .hero-cat--sand       .hero-cat__shape { background: #d4b896; }
+    .hero-cats-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
     @media(max-width:767px){
       .hero-v2__right { display: block; min-height: 0; max-width: 100%; margin-top: 8px; }
-      .hero-cat__shape { max-width: 280px; border-radius: 26px; padding: 18px; }
+      .hero-cat { max-width: 320px; }
+      .hero-cat__shape { border-radius: 26px; padding: 18px; }
       .hero-cat__label { font-size: 15px; }
     }
     @media(max-width:480px){.hero-v2__ctas{flex-direction:column}.hero-v2__btn-primary,.hero-v2__btn-outline{width:100%;justify-content:center}}
@@ -1512,6 +1518,14 @@
               </div>
               <span class="hero-cat__label">Featured Homes</span>
             </a>
+          </div>
+          <div class="hero-cats-nav" aria-label="Hero carousel controls">
+            <button type="button" class="ds-nav__arrow" data-hero-dir="prev" aria-label="Previous category">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <button type="button" class="ds-nav__arrow" data-hero-dir="next" aria-label="Next category">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -2403,6 +2417,17 @@
           heroIdx = best;
         }, 160);
       }, {passive:true});
+      /* Prev/Next buttons — wrap-around. Restart auto-advance after a brief
+         delay so a clicked direction gets to settle before the next tick. */
+      document.querySelectorAll('[data-hero-dir]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          heroStop();
+          var dir = btn.getAttribute('data-hero-dir') === 'next' ? 1 : -1;
+          heroIdx = (heroIdx + dir + heroCards.length) % heroCards.length;
+          heroScrollTo(heroIdx);
+          setTimeout(function(){ if(heroInView && !heroPaused) heroStart(); }, 4000);
+        });
+      });
     }
   }
 })();
