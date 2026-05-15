@@ -204,7 +204,7 @@ button { font-family: inherit; cursor: pointer; }
 /* ════════════════════════════════════
    PAGE LAYOUT
 ════════════════════════════════════ */
-.page-wrap { padding-top: 98px; }
+.page-wrap { padding-top: 80px; }
 .cont { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-h); }
 
 
@@ -962,7 +962,7 @@ button { font-family: inherit; cursor: pointer; }
   .nav-right { display: flex; }
   .nav-hamburger { display: none; }
   .subnav { top: 62px; }
-  .page-wrap { padding-top: 108px; }
+  .page-wrap { padding-top: 80px; }
   .hero-v2__inner { padding: 64px 32px 48px; }
   /* v2 sections */
   .sec { padding: 88px 0; }
