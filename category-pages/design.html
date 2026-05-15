@@ -890,7 +890,7 @@
        Drag, prev/next, and auto-advance all drive the same translateX. */
     .hero-v2__right { min-width: 0; }
     .hero-shape-card {
-      background: #d4b896;
+      background: #d4a048;
       border-radius: 36px;
       padding: 24px 24px 22px;
       display: flex;
@@ -899,7 +899,8 @@
       width: 100%;
       max-width: 520px;
       margin: 0 auto;
-      transition: transform .5s cubic-bezier(.4,0,.2,1);
+      transition: transform .5s cubic-bezier(.4,0,.2,1),
+                  background-color .55s cubic-bezier(.4,0,.2,1);
     }
     .hero-shape-card:hover { transform: translateY(-4px); }
     .hero-shape-mask {
@@ -1460,13 +1461,13 @@
         <div class="hero-shape-card" id="heroShapeCard">
           <a href="#architecture" id="heroShapeLink" class="hero-shape-mask" aria-label="Browse design categories">
             <div class="hero-shape-track" id="heroShapeTrack">
-              <div class="hero-shape-slide" data-label="Architecture" data-href="#architecture" style="background-image:url('https://images.unsplash.com/photo-1518005068251-37900150dfca?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
-              <div class="hero-shape-slide" data-label="Interiors" data-href="#interiors" style="background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
-              <div class="hero-shape-slide" data-label="Home Tours" data-href="#home-tours-shape" style="background-image:url('https://images.unsplash.com/photo-1600573472556-e636c2acda88?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
-              <div class="hero-shape-slide" data-label="Vastu" data-href="#vastu" style="background-image:url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
-              <div class="hero-shape-slide" data-label="Architects &amp; Founders" data-href="#designers" style="background-image:url('sanjay-puri.jpg')"></div>
-              <div class="hero-shape-slide" data-label="Guides" data-href="#guides" style="background-image:url('https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
-              <div class="hero-shape-slide" data-label="Featured Homes" data-href="#featured" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Architecture" data-href="#architecture" data-color="#d4a048" style="background-image:url('https://images.unsplash.com/photo-1518005068251-37900150dfca?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Interiors" data-href="#interiors" data-color="#c4775a" style="background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Home Tours" data-href="#home-tours-shape" data-color="#a8b5a0" style="background-image:url('https://images.unsplash.com/photo-1600573472556-e636c2acda88?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Vastu" data-href="#vastu" data-color="#d4b896" style="background-image:url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Architects &amp; Founders" data-href="#designers" data-color="#8e9aaf" style="background-image:url('sanjay-puri.jpg')"></div>
+              <div class="hero-shape-slide" data-label="Guides" data-href="#guides" data-color="#f29490" style="background-image:url('https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
+              <div class="hero-shape-slide" data-label="Featured Homes" data-href="#featured" data-color="#f5b4b0" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&amp;h=800&amp;fit=crop&amp;q=80')"></div>
             </div>
           </a>
           <div class="hero-shape-footer">
@@ -2345,6 +2346,8 @@
         var s = heroSlides[heroIdx];
         heroLabel.textContent = s.getAttribute('data-label') || '';
         heroLink.setAttribute('href', s.getAttribute('data-href') || '#');
+        var color = s.getAttribute('data-color');
+        if(color) heroCard.style.backgroundColor = color;
       }
       function heroStep(){ if(!heroPaused && heroInView) setHero(heroIdx + 1); }
       function heroStart(){ if(!heroTimer) heroTimer = setInterval(heroStep, 4000); }
