@@ -889,39 +889,35 @@
        Horizontal scroller with scroll-snap + auto-advance while in view. */
     .hero-v2__right { min-width: 0; }
     .hero-cats { width: 100%; min-width: 0; position: relative; }
-    .hero-cats::before, .hero-cats::after {
-      content: ''; position: absolute; top: 0; bottom: 0; width: 24px;
-      pointer-events: none; z-index: 2;
-    }
-    .hero-cats::before { left: 0; background: linear-gradient(to right, #fff, rgba(255,255,255,0)); }
-    .hero-cats::after  { right: 0; background: linear-gradient(to left,  #fff, rgba(255,255,255,0)); }
     .hero-cats-track {
       position: relative;
       display: flex;
-      gap: 16px;
+      gap: 0;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
-      padding: 8px 4px 12px;
+      padding: 4px 0 12px;
       scrollbar-width: none;
       -ms-overflow-style: none;
       overscroll-behavior-x: contain;
     }
     .hero-cats-track::-webkit-scrollbar { display: none; }
     .hero-cat {
-      flex: 0 0 280px;
-      scroll-snap-align: start;
+      flex: 0 0 100%;
+      scroll-snap-align: center;
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      align-items: center;
+      gap: 22px;
     }
     .hero-cat__shape {
       position: relative;
       width: 100%;
+      max-width: 400px;
       aspect-ratio: 1;
-      border-radius: 28px;
-      padding: 18px;
+      border-radius: 32px;
+      padding: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -931,12 +927,12 @@
       width: 100%;
       height: auto;
       display: block;
-      filter: drop-shadow(0 8px 22px rgba(0,0,0,.18));
+      filter: drop-shadow(0 10px 26px rgba(0,0,0,.18));
     }
     .hero-cat__label {
-      font-size: 13px;
+      font-size: 17px;
       font-weight: 600;
-      letter-spacing: .01em;
+      letter-spacing: .005em;
       color: var(--ink);
       text-align: center;
       line-height: 1.3;
@@ -948,9 +944,8 @@
     .hero-cat--sand       .hero-cat__shape { background: #d4b896; }
     @media(max-width:767px){
       .hero-v2__right { display: block; min-height: 0; max-width: 100%; margin-top: 8px; }
-      .hero-cat { flex: 0 0 220px; }
-      .hero-cat__shape { border-radius: 26px; padding: 16px; }
-      .hero-cat__label { font-size: 13px; }
+      .hero-cat__shape { max-width: 280px; border-radius: 26px; padding: 18px; }
+      .hero-cat__label { font-size: 15px; }
     }
     @media(max-width:480px){.hero-v2__ctas{flex-direction:column}.hero-v2__btn-primary,.hero-v2__btn-outline{width:100%;justify-content:center}}
 
