@@ -270,6 +270,26 @@
     #guides .sec-lead,
     #featured .sec-lead { max-width: 460px; }
 
+    /* ─── Section CTA — promote .btn-text from styles4.css's plain text-link
+       to the canonical 10px rounded outlined ink button per design-system.html
+       #ui-buttons-section. 1.5px stroke, fills with ink on hover, arrow
+       nudges right 2px. Same family as the hero CTAs above (which are the
+       inverse: filled-by-default, outlined on hover). */
+    .btn-text {
+      padding: 12px 22px;
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      font-size: 13px;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      transition: background .22s ease, color .22s ease, border-color .22s ease;
+    }
+    .btn-text:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+    .btn-text:hover svg { transform: translateX(2px); }
+
     /* ─── Disable hover transforms on grid cards — cards stay completely
        still on hover (no lift, no scale, no rotate, no shadow change, no
        transition animation). Inner image zooms also disabled. */
@@ -828,13 +848,16 @@
 
     .hero-v2__ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
     @media(min-width:900px){.hero-v2__ctas{justify-content:flex-start}}
-    .hero-v2__btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:16px 32px;border-radius:var(--rs);font-size:15px;font-weight:600;letter-spacing:.01em;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
-    .hero-v2__btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,23,20,.18)}
-    .hero-v2__btn-primary::after{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity .25s}
-    .hero-v2__btn-primary:hover::after{opacity:1}
+    /* Buttons follow design-system.html #ui-buttons-section spec:
+       10px rounded outlined ink button, 1.5px stroke, fills with ink on hover.
+       Hero primary = filled-by-default inverse of the same family. */
+    .hero-v2__btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:1.5px solid var(--ink);padding:14px 26px;border-radius:10px;font-size:14px;font-weight:600;letter-spacing:.01em;transition:background .22s ease,color .22s ease,border-color .22s ease,transform .22s ease}
+    .hero-v2__btn-primary:hover{background:transparent;color:var(--ink)}
+    .hero-v2__btn-primary:hover svg{transform:translateX(2px)}
     .hero-v2__btn-primary span{position:relative;z-index:1}
-    .hero-v2__btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--rule);color:var(--ink);padding:16px 32px;border-radius:var(--rs);font-size:15px;font-weight:500;background:none;transition:border-color .25s,background .25s}
-    .hero-v2__btn-outline:hover{border-color:var(--ink);background:rgba(26,23,20,.04)}
+    .hero-v2__btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ink);color:var(--ink);padding:14px 26px;border-radius:10px;font-size:14px;font-weight:600;background:transparent;letter-spacing:.01em;transition:background .22s ease,color .22s ease,border-color .22s ease}
+    .hero-v2__btn-outline:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .hero-v2__btn-outline:hover svg{transform:translateX(2px)}
 
     /* Right — SVG animation */
     .hero-v2__right{display:flex;align-items:center;justify-content:center;position:relative;min-height:300px;opacity:0;animation:fadeUp 1s .3s forwards}
