@@ -943,10 +943,13 @@
     .hero-cat--sand       .hero-cat__shape { background: #d4b896; }
     .hero-cats-nav {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       gap: 10px;
       margin-top: 16px;
     }
+    .hero-cats-track { cursor: grab; }
+    .hero-cats-track.is-dragging { cursor: grabbing; scroll-behavior: auto; scroll-snap-type: none; }
+    .hero-cats-track.is-dragging .hero-cat { pointer-events: none; }
     @media(max-width:767px){
       .hero-v2__right { display: block; min-height: 0; max-width: 100%; margin-top: 8px; }
       .hero-cat { max-width: 320px; }
@@ -2428,6 +2431,40 @@
           setTimeout(function(){ if(heroInView && !heroPaused) heroStart(); }, 4000);
         });
       });
+      /* Click-and-drag horizontal scroll for the hero carousel.
+         Mirrors the .ds-grid drag pattern — disables snap mid-drag so
+         scrollLeft tracks the pointer 1:1, then re-enables snap on release
+         so the carousel settles on the nearest card. Suppresses link click
+         if the user dragged more than a few pixels. */
+      (function(){
+        var down = false, startX = 0, startScroll = 0, moved = 0;
+        function endDrag(){
+          if(!down) return;
+          down = false;
+          requestAnimationFrame(function(){ heroTrack.classList.remove('is-dragging'); });
+        }
+        heroTrack.addEventListener('mousedown', function(e){
+          down = true; moved = 0;
+          startX = e.pageX; startScroll = heroTrack.scrollLeft;
+          heroPaused = true; heroStop();
+          e.preventDefault();
+        });
+        window.addEventListener('mouseup', function(){
+          endDrag();
+          setTimeout(function(){ heroPaused = false; if(heroInView) heroStart(); }, 4000);
+        });
+        heroTrack.addEventListener('mouseleave', endDrag);
+        heroTrack.addEventListener('mousemove', function(e){
+          if(!down) return;
+          var dx = e.pageX - startX;
+          moved = Math.abs(dx);
+          if(moved > 4) heroTrack.classList.add('is-dragging');
+          heroTrack.scrollLeft = startScroll - dx;
+        });
+        heroTrack.addEventListener('click', function(e){
+          if(moved > 6){ e.preventDefault(); e.stopPropagation(); }
+        }, true);
+      })();
     }
   }
 })();
