@@ -498,7 +498,8 @@
     #vastu .ds-grid > .ad4-card,
     #interiors .ds-grid > .ad4-card,
     #home-tours .ds-grid > .ed4-article,
-    #home-tours-shape .ds-grid > .cc-card {
+    #home-tours-shape .ds-grid > .cc-card,
+    #featured .ds-grid > .fh-list {
       flex: 0 0 84%;
       min-width: 260px;
       scroll-snap-align: start;
@@ -510,7 +511,8 @@
       #vastu .ds-grid > .ad4-card,
       #interiors .ds-grid > .ad4-card,
       #home-tours .ds-grid > .ed4-article,
-      #home-tours-shape .ds-grid > .cc-card { flex: 0 0 calc((100% - 24px) / 2 - 8%); }
+      #home-tours-shape .ds-grid > .cc-card,
+      #featured .ds-grid > .fh-list { flex: 0 0 calc((100% - 24px) / 2 - 8%); }
     }
     @media (min-width: 768px) {
       /* Home Tours + Cities stay 2-up (magazine); other sections go 3-up. */
@@ -521,6 +523,8 @@
       /* Exact 2-up fill — 2 cards + 24px gap = full width, no empty right side. */
       #home-tours .ds-grid > .ed4-article,
       #home-tours-shape .ds-grid > .cc-card { flex: 0 0 calc((100% - 24px) / 2); }
+      /* Featured Homes — 4-up at desktop, like the Designers rails. */
+      #featured .ds-grid > .fh-list { flex: 0 0 calc((100% - 72px) / 4 - 1px); }
     }
 
     /* ─── Editorial magazine card pattern (.ed4-article) — used for Home Tours.
@@ -1055,22 +1059,109 @@
       .guide-card__title{font-size:20px}
     }
 
-    /* ═══ FEATURED HOMES — Dark themed hero + 3-col ═══ */
-    /* Featured Homes — reuses .arch-layout + .arch-row (shared with Architecture), only custom theme for hero */
-    .fh-featured{border-color:var(--rule);background:transparent;margin-bottom:24px}
-    .fh-featured:hover{border-color:transparent;box-shadow:0 12px 40px rgba(26,23,20,.08)}
-    .fh-featured:hover .arch-featured__title{color:var(--espresso)!important}
-
-    .fh-card{display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;text-decoration:none;border:1px solid var(--rule);background:transparent;transition:transform .3s,box-shadow .3s,border-color .3s}
-    .fh-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(26,23,20,.08);border-color:transparent}
-    .fh-card__img{overflow:hidden;aspect-ratio:16/10}
-    .fh-card__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-    .fh-card:hover .fh-card__img img{transform:scale(1.05)}
-    .fh-card__body{padding:20px 24px}
-    .fh-card__cat{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
-    .fh-card__title{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:10px;transition:color .2s}
-    .fh-card:hover .fh-card__title{color:var(--espresso)}
-    .fh-card__meta{font-size:11px;font-weight:500;color:var(--muted)}
+    /* ═══ FEATURED HOMES — 4-up "Curated Lists" grid ════════════════════
+       Magazine "Best of" treatment. Each card is a Top-X annual list — large
+       rank numeral overlaid on the hero image, Gazpacho display title,
+       short subhead, list-count meta. Distinct from .ad4-card (editorial
+       articles) because the content type is genuinely different — a ranked
+       collection vs. a single article. */
+    .fh-list {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: var(--r);
+      overflow: hidden;
+      text-decoration: none;
+      transition: transform .4s cubic-bezier(.4,0,.2,1),
+                  box-shadow .4s cubic-bezier(.4,0,.2,1),
+                  border-color .25s ease;
+    }
+    .fh-list:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 1px 2px rgba(26,23,20,.04), 0 18px 42px rgba(26,23,20,.1);
+      border-color: transparent;
+    }
+    .fh-list__img {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .fh-list__img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,0) 38%);
+      pointer-events: none;
+    }
+    .fh-list__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s cubic-bezier(.4,0,.2,1);
+    }
+    .fh-list:hover .fh-list__img img { transform: scale(1.05); }
+    .fh-list__rank {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      z-index: 2;
+      font-family: var(--ff-display);
+      font-size: clamp(34px, 4vw, 44px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.025em;
+      line-height: 1;
+      text-shadow: 0 2px 14px rgba(0,0,0,.35), 0 1px 3px rgba(0,0,0,.25);
+    }
+    .fh-list__body {
+      padding: 20px 22px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .fh-list__cat {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .fh-list__title {
+      font-family: var(--ff-display);
+      font-size: clamp(18px, 1.5vw, 22px);
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -.015em;
+      color: var(--ink);
+      margin: 4px 0 6px;
+    }
+    .fh-list__sub {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+    }
+    .fh-list__meta {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      color: var(--faint);
+      text-transform: uppercase;
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fh-list__meta::before {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: var(--rule);
+    }
 
     /* ═══ MODERN CTA / NEWSLETTER ═══ */
     .cta-modern{position:relative;overflow:hidden;padding:clamp(64px,8vw,100px) 0;background:var(--ink)}
@@ -2034,60 +2125,72 @@
         </div>
       </section>
 
-      <!-- 7. FEATURED HOMES — Luxury Showcase -->
-      <section class="sec sec--featured reveal">
-        <div class="sec-header">
-          <div class="sec-header__left">
-            <span class="sec-header__num">07</span>
-            <h2 class="sec-header__title">Featured Homes</h2>
-          </div>
-          <a href="featured-homes.html" class="sec-header__link">View all &rarr;</a>
-        </div>
-        <!-- Horizontal hero + 3-col row — reuses Architecture layout -->
-        <div class="arch-layout">
-          <a href="#" class="arch-featured fh-featured">
-            <div class="arch-featured__img">
-              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=500&fit=crop&q=75" alt="Top penthouses India" loading="lazy">
+      <!-- 7. FEATURED HOMES — sec-head + 4-up "Curated Lists" grid -->
+      <section class="sec reveal" id="featured">
+        <div class="sec-head">
+          <span class="sec-eyebrow">Curated Lists</span>
+          <div class="sec-head-row">
+            <div class="sec-head-l">
+              <h2 class="sec-title">The homes worth talking about.</h2>
             </div>
-            <div class="arch-featured__body">
-              <span class="arch-featured__cat">Featured List</span>
-              <h3 class="arch-featured__title">Top Penthouses in India: Sky-High Living</h3>
-              <p class="arch-featured__excerpt">From Lodha World One in Mumbai to DLF Camellias in Gurgaon &mdash; the most spectacular penthouses redefining luxury living at India's highest addresses.</p>
-              <span class="arch-featured__meta">Mar 21, 2026 &middot; 12 min</span>
+            <div class="sec-head-r">
+              <p class="sec-lead">Annual rankings of India's most remarkable residences &mdash; sky-high penthouses, celebrity hideaways, eco-pioneers, and weekend retreats. The lists our editors revisit every year.</p>
+              <a href="featured-homes.html" class="btn-text">
+                View all lists
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="ds-grid">
+          <a href="#" class="fh-list">
+            <div class="fh-list__img">
+              <span class="fh-list__rank">01</span>
+              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=720&h=540&fit=crop&q=80" alt="Top penthouses India" loading="lazy">
+            </div>
+            <div class="fh-list__body">
+              <span class="fh-list__cat">Curated &middot; 2026</span>
+              <h3 class="fh-list__title">Top Penthouses in India</h3>
+              <p class="fh-list__sub">Sky-high living redefined &mdash; Lodha World One to DLF Camellias.</p>
+              <span class="fh-list__meta">12 homes &middot; 12 min read</span>
             </div>
           </a>
-          <div class="arch-row">
-            <a href="#" class="fh-card">
-              <div class="fh-card__img">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&h=320&fit=crop&q=75" alt="Celebrity homes Mumbai" loading="lazy">
-              </div>
-              <div class="fh-card__body">
-                <span class="fh-card__cat">Featured List</span>
-                <h3 class="fh-card__title">Top Celebrity Homes in Mumbai</h3>
-                <span class="fh-card__meta">Mar 18, 2026 &middot; 10 min</span>
-              </div>
-            </a>
-            <a href="#" class="fh-card">
-              <div class="fh-card__img">
-                <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=500&h=320&fit=crop&q=75" alt="Eco-friendly homes India" loading="lazy">
-              </div>
-              <div class="fh-card__body">
-                <span class="fh-card__cat">Featured List</span>
-                <h3 class="fh-card__title">Top Eco-Friendly Homes in India</h3>
-                <span class="fh-card__meta">Mar 15, 2026 &middot; 9 min</span>
-              </div>
-            </a>
-            <a href="#" class="fh-card">
-              <div class="fh-card__img">
-                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&h=320&fit=crop&q=75" alt="Best farmhouses near Mumbai" loading="lazy">
-              </div>
-              <div class="fh-card__body">
-                <span class="fh-card__cat">Featured List</span>
-                <h3 class="fh-card__title">Best Farmhouses Near Mumbai</h3>
-                <span class="fh-card__meta">Mar 12, 2026 &middot; 8 min</span>
-              </div>
-            </a>
-          </div>
+          <a href="#" class="fh-list">
+            <div class="fh-list__img">
+              <span class="fh-list__rank">02</span>
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=720&h=540&fit=crop&q=80" alt="Celebrity homes Mumbai" loading="lazy">
+            </div>
+            <div class="fh-list__body">
+              <span class="fh-list__cat">Curated &middot; 2026</span>
+              <h3 class="fh-list__title">Top Celebrity Homes</h3>
+              <p class="fh-list__sub">Inside the residences that shape India's pop-culture imagination.</p>
+              <span class="fh-list__meta">10 homes &middot; 10 min read</span>
+            </div>
+          </a>
+          <a href="#" class="fh-list">
+            <div class="fh-list__img">
+              <span class="fh-list__rank">03</span>
+              <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=720&h=540&fit=crop&q=80" alt="Eco-friendly homes India" loading="lazy">
+            </div>
+            <div class="fh-list__body">
+              <span class="fh-list__cat">Curated &middot; 2026</span>
+              <h3 class="fh-list__title">Eco-First Homes</h3>
+              <p class="fh-list__sub">Net-zero ambition &mdash; passive cooling, rammed earth, off-grid living.</p>
+              <span class="fh-list__meta">9 homes &middot; 9 min read</span>
+            </div>
+          </a>
+          <a href="#" class="fh-list">
+            <div class="fh-list__img">
+              <span class="fh-list__rank">04</span>
+              <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=720&h=540&fit=crop&q=80" alt="Best farmhouses near Mumbai" loading="lazy">
+            </div>
+            <div class="fh-list__body">
+              <span class="fh-list__cat">Curated &middot; 2026</span>
+              <h3 class="fh-list__title">Weekend Farmhouses</h3>
+              <p class="fh-list__sub">Two-hour escapes &mdash; Alibaug, Karjat, Lonavala, and Sariska.</p>
+              <span class="fh-list__meta">8 homes &middot; 8 min read</span>
+            </div>
+          </a>
         </div>
       </section>
 
