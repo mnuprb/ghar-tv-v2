@@ -377,7 +377,7 @@
     .intro p:last-child { margin-bottom: 0; }
     .intro__quote {
       background: var(--surface);
-      border-left: 3px solid var(--ink);
+      border-left: 3px solid var(--rule);
       padding: 22px 26px;
       margin: 28px 0;
       border-radius: 0 12px 12px 0;
@@ -420,8 +420,12 @@
       font-size: 13px; font-weight: 700; color: var(--ink);
       text-align: right; font-variant-numeric: tabular-nums;
     }
+    /* Methodology card — Espresso (#3a3530) from the Ghar palette per design-system.html.
+       Catalog rule: decorative list bullets/numbers NEVER use the brand red — they sit in
+       muted white so red stays reserved for primary CTAs / brand identity (~5% of view). */
     .aside-card--dark {
-      background: var(--ink); border-color: var(--ink);
+      background: #3a3530;
+      border-color: #3a3530;
       padding: 22px 24px 18px;
     }
     .aside-card--dark .aside-card__title { color: #fff; margin-bottom: 12px; }
@@ -433,7 +437,7 @@
     }
     .aside-method__num {
       flex: 0 0 auto; font-size: 11px; font-weight: 700;
-      color: var(--accent); letter-spacing: .04em;
+      color: rgba(255,255,255,.5); letter-spacing: .04em;
       font-variant-numeric: tabular-nums; min-width: 20px;
     }
 
@@ -499,8 +503,8 @@
     .rank:last-child { border-bottom: 0; padding-bottom: 0; }
     @media (min-width: 768px) {
       .rank {
-        grid-template-columns: 200px minmax(0, 1fr);
-        gap: 48px;
+        grid-template-columns: 140px minmax(0, 1fr);
+        gap: 40px;
         align-items: start;
       }
     }
@@ -515,10 +519,10 @@
     .rank__num {
       display: block;
       font-family: var(--ff-display);
-      font-size: clamp(72px, 9vw, 128px);
+      font-size: clamp(48px, 5vw, 80px);
       font-weight: 700;
       line-height: 0.92;
-      letter-spacing: -.045em;
+      letter-spacing: -.04em;
       color: var(--ink);
     }
     .rank__label {
@@ -1001,19 +1005,6 @@
           </ol>
         </div>
       </aside>
-    </div>
-
-    <!-- Ranking section header -->
-    <div class="sec-head reveal">
-      <span class="sec-eyebrow">The Rankings</span>
-      <div class="sec-head-row">
-        <div class="sec-head-l">
-          <h2 class="sec-title">From &#8377;2.83 lakh psf to &#8377;62K &mdash; the spine of India's priciest postcodes.</h2>
-        </div>
-        <div class="sec-head-r">
-          <p class="sec-lead">Ten micro-markets, ranked by verified record PSF, deal volume, and the heritage or branded supply anchoring each address. Each entry cites the deals that set the benchmark.</p>
-        </div>
-      </div>
     </div>
 
     <!-- Ranking list -->
