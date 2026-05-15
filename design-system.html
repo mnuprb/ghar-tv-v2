@@ -32,10 +32,10 @@
       --indigo: #8e9aaf;
       /* Brand */
       --brand-red: #ee324b;
-      --brand-rose: #f29490;
-      --brand-blush: #f5b4b0;
-      --brand-petal: #f9d2d0;
-      --brand-mist: #fce8e6;
+      --brand-rose: #f37e86;
+      --brand-blush: #f6aaad;
+      --brand-petal: #fbd4d5;
+      --brand-mist: #fde8e8;
     }
 
     html { scroll-behavior: smooth; }
@@ -613,10 +613,13 @@
     }
     .masks .label { margin-bottom: 36px; }
     .masks-row {
-      display: flex;
-      align-items: flex-end;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: end;
       gap: clamp(16px, 3vw, 32px);
       justify-content: center;
+      max-width: 880px;
+      margin: 0 auto;
       flex-wrap: wrap;
     }
     .mask-house {
@@ -627,6 +630,8 @@
     .mask-house:hover { transform: translateY(-8px) rotate(-1.5deg); }
     .mask-house svg { display: block; }
     .mask-house--lg, .mask-house--md, .mask-house--sm { width: clamp(160px, 18vw, 240px); }
+    /* Inside the 3×3 masks grid, item width is set by the grid cell, not the legacy clamp */
+    .masks-row .mask-house--lg, .masks-row .mask-house--md, .masks-row .mask-house--sm { width: 100%; }
     .mask-caption {
       text-align: center;
       margin-top: 12px;
@@ -1255,7 +1260,7 @@
       .community-grid { grid-template-columns: 1fr; gap: 32px; }
       .marks-row { gap: 24px; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .masks-row { gap: 12px; }
+      .masks-row { gap: 12px; grid-template-columns: repeat(2, 1fr); max-width: 560px; }
       .mask-house--lg { width: 42vw; }
       .mask-house--md { width: 34vw; }
       .mask-house--sm { width: 28vw; }
@@ -1353,9 +1358,11 @@
         <ul class="ds-nav-list">
           <li><a href="#cr-grid">Rule 01 · Container</a></li>
           <li><a href="#cr-head">Rule 02 · Section Head</a></li>
-          <li><a href="#cr-cta">Rule 03 · The One CTA</a></li>
+          <li><a href="#cr-cta">Rule 03 · CTA Tiers</a></li>
           <li><a href="#cr-cta-place">Rule 04 · CTA Placement</a></li>
           <li><a href="#cr-logo">Rule 05 · Logo Discipline</a></li>
+          <li><a href="#cr-card-link">Rule 06 · Whole-Card Link</a></li>
+          <li><a href="#cr-carousel">Rule 07 · Carousel Furniture</a></li>
         </ul>
       </div>
 
@@ -1366,10 +1373,11 @@
           <li><a href="#ui-overview">Overview</a></li>
           <li><a href="#ui-buttons">Buttons — When to use what</a></li>
           <li><a href="#ui-buttons-primary">Buttons · Primary action</a></li>
-          <li><a href="#ui-buttons-secondary">Buttons · Secondary outline</a></li>
+          <li><a href="#ui-buttons-section">Buttons · Section CTA (rounded outlined)</a></li>
+          <li><a href="#ui-buttons-secondary">Buttons · Secondary outline pill</a></li>
           <li><a href="#ui-buttons-icon">Buttons · Icon</a></li>
           <li><a href="#ui-buttons-ghost">Buttons · Ghost</a></li>
-          <li><a href="#ui-buttons-text">Buttons · Text link</a></li>
+          <li><a href="#ui-buttons-text">Buttons · Card link</a></li>
           <li><a href="#ui-inputs" class="is-pending">Inputs & Search</a></li>
           <li><a href="#ui-dropdowns" class="is-pending">Dropdowns</a></li>
           <li><a href="#ui-modals" class="is-pending">Modals & Dialogs</a></li>
@@ -2559,7 +2567,7 @@
           <span class="bi-color-label" style="color:rgba(255,255,255,0.6);">On Indigo Mist</span>
         </div>
         <!-- On Brand Mist -->
-        <div class="bi-color-card" style="background:#fce8e6;">
+        <div class="bi-color-card" style="background:#fde8e8;">
           <svg viewBox="-2 0 185 197" width="56" height="56"><path fill="#ee324b" d="M180.5,92.6l0,13.8c0,49.9-40.3,90.3-90.2,90.3S0,156.3,0,106.4V60.8c0-10.4,5.1-17.6,13.7-22.2l65.4-36c3-1.5,6.5-2.7,11.1-2.7c4.6,0,8.1,1.2,11.1,2.7l65.4,36l-30.6,23.9v0l0,0L97,40.9c-1.8-0.9-3.9-1.6-6.7-1.6c-2.8,0-4.9,0.7-6.7,1.6L44.3,62.5c-5.1,2.8-8.2,7.1-8.2,13.3v27.4c0,30,24.3,57.5,54.2,57.5c21.8,0,40.6-14.6,49.2-34.1H90.3v-34H180.5z"/></svg>
           <span class="bi-color-label" style="color:rgba(238,50,75,0.5);">On Brand Mist</span>
         </div>
@@ -2625,20 +2633,20 @@
           <div class="swatch-info"><div class="swatch-name">Brand Red</div><div class="swatch-hex">#ee324b</div></div>
         </div>
         <div class="swatch">
-          <div class="swatch-color" style="background:#f29490;"></div>
-          <div class="swatch-info"><div class="swatch-name">Brand Rose</div><div class="swatch-hex">#f29490</div></div>
+          <div class="swatch-color" style="background:#f37e86;"></div>
+          <div class="swatch-info"><div class="swatch-name">Brand Rose</div><div class="swatch-hex">#f37e86</div></div>
         </div>
         <div class="swatch">
-          <div class="swatch-color" style="background:#f5b4b0;"></div>
-          <div class="swatch-info"><div class="swatch-name">Brand Blush</div><div class="swatch-hex">#f5b4b0</div></div>
+          <div class="swatch-color" style="background:#f6aaad;"></div>
+          <div class="swatch-info"><div class="swatch-name">Brand Blush</div><div class="swatch-hex">#f6aaad</div></div>
         </div>
         <div class="swatch">
-          <div class="swatch-color" style="background:#f9d2d0;"></div>
-          <div class="swatch-info"><div class="swatch-name">Brand Petal</div><div class="swatch-hex">#f9d2d0</div></div>
+          <div class="swatch-color" style="background:#fbd4d5;"></div>
+          <div class="swatch-info"><div class="swatch-name">Brand Petal</div><div class="swatch-hex">#fbd4d5</div></div>
         </div>
         <div class="swatch">
-          <div class="swatch-color" style="background:#fce8e6;"></div>
-          <div class="swatch-info"><div class="swatch-name">Brand Mist</div><div class="swatch-hex">#fce8e6</div></div>
+          <div class="swatch-color" style="background:#fde8e8;"></div>
+          <div class="swatch-info"><div class="swatch-name">Brand Mist</div><div class="swatch-hex">#fde8e8</div></div>
         </div>
       </div>
 
@@ -2905,7 +2913,7 @@
       <div class="bi-shapes-on-photo">
         <div class="bi-sop-card" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=450&fit=crop');">
           <div class="bi-sop-shapes">
-            <svg viewBox="0 0 200 200" width="48" height="48"><path d="M 62,38 L 176,82 L 176,170 L 24,170 L 24,68 Z" fill="#f29490" stroke="#f29490" stroke-width="28" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 200 200" width="48" height="48"><path d="M 62,38 L 176,82 L 176,170 L 24,170 L 24,68 Z" fill="#f37e86" stroke="#f37e86" stroke-width="28" stroke-linejoin="round"/></svg>
             <svg viewBox="0 0 200 200" width="64" height="64"><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="#d4a048" stroke="#d4a048" stroke-width="28" stroke-linejoin="round"/></svg>
             <svg viewBox="0 0 200 200" width="40" height="40"><path d="M 138,38 L 176,68 L 176,170 L 24,170 L 24,82 Z" fill="#c4775a" stroke="#c4775a" stroke-width="28" stroke-linejoin="round"/></svg>
           </div>
@@ -2935,6 +2943,9 @@
   <section class="shapes" id="bi-shapes">
     <div class="wrap">
       <div class="label">Ghar Shape Library</div>
+      <p style="font-size:14px; color:#6a6a6a; line-height:1.7; max-width:620px; margin-top:14px; margin-bottom:36px;">
+        Nine canonical silhouettes that anchor the Ghar.tv visual identity. Same wall stance (x=24 → 176), same baseline (y=170), same soft 28-unit rounded edge. Variations come from roof silhouette and colorway. Every shape is a clean filled vessel — usable as a mask, image holder, icon backdrop, or shape-as-card.
+      </p>
       <div class="shapes-layout">
         <div class="shape-grid">
           <!-- All 9 shapes: same base (y≈170), same wall start (y≈82), same width (24–176). Distinct via peak position, roof angle, and features. -->
@@ -2966,9 +2977,9 @@
             </svg>
           </div>
           <div class="shape-cell">
-            <!-- 5. Arch door — Espresso (true cutout via evenodd) -->
+            <!-- 5. Hipped bungalow — Espresso. Single-volume house with a flat-top hipped roof; every corner sits at ~135° so the family's stroke-linejoin renders every node softly and consistently. Distinct archetype from the gable shapes around it. -->
             <svg viewBox="0 0 200 200">
-              <path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="none" stroke="#3a3530" stroke-width="28" stroke-linejoin="round"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z M 78,170 L 78,124 Q 78,102 100,102 Q 122,102 122,124 L 122,170 Z" fill="#3a3530" fill-rule="evenodd"/>
+              <path d="M 70,38 L 130,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="#3a3530" stroke="#3a3530" stroke-width="28" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="shape-cell">
@@ -2986,24 +2997,34 @@
             </svg>
           </div>
           <div class="shape-cell">
-            <!-- 8. Window house — Brand Rose -->
+            <!-- 8. Single-slope Shed — Brand Rose (replaces Window House cutout; from v2 #7 silhouette) -->
             <svg viewBox="0 0 200 200">
-              <path d="M 100,50 L 176,86 L 176,170 L 24,170 L 24,86 Z" fill="none" stroke="#f29490" stroke-width="28" stroke-linejoin="round"/>
-              <path d="M 100,50 L 176,86 L 176,170 L 24,170 L 24,86 Z M 80,120 A 20,20 0 1,1 120,120 A 20,20 0 1,1 80,120 Z" fill="#f29490" fill-rule="evenodd"/>
+              <path d="M 24,46 L 176,86 L 176,170 L 24,170 Z" fill="#f37e86" stroke="#f37e86" stroke-width="28" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="shape-cell">
             <!-- 9. Flat modern — Brand Blush -->
             <svg viewBox="0 0 200 200">
-              <path d="M 24,64 L 176,38 L 176,170 L 24,170 Z" fill="#f5b4b0" stroke="#f5b4b0" stroke-width="28" stroke-linejoin="round"/>
+              <path d="M 24,64 L 176,38 L 176,170 L 24,170 Z" fill="#f6aaad" stroke="#f6aaad" stroke-width="28" stroke-linejoin="round"/>
             </svg>
           </div>
         </div>
 
         <div class="shapes-desc">
-          <h3>Nine shapes. One brand. Infinite possibilities.</h3>
-          <p>Each shape is a variation on the fundamental "ghar" — home. Classic, modern, tall, wide, with doorways and windows. Together they form a visual vocabulary that's instantly recognizable and endlessly adaptable.</p>
+          <h3>Nine shapes. One family.</h3>
+          <p>Each shape is a variation on the fundamental "ghar" — home. Different roof silhouettes, different colorways, one consistent family rendering rule. Together they form a visual vocabulary that's instantly recognizable and endlessly adaptable.</p>
           <p style="margin-top: 12px;">The G symbol is the primary brand mark. These nine shapes are a supportive visual vocabulary — decorative, versatile, never competing with the logo.</p>
+          <ol class="shape-legend">
+            <li><span class="sl-num">1</span><span class="sl-name">Classic Gable</span><span class="sl-meta">Ink</span></li>
+            <li><span class="sl-num">2</span><span class="sl-name">Saltbox</span><span class="sl-meta">Turmeric</span></li>
+            <li><span class="sl-num">3</span><span class="sl-name">Peak-right</span><span class="sl-meta">Sand</span></li>
+            <li><span class="sl-num">4</span><span class="sl-name">Steep Gable</span><span class="sl-meta">Terracotta</span></li>
+            <li><span class="sl-num">5</span><span class="sl-name">Hipped Bungalow</span><span class="sl-meta">Espresso</span></li>
+            <li><span class="sl-num">6</span><span class="sl-name">Chimney Cottage</span><span class="sl-meta">Sage</span></li>
+            <li><span class="sl-num">7</span><span class="sl-name">Lean-Left</span><span class="sl-meta">Indigo Mist</span></li>
+            <li><span class="sl-num">8</span><span class="sl-name">Single-slope Shed</span><span class="sl-meta">Brand Rose</span></li>
+            <li><span class="sl-num">9</span><span class="sl-name">Flat Modern</span><span class="sl-meta">Brand Blush</span></li>
+          </ol>
           <div class="shape-tags">
             <span class="shape-tag">Website</span>
             <span class="shape-tag">Social Media</span>
@@ -3015,6 +3036,43 @@
         </div>
       </div>
     </div>
+
+    <style>
+      #bi-shapes .shape-legend {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0;
+        display: grid;
+        gap: 0;
+      }
+      #bi-shapes .shape-legend li {
+        display: grid;
+        grid-template-columns: 24px 1fr auto;
+        align-items: baseline;
+        gap: 14px;
+        padding: 10px 0;
+        border-bottom: 1px solid #e8e8e8;
+        font-size: 13px;
+      }
+      #bi-shapes .shape-legend li:last-child { border-bottom: 0; }
+      #bi-shapes .sl-num {
+        font-family: 'Gazpacho', Georgia, serif;
+        font-weight: 700;
+        font-size: 18px;
+        color: #1a1714;
+        line-height: 1;
+      }
+      #bi-shapes .sl-name {
+        font-weight: 600;
+        color: #1a1714;
+      }
+      #bi-shapes .sl-meta {
+        font-size: 10px;
+        color: #6a6a6a;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+    </style>
   </section>
 
   <!-- ── Reference exhibit · Photos in shapes (image masks) ── -->
@@ -3023,11 +3081,12 @@
       <div class="sec-head">
         <div class="label">Image Masks</div>
         <h2 class="sec-head__title">Photos in<br>house shapes.</h2>
-        <p class="sec-head__desc">The signature technique — real photography masked into canonical house shapes. Each shape creates a different visual personality while maintaining brand consistency.</p>
+        <p class="sec-head__desc">The signature technique — real photography masked into the nine canonical house shapes. Each silhouette creates a different visual personality while maintaining brand consistency. All paths byte-identical to the Ghar Shape Library above.</p>
       </div>
       <div class="masks-row">
-        <!-- All masks: same size, viewBox 0 0 200 200, EXACT canonical paths, 4 distinct shapes -->
-        <!-- Mask 1: Shape 1 (Classic — centered peak) -->
+        <!-- All 9 v1 canonical shapes used as image masks. Mask paths are byte-identical to the Ghar Shape Library above. -->
+
+        <!-- Mask 1 · Shape 1 Classic — Living Space -->
         <div class="mask-house mask-house--md">
           <svg viewBox="0 0 200 200" width="100%">
             <defs>
@@ -3041,7 +3100,7 @@
           <div class="mask-caption">Living Space</div>
         </div>
 
-        <!-- Mask 2: Shape 2 (Peak-left — asymmetric) -->
+        <!-- Mask 2 · Shape 2 Saltbox — Architecture -->
         <div class="mask-house mask-house--md">
           <svg viewBox="0 0 200 200" width="100%">
             <defs>
@@ -3055,7 +3114,7 @@
           <div class="mask-caption">Architecture</div>
         </div>
 
-        <!-- Mask 3: Shape 3 (Peak-right) -->
+        <!-- Mask 3 · Shape 3 Peak-right — Interiors -->
         <div class="mask-house mask-house--md">
           <svg viewBox="0 0 200 200" width="100%">
             <defs>
@@ -3069,16 +3128,86 @@
           <div class="mask-caption">Interiors</div>
         </div>
 
-        <!-- Mask 4: Shape 9 (Flat modern — sloped, no peak) -->
+        <!-- Mask 4 · Shape 4 Steep — Heritage -->
         <div class="mask-house mask-house--md">
           <svg viewBox="0 0 200 200" width="100%">
             <defs>
               <mask id="m4">
                 <rect width="200" height="200" fill="black"/>
+                <path d="M 100,26 L 176,88 L 176,170 L 24,170 L 24,88 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/>
+              </mask>
+            </defs>
+            <image href="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&h=600&fit=crop" width="200" height="200" mask="url(#m4)" preserveAspectRatio="xMidYMid slice"/>
+          </svg>
+          <div class="mask-caption">Heritage</div>
+        </div>
+
+        <!-- Mask 5 · Shape 5 Hipped Bungalow — Bungalow -->
+        <div class="mask-house mask-house--md">
+          <svg viewBox="0 0 200 200" width="100%">
+            <defs>
+              <mask id="m5">
+                <rect width="200" height="200" fill="black"/>
+                <path d="M 70,38 L 130,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/>
+              </mask>
+            </defs>
+            <image href="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=600&fit=crop" width="200" height="200" mask="url(#m5)" preserveAspectRatio="xMidYMid slice"/>
+          </svg>
+          <div class="mask-caption">Bungalow</div>
+        </div>
+
+        <!-- Mask 6 · Shape 6 Chimney Cottage — Cottage (uses native 640×600 viewBox; no stroke needed, fill-only Clickl-style path) -->
+        <div class="mask-house mask-house--md">
+          <svg viewBox="0 0 640 600" width="100%">
+            <defs>
+              <mask id="m6">
+                <rect width="640" height="600" fill="black"/>
+                <path d="M 70 560 C 48 560, 30 542, 30 520 L 30 255 C 30 235, 40 220, 58 210 L 375 58 C 400 44, 430 46, 444 64 C 452 74, 456 87, 456 102 L 456 192 C 456 208, 464 218, 476 223 C 489 228, 501 224, 512 215 L 577 165 C 603 145, 634 164, 634 195 L 634 520 C 634 542, 616 560, 594 560 Z" fill="white"/>
+              </mask>
+            </defs>
+            <image href="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=640&h=600&fit=crop" width="640" height="600" mask="url(#m6)" preserveAspectRatio="xMidYMid slice"/>
+          </svg>
+          <div class="mask-caption">Cottage</div>
+        </div>
+
+        <!-- Mask 7 · Shape 7 Lean-left — Hillside -->
+        <div class="mask-house mask-house--md">
+          <svg viewBox="0 0 200 200" width="100%">
+            <defs>
+              <mask id="m7">
+                <rect width="200" height="200" fill="black"/>
+                <path d="M 58,48 L 176,88 L 176,170 L 24,170 L 24,78 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/>
+              </mask>
+            </defs>
+            <image href="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=600&fit=crop" width="200" height="200" mask="url(#m7)" preserveAspectRatio="xMidYMid slice"/>
+          </svg>
+          <div class="mask-caption">Hillside</div>
+        </div>
+
+        <!-- Mask 8 · Shape 8 Single-slope Shed — Modern -->
+        <div class="mask-house mask-house--md">
+          <svg viewBox="0 0 200 200" width="100%">
+            <defs>
+              <mask id="m8">
+                <rect width="200" height="200" fill="black"/>
+                <path d="M 24,46 L 176,86 L 176,170 L 24,170 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/>
+              </mask>
+            </defs>
+            <image href="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=600&fit=crop" width="200" height="200" mask="url(#m8)" preserveAspectRatio="xMidYMid slice"/>
+          </svg>
+          <div class="mask-caption">Modern</div>
+        </div>
+
+        <!-- Mask 9 · Shape 9 Flat Modern — Design -->
+        <div class="mask-house mask-house--md">
+          <svg viewBox="0 0 200 200" width="100%">
+            <defs>
+              <mask id="m9">
+                <rect width="200" height="200" fill="black"/>
                 <path d="M 24,64 L 176,38 L 176,170 L 24,170 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/>
               </mask>
             </defs>
-            <image href="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=600&fit=crop" width="200" height="200" mask="url(#m4)" preserveAspectRatio="xMidYMid slice"/>
+            <image href="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=600&fit=crop" width="200" height="200" mask="url(#m9)" preserveAspectRatio="xMidYMid slice"/>
           </svg>
           <div class="mask-caption">Design</div>
         </div>
@@ -3445,15 +3574,15 @@
             <div style="display:flex; gap:4px; margin-bottom:8px;">
               <svg viewBox="0 0 200 200" width="12" height="12"><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="#d4b896" stroke="#d4b896" stroke-width="28" stroke-linejoin="round"/></svg>
               <svg viewBox="0 0 200 200" width="12" height="12"><path d="M 100,26 L 176,88 L 176,170 L 24,170 L 24,88 Z" fill="#c4775a" stroke="#c4775a" stroke-width="28" stroke-linejoin="round"/></svg>
-              <svg viewBox="0 0 200 200" width="12" height="12"><path d="M 24,64 L 176,38 L 176,170 L 24,170 Z" fill="#f29490" stroke="#f29490" stroke-width="28" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 200 200" width="12" height="12"><path d="M 24,64 L 176,38 L 176,170 L 24,170 Z" fill="#f37e86" stroke="#f37e86" stroke-width="28" stroke-linejoin="round"/></svg>
               <svg viewBox="0 0 200 200" width="12" height="12"><path d="M 58,48 L 176,88 L 176,170 L 24,170 L 24,78 Z" fill="#d4a048" stroke="#d4a048" stroke-width="28" stroke-linejoin="round"/></svg>
-              <svg viewBox="0 0 200 200" width="12" height="12"><path d="M 100,50 L 176,86 L 176,170 L 24,170 L 24,86 Z" fill="#a8b5a0" stroke="#a8b5a0" stroke-width="28" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 200 200" width="12" height="12"><path d="M 24,46 L 176,86 L 176,170 L 24,170 Z" fill="#a8b5a0" stroke="#a8b5a0" stroke-width="28" stroke-linejoin="round"/></svg>
             </div>
             <div style="height:8px; background:var(--rule); border-radius:4px; width:80%;"></div>
             <div style="height:8px; background:var(--rule); border-radius:4px; width:60%; margin-top:4px;"></div>
             <div style="display:flex; gap:4px; margin-top:8px;">
               <svg viewBox="0 0 200 200" width="10" height="10"><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="#8e9aaf" stroke="#8e9aaf" stroke-width="28" stroke-linejoin="round"/></svg>
-              <svg viewBox="0 0 200 200" width="10" height="10"><path d="M 62,38 L 176,82 L 176,170 L 24,170 L 24,68 Z" fill="#f5b4b0" stroke="#f5b4b0" stroke-width="28" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 200 200" width="10" height="10"><path d="M 62,38 L 176,82 L 176,170 L 24,170 L 24,68 Z" fill="#f6aaad" stroke="#f6aaad" stroke-width="28" stroke-linejoin="round"/></svg>
               <svg viewBox="0 0 200 200" width="10" height="10"><path d="M 138,38 L 176,68 L 176,170 L 24,170 L 24,82 Z" fill="#d4b896" stroke="#d4b896" stroke-width="28" stroke-linejoin="round"/></svg>
             </div>
           </div>
@@ -3767,13 +3896,17 @@
       max-width: 540px;
     }
 
-    .cr-grid, .cr-head, .cr-cta, .cr-cta-place {
+    .cr-grid, .cr-head, .cr-cta, .cr-cta-place, .cr-card-link, .cr-carousel {
       padding: clamp(64px, 8vw, 100px) 0;
       background: var(--warm-white);
     }
     .cr-grid + .cr-head,
     .cr-head + .cr-cta,
     .cr-cta + .cr-cta-place {
+      border-top: 1px solid rgba(221, 214, 203, .6);
+    }
+    .cr-logo + .cr-card-link,
+    .cr-card-link + .cr-carousel {
       border-top: 1px solid rgba(221, 214, 203, .6);
     }
 
@@ -3790,7 +3923,7 @@
       white-space: pre;
       margin: 32px 0 0;
     }
-    .cr-code .tk-prop { color: #f29490; }
+    .cr-code .tk-prop { color: #f37e86; }
     .cr-code .tk-val  { color: #c8d8a8; }
     .cr-code .tk-com  { color: #8a8278; font-style: italic; }
 
@@ -3883,29 +4016,47 @@
       .cr-head-mock-r { flex: 0 0 auto; }
     }
 
-    /* Shared text-link CTA used inside mocks (mirrors `.btn-text`) */
+    /* Shared text-link CTA used inside mocks (mirrors `.btn-link` —
+       the card-internal CTA tier: text + arrow, no border). */
     .cr-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       padding: 4px 0;
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--ink);
       text-decoration: none;
       cursor: pointer;
-      transition: color .25s ease;
+      transition: color .25s ease, gap .25s ease;
     }
     .cr-btn svg {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       transition: transform .25s cubic-bezier(.2,.7,.2,1);
     }
-    .cr-btn:hover { color: var(--brand-red); }
-    .cr-btn:hover svg { transform: translateX(3px); }
-    .cr-btn.is-hover { color: var(--brand-red); }
-    .cr-btn.is-hover svg { transform: translateX(3px); }
+    .cr-btn:hover { color: var(--brand-red); gap: 9px; }
+    .cr-btn:hover svg { transform: translateX(2px); }
+    .cr-btn.is-hover { color: var(--brand-red); gap: 9px; }
+    .cr-btn.is-hover svg { transform: translateX(2px); }
+
+    /* Section-CTA tier — `.cr-btn--pill` mirrors `.btn-text` (bordered
+       pill, 13/24 padding, 1.5px ink border, hover fills ink). Used
+       for section-header and section-main CTAs. */
+    .cr-btn--pill {
+      gap: 8px;
+      padding: 13px 24px;
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      letter-spacing: .01em;
+      transition: background .22s ease, color .22s ease, border-color .22s ease;
+    }
+    .cr-btn--pill svg { width: 13px; height: 13px; }
+    .cr-btn--pill:hover { background: var(--ink); color: #fff; gap: 8px; }
+    .cr-btn--pill:hover svg { transform: translateX(3px); }
+    .cr-btn--pill.is-hover { background: var(--ink); color: #fff; gap: 8px; }
+    .cr-btn--pill.is-hover svg { transform: translateX(3px); }
 
     /* Rule 03 · CTA exhibit */
     .cr-cta-exhibit {
@@ -3930,7 +4081,22 @@
       letter-spacing: .12em;
       text-transform: uppercase;
       color: #6a6a6a;
-      flex: 0 0 88px;
+      flex: 0 0 124px;
+    }
+    .cr-cta-row__note {
+      font-size: 12.5px;
+      color: #6a6a6a;
+      line-height: 1.5;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .cr-cta-row__note code {
+      font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 11.5px;
+      background: rgba(221, 214, 203, .35);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--ink);
     }
     .cr-cta-rejected {
       margin-top: 28px;
@@ -4282,29 +4448,42 @@
   <section class="cr-cta" id="cr-cta">
     <div class="wrap">
       <div class="sec-head">
-        <div class="label">Rule 03 · The One CTA</div>
-        <h2 class="sec-head__title">One CTA pattern.<br>Every section.</h2>
-        <p class="sec-head__desc">Fourteen-pixel ink-color text + arrow. Hover: brand-red and the arrow slides 3px right. No pills. No filled buttons. No ghost variants. Every section CTA — header, inline, anywhere — uses <code>.btn-text</code>. Mixing patterns across sections breaks the calm; one pattern wins.</p>
+        <div class="label">Rule 03 · CTA Tiers</div>
+        <h2 class="sec-head__title">Two CTA tiers.<br>One per role.</h2>
+        <p class="sec-head__desc">Every CTA on the site belongs to one of two tiers — and they don't swap. <strong>Section main CTA</strong> is a bordered pill (<code>.btn-text</code>) — used once per section, next to the lead or under the description. <strong>Card-internal CTA</strong> is a text+arrow link (<code>.btn-link</code>) — used inside cards as a navigation cue because the card itself is already a click target. Putting a pill inside a card competes with the section CTA; putting a text link as the section CTA fails to anchor the section. One tier per role, never both.</p>
       </div>
 
       <div class="cr-cta-exhibit">
         <div class="cr-cta-row">
-          <span class="cr-cta-row__label">Default</span>
-          <a href="#" class="cr-btn">Explore Intelligence <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <span class="cr-cta-row__label">Section · default</span>
+          <a href="#" class="cr-btn cr-btn--pill">Explore Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <span class="cr-cta-row__note"><code>.btn-text</code> — bordered pill, 1.5px ink border, 13/24 padding</span>
         </div>
         <div class="cr-cta-row">
-          <span class="cr-cta-row__label">Hover</span>
-          <a href="#" class="cr-btn is-hover">Explore Intelligence <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <span class="cr-cta-row__label">Section · hover</span>
+          <a href="#" class="cr-btn cr-btn--pill is-hover">Explore Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <span class="cr-cta-row__note">Fills ink, arrow slides 3px right</span>
+        </div>
+        <div class="cr-cta-row">
+          <span class="cr-cta-row__label">Card · default</span>
+          <a href="#" class="cr-btn">Explore finance <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <span class="cr-cta-row__note"><code>.btn-link</code> — 13px ink, no border, no background</span>
+        </div>
+        <div class="cr-cta-row">
+          <span class="cr-cta-row__label">Card · hover</span>
+          <a href="#" class="cr-btn is-hover">Explore finance <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <span class="cr-cta-row__note">Color &rarr; brand-red, gap widens 6&rarr;9px, arrow slides 2px</span>
         </div>
       </div>
 
       <div class="cr-cta-rejected">
         <h4>Rejected variants — do not reintroduce</h4>
         <ul>
-          <li><b>Pill outline buttons</b> <span>· pills + text links across sections felt inconsistent</span></li>
-          <li><b>Filled brand-red buttons</b> <span>· red is reserved for page-level CTAs (Post Property, primary nav action) only</span></li>
-          <li><b>Ghost / muted variants</b> <span>· even &ldquo;Watch on YouTube&rdquo; uses the same ink color as everything else</span></li>
-          <li><b>13px or 15px sizing</b> <span>· 14px is the canonical CTA size — no exceptions</span></li>
+          <li><b>Pill on a card</b> <span>· competes with the section CTA. Cards are already click targets — use <code>.btn-link</code> for the inner cue.</span></li>
+          <li><b>Text link as section CTA</b> <span>· loses anchor weight. Section CTA needs the pill border to read as the section&apos;s primary call to act.</span></li>
+          <li><b>Filled brand-red buttons</b> <span>· red is reserved for page-level CTAs (Post Property, primary nav action) only.</span></li>
+          <li><b>Ghost / muted variants</b> <span>· both tiers stay ink-colored. No "Watch on YouTube" red, no muted-grey CTAs.</span></li>
+          <li><b>Custom paddings / sizes per section</b> <span>· tiers are canonical — <code>.btn-text</code> is 13/24, <code>.btn-link</code> is 13px text + 12px svg. No per-section tuning.</span></li>
         </ul>
       </div>
     </div>
@@ -4442,6 +4621,377 @@
       </div>
     </div>
   </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       Rule 06 · Whole-Card Link Pattern
+       When a card has ONE destination, the entire card is the
+       anchor. Inner CTA becomes a span (nested anchors are
+       invalid HTML). Card hover propagates to inner-CTA hover.
+       ═══════════════════════════════════════════════════════════ -->
+  <style>
+    .cr-card-link-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 900px) {
+      .cr-card-link-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    }
+    .cr-card-link-card {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cr-card-link-card__head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cr-card-link-card__mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      flex: 0 0 auto;
+    }
+    .cr-card-link-card.is-good .cr-card-link-card__mark { background: #5e7458; }
+    .cr-card-link-card.is-bad  .cr-card-link-card__mark { background: #c25b5b; }
+    .cr-card-link-card__label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .cr-card-link-card__why {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #6a6a6a;
+      margin: 0;
+    }
+    .cr-card-link-code {
+      font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.6;
+      background: #1a1714;
+      color: #e8e2d6;
+      padding: 16px 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .cr-card-link-code .tk-tag  { color: #f37e86; }
+    .cr-card-link-code .tk-attr { color: #c8d8a8; }
+    .cr-card-link-code .tk-com  { color: #8a8278; font-style: italic; }
+
+    .cr-card-link-notes {
+      margin-top: 28px;
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 22px 24px;
+    }
+    .cr-card-link-notes h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #6a6a6a;
+      margin: 0 0 14px;
+    }
+    .cr-card-link-notes ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .cr-card-link-notes li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink);
+      padding-left: 18px;
+      position: relative;
+    }
+    .cr-card-link-notes li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: #c4775a;
+      font-weight: 700;
+    }
+    .cr-card-link-notes li code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: rgba(221, 214, 203, .35);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+  </style>
+
+  <section class="cr-card-link" id="cr-card-link">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="label">Rule 06 · Whole-Card Link</div>
+        <h2 class="sec-head__title">The whole card<br>is the link.</h2>
+        <p class="sec-head__desc">When a card has one primary destination, wrap the entire card in <code>&lt;a&gt;</code> so the full surface is clickable. The "Explore X &rarr;" cue at the bottom stays for affordance but becomes a <code>&lt;span&gt;</code> &mdash; nested anchors are invalid HTML. Card hover propagates to the inner cue so the link visual updates from anywhere on the surface.</p>
+      </div>
+
+      <div class="cr-card-link-grid">
+        <article class="cr-card-link-card is-good">
+          <div class="cr-card-link-card__head">
+            <span class="cr-card-link-card__mark">&#10003;</span>
+            <span class="cr-card-link-card__label">Card is the anchor; inner cue is a span</span>
+          </div>
+          <p class="cr-card-link-card__why">Entire surface is the click target. The bottom &ldquo;Explore X &rarr;&rdquo; reads as a link cue, not a separate link.</p>
+<pre class="cr-card-link-code"><span class="tk-com">&lt;!-- The whole card is one anchor. --&gt;</span>
+<span class="tk-tag">&lt;a</span> <span class="tk-attr">href</span>=<span class="tk-attr">"/services/finance"</span> <span class="tk-attr">class</span>=<span class="tk-attr">"sv4-card sv4-card--finance"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-attr">"sv4-card-ico"</span><span class="tk-tag">&gt;</span>&hellip;<span class="tk-tag">&lt;/div&gt;</span>
+  <span class="tk-tag">&lt;h3</span> <span class="tk-attr">class</span>=<span class="tk-attr">"sv4-card-name"</span><span class="tk-tag">&gt;</span>Ghar Finance<span class="tk-tag">&lt;/h3&gt;</span>
+  <span class="tk-tag">&lt;p</span>  <span class="tk-attr">class</span>=<span class="tk-attr">"sv4-card-desc"</span><span class="tk-tag">&gt;</span>&hellip;<span class="tk-tag">&lt;/p&gt;</span>
+  <span class="tk-com">&lt;!-- inner cue is a span, NOT an a --&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-attr">"btn-link sv4-card-cta"</span><span class="tk-tag">&gt;</span>Explore finance &rarr;<span class="tk-tag">&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/a&gt;</span></pre>
+        </article>
+
+        <article class="cr-card-link-card is-bad">
+          <div class="cr-card-link-card__head">
+            <span class="cr-card-link-card__mark">&#10007;</span>
+            <span class="cr-card-link-card__label">Card is article, inner CTA is the anchor</span>
+          </div>
+          <p class="cr-card-link-card__why">Only the small &ldquo;Explore X&rdquo; text is clickable. Users who tap the card surface, image, or title get no response.</p>
+<pre class="cr-card-link-code"><span class="tk-com">&lt;!-- Click area limited to the inner text link. --&gt;</span>
+<span class="tk-tag">&lt;article</span> <span class="tk-attr">class</span>=<span class="tk-attr">"sv4-card"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-attr">"sv4-card-ico"</span><span class="tk-tag">&gt;</span>&hellip;<span class="tk-tag">&lt;/div&gt;</span>
+  <span class="tk-tag">&lt;h3</span> <span class="tk-attr">class</span>=<span class="tk-attr">"sv4-card-name"</span><span class="tk-tag">&gt;</span>Ghar Finance<span class="tk-tag">&lt;/h3&gt;</span>
+  <span class="tk-tag">&lt;p</span>  <span class="tk-attr">class</span>=<span class="tk-attr">"sv4-card-desc"</span><span class="tk-tag">&gt;</span>&hellip;<span class="tk-tag">&lt;/p&gt;</span>
+  <span class="tk-tag">&lt;a</span> <span class="tk-attr">href</span>=<span class="tk-attr">"/services/finance"</span> <span class="tk-attr">class</span>=<span class="tk-attr">"btn-link"</span><span class="tk-tag">&gt;</span>Explore &rarr;<span class="tk-tag">&lt;/a&gt;</span>
+<span class="tk-tag">&lt;/article&gt;</span></pre>
+        </article>
+      </div>
+
+      <div class="cr-card-link-notes">
+        <h4>Required when the whole card is a link</h4>
+        <ul>
+          <li>Reset anchor styles on the card: <code>text-decoration: none; color: inherit;</code></li>
+          <li>Focus-visible outline so keyboard users see card focus: <code>outline: 2px solid var(--ink); outline-offset: 4px;</code></li>
+          <li>Propagate card hover to inner cue so the link visual reads from anywhere on the surface: <code>.xx-card:hover .xx-card-cta { color: var(--brand-red); gap: 9px; }</code> and <code>.xx-card:hover .xx-card-cta svg { transform: translateX(2px); }</code></li>
+          <li>Inner cue is <code>.btn-link</code> per <a href="#cr-cta">Rule 03</a> &mdash; text+arrow, no border, because the card itself carries the click affordance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       Rule 07 · Carousel Furniture in Carousel Mode
+       Carousel UI (arrows, drag cursor, bleed-edge) appears
+       ONLY when the layout actually overflows. On the grid
+       breakpoint where cards fit, the chassis is silent.
+       ═══════════════════════════════════════════════════════════ -->
+  <style>
+    .cr-carousel-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 900px) {
+      .cr-carousel-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    }
+    .cr-carousel-mock {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cr-carousel-mock__head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cr-carousel-mock__bp {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #6a6a6a;
+      padding: 4px 8px;
+      background: rgba(221, 214, 203, .35);
+      border-radius: 4px;
+    }
+    .cr-carousel-mock__mode {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .cr-carousel-mock__why {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #6a6a6a;
+      margin: 0;
+    }
+    .cr-carousel-mock__rail {
+      background: rgba(221, 214, 203, .25);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      gap: 8px;
+      overflow: hidden;
+    }
+    .cr-carousel-mock__rail-card {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      flex: 1 1 0;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #6a6a6a;
+    }
+    .cr-carousel-mock--carousel .cr-carousel-mock__rail-card { flex: 0 0 38%; }
+    .cr-carousel-mock__foot {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .cr-carousel-mock__arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--rule);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      font-size: 12px;
+    }
+    .cr-carousel-mock--grid .cr-carousel-mock__foot {
+      visibility: hidden;
+    }
+    .cr-carousel-mock__cursor {
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #6a6a6a;
+      padding-top: 4px;
+      border-top: 1px solid rgba(221, 214, 203, .6);
+      margin-top: 4px;
+    }
+    .cr-carousel-rejected {
+      margin-top: 28px;
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 22px 24px;
+    }
+    .cr-carousel-rejected h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #6a6a6a;
+      margin: 0 0 14px;
+    }
+    .cr-carousel-rejected ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .cr-carousel-rejected li {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .cr-carousel-rejected li::before {
+      content: '\2715';
+      color: #c25b5b;
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+    .cr-carousel-rejected li b { font-weight: 600; }
+    .cr-carousel-rejected li span { color: #6a6a6a; font-size: 13px; }
+  </style>
+
+  <section class="cr-carousel" id="cr-carousel">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="label">Rule 07 · Carousel Furniture</div>
+        <h2 class="sec-head__title">Furniture appears<br>only in carousel mode.</h2>
+        <p class="sec-head__desc">The carousel chassis (<code>.rail-outer</code> / <code>.rail</code> + <code>initCarousel</code>) is shared across every rail-using section. But the <strong>visible furniture</strong> &mdash; arrow buttons, <code>cursor: grab</code>, bleed-edge margins &mdash; appears ONLY at the breakpoint where the row overflows. On the grid breakpoint where cards fit, the chassis is silent. Disabled arrows on a grid that doesn&apos;t scroll read as broken UX. A grab cursor on a static row is misleading.</p>
+      </div>
+
+      <div class="cr-carousel-grid">
+        <article class="cr-carousel-mock cr-carousel-mock--grid">
+          <div class="cr-carousel-mock__head">
+            <span class="cr-carousel-mock__bp">&ge; 1024 px</span>
+            <span class="cr-carousel-mock__mode">Grid mode &middot; silent chassis</span>
+          </div>
+          <p class="cr-carousel-mock__why">All 3 cards fit. No arrows, no bleed, no grab cursor.</p>
+          <div class="cr-carousel-mock__rail">
+            <div class="cr-carousel-mock__rail-card">Card 1</div>
+            <div class="cr-carousel-mock__rail-card">Card 2</div>
+            <div class="cr-carousel-mock__rail-card">Card 3</div>
+          </div>
+          <div class="cr-carousel-mock__foot">
+            <span class="cr-carousel-mock__arrow">&lsaquo;</span>
+            <span class="cr-carousel-mock__arrow">&rsaquo;</span>
+          </div>
+          <div class="cr-carousel-mock__cursor">cursor: default</div>
+        </article>
+
+        <article class="cr-carousel-mock cr-carousel-mock--carousel">
+          <div class="cr-carousel-mock__head">
+            <span class="cr-carousel-mock__bp">&lt; 1024 px</span>
+            <span class="cr-carousel-mock__mode">Carousel mode &middot; furniture on</span>
+          </div>
+          <p class="cr-carousel-mock__why">Track bleeds to viewport edges; next card peeks in the bleed zone. Arrows + grab cursor + drag are live.</p>
+          <div class="cr-carousel-mock__rail">
+            <div class="cr-carousel-mock__rail-card">Card 1</div>
+            <div class="cr-carousel-mock__rail-card">Card 2</div>
+            <div class="cr-carousel-mock__rail-card">Card 3</div>
+          </div>
+          <div class="cr-carousel-mock__foot">
+            <span class="cr-carousel-mock__arrow">&lsaquo;</span>
+            <span class="cr-carousel-mock__arrow">&rsaquo;</span>
+          </div>
+          <div class="cr-carousel-mock__cursor">cursor: grab &middot; margin: 0 calc(-1 * var(--pad-h)) &middot; overflow-x: clip</div>
+        </article>
+      </div>
+
+      <div class="cr-carousel-rejected">
+        <h4>Rejected variants — do not reintroduce</h4>
+        <ul>
+          <li><b>Arrows always visible (disabled on desktop)</b> <span>&middot; reads as broken UX. If there&apos;s nothing to navigate, don&apos;t show the control.</span></li>
+          <li><b>Grab cursor on a non-overflowing grid</b> <span>&middot; the cursor promises drag; the grid can&apos;t deliver. Misleading.</span></li>
+          <li><b>Bleed-edge margins on a grid layout</b> <span>&middot; bleed exists so the next card peeks past the viewport edge. With no overflow, the &ldquo;peek&rdquo; never appears &mdash; just an awkward left/right gap.</span></li>
+          <li><b>Separate &ldquo;always rail&rdquo; chassis to dodge the rule</b> <span>&middot; some sections naturally always overflow (Architecture &amp; Design has 7 cards). That&apos;s the same rule applied to a section permanently in carousel mode &mdash; not an exception.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ══ DIVISION 03 · UI COMPONENTS ══ -->
   <section class="ds-division" id="ui-divider">
@@ -4686,7 +5236,7 @@
       overflow-x: auto;
       white-space: pre;
     }
-    .ui-code .c-tag { color: #f5b4b0; }
+    .ui-code .c-tag { color: #f6aaad; }
     .ui-code .c-attr { color: #d4b896; }
     .ui-code .c-str { color: #a8b5a0; }
     .ui-code .c-com { color: #6a6a6a; font-style: italic; }
@@ -4760,7 +5310,60 @@
       transform: scale(0.97);
     }
 
-    /* ────────────── FAMILY 2 · Secondary outline ────────────── */
+    /* ────────────── FAMILY 2 · Section CTA (10px rounded outlined — index4's `.btn-text` v2) ──────────────
+       NOT a full pill. The 10px border-radius is the difference between
+       an editorial CTA (this) and a transactional UI pill (Family 03). */
+    .ui-btn--section {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      padding: 13px 24px;
+      height: auto;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition:
+        background-color 0.22s ease,
+        color 0.22s ease,
+        border-color 0.22s ease,
+        transform 0.22s ease;
+    }
+    .ui-btn--section:not(:disabled):not([aria-disabled="true"]):hover {
+      background: var(--ink);
+      color: #fff;
+    }
+    .ui-btn--section:focus-visible {
+      outline: 2px solid var(--brand-red);
+      outline-offset: 3px;
+    }
+    .ui-btn--section svg {
+      width: 13px;
+      height: 13px;
+      transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .ui-btn--section:not(:disabled):not([aria-disabled="true"]):hover svg {
+      transform: translateX(2px);
+    }
+    .ui-btn--section.is-active {
+      background: var(--ink);
+      color: #fff;
+      transform: scale(0.97);
+    }
+    .ui-btn--section[aria-disabled="true"],
+    .ui-btn--section:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ────────────── FAMILY 3 · Secondary outline pill ────────────── */
     .ui-btn--secondary {
       background: transparent;
       color: var(--ink);
@@ -4939,9 +5542,9 @@
         <div class="ui-when-card ui-when-card--editorial">
           <div class="ui-when-tag">Editorial · Storytelling</div>
           <h3 class="ui-when-h">Section CTAs.</h3>
-          <p class="ui-when-p">Header CTAs, foot CTAs, inline actions inside marketing &amp; storytelling sections — Intelligence, Editorial, GharTalks, Voices, Architecture &amp; Design.</p>
-          <div class="ui-when-rule">Use <code>.btn-text</code> only. Never a filled button, pill, or ghost variant. <strong>One pattern wins.</strong></div>
-          <a href="#cr-cta" class="ui-when-link">See Rule 03 — The one CTA <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <p class="ui-when-p">Header CTAs, card CTAs, inline actions inside marketing &amp; storytelling sections — Intelligence, Editorial, GharTalks, Voices, Architecture &amp; Design, VideoWorks, Services, GharEvents, For Brokers, For Developers.</p>
+          <div class="ui-when-rule">Two tiers, never mixed. Section main CTA = <code>.btn-text</code> — a 10px rounded outlined button (Family 02). Card-internal CTA = <code>.btn-link</code> — text + arrow, no border (Family 06). The pill is the section's voice; the link is the card&rsquo;s.</div>
+          <a href="#cr-cta" class="ui-when-link">See Rule 03 — CTA Tiers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
         <div class="ui-when-card ui-when-card--ui">
           <div class="ui-when-tag">Transactional · Product UI</div>
@@ -5030,13 +5633,110 @@
 <span class="c-tag">&lt;/button&gt;</span></pre>
       </div>
 
-      <!-- ───────────── FAMILY 02 · SECONDARY OUTLINE ───────────── -->
-      <div class="ui-family" id="ui-buttons-secondary">
+      <!-- ───────────── FAMILY 02 · SECTION CTA (10px rounded outlined) ─────────────
+           This is the index4 `.btn-text` v2 — the canonical editorial section
+           main CTA used across every storytelling section on the homepage.
+           Visually distinct from the Secondary outline pill (Family 03):
+           10px radius = editorial · 999px radius = transactional. -->
+      <div class="ui-family" id="ui-buttons-section">
         <div class="ui-family-head">
           <div class="ui-family-num">02</div>
           <div class="ui-family-titlewrap">
-            <h3 class="ui-family-title">Secondary outline.</h3>
-            <p class="ui-family-desc">Quieter than primary but still high-confidence. Ink border, transparent fill, fills with ink on hover. Pairs with a primary on the same screen (Cancel + Confirm), or stands alone where the action is meaningful but not the screen's main goal — like the <em>Post Property</em> pill in the navbar.</p>
+            <h3 class="ui-family-title">Section CTA.</h3>
+            <p class="ui-family-desc">The canonical <strong>editorial section main CTA</strong> — a 10px rounded-corner outlined button. Ink stroke 1.5px on warm-white; fills with ink + arrow nudges right 2px on hover. Every section header CTA across index4 uses this exact treatment: <em>Explore Intelligence</em>, <em>Explore Architecture &amp; Design</em>, <em>Inside GharTalks</em>, <em>Explore VideoWorks</em>, <em>Explore developer solutions</em>. NOT a full pill — the 10px radius is what keeps it editorial; the 999px Secondary pill (Family 03) is for transactional nav like Post Property.</p>
+            <span class="ui-family-prod">In production: <code style="background:none;padding:0">.btn-text</code> · every section header CTA in index4</span>
+          </div>
+        </div>
+
+        <!-- Default · with / without arrow -->
+        <div class="ui-exhibit">
+          <div class="ui-exhibit__label"><span>Default · ink outline · 10px radius</span><span>1.5px stroke · 13px Inter 600</span></div>
+          <div class="ui-exhibit__row">
+            <span class="ui-exhibit__row-tag">Without arrow</span>
+            <a href="#cr-cta" class="ui-btn--section">Explore Intelligence</a>
+            <a href="#cr-cta" class="ui-btn--section">Inside GharTalks</a>
+          </div>
+          <div class="ui-exhibit__row">
+            <span class="ui-exhibit__row-tag">With arrow</span>
+            <a href="#cr-cta" class="ui-btn--section">
+              Explore Intelligence
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#cr-cta" class="ui-btn--section">
+              Explore VideoWorks
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- States -->
+        <div class="ui-exhibit">
+          <div class="ui-exhibit__label"><span>States</span><span>Hover live · others mocked for the doc</span></div>
+          <div class="ui-exhibit__row">
+            <span class="ui-exhibit__row-tag">Default</span>
+            <a href="#cr-cta" class="ui-btn--section">
+              Explore Intelligence
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <span class="ui-exhibit__row-tag" style="margin-left:24px">Hover</span>
+            <a href="#cr-cta" class="ui-btn--section" style="background:var(--ink);color:#fff">
+              Explore Intelligence
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:translateX(2px)"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="ui-exhibit__row">
+            <span class="ui-exhibit__row-tag">Focus-visible</span>
+            <a href="#cr-cta" class="ui-btn--section" style="outline:2px solid var(--brand-red);outline-offset:3px">
+              Explore Intelligence
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <span class="ui-exhibit__row-tag" style="margin-left:24px">Active</span>
+            <a href="#cr-cta" class="ui-btn--section is-active">
+              Explore Intelligence
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="ui-exhibit__row">
+            <span class="ui-exhibit__row-tag">Disabled</span>
+            <a class="ui-btn--section" aria-disabled="true">
+              Explore Intelligence
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <pre class="ui-code"><span class="c-com">&lt;!-- Section CTA · every editorial section header in index4 --&gt;</span>
+<span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-str">"/intelligence"</span> <span class="c-attr">class</span>=<span class="c-str">"btn-text"</span><span class="c-tag">&gt;</span>
+  Explore Intelligence
+  <span class="c-tag">&lt;svg</span> <span class="c-attr">viewBox</span>=<span class="c-str">"0 0 24 24"</span> …<span class="c-tag">&gt;&lt;path</span> <span class="c-attr">d</span>=<span class="c-str">"M5 12h14M13 5l7 7-7 7"</span><span class="c-tag">/&gt;&lt;/svg&gt;</span>
+<span class="c-tag">&lt;/a&gt;</span>
+
+<span class="c-com">/* styles4.css */</span>
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;        <span class="c-com">/* NOT 999px — that's the pill family */</span>
+  font: 600 13px/1 'Inter', sans-serif;
+  letter-spacing: .01em;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background .22s ease, color .22s ease, border-color .22s ease, transform .22s ease;
+}
+.btn-text:hover { background: var(--ink); color: #fff; }
+.btn-text:hover svg { transform: translateX(2px); }</pre>
+      </div>
+
+      <!-- ───────────── FAMILY 03 · SECONDARY OUTLINE PILL ───────────── -->
+      <div class="ui-family" id="ui-buttons-secondary">
+        <div class="ui-family-head">
+          <div class="ui-family-num">03</div>
+          <div class="ui-family-titlewrap">
+            <h3 class="ui-family-title">Secondary outline pill.</h3>
+            <p class="ui-family-desc">A fully-rounded pill (999px radius) — quieter than primary but still high-confidence. Ink border, transparent fill, fills with ink on hover. Use for transactional UI where a pill silhouette is right: the <em>Post Property</em> mark in the navbar, Cancel + Confirm pairs in modals, secondary CTAs paired with a primary. NOT for editorial section CTAs — that&rsquo;s Family 02&rsquo;s job.</p>
             <span class="ui-family-prod">In production: <code style="background:none;padding:0">.nav-btn</code> (Post Property pill)</span>
           </div>
         </div>
@@ -5086,10 +5786,10 @@
 <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"ui-btn ui-btn--secondary ui-btn--md"</span><span class="c-tag">&gt;</span>Post Property<span class="c-tag">&lt;/button&gt;</span></pre>
       </div>
 
-      <!-- ───────────── FAMILY 03 · ICON ───────────── -->
+      <!-- ───────────── FAMILY 04 · ICON ───────────── -->
       <div class="ui-family" id="ui-buttons-icon">
         <div class="ui-family-head">
-          <div class="ui-family-num">03</div>
+          <div class="ui-family-num">04</div>
           <div class="ui-family-titlewrap">
             <h3 class="ui-family-title">Icon button.</h3>
             <p class="ui-family-desc">Circular, single-icon action. Always pair with an <code>aria-label</code>. Three flavors: outline (default — Profile, Menu in nav), filled (the canonical brand-red search submit, also used for primary circular actions), soft (warm-paper subtle background — close, back inside cards/modals).</p>
@@ -5147,10 +5847,10 @@
 <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"ui-btn-icon ui-btn-icon--soft"</span> <span class="c-attr">aria-label</span>=<span class="c-str">"Close"</span><span class="c-tag">&gt;…&lt;/button&gt;</span></pre>
       </div>
 
-      <!-- ───────────── FAMILY 04 · GHOST ───────────── -->
+      <!-- ───────────── FAMILY 05 · GHOST ───────────── -->
       <div class="ui-family" id="ui-buttons-ghost">
         <div class="ui-family-head">
-          <div class="ui-family-num">04</div>
+          <div class="ui-family-num">05</div>
           <div class="ui-family-titlewrap">
             <h3 class="ui-family-title">Ghost.</h3>
             <p class="ui-family-desc">Lowest-emphasis chrome. Transparent until hovered, where it picks up a faint ink wash. Use for secondary toolbar actions, off-canvas nav rows, segment labels, the hamburger trigger. Never use ghost in editorial sections — it dilutes <code>.btn-text</code>.</p>
@@ -5202,14 +5902,17 @@
 <span class="c-tag">&lt;/button&gt;</span></pre>
       </div>
 
-      <!-- ───────────── FAMILY 05 · TEXT LINK (cross-ref) ───────────── -->
+      <!-- ───────────── FAMILY 06 · CARD LINK (text + arrow, no border) ─────────────
+           This is the index4 `.btn-link` — the card-internal CTA tier
+           that pairs with the Section CTA pill (Family 02). Sub-action
+           inside an already-clickable card. NOT a section main CTA. -->
       <div class="ui-family" id="ui-buttons-text">
         <div class="ui-family-head">
-          <div class="ui-family-num">05</div>
+          <div class="ui-family-num">06</div>
           <div class="ui-family-titlewrap">
-            <h3 class="ui-family-title">Text link.</h3>
-            <p class="ui-family-desc">The canonical editorial CTA. <code>.btn-text</code> — Inter 14 / 600, ink → brand-red on hover, arrow slides 2px right. <strong>The full spec, rejected variants, and placement rules live in Composition Rule 03</strong> (this is a UI-catalog cross-reference, not a duplicate spec).</p>
-            <span class="ui-family-prod">Defined in <code style="background:none;padding:0">cr-cta</code> · Used everywhere editorial</span>
+            <h3 class="ui-family-title">Card link.</h3>
+            <p class="ui-family-desc">The <strong>card-internal CTA tier</strong> — a text + arrow link with no border, no fill. <code>.btn-link</code> in index4. Used as the sub-action inside an already-clickable card (e.g. <em>Explore finance &rarr;</em> inside a Ghar Finance service card, <em>VideoWorks &rarr;</em> inside the cinematic title-card hero). Inter 13&ndash;14 / 600, ink &rarr; brand-red on hover, arrow slides 2px right. Card hover propagates to this CTA via <code>.xx-card:hover .xx-card-cta</code> so the whole card surface lights it up. <strong>Never use as a section main CTA</strong> — that&rsquo;s Family 02 (the rounded outlined pill).</p>
+            <span class="ui-family-prod">In production: <code style="background:none;padding:0">.btn-link</code> · every whole-card-linked card in index4</span>
           </div>
         </div>
 
@@ -5232,7 +5935,7 @@
           </div>
           <div class="ui-exhibit__row" style="background:var(--warm-white);margin:8px -12px 0;padding:16px 20px;border-radius:10px;border-top:none">
             <span style="font-size:13px;color:var(--ink);line-height:1.6">
-              <strong>One pattern, no variants.</strong> No 13/15px sizes, no ghost, no pill. Every editorial section header CTA, foot CTA, and inline CTA on every page uses this exact treatment.
+              <strong>Pair, don&rsquo;t mix.</strong> Card link is the sub-action inside a card; Section CTA (Family 02) is the section&rsquo;s main action. Putting <code>.btn-link</code> as the section CTA, or a pill as a card&rsquo;s inner cue, breaks the visual tier. The full placement spec lives in Rule 03.
               <a href="#cr-cta" class="ui-btn-text" style="margin-left:8px;display:inline-flex">
                 Full spec
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -8702,9 +9405,9 @@
   <section class="hp-b2b" id="hp-b2b">
     <div class="wrap">
       <div class="hp-b2b-intro">
-        <div class="eyebrow">10 — B2B flex</div>
-        <h3>Authority without cold.<br>The warm voice adapts for brokers and developers — it doesn't switch brands.</h3>
-        <p>B2B pages are where most warm-voice platforms crack and turn into SaaS dashboards. Grey panels. Blue CTAs. Stock icons. On Ghar.tv, the flex works differently: tighter hierarchy, denser proof, precise type — but the paper stays warm and the serif keeps reading. Authority comes from composition, not from colder color.</p>
+        <div class="eyebrow">10 — B2B layout options</div>
+        <h3>Authority without cold.<br>Layouts to reach for when designing B2B sections — not a fixed pattern.</h3>
+        <p>B2B pages are where most warm-voice platforms crack and turn into SaaS dashboards. Grey panels. Blue CTAs. Stock icons. On Ghar.tv, the flex works differently: tighter hierarchy, denser proof, precise type — but the paper stays warm and the serif keeps reading. The card pattern below is <strong>one option</strong> for a B2B layout — useful when proof points need to stack in 3-column rules. Sections like For Brokers and For Developers should pick the composition that fits the offering — image-masked shape windows, editorial broadsheet spreads, asymmetric splits, single hero cards. Treat hp-b2b as a vocabulary, not a template.</p>
       </div>
 
       <div class="hp-b2b-grid">
@@ -8772,8 +9475,8 @@
       </div>
 
       <div class="hp-b2b-closer">
-        <strong>What "flex" means here.</strong>
-        Same warm paper. Same Gazpacho serif. Same Inter body. What tightens: typographic hierarchy compresses, proof points stack in 3-column rules, CTAs get darker and more direct, badges replace marketing copy. What stays: the warmth, the voice, the literary stance. Authority isn't grey. It's precise.
+        <strong>This is a vocabulary, not a template.</strong>
+        Same warm paper. Same Gazpacho serif. Same Inter body. The card pattern shown above is one B2B option — useful when proof points need 3-column rules and a tight headline. Other options are valid and often better: image-masked shape windows (For Developers v8), editorial broadsheet spreads with oversized numerals, asymmetric splits with a profile card and supporting panel (For Brokers), centered single composition. Pick the layout that fits the offering. What stays across all options: the warmth, the voice, the literary stance, the editorial restraint. Authority isn't grey — it's precise.
       </div>
     </div>
   </section>
