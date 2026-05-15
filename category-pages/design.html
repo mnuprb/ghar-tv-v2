@@ -881,7 +881,77 @@
       .hero-v2__orbit{width:180px;height:180px;margin:-90px 0 0 -90px}
       .hero-v2__float{display:none}
     }
-    @media(max-width:767px){.hero-v2__float{display:none}.hero-v2__right{display:none}}
+    @media(max-width:767px){.hero-v2__float{display:none}}
+
+    /* ─── Hero category carousel ───────────────────────────────────────
+       Replaces the old animated SVG illustration. Rounded house-mask
+       (same .cc-card silhouette) holds a category image; label sits below.
+       Horizontal scroller with scroll-snap + auto-advance while in view. */
+    .hero-v2__right { min-width: 0; }
+    .hero-cats { width: 100%; min-width: 0; position: relative; }
+    .hero-cats::before, .hero-cats::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 24px;
+      pointer-events: none; z-index: 2;
+    }
+    .hero-cats::before { left: 0; background: linear-gradient(to right, #fff, rgba(255,255,255,0)); }
+    .hero-cats::after  { right: 0; background: linear-gradient(to left,  #fff, rgba(255,255,255,0)); }
+    .hero-cats-track {
+      position: relative;
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 8px 4px 12px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
+    }
+    .hero-cats-track::-webkit-scrollbar { display: none; }
+    .hero-cat {
+      flex: 0 0 200px;
+      scroll-snap-align: start;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .hero-cat__shape {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 28px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+    }
+    .hero-cat__shape svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 8px 22px rgba(0,0,0,.18));
+    }
+    .hero-cat__label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .01em;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.3;
+    }
+    .hero-cat:hover .hero-cat__shape { transform: translateY(-4px); }
+    .hero-cat--turmeric   .hero-cat__shape { background: #d4a048; }
+    .hero-cat--terracotta .hero-cat__shape { background: #c4775a; }
+    .hero-cat--sage       .hero-cat__shape { background: #a8b5a0; }
+    .hero-cat--sand       .hero-cat__shape { background: #d4b896; }
+    @media(max-width:767px){
+      .hero-v2__right { display: block; min-height: 0; max-width: 100%; margin-top: 8px; }
+      .hero-cat { flex: 0 0 160px; }
+      .hero-cat__shape { border-radius: 22px; padding: 14px; }
+      .hero-cat__label { font-size: 12px; }
+    }
     @media(max-width:480px){.hero-v2__ctas{flex-direction:column}.hero-v2__btn-primary,.hero-v2__btn-outline{width:100%;justify-content:center}}
 
     /* ═══ SHARED GRID — Designer Spotlight, Vastu, Interiors ═══ */
@@ -1380,125 +1450,77 @@
         </div>
       </div>
 
-      <!-- RIGHT — Animated SVG illustration -->
+      <!-- RIGHT — Category carousel (shape-mask cards) -->
       <div class="hero-v2__right">
-        <!-- Orbiting dots -->
-        <div class="hero-v2__orbit" aria-hidden="true"><span class="hero-v2__orbit-dot"></span></div>
-
-        <!-- SVG — Home shape, soft gray strokes -->
-        <svg class="hero-svg" viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Ground line -->
-          <line x1="20" y1="320" x2="380" y2="320" stroke="#ddd6cb" stroke-width="1" class="svg-draw"/>
-
-          <!-- Main house outline -->
-          <path d="M80 320 L80 140 L200 60 L320 140 L320 320" stroke="#ddd6cb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" class="svg-draw"/>
-          <!-- Roof peak -->
-          <path d="M200 60 L200 32" stroke="#ddd6cb" stroke-width="1.5" stroke-linecap="round" class="svg-draw-2"/>
-          <!-- Roof flag -->
-          <path d="M200 32 L218 41 L200 50" stroke="#c4775a" stroke-width="1.2" fill="#c4775a" class="svg-draw-2"/>
-
-          <!-- Windows row 1 -->
-          <rect x="110" y="160" width="50" height="60" rx="4" stroke="#ddd6cb" stroke-width="1.2" fill="#a8b5a0" class="svg-draw-2"/>
-          <rect x="240" y="160" width="50" height="60" rx="4" stroke="#ddd6cb" stroke-width="1.2" fill="#8e9aaf" class="svg-draw-2"/>
-          <!-- Window crosses -->
-          <line x1="135" y1="160" x2="135" y2="220" stroke="#faf7f2" stroke-width="2" class="svg-draw-3"/>
-          <line x1="110" y1="190" x2="160" y2="190" stroke="#faf7f2" stroke-width="2" class="svg-draw-3"/>
-          <line x1="265" y1="160" x2="265" y2="220" stroke="#faf7f2" stroke-width="2" class="svg-draw-3"/>
-          <line x1="240" y1="190" x2="290" y2="190" stroke="#faf7f2" stroke-width="2" class="svg-draw-3"/>
-
-<!-- Door -->
-          <rect x="170" y="240" width="60" height="80" rx="30 30 0 0" stroke="#ddd6cb" stroke-width="1.2" fill="#d4a048" class="svg-draw-3"/>
-          <circle cx="218" cy="285" r="3" fill="#3a3530" class="svg-fill svg-fill-2"/>
-
-          <!-- Chimney -->
-          <rect x="260" y="80" width="20" height="40" rx="2" stroke="#ddd6cb" stroke-width="1.2" fill="none" class="svg-draw-4"/>
-          <!-- Smoke puffs -->
-          <circle cx="270" cy="68" r="6" fill="none" stroke="#ddd6cb" stroke-width="1" opacity=".5" class="svg-fill svg-fill-3">
-            <animate attributeName="cy" values="68;50;32" dur="3s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values=".5;.25;0" dur="3s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="6;9;12" dur="3s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="275" cy="58" r="4" fill="none" stroke="#ddd6cb" stroke-width="1" opacity=".35" class="svg-fill svg-fill-4">
-            <animate attributeName="cy" values="58;40;22" dur="3.5s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values=".35;.15;0" dur="3.5s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="4;7;10" dur="3.5s" repeatCount="indefinite"/>
-          </circle>
-
-          <!-- Window glow tint (overlays solid window for highlight) -->
-          <rect x="110" y="160" width="50" height="60" rx="4" fill="rgba(255,255,255,.18)" class="svg-fill svg-fill-1"/>
-          <rect x="240" y="160" width="50" height="60" rx="4" fill="rgba(255,255,255,.18)" class="svg-fill svg-fill-1"/>
-
-          <!-- Garden -->
-          <ellipse cx="50" cy="318" rx="25" ry="8" fill="#d4b896" class="svg-fill svg-fill-3"/>
-          <ellipse cx="350" cy="318" rx="25" ry="8" fill="#d4b896" class="svg-fill svg-fill-3"/>
-          <!-- Tree left -->
-          <line x1="40" y1="318" x2="40" y2="290" stroke="#3a3530" stroke-width="2" class="svg-draw-4"/>
-          <circle cx="40" cy="282" r="14" fill="#a8b5a0" class="svg-fill svg-fill-4"/>
-          <!-- Tree right -->
-          <line x1="360" y1="318" x2="360" y2="295" stroke="#3a3530" stroke-width="2" class="svg-draw-4"/>
-          <circle cx="360" cy="288" r="11" fill="#a8b5a0" class="svg-fill svg-fill-4"/>
-
-          <!-- Measurement lines (architectural) -->
-          <line x1="75" y1="140" x2="75" y2="320" stroke="#6a6a6a" stroke-width=".5" stroke-dasharray="4 4" opacity=".2" class="svg-fill svg-fill-3"/>
-          <line x1="325" y1="140" x2="325" y2="320" stroke="#6a6a6a" stroke-width=".5" stroke-dasharray="4 4" opacity=".2" class="svg-fill svg-fill-3"/>
-        </svg>
-
-        <!-- 7 Floating topic cards -->
-        <div class="hero-v2__float hero-v2__float--1">
-          <div class="hero-v2__float-icon" style="background:#d4a048">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#faf7f2" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          </div>
-          <div>
-            <div class="hero-v2__float-text">Architecture</div>
-            <div class="hero-v2__float-sub">200+ articles</div>
-          </div>
-        </div>
-        <div class="hero-v2__float hero-v2__float--3">
-          <div class="hero-v2__float-icon" style="background:#c4775a">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#faf7f2" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <div>
-            <div class="hero-v2__float-text">Interiors</div>
-            <div class="hero-v2__float-sub">Room-by-room ideas</div>
-          </div>
-        </div>
-        <div class="hero-v2__float hero-v2__float--4">
-          <div class="hero-v2__float-icon" style="background:#a8b5a0">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#faf7f2" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div>
-            <div class="hero-v2__float-text">Designers</div>
-            <div class="hero-v2__float-sub">Top architect profiles</div>
-          </div>
-        </div>
-        <div class="hero-v2__float hero-v2__float--5">
-          <div class="hero-v2__float-icon" style="background:#8e9aaf">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#faf7f2" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-          </div>
-          <div>
-            <div class="hero-v2__float-text">Home Tours</div>
-            <div class="hero-v2__float-sub">Video walkthroughs</div>
-          </div>
-        </div>
-        <div class="hero-v2__float hero-v2__float--6">
-          <div class="hero-v2__float-icon" style="background:#f29490">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#faf7f2" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div>
-            <div class="hero-v2__float-text">Celebrity Homes</div>
-            <div class="hero-v2__float-sub">Inside iconic residences</div>
-          </div>
-        </div>
-        <div class="hero-v2__float hero-v2__float--7">
-          <div class="hero-v2__float-icon" style="background:#3a3530">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#faf7f2" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          </div>
-          <div>
-            <div class="hero-v2__float-text">Guides</div>
-            <div class="hero-v2__float-sub">Material &amp; cost guides</div>
+        <div class="hero-cats" aria-label="Browse design categories">
+          <div class="hero-cats-track" id="heroCatsTrack">
+            <a href="#architecture" class="hero-cat hero-cat--turmeric">
+              <div class="hero-cat__shape">
+                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs><mask id="hc1"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
+                  <image href="https://images.unsplash.com/photo-1518005068251-37900150dfca?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc1)" preserveAspectRatio="xMidYMid slice"/>
+                </svg>
+              </div>
+              <span class="hero-cat__label">Architecture</span>
+            </a>
+            <a href="#interiors" class="hero-cat hero-cat--terracotta">
+              <div class="hero-cat__shape">
+                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs><mask id="hc2"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
+                  <image href="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc2)" preserveAspectRatio="xMidYMid slice"/>
+                </svg>
+              </div>
+              <span class="hero-cat__label">Interiors</span>
+            </a>
+            <a href="#home-tours-shape" class="hero-cat hero-cat--sage">
+              <div class="hero-cat__shape">
+                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs><mask id="hc3"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
+                  <image href="https://images.unsplash.com/photo-1600573472556-e636c2acda88?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc3)" preserveAspectRatio="xMidYMid slice"/>
+                </svg>
+              </div>
+              <span class="hero-cat__label">Home Tours</span>
+            </a>
+            <a href="#vastu" class="hero-cat hero-cat--sand">
+              <div class="hero-cat__shape">
+                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs><mask id="hc4"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
+                  <image href="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc4)" preserveAspectRatio="xMidYMid slice"/>
+                </svg>
+              </div>
+              <span class="hero-cat__label">Vastu</span>
+            </a>
+            <a href="#designers" class="hero-cat hero-cat--turmeric">
+              <div class="hero-cat__shape">
+                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs><mask id="hc5"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
+                  <image href="sanjay-puri.jpg" width="200" height="200" mask="url(#hc5)" preserveAspectRatio="xMidYMid slice"/>
+                </svg>
+              </div>
+              <span class="hero-cat__label">Architects &amp; Founders</span>
+            </a>
+            <a href="#guides" class="hero-cat hero-cat--terracotta">
+              <div class="hero-cat__shape">
+                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs><mask id="hc6"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
+                  <image href="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc6)" preserveAspectRatio="xMidYMid slice"/>
+                </svg>
+              </div>
+              <span class="hero-cat__label">Guides</span>
+            </a>
+            <a href="#featured" class="hero-cat hero-cat--sage">
+              <div class="hero-cat__shape">
+                <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs><mask id="hc7"><rect width="200" height="200" fill="black"/><path d="M 100,38 L 176,82 L 176,170 L 24,170 L 24,82 Z" fill="white" stroke="white" stroke-width="28" stroke-linejoin="round"/></mask></defs>
+                  <image href="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&amp;h=400&amp;fit=crop&amp;q=80" width="200" height="200" mask="url(#hc7)" preserveAspectRatio="xMidYMid slice"/>
+                </svg>
+              </div>
+              <span class="hero-cat__label">Featured Homes</span>
+            </a>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -2340,6 +2362,54 @@
       if(moved > 6){ e.preventDefault(); e.stopPropagation(); }
     }, true);
   });
+
+  /* ─── Hero category carousel — auto-advance ─────────────────────────
+     Snap-scrolls one card every 3.5s while the track is in view. Pauses
+     on hover, touch, and focus. Resyncs idx after manual user scroll. */
+  var heroTrack = document.getElementById('heroCatsTrack');
+  if(heroTrack){
+    var heroCards = heroTrack.querySelectorAll('.hero-cat');
+    if(heroCards.length > 1){
+      var heroIdx = 0, heroTimer = null, heroPaused = false, heroInView = false;
+      function heroScrollTo(i){
+        var c = heroCards[i];
+        if(c) heroTrack.scrollTo({ left: c.offsetLeft - heroTrack.offsetLeft, behavior: 'smooth' });
+      }
+      function heroStep(){
+        if(heroPaused || !heroInView) return;
+        heroIdx = (heroIdx + 1) % heroCards.length;
+        heroScrollTo(heroIdx);
+      }
+      function heroStart(){ if(heroTimer) return; heroTimer = setInterval(heroStep, 3500); }
+      function heroStop(){ if(heroTimer){ clearInterval(heroTimer); heroTimer = null; } }
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            heroInView = e.isIntersecting;
+            if(heroInView && !heroPaused) heroStart(); else heroStop();
+          });
+        }, { threshold: 0.15 }).observe(heroTrack);
+      } else { heroInView = true; heroStart(); }
+      ['mouseenter','touchstart','focusin'].forEach(function(ev){
+        heroTrack.addEventListener(ev, function(){ heroPaused = true; heroStop(); }, {passive:true});
+      });
+      ['mouseleave','touchend','focusout'].forEach(function(ev){
+        heroTrack.addEventListener(ev, function(){ heroPaused = false; if(heroInView) heroStart(); }, {passive:true});
+      });
+      var heroScrollDeb;
+      heroTrack.addEventListener('scroll', function(){
+        clearTimeout(heroScrollDeb);
+        heroScrollDeb = setTimeout(function(){
+          var sl = heroTrack.scrollLeft, best = 0, min = Infinity;
+          heroCards.forEach(function(c, i){
+            var d = Math.abs(c.offsetLeft - heroTrack.offsetLeft - sl);
+            if(d < min){ min = d; best = i; }
+          });
+          heroIdx = best;
+        }, 160);
+      }, {passive:true});
+    }
+  }
 })();
 </script>
 
