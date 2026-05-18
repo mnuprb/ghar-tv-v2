@@ -187,69 +187,6 @@
     .nav-btn-bar + .nav-btn-bar { margin-top: 4px; }
 
 
-    /* ─── Off-canvas menu (slides in from right, opened by hamburger) ─── */
-    #ocOverlay {
-      position: fixed; inset: 0; z-index: 990;
-      background: rgba(17,17,17,.4);
-      backdrop-filter: blur(2px);
-      opacity: 0; visibility: hidden;
-      transition: opacity .3s ease, visibility .3s ease;
-    }
-    #ocOverlay.oc-open { opacity: 1; visibility: visible; }
-    #ocMenu {
-      position: fixed; top: 0; right: 0; bottom: 0; z-index: 995;
-      width: min(420px, 92vw);
-      background: #fff;
-      transform: translateX(100%);
-      transition: transform .35s cubic-bezier(.4, 0, .2, 1);
-      overflow-y: auto;
-      box-shadow: -8px 0 32px rgba(0,0,0,.12);
-      display: flex; flex-direction: column;
-    }
-    #ocMenu.oc-open { transform: none; }
-    .oc-hdr {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 28px; border-bottom: 1px solid var(--rule);
-    }
-    .oc-hdr-mark { font-family: var(--ff-display); font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
-    .oc-hdr-mark span { color: var(--accent); }
-    .oc-close {
-      width: 38px; height: 38px; border-radius: 50%;
-      border: 1px solid var(--rule);
-      background: transparent; color: var(--ink);
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: background .2s ease, border-color .2s ease;
-    }
-    .oc-close:hover { background: var(--surface); border-color: var(--ink); }
-    .oc-links { list-style: none; padding: 16px 28px 24px; margin: 0; }
-    .oc-links li { border-bottom: 1px solid var(--rule); }
-    .oc-links a {
-      display: flex; align-items: center; justify-content: space-between; gap: 14px;
-      padding: 18px 0;
-      font-family: var(--ff-display);
-      font-size: 22px; font-weight: 700;
-      color: var(--ink); letter-spacing: -.012em;
-      transition: color .2s ease;
-    }
-    .oc-links a:hover { color: var(--accent); }
-    .oc-links a svg { width: 16px; height: 16px; color: var(--muted); transition: color .2s, transform .2s; }
-    .oc-links a:hover svg { color: var(--accent); transform: translateX(3px); }
-    .oc-foot {
-      margin-top: auto; padding: 22px 28px;
-      border-top: 1px solid var(--rule);
-      background: var(--surface);
-      display: flex; flex-direction: column; gap: 14px;
-    }
-    .oc-foot-cta {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 13px 22px; border-radius: 10px;
-      background: var(--ink); color: #fff;
-      font-size: 14px; font-weight: 600;
-      transition: background .22s ease;
-    }
-    .oc-foot-cta:hover { background: var(--accent); }
-    .oc-foot-meta { font-size: 11.5px; color: var(--muted); text-align: center; line-height: 1.5; }
-
     /* Mobile bottom bar */
     #bottomBar {
       display: none;
@@ -1445,28 +1382,92 @@
 
   </main>
 
-  <!-- ═══ OFF-CANVAS MENU (slides in from right via hamburger / bottom-bar menu) ═══ -->
-  <div id="ocOverlay" aria-hidden="true"></div>
-  <nav id="ocMenu" aria-label="Site menu" aria-hidden="true">
-    <div class="oc-hdr">
-      <span class="oc-hdr-mark">Ghar<span>.tv</span></span>
-      <button class="oc-close" aria-label="Close menu" type="button">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
+  <!-- ═══ OFF-CANVAS MENU — copied verbatim from design.html (driven by main.js) ═══ -->
+  <div id="ocOverlay" onclick="closeOC()"></div>
+  <nav id="ocMenu" aria-label="Main menu"><!-- Header -->
+    <div class="oc-hdr"> <img src="https://www.ghar.tv/imgbo/logo.svg" alt="Ghar.tv"> <button class="oc-close" onclick="closeOC()" aria-label="Close menu"> <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">
+          <path d="M18 6L6 18" />
+          <path d="M6 6l12 12" />
+        </svg> </button></div>
+    <div class="oc-body">
+      <div class="oc-panel oc-panel--l1" id="ocL1">
+        <button class="oc-discover" onclick="openSub('cities')" aria-label="Browse properties by city"> <span class="oc-discover-icon">        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>          <circle cx="12" cy="10" r="3"/>        </svg>      </span> <span class="oc-discover-text">        <span class="oc-discover-title">Browse By City</span> <span class="oc-discover-sub">Properties across India's leading cities</span> </span> <svg class="oc-discover-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg> </button>
+        <div class="oc-prominent"> <a href="/postproperty.php"> <svg viewBox="0 0 24 24">
+              <path d="M3 10.5L12 3l9 7.5V21a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 21z" />
+              <line x1="12" y1="13" x2="12" y2="18" />
+              <line x1="9.5" y1="15.5" x2="14.5" y2="15.5" />
+            </svg> Post Property </a> <a href="/post-your-requirement.php"> <svg viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="12" y1="18" x2="12" y2="12" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg> Post Requirement </a> <button type="button" class="oc-prominent-sub" onclick="openSub('content')"> <svg viewBox="0 0 24 24">
+              <path d="M4 4h11a3 3 0 013 3v13H7a3 3 0 01-3-3V4z" />
+              <path d="M4 4v13a3 3 0 003 3" />
+              <line x1="8" y1="9" x2="14" y2="9" />
+              <line x1="8" y1="13" x2="14" y2="13" />
+            </svg> Read &amp; Watch <svg class="oc-prominent-sub-arrow" viewBox="0 0 24 24" stroke-linecap="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg> </button> </div>
+        <div class="oc-divider"></div>
+        <a href="/for-buyers-owners" class="oc-item">For Buyers &amp; Owners</a>
+        <a href="/for-brokers" class="oc-item">For Brokers</a>
+        <a href="/for-developers" class="oc-item">For Developers</a>
+        <a href="/for-allied" class="oc-item">For Brand Partners</a>
+        <div class="oc-divider"></div>
+        <a href="/ghartalks" class="oc-item">GharTalks <span style="font-size:11px;color:var(--muted);font-weight:400;margin-left:auto;margin-right:4px">Podcast</span></a>
+        <a href="/videoworks" class="oc-item">VideoWorks <span style="font-size:11px;color:var(--muted);font-weight:400;margin-left:auto;margin-right:4px">Studio</span></a>
+        <a href="/brands" class="oc-item">Brands <span style="font-size:11px;color:var(--muted);font-weight:400;margin-left:auto;margin-right:4px">Brand Stories</span></a>
+        <a href="/people" class="oc-item">People <span style="font-size:11px;color:var(--muted);font-weight:400;margin-left:auto;margin-right:4px">People Stories</span></a>
+        <div class="oc-divider"></div>
+        <button class="oc-item oc-item--has-sub" onclick="openSub('gharevents')"> GharEvents <svg class="oc-item-arrow" viewBox="0 0 24 24" stroke-linecap="round"><path d="M9 18l6-6-6-6" /></svg> </button>
+        <a href="/events" class="oc-item">Events</a>
+        <div class="oc-divider"></div>
+        <button class="oc-item oc-item--has-sub" onclick="openSub('services')"> Services <svg class="oc-item-arrow" viewBox="0 0 24 24" stroke-linecap="round"><path d="M9 18l6-6-6-6" /></svg> </button>
+        <button class="oc-item oc-item--has-sub" onclick="openSub('tools')"> Tools <svg class="oc-item-arrow" viewBox="0 0 24 24" stroke-linecap="round"><path d="M9 18l6-6-6-6" /></svg> </button>
+      </div>
+      <div class="oc-panel oc-panel--l2" id="ocSub-cities"> <button class="oc-back" onclick="closeSub()"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M15 18l-6-6 6-6" /></svg> Back</button> <span class="oc-label">Browse By City</span>
+        <div class="oc-search"> <svg class="oc-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg> <input type="search" id="ocCitySearch" class="oc-search-input" placeholder="Select or type your city" autocomplete="off"> <button type="button" class="oc-search-clear" id="ocCitySearchClear" onclick="clearCitySearch()" aria-label="Clear search" hidden> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18" /><path d="M6 6l12 12" /></svg> </button> </div>
+        <div class="oc-section-hd" data-section="top">Popular Cities</div>
+        <div class="oc-city-grid" id="ocCityGrid">
+          <a href="/mumbai" class="oc-city-tile oc-city" data-city="mumbai"><span class="oc-city-tile-label">Mumbai</span></a>
+          <a href="/delhi" class="oc-city-tile oc-city" data-city="delhi"><span class="oc-city-tile-label">Delhi</span></a>
+          <a href="/bengaluru" class="oc-city-tile oc-city" data-city="bengaluru"><span class="oc-city-tile-label">Bengaluru</span></a>
+          <a href="/chennai" class="oc-city-tile oc-city" data-city="chennai"><span class="oc-city-tile-label">Chennai</span></a>
+          <a href="/gurugram" class="oc-city-tile oc-city" data-city="gurugram"><span class="oc-city-tile-label">Gurugram</span></a>
+          <a href="/hyderabad" class="oc-city-tile oc-city" data-city="hyderabad"><span class="oc-city-tile-label">Hyderabad</span></a>
+          <a href="/kolkata" class="oc-city-tile oc-city" data-city="kolkata"><span class="oc-city-tile-label">Kolkata</span></a>
+          <a href="/pune" class="oc-city-tile oc-city" data-city="pune"><span class="oc-city-tile-label">Pune</span></a>
+        </div>
+        <div class="oc-city-empty" id="ocCityEmpty" hidden>No cities match "<span id="ocCityEmptyTerm"></span>"</div>
+      </div>
+      <div class="oc-panel oc-panel--l2" id="ocSub-content"> <button class="oc-back" onclick="closeSub()"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M15 18l-6-6 6-6" /></svg> Back</button> <span class="oc-label">Read &amp; Watch</span>
+        <a href="/intelligence" class="oc-sub-item">Intelligence</a>
+        <a href="/design" class="oc-sub-item">Design</a>
+        <a href="/voices" class="oc-sub-item">Industry Voices</a>
+        <a href="/videos" class="oc-sub-item">Videos</a>
+      </div>
+      <div class="oc-panel oc-panel--l2" id="ocSub-gharevents"> <button class="oc-back" onclick="closeSub()"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M15 18l-6-6 6-6" /></svg> Back</button> <span class="oc-label">GharEvents</span>
+        <a href="/events/india-property-show" class="oc-sub-item">India Property Show</a>
+        <a href="/events/india-luxury-property-show" class="oc-sub-item">India Luxury Property Show</a>
+        <a href="/events/india-proptech-expo" class="oc-sub-item">India PropTech Expo</a>
+        <a href="/events/india-senior-living-show" class="oc-sub-item">India Senior Living Show</a>
+      </div>
+      <div class="oc-panel oc-panel--l2" id="ocSub-services"> <button class="oc-back" onclick="closeSub()"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M15 18l-6-6 6-6" /></svg> Back</button> <span class="oc-label">Services</span>
+        <a href="/services/home-loans" class="oc-sub-item">Ghar Finance</a>
+        <a href="/services/interior-design" class="oc-sub-item">Ghar Design</a>
+        <a href="/services/relocation" class="oc-sub-item">Ghar Move</a>
+      </div>
+      <div class="oc-panel oc-panel--l2" id="ocSub-tools"> <button class="oc-back" onclick="closeSub()"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M15 18l-6-6 6-6" /></svg> Back</button> <span class="oc-label">Tools</span>
+        <a href="/tools/emi-calculator" class="oc-sub-item">EMI Calculator</a>
+        <a href="/tools/stamp-duty-calculator" class="oc-sub-item">Stamp Duty Calculator</a>
+        <a href="/tools/area-converter" class="oc-sub-item">Area Converter</a>
+      </div>
     </div>
-    <ul class="oc-links" role="list">
-      <li><a href="https://www.ghar.tv/intelligence/">Intelligence <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
-      <li><a href="https://www.ghar.tv/design/">Design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
-      <li><a href="https://www.ghar.tv/ghartalks/">GharTalks <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
-      <li><a href="https://www.ghar.tv/events/">GharEvents <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
-      <li><a href="https://www.ghar.tv/videoworks/">VideoWorks <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
-      <li><a href="https://www.ghar.tv/people/">People <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
-      <li><a href="https://www.ghar.tv/postproperty.php">Post Property <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
-      <li><a href="https://www.ghar.tv/post-your-requirement.php">Post Requirement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
-    </ul>
-    <div class="oc-foot">
-      <a href="#" id="ocSignInLink" class="oc-foot-cta">Sign In / Join</a>
-      <p class="oc-foot-meta">India's AI-native real estate intelligence</p>
+    <div class="oc-footer">
+      <div class="oc-footer-links"> <a href="#" onclick="event.preventDefault();closeOC();setTimeout(openSignIn,400)" style="font-weight:600;color:var(--ink)">Sign In</a> <a href="/aboutus.php">About Us</a> <a href="/contact.php">Contact Us</a> <a href="/careers.php">Careers</a> <a href="/qa">Q&amp;A</a> </div>
     </div>
   </nav>
 
@@ -1691,57 +1692,8 @@
 
   <!-- JS -->
   <script>
-  // Nav handlers — off-canvas menu + sign-in + mobile search.
-  // openOC / closeOC toggle the #ocMenu + #ocOverlay (same API as main.js so design.html-style buttons work).
-  (function(){
-    var oc      = document.getElementById('ocMenu');
-    var overlay = document.getElementById('ocOverlay');
-    var closeBtn = oc && oc.querySelector('.oc-close');
-    function openOC(){
-      if (!oc) return;
-      oc.classList.add('is-open');
-      overlay.classList.add('is-open');
-      oc.setAttribute('aria-hidden', 'false');
-      overlay.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeOC(){
-      if (!oc) return;
-      oc.classList.remove('is-open');
-      overlay.classList.remove('is-open');
-      oc.setAttribute('aria-hidden', 'true');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-    overlay && overlay.addEventListener('click', closeOC);
-    closeBtn && closeBtn.addEventListener('click', closeOC);
-    // Close any link click closes the menu
-    oc && oc.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', closeOC);
-    });
-    // Escape key closes menu
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && oc.classList.contains('is-open')) closeOC();
-    });
-    window.openOC = openOC;
-    window.closeOC = closeOC;
-
-    // Compact pill (desktop scrolled state) → triggers the same mobile search modal
-    // (main.js handler). Compact pill click in main.js is wired to expand the nav;
-    // for this standalone page we want it to open the search modal instead.
-    var cSearchEl = document.getElementById('compactSearch');
-    if (cSearchEl) cSearchEl.addEventListener('click', function(e){
-      e.stopPropagation();
-      if (typeof openMobileSearch === 'function') openMobileSearch();
-    });
-    // Off-canvas Sign In link → opens the joinModal (main.js openSignIn)
-    var ocSignIn = document.getElementById('ocSignInLink');
-    if (ocSignIn) ocSignIn.addEventListener('click', function(e){
-      e.preventDefault();
-      closeOC();
-      if (typeof openSignIn === 'function') openSignIn();
-    });
-  })();
+  // openOC / closeOC / openSignIn / openMobileSearch are all provided by main.js (loaded at the bottom).
+  // This page now uses the design.html / index4 off-canvas menu + modals verbatim.
 
   (function () {
     'use strict';
