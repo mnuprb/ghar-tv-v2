@@ -181,6 +181,137 @@
     .nav-btn-bar--w14 { width: 14px; }
     .nav-btn-bar + .nav-btn-bar { margin-top: 4px; }
 
+    /* ─── Full-viewport search modal (mirrors design.html mobile-search) ─── */
+    .sm {
+      position: fixed; inset: 0; z-index: 1001;
+      background: var(--warm-white, #faf7f2);
+      opacity: 0; visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity .3s ease, visibility .3s ease, transform .35s cubic-bezier(.4,0,.2,1);
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+    }
+    .sm.is-open { opacity: 1; visibility: visible; transform: none; }
+    .sm__close {
+      position: absolute; top: 18px; left: 18px;
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--rule);
+      background: #fff; color: var(--ink);
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background .18s ease, border-color .18s ease;
+      z-index: 2;
+    }
+    .sm__close:hover { background: var(--surface); border-color: var(--ink); }
+    .sm__close svg { width: 18px; height: 18px; }
+    .sm__inner {
+      flex: 1;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 72px 20px 120px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .sm-sec {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color .2s ease;
+    }
+    .sm-sec.is-active { border-color: rgba(17,17,17,.18); }
+    .sm-sec__head { padding: 26px 26px 30px; display: flex; flex-direction: column; gap: 22px; }
+    .sm-sec__title {
+      font-family: var(--ff-display);
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -.015em; color: var(--ink);
+    }
+    .sm-sec__search {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 16px; border-radius: 999px;
+      border: 1px solid var(--rule); background: #fff;
+      transition: border-color .2s ease;
+    }
+    .sm-sec__search:focus-within { border-color: var(--ink); }
+    .sm-sec__search svg { width: 16px; height: 16px; color: var(--muted); flex-shrink: 0; }
+    .sm-sec__search input {
+      flex: 1; border: 0; outline: 0;
+      font-family: var(--ff-sans); font-size: 14px; color: var(--ink);
+      background: transparent;
+    }
+    .sm-pop { display: flex; flex-direction: column; gap: 12px; }
+    .sm-pop__label {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .sm-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sm-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid var(--rule); background: #fff;
+      font-family: var(--ff-sans); font-size: 13.5px; font-weight: 500;
+      color: var(--ink);
+      transition: border-color .18s ease, background .18s ease, color .18s ease;
+      cursor: pointer;
+    }
+    .sm-pill:hover { border-color: var(--ink); }
+    .sm-pill.is-selected { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .sm-pills--cat .sm-pill span { font-size: 14px; }
+    .sm-divider {
+      position: relative; display: flex; align-items: center;
+      font-size: 12px; color: var(--muted);
+      margin: 4px 0;
+    }
+    .sm-divider::before, .sm-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--rule);
+    }
+    .sm-divider span { padding: 0 14px; }
+    .sm-sec__collapsed {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 14px; padding: 20px 26px;
+      background: transparent; border: 0;
+      font-family: var(--ff-sans);
+      transition: background .15s ease;
+      cursor: pointer;
+    }
+    .sm-sec__collapsed:hover { background: var(--surface); }
+    .sm-sec__k { font-size: 14px; font-weight: 500; color: var(--ink2); }
+    .sm-sec__v { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .sm-sec__expanded { display: none; padding: 4px 26px 28px; flex-direction: column; gap: 18px; }
+    .sm-sec.is-active .sm-sec__expanded { display: flex; }
+    .sm-sec.is-active .sm-sec__collapsed { display: none; }
+    .sm-sec.is-active.sm-sec--where .sm-sec__head { display: flex; }
+    .sm-sec:not(.is-active) .sm-sec__head { display: none; }
+    .sm__foot {
+      position: sticky; bottom: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 16px 20px;
+      background: var(--warm-white, #faf7f2);
+      border-top: 1px solid var(--rule);
+    }
+    .sm-clear {
+      background: transparent; border: 0;
+      font-family: var(--ff-sans); font-size: 14px; font-weight: 600;
+      color: var(--ink); text-decoration: underline;
+      cursor: pointer;
+    }
+    .sm-submit {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 999px;
+      background: var(--accent); color: #fff; border: 0;
+      font-family: var(--ff-sans); font-size: 15px; font-weight: 600;
+      letter-spacing: .01em;
+      transition: background .22s ease, transform .22s ease;
+      cursor: pointer;
+    }
+    .sm-submit:hover { background: #d52540; transform: translateY(-1px); }
+    .sm-submit svg { width: 16px; height: 16px; }
+    @media (min-width: 744px) {
+      .sm__close { top: 24px; left: 24px; }
+      .sm__inner { padding: 80px 24px 140px; }
+      .sm__foot { padding: 18px 32px; }
+    }
+
     /* ─── Modal system (shared by search + sign-in) — mirrors design.html joinModal ─── */
     .modal {
       position: fixed; inset: 0; z-index: 1000;
@@ -217,13 +348,15 @@
     .modal__close svg { width: 18px; height: 18px; }
     .modal__title {
       font-family: var(--ff-display);
-      font-size: 26px; font-weight: 700;
+      font-size: 28px; font-weight: 700;
       letter-spacing: -.018em; color: var(--ink);
       margin-bottom: 6px;
+      text-align: center;
     }
     .modal__subtitle {
       font-size: 14px; line-height: 1.6;
       color: var(--ink2); margin-bottom: 24px;
+      text-align: center;
     }
     .modal__field-label {
       display: block;
@@ -1620,42 +1753,76 @@
     </div>
   </nav>
 
-  <!-- ═══ SEARCH MODAL — opened by .nav search trigger / mobile search ═══ -->
-  <div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-label="Search properties" aria-hidden="true">
-    <div class="modal__overlay" data-modal-close></div>
-    <div class="modal__card">
-      <button class="modal__close" type="button" data-modal-close aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-      <h2 class="modal__title">Search Properties</h2>
-      <p class="modal__subtitle">Find your next home &mdash; by city, locality, project, or pin-code.</p>
-      <form id="searchModalForm" novalidate>
-        <div class="modal__field">
-          <label class="modal__field-label" for="searchWhere">Where</label>
-          <input id="searchWhere" type="text" class="modal__input" placeholder="City, locality, project or pin-code" autocomplete="off">
-        </div>
-        <div class="modal__field-row">
-          <div>
-            <label class="modal__field-label" for="searchMode">Looking for</label>
-            <select id="searchMode" class="modal__input">
-              <option value="buy">Buy</option>
-              <option value="rent">Rent</option>
-            </select>
+  <!-- ═══ SEARCH MODAL — full-viewport takeover mirroring design.html mobile search ═══ -->
+  <div id="searchModal" class="sm" role="dialog" aria-modal="true" aria-label="Search properties" aria-hidden="true">
+    <button class="sm__close" type="button" data-modal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="sm__inner">
+      <!-- WHERE section (expanded by default) -->
+      <div class="sm-sec is-active" id="smSecWhere">
+        <div class="sm-sec__head" data-sm-sec="where">
+          <h2 class="sm-sec__title">Where?</h2>
+          <div class="sm-sec__search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input id="smWhereInput" type="text" placeholder="Search city, locality..." autocomplete="off">
           </div>
-          <div>
-            <label class="modal__field-label" for="searchType">Property type</label>
-            <select id="searchType" class="modal__input">
-              <option value="homes">Homes</option>
-              <option value="workspaces">Workspaces</option>
-              <option value="land">Land</option>
-            </select>
+          <div class="sm-pop">
+            <span class="sm-pop__label">Popular cities</span>
+            <div class="sm-pills">
+              <button type="button" class="sm-pill" data-city="mumbai">Mumbai</button>
+              <button type="button" class="sm-pill" data-city="delhi">Delhi</button>
+              <button type="button" class="sm-pill" data-city="bengaluru">Bengaluru</button>
+              <button type="button" class="sm-pill" data-city="pune">Pune</button>
+              <button type="button" class="sm-pill" data-city="jaipur">Jaipur</button>
+            </div>
+          </div>
+          <div class="sm-divider"><span>or browse by category</span></div>
+          <div class="sm-pills sm-pills--cat">
+            <button type="button" class="sm-pill" data-cat="senior-living"><span>🛏</span> Senior Living</button>
+            <button type="button" class="sm-pill" data-cat="co-living"><span>🏠</span> Co-Living</button>
+            <button type="button" class="sm-pill" data-cat="co-working"><span>💼</span> Co-Working</button>
+            <button type="button" class="sm-pill" data-cat="warehouse"><span>📦</span> Warehouse</button>
+            <button type="button" class="sm-pill" data-cat="auction"><span>🔨</span> Auction Deals</button>
           </div>
         </div>
-        <button type="submit" class="modal__btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-          Search
+      </div>
+      <!-- MODE section (collapsed) -->
+      <div class="sm-sec" id="smSecMode">
+        <button class="sm-sec__collapsed" type="button" data-sm-sec="mode">
+          <span class="sm-sec__k">Mode</span>
+          <span class="sm-sec__v" id="smModeVal">Buy</span>
         </button>
-      </form>
+        <div class="sm-sec__expanded">
+          <h2 class="sm-sec__title">Looking to</h2>
+          <div class="sm-pills sm-pills--toggle" data-sm-group="mode">
+            <button type="button" class="sm-pill" data-val="buy">Buy</button>
+            <button type="button" class="sm-pill" data-val="rent">Rent</button>
+          </div>
+        </div>
+      </div>
+      <!-- TYPE section (collapsed) -->
+      <div class="sm-sec" id="smSecType">
+        <button class="sm-sec__collapsed" type="button" data-sm-sec="type">
+          <span class="sm-sec__k">Type</span>
+          <span class="sm-sec__v" id="smTypeVal">Homes</span>
+        </button>
+        <div class="sm-sec__expanded">
+          <h2 class="sm-sec__title">Property type</h2>
+          <div class="sm-pills sm-pills--toggle" data-sm-group="type">
+            <button type="button" class="sm-pill" data-val="homes">Homes</button>
+            <button type="button" class="sm-pill" data-val="workspaces">Workspaces</button>
+            <button type="button" class="sm-pill" data-val="land">Land</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sm__foot">
+      <button type="button" class="sm-clear" id="smClearAll">Clear all</button>
+      <button type="button" class="sm-submit" id="smSubmit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        Search
+      </button>
     </div>
   </div>
 
@@ -1843,33 +2010,112 @@
       m.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
-    // Wire [data-modal-close] on overlay + X buttons to close their parent modal
+    // Wire [data-modal-close] on overlay + X buttons to close their parent modal/sm
     document.querySelectorAll('[data-modal-close]').forEach(function(el){
       el.addEventListener('click', function(e){
         e.preventDefault();
-        var m = el.closest('.modal');
-        if (m) closeModal(m.id);
+        var m = el.closest('.modal') || el.closest('.sm');
+        if (m) {
+          m.classList.remove('is-open');
+          m.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
       });
     });
-    // Esc closes any open modal
+    // Esc closes any open modal / search modal
     document.addEventListener('keydown', function(e){
       if (e.key !== 'Escape') return;
-      document.querySelectorAll('.modal.is-open').forEach(function(m){ closeModal(m.id); });
+      document.querySelectorAll('.modal.is-open, .sm.is-open').forEach(function(m){
+        m.classList.remove('is-open');
+        m.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
     });
 
-    // Search modal → opened by tablet trigger, mobile search row, compact pill,
-    // and the desktop expanded search bar's outer click.
-    window.openMobileSearch = function(){ openModal('searchModal', '#searchWhere'); };
-    window.closeMobileSearch = function(){ closeModal('searchModal'); };
+    // ─── Search modal — accordion sections + pill toggles ───
+    var sm = document.getElementById('searchModal');
+    function openSearch(){
+      if (!sm) return;
+      sm.classList.add('is-open');
+      sm.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){
+        var inp = document.getElementById('smWhereInput');
+        if (inp) inp.focus();
+      }, 320);
+    }
+    function closeSearch(){
+      if (!sm) return;
+      sm.classList.remove('is-open');
+      sm.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    // Toggle which sm-sec is active (accordion)
+    function setActiveSec(name){
+      ['where','mode','type'].forEach(function(n){
+        var sec = document.getElementById('smSec' + n.charAt(0).toUpperCase() + n.slice(1));
+        if (!sec) return;
+        sec.classList.toggle('is-active', n === name);
+      });
+    }
+    // Wire collapsed section clicks to expand them
+    if (sm) {
+      sm.querySelectorAll('[data-sm-sec]').forEach(function(el){
+        el.addEventListener('click', function(e){
+          // Don't expand if the click came from inside the active head's controls
+          if (el.classList.contains('sm-sec__head')) return;
+          setActiveSec(el.getAttribute('data-sm-sec'));
+        });
+      });
+      // Pill toggle groups (mode + type) — single-select, updates collapsed value display
+      sm.querySelectorAll('[data-sm-group]').forEach(function(group){
+        var key = group.getAttribute('data-sm-group');
+        var valEl = document.getElementById('sm' + key.charAt(0).toUpperCase() + key.slice(1) + 'Val');
+        group.querySelectorAll('.sm-pill').forEach(function(p){
+          // Initial: first pill selected
+          if (p === group.querySelector('.sm-pill')) p.classList.add('is-selected');
+          p.addEventListener('click', function(){
+            group.querySelectorAll('.sm-pill').forEach(function(x){ x.classList.remove('is-selected'); });
+            p.classList.add('is-selected');
+            if (valEl) valEl.textContent = p.textContent.trim();
+            // Auto-collapse this section + open the next one for flow
+            if (key === 'mode') setActiveSec('type');
+            else if (key === 'type') setActiveSec('where');
+          });
+        });
+      });
+      // City pills + category chips — single-select within their group
+      sm.querySelectorAll('.sm-pop .sm-pills .sm-pill, .sm-pills--cat .sm-pill').forEach(function(p){
+        p.addEventListener('click', function(){
+          var siblings = p.parentElement.querySelectorAll('.sm-pill');
+          siblings.forEach(function(x){ x.classList.remove('is-selected'); });
+          p.classList.add('is-selected');
+        });
+      });
+      // Clear all
+      var clearBtn = document.getElementById('smClearAll');
+      if (clearBtn) clearBtn.addEventListener('click', function(){
+        sm.querySelectorAll('.sm-pill.is-selected').forEach(function(x){ x.classList.remove('is-selected'); });
+        // Re-default mode = Buy, type = Homes
+        var modeFirst = sm.querySelector('[data-sm-group="mode"] .sm-pill');
+        var typeFirst = sm.querySelector('[data-sm-group="type"] .sm-pill');
+        if (modeFirst) modeFirst.classList.add('is-selected');
+        if (typeFirst) typeFirst.classList.add('is-selected');
+        var input = document.getElementById('smWhereInput');
+        if (input) input.value = '';
+        document.getElementById('smModeVal').textContent = 'Buy';
+        document.getElementById('smTypeVal').textContent = 'Homes';
+        setActiveSec('where');
+      });
+      // Submit
+      var submitBtn = document.getElementById('smSubmit');
+      if (submitBtn) submitBtn.addEventListener('click', function(){ closeSearch(); });
+    }
+    window.openMobileSearch  = openSearch;
+    window.closeMobileSearch = closeSearch;
     // Compact pill (desktop scrolled state) also opens the modal
     var cSearchEl = document.getElementById('compactSearch');
-    if (cSearchEl) cSearchEl.addEventListener('click', window.openMobileSearch);
-    // Submit handler — placeholder, just closes the modal (no real search yet)
-    var searchForm = document.getElementById('searchModalForm');
-    if (searchForm) searchForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      closeModal('searchModal');
-    });
+    if (cSearchEl) cSearchEl.addEventListener('click', openSearch);
 
     // Sign-in modal → opened by account icon, bottom-bar Account, off-canvas
     // 'Sign In / Join' link. Closing OC menu first so the modal sits cleanly on top.
