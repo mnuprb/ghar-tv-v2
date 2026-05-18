@@ -119,44 +119,10 @@
       #desktopNavRow { display: none !important; }
       body { padding-bottom: 68px; }
     }
-    /* On-scroll state — swap expanded search for compact pill, shrink nav row.
-       Matches design.html's collapseNav() behavior. */
-    #mainNav.is-scrolled {
-      box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 2px 8px rgba(0,0,0,.04);
-      border-bottom-color: transparent;
-    }
-    #mainNav.is-scrolled #desktopNavRow { height: 68px; }
-    #compactSearch:hover { box-shadow: 0 4px 18px rgba(0,0,0,.10) !important; }
-    #mobSearchRow { display: none; }
+    /* Nav scroll-shrink + iPad search swap is all driven by main.js
+       (collapseNav / expandNav / showMidTrigger) — no inline overrides needed
+       now that styles.css + main.js handle the canonical behavior. */
     @media (max-width: 743.98px) { #mobSearchRow { display: block; } }
-
-    /* Tablet / mid-screen (744–1079): swap full expanded search for a simple
-       'Search Properties' trigger pill (matches index4.html / main.js
-       showMidTrigger pattern — the #compactSearch with Anywhere|Buy|Homes is
-       reserved for the desktop scroll-collapse state, not iPad layout). */
-    @media (min-width: 744px) and (max-width: 1079.98px) {
-      #expandedSearch { display: none !important; }
-      #compactSearch { display: none !important; }
-      #tabletSearchTrigger { display: flex !important; }
-      /* Force a minimum on the center column so the 'Search Properties' pill
-         renders at index4-equivalent width (~270px) instead of being squeezed
-         to its content size in an auto column. */
-      #desktopNavRow {
-        grid-template-columns: 1fr minmax(310px, auto) 1fr !important;
-      }
-      /* In the scrolled state at iPad widths the compact pill DOES become useful
-         (replaces the trigger to save space). */
-      #mainNav.is-scrolled #tabletSearchTrigger { display: none !important; }
-      #mainNav.is-scrolled #compactSearch {
-        display: flex !important;
-        opacity: 1 !important;
-        transform: none !important;
-      }
-    }
-    /* Slight shrink on the right-side button group at iPad widths */
-    @media (min-width: 744px) and (max-width: 899.98px) {
-      .nav-btn { padding: 9px 14px; font-size: 13px; }
-    }
 
     /* Theme outline button — Post Property, Account icon, Menu hamburger */
     .nav-btn {
@@ -1736,54 +1702,15 @@
       });
     }
 
-    // Reading progress
+    // Reading progress (nav scroll-collapse / search-pill swap is now driven by main.js)
     var bar = document.getElementById('readingProgress');
-    // Nav collapse/expand — swaps #expandedSearch ↔ #compactSearch on scroll.
-    // Mirrors design.html's collapseNav() / expandNav() in main.js.
-    var mainNav  = document.getElementById('mainNav');
-    var eSearch  = document.getElementById('expandedSearch');
-    var cSearch  = document.getElementById('compactSearch');
-    var navCol   = false;
-    function collapseNav(){
-      navCol = true;
-      mainNav.classList.add('is-scrolled');
-      eSearch.style.display = 'none';
-      cSearch.style.display = 'flex';
-      // force reflow then animate in
-      void cSearch.offsetWidth;
-      cSearch.style.opacity = '1';
-      cSearch.style.transform = 'scale(1)';
-    }
-    function expandNav(){
-      navCol = false;
-      mainNav.classList.remove('is-scrolled');
-      cSearch.style.opacity = '0';
-      cSearch.style.transform = 'scale(.92)';
-      setTimeout(function(){
-        cSearch.style.display = 'none';
-        eSearch.style.display = 'flex';
-      }, 220);
-    }
-    // Compact pill click → open mobile search (or scroll to top in this page's case)
-    cSearch.addEventListener('click', function(){
-      if (typeof openMobileSearch === 'function') openMobileSearch();
-    });
-    window.addEventListener('scroll', function () {
-      var y = window.scrollY;
-      if (bar) {
+    if (bar) {
+      window.addEventListener('scroll', function () {
         var total = document.body.scrollHeight - window.innerHeight;
-        var pct = Math.min(Math.max(y / total * 100, 0), 100);
+        var pct = Math.min(Math.max(window.scrollY / total * 100, 0), 100);
         bar.style.width = pct + '%';
-      }
-      // Only run the collapse/expand on desktop (where the expanded pill renders).
-      // Below 744px the desktop row is display:none anyway, so just toggle the shadow.
-      if (window.innerWidth >= 744) {
-        if (y > 8 && !navCol) collapseNav();
-        else if (y <= 8 && navCol) expandNav();
-      } else {
-        mainNav.classList.toggle('is-scrolled', y > 8);
-      }
-    }, { passive: true });
+      }, { passive: true });
+    }
 
     // Reveal on scroll
     var reveals = document.querySelectorAll('.reveal');
