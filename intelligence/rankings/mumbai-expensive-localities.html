@@ -181,6 +181,152 @@
     .nav-btn-bar--w14 { width: 14px; }
     .nav-btn-bar + .nav-btn-bar { margin-top: 4px; }
 
+    /* ─── Modal system (shared by search + sign-in) — mirrors design.html joinModal ─── */
+    .modal {
+      position: fixed; inset: 0; z-index: 1000;
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+    .modal.is-open { opacity: 1; visibility: visible; }
+    .modal__overlay {
+      position: absolute; inset: 0;
+      background: rgba(17,17,17,.5);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+    }
+    .modal__card {
+      position: relative; z-index: 1;
+      background: #fff; border-radius: 20px;
+      width: min(460px, 92vw);
+      margin: clamp(20px, 8vh, 80px) auto 0;
+      padding: 32px 32px 28px;
+      box-shadow: 0 32px 80px rgba(0,0,0,.18), 0 6px 16px rgba(0,0,0,.06);
+      transform: translateY(20px); opacity: 0;
+      transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal.is-open .modal__card { transform: none; opacity: 1; }
+    .modal__close {
+      position: absolute; top: 18px; right: 18px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: transparent; color: var(--ink);
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background .2s ease;
+    }
+    .modal__close:hover { background: var(--surface); }
+    .modal__close svg { width: 18px; height: 18px; }
+    .modal__title {
+      font-family: var(--ff-display);
+      font-size: 26px; font-weight: 700;
+      letter-spacing: -.018em; color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .modal__subtitle {
+      font-size: 14px; line-height: 1.6;
+      color: var(--ink2); margin-bottom: 24px;
+    }
+    .modal__field-label {
+      display: block;
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .modal__input {
+      width: 100%;
+      font-family: var(--ff-sans); font-size: 15px;
+      padding: 14px 16px; border-radius: 10px;
+      border: 1.5px solid var(--rule); background: #fff;
+      color: var(--ink);
+      transition: border-color .2s ease;
+    }
+    .modal__input:focus { outline: none; border-color: var(--ink); }
+    .modal__btn {
+      width: 100%; display: inline-flex;
+      align-items: center; justify-content: center; gap: 8px;
+      padding: 15px 22px; border-radius: 10px;
+      background: var(--ink); color: #fff; border: 0;
+      font-family: var(--ff-sans); font-size: 15px; font-weight: 600;
+      letter-spacing: .01em;
+      transition: background .22s ease, transform .22s ease;
+      cursor: pointer;
+    }
+    .modal__btn:hover { background: var(--accent); transform: translateY(-1px); }
+    .modal__field { margin-bottom: 14px; }
+    .modal__field-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      margin-bottom: 18px;
+    }
+    /* Sign-in specifics */
+    .modal__phone {
+      display: flex; align-items: stretch; gap: 0;
+      border: 1.5px solid var(--rule); border-radius: 10px;
+      overflow: hidden;
+      transition: border-color .2s ease;
+    }
+    .modal__phone:focus-within { border-color: var(--ink); }
+    .modal__cc {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 0 12px 0 14px;
+      background: var(--surface);
+      border: 0; border-right: 1px solid var(--rule);
+      font-family: var(--ff-sans); font-size: 14px; font-weight: 500;
+      color: var(--ink); cursor: pointer;
+      white-space: nowrap;
+    }
+    .modal__cc img { width: 20px; height: auto; display: block; border-radius: 2px; }
+    .modal__cc svg { width: 10px; height: 10px; opacity: .6; }
+    .modal__phone input {
+      flex: 1; border: 0; outline: 0;
+      padding: 14px 16px;
+      font-family: var(--ff-sans); font-size: 15px; color: var(--ink);
+      background: transparent;
+    }
+    .modal__pw {
+      position: relative;
+    }
+    .modal__pw input { padding-right: 44px; }
+    .modal__pw-toggle {
+      position: absolute; right: 12px; top: 50%;
+      transform: translateY(-50%);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: transparent; color: var(--muted);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .modal__pw-toggle:hover { color: var(--ink); background: var(--surface); }
+    .modal__meta {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-size: 13px; margin-top: 14px;
+    }
+    .modal__meta a { color: var(--ink); font-weight: 500; }
+    .modal__meta a:hover { color: var(--accent); }
+    .modal__meta span { color: var(--muted); }
+    .modal__divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 24px 0 16px;
+      font-size: 11px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .modal__divider::before, .modal__divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--rule);
+    }
+    .modal__new-actions {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .modal__new-actions a {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--rule); border-radius: 10px;
+      font-size: 13.5px; font-weight: 600; color: var(--ink);
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .modal__new-actions a:hover { border-color: var(--ink); background: var(--surface); }
+    .modal__new-actions svg { width: 16px; height: 16px; }
+    .modal__terms {
+      font-size: 11.5px; line-height: 1.55; color: var(--muted);
+      text-align: center; margin-top: 18px;
+    }
+    .modal__terms a { color: var(--ink2); text-decoration: underline; }
+
     /* ─── Off-canvas menu (slides in from right, opened by hamburger) ─── */
     #ocOverlay {
       position: fixed; inset: 0; z-index: 990;
@@ -1469,10 +1615,97 @@
       <li><a href="https://www.ghar.tv/post-your-requirement.php">Post Requirement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
     </ul>
     <div class="oc-foot">
-      <a href="https://www.ghar.tv/login/" class="oc-foot-cta">Sign In / Join</a>
+      <a href="#" id="ocSignInLink" class="oc-foot-cta">Sign In / Join</a>
       <p class="oc-foot-meta">India's AI-native real estate intelligence</p>
     </div>
   </nav>
+
+  <!-- ═══ SEARCH MODAL — opened by .nav search trigger / mobile search ═══ -->
+  <div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-label="Search properties" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__card">
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <h2 class="modal__title">Search Properties</h2>
+      <p class="modal__subtitle">Find your next home &mdash; by city, locality, project, or pin-code.</p>
+      <form id="searchModalForm" novalidate>
+        <div class="modal__field">
+          <label class="modal__field-label" for="searchWhere">Where</label>
+          <input id="searchWhere" type="text" class="modal__input" placeholder="City, locality, project or pin-code" autocomplete="off">
+        </div>
+        <div class="modal__field-row">
+          <div>
+            <label class="modal__field-label" for="searchMode">Looking for</label>
+            <select id="searchMode" class="modal__input">
+              <option value="buy">Buy</option>
+              <option value="rent">Rent</option>
+            </select>
+          </div>
+          <div>
+            <label class="modal__field-label" for="searchType">Property type</label>
+            <select id="searchType" class="modal__input">
+              <option value="homes">Homes</option>
+              <option value="workspaces">Workspaces</option>
+              <option value="land">Land</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="modal__btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          Search
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══ SIGN-IN MODAL — opened by account icon / bottom-bar Account / off-canvas Sign In ═══ -->
+  <div id="signInModal" class="modal" role="dialog" aria-modal="true" aria-label="Sign in to Ghar.tv" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__card">
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <h2 class="modal__title">Sign In</h2>
+      <p class="modal__subtitle">Enter your registered mobile number and password.</p>
+      <form id="signInForm" novalidate>
+        <div class="modal__field">
+          <div class="modal__phone">
+            <button type="button" class="modal__cc" aria-label="Country code">
+              <img src="https://flagcdn.com/w40/in.png" alt="IN" width="20" height="14">
+              <span>+91</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <input id="signInPhone" type="tel" placeholder="Mobile number" maxlength="10" inputmode="numeric" autocomplete="tel">
+          </div>
+        </div>
+        <div class="modal__field modal__pw">
+          <input id="signInPw" type="password" class="modal__input" placeholder="Password" autocomplete="current-password">
+          <button type="button" class="modal__pw-toggle" id="signInPwToggle" aria-label="Show password">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <button type="submit" class="modal__btn">Sign In</button>
+        <div class="modal__meta">
+          <a href="#">Forgot Password?</a>
+          <span>&middot;</span>
+          <a href="#">Login with OTP</a>
+        </div>
+        <div class="modal__divider">New to Ghar.tv?</div>
+        <div class="modal__new-actions">
+          <a href="https://www.ghar.tv/postproperty.php">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10.5L12 3l9 7.5V21a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 21z"/></svg>
+            Post Property
+          </a>
+          <a href="https://www.ghar.tv/post-your-requirement.php">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Post Requirement
+          </a>
+        </div>
+        <p class="modal__terms">By signing in, you agree to Ghar.tv's <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.</p>
+      </form>
+    </div>
+  </div>
 
   <!-- ═══ NEWSLETTER ═══ -->
   <section class="cta" id="newsletter">
@@ -1590,20 +1823,81 @@
     });
     window.openOC = openOC;
     window.closeOC = closeOC;
-    // Sign in → navigate to /login (placeholder; real modal lives in main.js on category pages)
-    window.openSignIn = function(){ location.href = 'https://www.ghar.tv/login/'; };
-    // Mobile / tablet search → focus the desktop search if visible, else go home.
-    // (Full search modal lives in main.js on category pages; standalone detail
-    // pages don't ship it, so this is a graceful fallback.)
-    window.openMobileSearch = function(){
-      var input = document.querySelector('#searchBar input');
-      if (input && input.offsetParent !== null) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(function(){ input.focus(); }, 350);
-      } else {
-        location.href = 'https://www.ghar.tv/';
-      }
+
+    // ─── Modal helpers (shared by search + sign-in) ───
+    function openModal(id, focusSel){
+      var m = document.getElementById(id);
+      if (!m) return;
+      m.classList.add('is-open');
+      m.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      if (focusSel) setTimeout(function(){
+        var el = m.querySelector(focusSel);
+        if (el) el.focus();
+      }, 320);
+    }
+    function closeModal(id){
+      var m = document.getElementById(id);
+      if (!m) return;
+      m.classList.remove('is-open');
+      m.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    // Wire [data-modal-close] on overlay + X buttons to close their parent modal
+    document.querySelectorAll('[data-modal-close]').forEach(function(el){
+      el.addEventListener('click', function(e){
+        e.preventDefault();
+        var m = el.closest('.modal');
+        if (m) closeModal(m.id);
+      });
+    });
+    // Esc closes any open modal
+    document.addEventListener('keydown', function(e){
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.modal.is-open').forEach(function(m){ closeModal(m.id); });
+    });
+
+    // Search modal → opened by tablet trigger, mobile search row, compact pill,
+    // and the desktop expanded search bar's outer click.
+    window.openMobileSearch = function(){ openModal('searchModal', '#searchWhere'); };
+    window.closeMobileSearch = function(){ closeModal('searchModal'); };
+    // Compact pill (desktop scrolled state) also opens the modal
+    var cSearchEl = document.getElementById('compactSearch');
+    if (cSearchEl) cSearchEl.addEventListener('click', window.openMobileSearch);
+    // Submit handler — placeholder, just closes the modal (no real search yet)
+    var searchForm = document.getElementById('searchModalForm');
+    if (searchForm) searchForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      closeModal('searchModal');
+    });
+
+    // Sign-in modal → opened by account icon, bottom-bar Account, off-canvas
+    // 'Sign In / Join' link. Closing OC menu first so the modal sits cleanly on top.
+    window.openSignIn = function(){
+      closeOC();
+      openModal('signInModal', '#signInPhone');
     };
+    window.closeSignIn = function(){ closeModal('signInModal'); };
+    // Off-canvas Sign In link
+    var ocSignIn = document.getElementById('ocSignInLink');
+    if (ocSignIn) ocSignIn.addEventListener('click', function(e){
+      e.preventDefault();
+      window.openSignIn();
+    });
+    // Password reveal toggle
+    var pwToggle = document.getElementById('signInPwToggle');
+    var pwInput  = document.getElementById('signInPw');
+    if (pwToggle && pwInput) pwToggle.addEventListener('click', function(){
+      var isPw = pwInput.type === 'password';
+      pwInput.type = isPw ? 'text' : 'password';
+      pwToggle.setAttribute('aria-label', isPw ? 'Hide password' : 'Show password');
+    });
+    // Sign-in submit — placeholder, just closes
+    var siForm = document.getElementById('signInForm');
+    if (siForm) siForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      closeModal('signInModal');
+    });
   })();
 
   (function () {
