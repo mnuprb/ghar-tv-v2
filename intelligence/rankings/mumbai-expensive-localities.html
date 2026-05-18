@@ -242,20 +242,6 @@
     .page { padding-top: 0; }
     @media (max-width: 743.98px)  { .page { padding-top: 0; } }
 
-    /* ─── Breadcrumb ─── */
-    .bc {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 20px var(--pad-h) 0;
-    }
-    .bc__inner { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .bc__link {
-      font-size: 12px; font-weight: 500; color: var(--muted);
-      transition: color .16s ease;
-    }
-    .bc__link:hover { color: var(--ink); }
-    .bc__sep { font-size: 11px; color: var(--muted); }
-    .bc__cur { font-size: 12px; font-weight: 600; color: var(--ink); }
-
     /* ─── Hero (article header) ─── */
     .hero {
       max-width: var(--max-w); margin: 0 auto;
@@ -910,19 +896,6 @@
 
   <!-- ═══ PAGE CONTENT ═══ -->
   <main class="page">
-
-    <!-- Breadcrumb -->
-    <nav class="bc" aria-label="Breadcrumb">
-      <div class="bc__inner">
-        <a href="https://www.ghar.tv/" class="bc__link">Ghar.tv</a>
-        <span class="bc__sep" aria-hidden="true">&rsaquo;</span>
-        <a href="https://www.ghar.tv/intelligence/" class="bc__link">Intelligence</a>
-        <span class="bc__sep" aria-hidden="true">&rsaquo;</span>
-        <a href="https://www.ghar.tv/intelligence/rankings/" class="bc__link">Rankings</a>
-        <span class="bc__sep" aria-hidden="true">&rsaquo;</span>
-        <span class="bc__cur">Top 10 Most Expensive Localities in Mumbai</span>
-      </div>
-    </nav>
 
     <!-- Hero -->
     <header class="hero">
