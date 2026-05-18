@@ -1592,11 +1592,17 @@
     window.closeOC = closeOC;
     // Sign in → navigate to /login (placeholder; real modal lives in main.js on category pages)
     window.openSignIn = function(){ location.href = 'https://www.ghar.tv/login/'; };
-    // Mobile search → focus the search input if visible, else open the menu
+    // Mobile / tablet search → focus the desktop search if visible, else go home.
+    // (Full search modal lives in main.js on category pages; standalone detail
+    // pages don't ship it, so this is a graceful fallback.)
     window.openMobileSearch = function(){
       var input = document.querySelector('#searchBar input');
-      if (input && input.offsetWidth > 0) { input.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-      else openOC();
+      if (input && input.offsetParent !== null) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(function(){ input.focus(); }, 350);
+      } else {
+        location.href = 'https://www.ghar.tv/';
+      }
     };
   })();
 
