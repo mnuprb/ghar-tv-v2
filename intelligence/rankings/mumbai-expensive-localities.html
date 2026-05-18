@@ -153,6 +153,69 @@
     .nav-btn-bar--w14 { width: 14px; }
     .nav-btn-bar + .nav-btn-bar { margin-top: 4px; }
 
+    /* ─── Off-canvas menu (slides in from right, opened by hamburger) ─── */
+    #ocOverlay {
+      position: fixed; inset: 0; z-index: 990;
+      background: rgba(17,17,17,.4);
+      backdrop-filter: blur(2px);
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+    #ocOverlay.is-open { opacity: 1; visibility: visible; }
+    #ocMenu {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 995;
+      width: min(420px, 92vw);
+      background: #fff;
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+      overflow-y: auto;
+      box-shadow: -8px 0 32px rgba(0,0,0,.12);
+      display: flex; flex-direction: column;
+    }
+    #ocMenu.is-open { transform: none; }
+    .oc-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 28px; border-bottom: 1px solid var(--rule);
+    }
+    .oc-hdr-mark { font-family: var(--ff-display); font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+    .oc-hdr-mark span { color: var(--accent); }
+    .oc-close {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--rule);
+      background: transparent; color: var(--ink);
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .oc-close:hover { background: var(--surface); border-color: var(--ink); }
+    .oc-links { list-style: none; padding: 16px 28px 24px; margin: 0; }
+    .oc-links li { border-bottom: 1px solid var(--rule); }
+    .oc-links a {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 18px 0;
+      font-family: var(--ff-display);
+      font-size: 22px; font-weight: 700;
+      color: var(--ink); letter-spacing: -.012em;
+      transition: color .2s ease;
+    }
+    .oc-links a:hover { color: var(--accent); }
+    .oc-links a svg { width: 16px; height: 16px; color: var(--muted); transition: color .2s, transform .2s; }
+    .oc-links a:hover svg { color: var(--accent); transform: translateX(3px); }
+    .oc-foot {
+      margin-top: auto; padding: 22px 28px;
+      border-top: 1px solid var(--rule);
+      background: var(--surface);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .oc-foot-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 22px; border-radius: 10px;
+      background: var(--ink); color: #fff;
+      font-size: 14px; font-weight: 600;
+      transition: background .22s ease;
+    }
+    .oc-foot-cta:hover { background: var(--accent); }
+    .oc-foot-meta { font-size: 11.5px; color: var(--muted); text-align: center; line-height: 1.5; }
+
     /* Mobile bottom bar */
     #bottomBar {
       display: none;
@@ -1351,6 +1414,31 @@
 
   </main>
 
+  <!-- ═══ OFF-CANVAS MENU (slides in from right via hamburger / bottom-bar menu) ═══ -->
+  <div id="ocOverlay" aria-hidden="true"></div>
+  <nav id="ocMenu" aria-label="Site menu" aria-hidden="true">
+    <div class="oc-hdr">
+      <span class="oc-hdr-mark">Ghar<span>.tv</span></span>
+      <button class="oc-close" aria-label="Close menu" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <ul class="oc-links" role="list">
+      <li><a href="https://www.ghar.tv/intelligence/">Intelligence <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
+      <li><a href="https://www.ghar.tv/design/">Design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
+      <li><a href="https://www.ghar.tv/ghartalks/">GharTalks <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
+      <li><a href="https://www.ghar.tv/events/">GharEvents <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
+      <li><a href="https://www.ghar.tv/videoworks/">VideoWorks <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
+      <li><a href="https://www.ghar.tv/people/">People <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
+      <li><a href="https://www.ghar.tv/postproperty.php">Post Property <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
+      <li><a href="https://www.ghar.tv/post-your-requirement.php">Post Requirement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></li>
+    </ul>
+    <div class="oc-foot">
+      <a href="https://www.ghar.tv/login/" class="oc-foot-cta">Sign In / Join</a>
+      <p class="oc-foot-meta">India's AI-native real estate intelligence</p>
+    </div>
+  </nav>
+
   <!-- ═══ NEWSLETTER ═══ -->
   <section class="cta" id="newsletter">
     <div class="cta__bg" aria-hidden="true"></div>
@@ -1433,12 +1521,49 @@
 
   <!-- JS -->
   <script>
-  // Stub nav handlers so the design.html-style buttons don't error in this standalone page.
-  // (Full off-canvas / sign-in / mobile search flow lives in /main.js on category pages.)
-  window.openOC = window.openOC || function(){};
-  window.closeOC = window.closeOC || function(){};
-  window.openSignIn = window.openSignIn || function(){};
-  window.openMobileSearch = window.openMobileSearch || function(){};
+  // Nav handlers — off-canvas menu + sign-in + mobile search.
+  // openOC / closeOC toggle the #ocMenu + #ocOverlay (same API as main.js so design.html-style buttons work).
+  (function(){
+    var oc      = document.getElementById('ocMenu');
+    var overlay = document.getElementById('ocOverlay');
+    var closeBtn = oc && oc.querySelector('.oc-close');
+    function openOC(){
+      if (!oc) return;
+      oc.classList.add('is-open');
+      overlay.classList.add('is-open');
+      oc.setAttribute('aria-hidden', 'false');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeOC(){
+      if (!oc) return;
+      oc.classList.remove('is-open');
+      overlay.classList.remove('is-open');
+      oc.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    overlay && overlay.addEventListener('click', closeOC);
+    closeBtn && closeBtn.addEventListener('click', closeOC);
+    // Close any link click closes the menu
+    oc && oc.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeOC);
+    });
+    // Escape key closes menu
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && oc.classList.contains('is-open')) closeOC();
+    });
+    window.openOC = openOC;
+    window.closeOC = closeOC;
+    // Sign in → navigate to /login (placeholder; real modal lives in main.js on category pages)
+    window.openSignIn = function(){ location.href = 'https://www.ghar.tv/login/'; };
+    // Mobile search → focus the search input if visible, else open the menu
+    window.openMobileSearch = function(){
+      var input = document.querySelector('#searchBar input');
+      if (input && input.offsetWidth > 0) { input.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      else openOC();
+    };
+  })();
 
   (function () {
     'use strict';
