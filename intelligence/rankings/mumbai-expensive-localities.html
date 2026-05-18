@@ -413,14 +413,19 @@
       .aside { position: sticky; top: 124px; align-self: start; }
     }
     .aside-card {
-      background: var(--surface);
+      background: #fff;
       border: 1px solid var(--rule);
       border-radius: 14px;
       padding: 22px 24px 8px;
     }
     .aside-card__title {
-      font-size: 16px; font-weight: 700; color: var(--ink);
-      letter-spacing: -.005em; margin-bottom: 4px;
+      font-family: var(--ff-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.015em;
+      line-height: 1.2;
+      margin-bottom: 8px;
     }
     .aside-list { list-style: none; }
     .aside-list li {
@@ -432,25 +437,27 @@
       font-size: 13px; font-weight: 700; color: var(--ink);
       text-align: right; font-variant-numeric: tabular-nums;
     }
-    /* Methodology card — Espresso (#3a3530) from the Ghar palette per design-system.html.
-       Catalog rule: decorative list bullets/numbers NEVER use the brand red — they sit in
-       muted white so red stays reserved for primary CTAs / brand identity (~5% of view). */
+    /* Methodology card — unified with Snapshot card on white background.
+       Catalog rule: red is reserved for primary CTAs / brand identity, never
+       on decorative list bullets — numerals use muted ink. */
     .aside-card--dark {
-      background: #3a3530;
-      border-color: #3a3530;
+      background: #fff;
+      border: 1px solid var(--rule);
       padding: 22px 24px 18px;
     }
-    .aside-card--dark .aside-card__title { color: #fff; margin-bottom: 12px; }
+    .aside-card--dark .aside-card__title { color: var(--ink); margin-bottom: 12px; }
     .aside-method { list-style: none; }
     .aside-method li {
       display: flex; align-items: baseline; gap: 14px;
-      padding: 8px 0; font-size: 12.5px; line-height: 1.5;
-      color: rgba(255,255,255,.85);
+      padding: 10px 0; font-size: 13px; line-height: 1.55;
+      color: var(--ink2);
+      border-top: 1px solid var(--rule);
     }
+    .aside-method li:first-child { border-top: 0; }
     .aside-method__num {
-      flex: 0 0 auto; font-size: 11px; font-weight: 700;
-      color: rgba(255,255,255,.5); letter-spacing: .04em;
-      font-variant-numeric: tabular-nums; min-width: 20px;
+      flex: 0 0 auto; font-size: 11.5px; font-weight: 700;
+      color: var(--muted); letter-spacing: .04em;
+      font-variant-numeric: tabular-nums; min-width: 22px;
     }
 
     /* ─── Section header (sec-head pattern) ─── */
