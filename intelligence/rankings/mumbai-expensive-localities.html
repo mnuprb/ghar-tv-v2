@@ -36,6 +36,11 @@
     }
   </script>
 
+  <!-- Shared site stylesheets (same as design.html) — required for the canonical
+       joinModal / mobileModal styles (.jm-*, .mob-section, etc.) -->
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../styles4.css">
+
   <style>
     /* ─── Brand fonts ─── */
     @font-face {
@@ -181,284 +186,6 @@
     .nav-btn-bar--w14 { width: 14px; }
     .nav-btn-bar + .nav-btn-bar { margin-top: 4px; }
 
-    /* ─── Full-viewport search modal (mirrors design.html mobile-search) ─── */
-    .sm {
-      position: fixed; inset: 0; z-index: 1001;
-      background: var(--warm-white, #faf7f2);
-      opacity: 0; visibility: hidden;
-      transform: translateY(12px);
-      transition: opacity .3s ease, visibility .3s ease, transform .35s cubic-bezier(.4,0,.2,1);
-      display: flex; flex-direction: column;
-      overflow-y: auto;
-    }
-    .sm.is-open { opacity: 1; visibility: visible; transform: none; }
-    .sm__close {
-      position: absolute; top: 18px; left: 18px;
-      width: 38px; height: 38px; border-radius: 50%;
-      border: 1px solid var(--rule);
-      background: #fff; color: var(--ink);
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: background .18s ease, border-color .18s ease;
-      z-index: 2;
-    }
-    .sm__close:hover { background: var(--surface); border-color: var(--ink); }
-    .sm__close svg { width: 18px; height: 18px; }
-    .sm__inner {
-      flex: 1;
-      max-width: 720px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 72px 20px 120px;
-      display: flex; flex-direction: column; gap: 14px;
-    }
-    .sm-sec {
-      background: #fff;
-      border: 1px solid var(--rule);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: border-color .2s ease;
-    }
-    .sm-sec.is-active { border-color: rgba(17,17,17,.18); }
-    .sm-sec__head { padding: 26px 26px 30px; display: flex; flex-direction: column; gap: 22px; }
-    .sm-sec__title {
-      font-family: var(--ff-display);
-      font-size: 22px; font-weight: 700;
-      letter-spacing: -.015em; color: var(--ink);
-    }
-    .sm-sec__search {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 16px; border-radius: 999px;
-      border: 1px solid var(--rule); background: #fff;
-      transition: border-color .2s ease;
-    }
-    .sm-sec__search:focus-within { border-color: var(--ink); }
-    .sm-sec__search svg { width: 16px; height: 16px; color: var(--muted); flex-shrink: 0; }
-    .sm-sec__search input {
-      flex: 1; border: 0; outline: 0;
-      font-family: var(--ff-sans); font-size: 14px; color: var(--ink);
-      background: transparent;
-    }
-    .sm-pop { display: flex; flex-direction: column; gap: 12px; }
-    .sm-pop__label {
-      font-size: 10px; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--muted);
-    }
-    .sm-pills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .sm-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 14px; border-radius: 999px;
-      border: 1px solid var(--rule); background: #fff;
-      font-family: var(--ff-sans); font-size: 13.5px; font-weight: 500;
-      color: var(--ink);
-      transition: border-color .18s ease, background .18s ease, color .18s ease;
-      cursor: pointer;
-    }
-    .sm-pill:hover { border-color: var(--ink); }
-    .sm-pill.is-selected { background: var(--ink); border-color: var(--ink); color: #fff; }
-    .sm-pills--cat .sm-pill span { font-size: 14px; }
-    .sm-divider {
-      position: relative; display: flex; align-items: center;
-      font-size: 12px; color: var(--muted);
-      margin: 4px 0;
-    }
-    .sm-divider::before, .sm-divider::after {
-      content: ''; flex: 1; height: 1px; background: var(--rule);
-    }
-    .sm-divider span { padding: 0 14px; }
-    .sm-sec__collapsed {
-      width: 100%;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 14px; padding: 20px 26px;
-      background: transparent; border: 0;
-      font-family: var(--ff-sans);
-      transition: background .15s ease;
-      cursor: pointer;
-    }
-    .sm-sec__collapsed:hover { background: var(--surface); }
-    .sm-sec__k { font-size: 14px; font-weight: 500; color: var(--ink2); }
-    .sm-sec__v { font-size: 14px; font-weight: 700; color: var(--ink); }
-    .sm-sec__expanded { display: none; padding: 4px 26px 28px; flex-direction: column; gap: 18px; }
-    .sm-sec.is-active .sm-sec__expanded { display: flex; }
-    .sm-sec.is-active .sm-sec__collapsed { display: none; }
-    .sm-sec.is-active.sm-sec--where .sm-sec__head { display: flex; }
-    .sm-sec:not(.is-active) .sm-sec__head { display: none; }
-    .sm__foot {
-      position: sticky; bottom: 0;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 16px; padding: 16px 20px;
-      background: var(--warm-white, #faf7f2);
-      border-top: 1px solid var(--rule);
-    }
-    .sm-clear {
-      background: transparent; border: 0;
-      font-family: var(--ff-sans); font-size: 14px; font-weight: 600;
-      color: var(--ink); text-decoration: underline;
-      cursor: pointer;
-    }
-    .sm-submit {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: 999px;
-      background: var(--accent); color: #fff; border: 0;
-      font-family: var(--ff-sans); font-size: 15px; font-weight: 600;
-      letter-spacing: .01em;
-      transition: background .22s ease, transform .22s ease;
-      cursor: pointer;
-    }
-    .sm-submit:hover { background: #d52540; transform: translateY(-1px); }
-    .sm-submit svg { width: 16px; height: 16px; }
-    @media (min-width: 744px) {
-      .sm__close { top: 24px; left: 24px; }
-      .sm__inner { padding: 80px 24px 140px; }
-      .sm__foot { padding: 18px 32px; }
-    }
-
-    /* ─── Modal system (shared by search + sign-in) — mirrors design.html joinModal ─── */
-    .modal {
-      position: fixed; inset: 0; z-index: 1000;
-      opacity: 0; visibility: hidden;
-      transition: opacity .3s ease, visibility .3s ease;
-    }
-    .modal.is-open { opacity: 1; visibility: visible; }
-    .modal__overlay {
-      position: absolute; inset: 0;
-      background: rgba(17,17,17,.5);
-      -webkit-backdrop-filter: blur(3px);
-      backdrop-filter: blur(3px);
-    }
-    .modal__card {
-      position: relative; z-index: 1;
-      background: #fff; border-radius: 20px;
-      width: min(460px, 92vw);
-      margin: clamp(20px, 8vh, 80px) auto 0;
-      padding: 32px 32px 28px;
-      box-shadow: 0 32px 80px rgba(0,0,0,.18), 0 6px 16px rgba(0,0,0,.06);
-      transform: translateY(20px); opacity: 0;
-      transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .3s ease;
-      max-height: 90vh; overflow-y: auto;
-    }
-    .modal.is-open .modal__card { transform: none; opacity: 1; }
-    .modal__close {
-      position: absolute; top: 18px; right: 18px;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: transparent; color: var(--ink);
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: background .2s ease;
-    }
-    .modal__close:hover { background: var(--surface); }
-    .modal__close svg { width: 18px; height: 18px; }
-    .modal__title {
-      font-family: var(--ff-display);
-      font-size: 28px; font-weight: 700;
-      letter-spacing: -.018em; color: var(--ink);
-      margin-bottom: 6px;
-      text-align: center;
-    }
-    .modal__subtitle {
-      font-size: 14px; line-height: 1.6;
-      color: var(--ink2); margin-bottom: 24px;
-      text-align: center;
-    }
-    .modal__field-label {
-      display: block;
-      font-size: 10px; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .modal__input {
-      width: 100%;
-      font-family: var(--ff-sans); font-size: 15px;
-      padding: 14px 16px; border-radius: 10px;
-      border: 1.5px solid var(--rule); background: #fff;
-      color: var(--ink);
-      transition: border-color .2s ease;
-    }
-    .modal__input:focus { outline: none; border-color: var(--ink); }
-    .modal__btn {
-      width: 100%; display: inline-flex;
-      align-items: center; justify-content: center; gap: 8px;
-      padding: 15px 22px; border-radius: 10px;
-      background: var(--ink); color: #fff; border: 0;
-      font-family: var(--ff-sans); font-size: 15px; font-weight: 600;
-      letter-spacing: .01em;
-      transition: background .22s ease, transform .22s ease;
-      cursor: pointer;
-    }
-    .modal__btn:hover { background: var(--accent); transform: translateY(-1px); }
-    .modal__field { margin-bottom: 14px; }
-    .modal__field-row {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-      margin-bottom: 18px;
-    }
-    /* Sign-in specifics */
-    .modal__phone {
-      display: flex; align-items: stretch; gap: 0;
-      border: 1.5px solid var(--rule); border-radius: 10px;
-      overflow: hidden;
-      transition: border-color .2s ease;
-    }
-    .modal__phone:focus-within { border-color: var(--ink); }
-    .modal__cc {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 0 12px 0 14px;
-      background: var(--surface);
-      border: 0; border-right: 1px solid var(--rule);
-      font-family: var(--ff-sans); font-size: 14px; font-weight: 500;
-      color: var(--ink); cursor: pointer;
-      white-space: nowrap;
-    }
-    .modal__cc img { width: 20px; height: auto; display: block; border-radius: 2px; }
-    .modal__cc svg { width: 10px; height: 10px; opacity: .6; }
-    .modal__phone input {
-      flex: 1; border: 0; outline: 0;
-      padding: 14px 16px;
-      font-family: var(--ff-sans); font-size: 15px; color: var(--ink);
-      background: transparent;
-    }
-    .modal__pw {
-      position: relative;
-    }
-    .modal__pw input { padding-right: 44px; }
-    .modal__pw-toggle {
-      position: absolute; right: 12px; top: 50%;
-      transform: translateY(-50%);
-      width: 32px; height: 32px; border-radius: 50%;
-      background: transparent; color: var(--muted);
-      display: inline-flex; align-items: center; justify-content: center;
-    }
-    .modal__pw-toggle:hover { color: var(--ink); background: var(--surface); }
-    .modal__meta {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      font-size: 13px; margin-top: 14px;
-    }
-    .modal__meta a { color: var(--ink); font-weight: 500; }
-    .modal__meta a:hover { color: var(--accent); }
-    .modal__meta span { color: var(--muted); }
-    .modal__divider {
-      display: flex; align-items: center; gap: 12px;
-      margin: 24px 0 16px;
-      font-size: 11px; font-weight: 600; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--muted);
-    }
-    .modal__divider::before, .modal__divider::after {
-      content: ''; flex: 1; height: 1px; background: var(--rule);
-    }
-    .modal__new-actions {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    }
-    .modal__new-actions a {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 14px;
-      border: 1.5px solid var(--rule); border-radius: 10px;
-      font-size: 13.5px; font-weight: 600; color: var(--ink);
-      transition: border-color .2s ease, background .2s ease;
-    }
-    .modal__new-actions a:hover { border-color: var(--ink); background: var(--surface); }
-    .modal__new-actions svg { width: 16px; height: 16px; }
-    .modal__terms {
-      font-size: 11.5px; line-height: 1.55; color: var(--muted);
-      text-align: center; margin-top: 18px;
-    }
-    .modal__terms a { color: var(--ink2); text-decoration: underline; }
 
     /* ─── Off-canvas menu (slides in from right, opened by hamburger) ─── */
     #ocOverlay {
@@ -468,7 +195,7 @@
       opacity: 0; visibility: hidden;
       transition: opacity .3s ease, visibility .3s ease;
     }
-    #ocOverlay.is-open { opacity: 1; visibility: visible; }
+    #ocOverlay.oc-open { opacity: 1; visibility: visible; }
     #ocMenu {
       position: fixed; top: 0; right: 0; bottom: 0; z-index: 995;
       width: min(420px, 92vw);
@@ -479,7 +206,7 @@
       box-shadow: -8px 0 32px rgba(0,0,0,.12);
       display: flex; flex-direction: column;
     }
-    #ocMenu.is-open { transform: none; }
+    #ocMenu.oc-open { transform: none; }
     .oc-hdr {
       display: flex; align-items: center; justify-content: space-between;
       padding: 22px 28px; border-bottom: 1px solid var(--rule);
@@ -1186,67 +913,57 @@
 
   <!-- ═══ MAIN NAV — design.html / index4 canonical structure ═══ -->
   <nav id="mainNav" class="fixed top-0 left-0 right-0 z-[200] bg-white" style="transition:box-shadow .3s ease;border-bottom:1px solid var(--rule)">
-    <div id="desktopNavRow" style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:0 var(--pad-h);max-width:var(--max-w);margin:0 auto;width:100%">
-      <a href="https://www.ghar.tv/" style="line-height:1;text-decoration:none;justify-self:start">
-        <svg viewBox="0 0 890.6 196.8" fill="currentColor" aria-label="Ghar.tv" style="height:28px;width:auto;display:block;color:var(--ink)">
+    <div id="desktopNavRow" style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:0 var(--pad-h);max-width:var(--max-w);margin:0 auto;width:100%;transition:height .3s cubic-bezier(.4,0,.2,1)"> <a href="/" style="line-height:1;text-decoration:none;justify-self:start"> <svg viewBox="0 0 890.6 196.8" fill="currentColor" aria-label="Ghar.tv" style="height:28px;width:auto;display:block;color:var(--ink)">
           <path d="M180.5,92.6l0,13.8c0,49.9-40.3,90.3-90.2,90.3S0,156.3,0,106.4V60.8c0-10.4,5.1-17.6,13.7-22.2l65.4-36c3-1.5,6.5-2.7,11.1-2.7c4.6,0,8.1,1.2,11.1,2.7l65.4,36l-30.6,23.9v0l0,0L97,40.9c-1.8-0.9-3.9-1.6-6.7-1.6c-2.8,0-4.9,0.7-6.7,1.6L44.3,62.5c-5.1,2.8-8.2,7.1-8.2,13.3v27.4c0,30,24.3,57.5,54.2,57.5c21.8,0,40.6-14.6,49.2-34.1H90.3v-34H180.5z M451.9,65.2h34V194h-34v-11.4c-10.7,8.9-24.4,14.2-40.1,14.2c-36.3,0-64-30-64-67.3c0-37.1,27.7-67.1,64-67.1c15.8,0,29.5,5.3,40.1,14.2L451.9,65.2L451.9,65.2z M449.8,129.5c0-18.3-15-33.3-33.5-33.3s-33.5,15-33.5,33.3c0,18.5,15,33.5,33.5,33.5S449.8,148.1,449.8,129.5z M268.2,62.4c-14.5,0-26.2,5.1-34.8,13.7V4.8h-33.8V194h33.8v-61.7c0-18.8,8.9-36.1,30.2-36.1c20.3,0,29.7,15.5,29.7,31.2V194h34v-66.6C327.4,91.4,308.1,62.4,268.2,62.4z M854.3,65.2L854.3,65.2l-34.8,84.6l-34.5-84.6h-36.3L801.4,194h36.3l52.8-128.8H854.3z M715.1,164.3L715.1,164.3c-9.1,0-14.2-5.6-14.2-15.2V97h35.1V65.2h-35.1V36.5h-34v28.7h-21.3V97h21.3v52.1c0,33,17.5,47,44.7,47c16.5,0,28.5-8.9,35.8-17.3l-20.6-20.6C725,160.3,720.9,164.3,715.1,164.3z M605.6,157.7c-10.9,0-19.8,8.6-19.8,19.6c0,10.9,8.9,19.6,19.8,19.6s19.6-8.6,19.6-19.6C625.1,166.3,616.5,157.7,605.6,157.7z M545.1,82L545.1,82V65.2h-33.8V194h33.8v-50.3c0-39.4,15.5-47.5,39.4-47.5V62.4C567.2,62.4,554.2,69.3,545.1,82z" />
-        </svg>
-      </a>
-      <!-- Expanded search (default) — swapped out for #compactSearch on scroll -->
-      <div id="expandedSearch" style="display:flex;justify-content:center">
-        <div id="searchBar" class="bg-white rounded-full flex items-center border border-gray-200" style="padding:8px 10px 8px 8px;box-shadow:0 2px 8px rgba(0,0,0,.04),0 8px 32px rgba(0,0,0,.08);width:clamp(600px,58vw,760px);transition:box-shadow .3s ease,border-color .3s ease">
-          <div class="flex items-center flex-1 min-w-0 border-r border-ln" style="padding:10px 24px">
+        </svg> </a>
+      <div id="expandedSearch" class="expanded-desktop" style="display:flex;justify-content:center">
+        <div id="searchBar" class="bg-white rounded-full flex items-center border border-gray-200 transition-shadow duration-200" style="padding:8px 10px 8px 8px;box-shadow:0 2px 8px rgba(0,0,0,.04),0 8px 32px rgba(0,0,0,.08);width:clamp(600px,58vw,760px)">
+          <div id="wherePill" class="flex items-center flex-1 min-w-0 border-r border-ln relative" style="padding:10px 24px">
             <div class="flex flex-col gap-0.5 w-full overflow-hidden">
-              <div class="text-[11px] font-semibold tracking-wider uppercase text-left" style="color:var(--muted);letter-spacing:.14em">Where</div>
-              <input type="text" placeholder="Search by city, locality, project or pin-code" autocomplete="off" class="flex-1 border-0 outline-none text-sm bg-transparent min-w-[80px]" style="color:var(--ink)">
-            </div>
+              <div class="text-tx text-[11px] font-semibold tracking-wider uppercase text-left">Where</div>
+              <div id="chipsRow" class="flex items-center gap-1.5 flex-nowrap overflow-hidden"> <input id="whereInput" type="text" placeholder="Search by city, locality, project or pin-code" autocomplete="off" spellcheck="false" class="flex-1 border-0 outline-none text-sm text-tx bg-transparent min-w-[80px]"> </div>
+            </div> <button id="clearBtn" class="hidden w-6 h-6 rounded-full border border-ln bg-white cursor-pointer text-mu text-xs ml-2 shrink-0 items-center justify-center">×</button>
+            <div id="wherePanel" class="hidden absolute top-[calc(100%+16px)] bg-white border border-ln rounded-2xl z-[9999] max-h-[420px] overflow-y-auto" style="width:clamp(520px,42vw,640px);padding:24px 28px;left:-7px;box-shadow:0 4px 16px rgba(0,0,0,.06),0 12px 40px rgba(0,0,0,.1)"></div>
           </div>
-          <button class="border-0 bg-transparent px-5 py-2.5 text-sm cursor-pointer flex items-center gap-1.5 font-medium" style="color:var(--ink)">Buy
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4L5 7L8 4" stroke="#999" stroke-width="1.5" /></svg>
-          </button>
-          <button class="border-0 bg-transparent px-5 py-2.5 text-sm cursor-pointer flex items-center gap-1.5 font-medium border-l border-ln" style="color:var(--ink)">Homes
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4L5 7L8 4" stroke="#999" stroke-width="1.5" /></svg>
-          </button>
-          <button class="border-0 rounded-full flex items-center justify-center cursor-pointer shrink-0 transition-colors" style="background:#ee324b;width:48px;height:48px;min-width:48px" aria-label="Search">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
-          </button>
+          <div id="modeWrap" class="relative hidden sm:flex items-center"> <button id="modeBtn" class="border-0 bg-transparent px-5 py-2.5 text-sm text-tx cursor-pointer flex items-center gap-1.5 font-medium"><span id="modeLbl">Buy</span> <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 4L5 7L8 4" stroke="#999" stroke-width="1.5" />
+              </svg></button>
+            <div id="modePop" class="hidden absolute top-[calc(100%+12px)] right-0 w-[180px] bg-white border border-ln rounded-xl shadow-xl p-2 z-[9999]"></div>
+          </div>
+          <div id="typeWrap" class="relative hidden sm:flex items-center border-l border-ln"> <button id="typeBtn" class="border-0 bg-transparent px-5 py-2.5 text-sm text-tx cursor-pointer flex items-center gap-1.5 font-medium"><span id="typeLbl">Homes</span> <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 4L5 7L8 4" stroke="#999" stroke-width="1.5" />
+              </svg></button>
+            <div id="typePop" class="hidden absolute top-[calc(100%+12px)] right-0 w-[200px] bg-white border border-ln rounded-xl shadow-xl p-2 z-[9999]"></div>
+          </div> <button id="goBtn" class="border-0 rounded-full flex items-center justify-center cursor-pointer shrink-0 transition-colors" style="background:#ee324b;width:48px;height:48px;min-width:48px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg></button>
         </div>
       </div>
-      <!-- Compact pill — hidden until scrollY > 8 on desktop; swaps in via collapseNav() -->
-      <div id="compactSearch" class="items-center bg-white border border-gray-200 rounded-full cursor-pointer whitespace-nowrap" style="padding:6px 6px 6px 16px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:none;transition:opacity .3s ease,transform .3s cubic-bezier(.4,0,.2,1);opacity:0;transform:scale(.92)">
-        <span class="text-sm font-medium border-r border-ln pr-3" style="color:var(--ink)">Anywhere</span>
-        <span class="text-sm px-3 border-r border-ln" style="color:var(--muted)">Buy</span>
-        <span class="text-sm px-3" style="color:var(--muted)">Homes</span>
-        <div class="rounded-full w-8 h-8 flex items-center justify-center ml-2 shrink-0" style="background:#ee324b">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
-        </div>
-      </div>
-      <!-- Tablet search trigger — simple "Search Properties" pill at 744-1079, mirrors design.html #midSmallTrigger verbatim (incl. nested flex column + min-width:0 so justify-self:stretch actually widens the pill) -->
-      <button id="tabletSearchTrigger" onclick="openMobileSearch&&openMobileSearch()" style="display:none;align-items:center;justify-self:stretch;justify-content:center;background:#fff;border:1px solid var(--rule);border-radius:40px;padding:15px 28px;gap:10px;margin:0 20px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);cursor:pointer;font-family:inherit;transition:box-shadow .2s,border-color .2s">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2.5" style="flex-shrink:0"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0">
-          <span style="font-size:14px;font-weight:600;color:#222;font-family:'Inter',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Search Properties</span>
-        </div>
-      </button>
-      <div style="display:flex;align-items:center;gap:10px;justify-self:end">
-        <a href="https://www.ghar.tv/postproperty.php" class="nav-btn">Post Property</a>
-        <button onclick="openSignIn&&openSignIn()" class="nav-btn nav-btn--icon" aria-label="Account">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-        </button>
-        <button onclick="openOC&&openOC()" class="nav-btn nav-btn--ghost" aria-label="Open menu">
-          <span class="nav-btn-bar nav-btn-bar--w20"></span>
-          <span class="nav-btn-bar nav-btn-bar--w20"></span>
-          <span class="nav-btn-bar nav-btn-bar--w14"></span>
-        </button>
-      </div>
+      <div id="navTabs" class="nav-tabs-desktop" style="display:none"></div>
+      <div id="compactSearch" class="items-center bg-white compact-desktop border border-gray-200 rounded-full cursor-pointer whitespace-nowrap transition-all duration-300" style="padding:6px 6px 6px 16px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:none"> <span id="compactWhere" class="text-sm font-medium text-tx border-r border-ln pr-3">Anywhere</span> <span id="compactMode" class="text-sm text-mu px-3 border-r border-ln">Buy</span> <span id="compactType" class="text-sm text-mu px-3">Homes</span>
+        <div class="bg-red rounded-full w-8 h-8 flex items-center justify-center ml-2 shrink-0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg></div>
+      </div> <button id="midSmallTrigger" onclick="openMobileSearch()" style="display:none;align-items:center;justify-self:stretch;justify-content:center;background:#fff;border:1px solid #ddd;border-radius:40px;padding:15px 28px;gap:10px;margin:0 20px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);cursor:pointer;transition:box-shadow .2s,border-color .2s"> <svg id="midSmallIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2.5" style="flex-shrink:0">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0"> <span id="midSmallLine1" style="font-size:14px;font-weight:600;color:#222;font-family:'Inter',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Search Properties</span> <span id="midSmallLine2" style="font-size:12px;font-weight:400;color:#6a6a6a;font-family:'Inter',sans-serif;white-space:nowrap;display:none"></span> </div>
+      </button> <button id="midSearchTrigger" onclick="openMobileSearch()" style="display:none;align-items:center;justify-self:stretch;background:#fff;border:1px solid #e5e7eb;border-radius:40px;padding:0;box-shadow:0 2px 12px rgba(0,0,0,.06),0 6px 20px rgba(0,0,0,.04);cursor:pointer;transition:box-shadow .2s,border-color .2s;overflow:hidden;margin:0 20px"> <span class="mid-search-seg" style="display:flex;align-items:center;gap:8px;padding:15px 22px;border-right:1px solid #e5e7eb;flex:1;min-width:0;overflow:hidden">          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" style="flex-shrink:0"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>          <span id="midSearchWhere" style="font-size:14px;font-weight:500;color:var(--ink);font-family:'Inter',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Anywhere</span> </span> <span id="midSearchMode" class="mid-search-seg" style="padding:15px 20px;font-size:13px;font-weight:400;color:var(--muted);font-family:'Inter',sans-serif;border-right:1px solid #e5e7eb;flex-shrink:0">Buy</span> <span id="midSearchType" class="mid-search-seg" style="padding:15px 20px;font-size:13px;font-weight:400;color:var(--muted);font-family:'Inter',sans-serif;flex-shrink:0">Homes</span> </button>
+      <div style="display:flex;align-items:center;gap:10px;justify-self:end"> <a href="/postproperty.php" class="post-free-desktop nav-btn">Post Property</a> <button onclick="openSignIn&&openSignIn()" class="nav-btn nav-btn--icon" aria-label="Account"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg> </button> <button onclick="openOC&&openOC()" class="nav-btn nav-btn--ghost" aria-label="Open menu"> <span class="nav-btn-bar nav-btn-bar--w20"></span> <span class="nav-btn-bar nav-btn-bar--w20"></span> <span class="nav-btn-bar nav-btn-bar--w14"></span> </button> </div>
     </div>
-    <!-- Mobile search trigger row (visible <744px) -->
-    <div id="mobSearchRow" style="padding:10px 20px 14px">
-      <button id="mobSearchTrigger" onclick="openMobileSearch&&openMobileSearch()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:12px;background:#fff;border:1px solid var(--rule);border-radius:40px;padding:18px 24px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);cursor:pointer">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2.5"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
-        <span style="font-size:14px;font-weight:600;color:var(--ink);font-family:'Inter',sans-serif;white-space:nowrap">Search Properties</span>
-      </button>
-    </div>
+    <div id="mobTabsRow" style="display:none"></div>
+    <div id="mobSearchRow" style="padding:10px 20px 14px;transition:padding .3s cubic-bezier(.4,0,.2,1)"> <button id="mobSearchTrigger" onclick="openMobileSearch&&openMobileSearch()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:12px;background:#fff;border:1px solid #ddd;border-radius:40px;padding:22px 28px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);cursor:pointer;transition:box-shadow .2s,padding .3s cubic-bezier(.4,0,.2,1)"> <svg id="mobSearchIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2.5" style="flex-shrink:0">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg>
+        <div id="mobSearchContent" style="display:flex;flex-direction:column;align-items:center;gap:3px"> <span id="mobSearchLine1" style="font-size:14px;font-weight:600;color:#222;font-family:'Inter',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Search Properties</span> <span id="mobSearchLine2" style="font-size:12px;font-weight:400;color:#6a6a6a;font-family:'Inter',sans-serif;white-space:nowrap;display:none"></span> </div>
+      </button> </div>
   </nav>
 
   <!-- ═══ SECONDARY NAV — Intelligence + Rankings/Reports/... ═══ -->
@@ -1753,126 +1470,144 @@
     </div>
   </nav>
 
-  <!-- ═══ SEARCH MODAL — full-viewport takeover mirroring design.html mobile search ═══ -->
-  <div id="searchModal" class="sm" role="dialog" aria-modal="true" aria-label="Search properties" aria-hidden="true">
-    <button class="sm__close" type="button" data-modal-close aria-label="Close">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="sm__inner">
-      <!-- WHERE section (expanded by default) -->
-      <div class="sm-sec is-active" id="smSecWhere">
-        <div class="sm-sec__head" data-sm-sec="where">
-          <h2 class="sm-sec__title">Where?</h2>
-          <div class="sm-sec__search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-            <input id="smWhereInput" type="text" placeholder="Search city, locality..." autocomplete="off">
-          </div>
-          <div class="sm-pop">
-            <span class="sm-pop__label">Popular cities</span>
-            <div class="sm-pills">
-              <button type="button" class="sm-pill" data-city="mumbai">Mumbai</button>
-              <button type="button" class="sm-pill" data-city="delhi">Delhi</button>
-              <button type="button" class="sm-pill" data-city="bengaluru">Bengaluru</button>
-              <button type="button" class="sm-pill" data-city="pune">Pune</button>
-              <button type="button" class="sm-pill" data-city="jaipur">Jaipur</button>
-            </div>
-          </div>
-          <div class="sm-divider"><span>or browse by category</span></div>
-          <div class="sm-pills sm-pills--cat">
-            <button type="button" class="sm-pill" data-cat="senior-living"><span>🛏</span> Senior Living</button>
-            <button type="button" class="sm-pill" data-cat="co-living"><span>🏠</span> Co-Living</button>
-            <button type="button" class="sm-pill" data-cat="co-working"><span>💼</span> Co-Working</button>
-            <button type="button" class="sm-pill" data-cat="warehouse"><span>📦</span> Warehouse</button>
-            <button type="button" class="sm-pill" data-cat="auction"><span>🔨</span> Auction Deals</button>
-          </div>
+  <!-- ═══ JOIN / SIGN-IN MODAL — copied verbatim from design.html (driven by main.js) ═══ -->
+  <div id="joinOverlay" onclick="closeSignIn()"></div>
+  <div id="joinModal" role="dialog" aria-modal="true" aria-label="Join Ghar.tv">
+    <div class="jm-hdr"> <span class="jm-hdr-title">Sign In</span> <button class="jm-close" onclick="closeSignIn()" aria-label="Close"> <svg viewBox="0 0 24 24" stroke-linecap="round">
+          <path d="M18 6L6 18" />
+          <path d="M6 6l12 12" />
+        </svg> </button></div>
+    <div class="jm-body">
+      <div class="jm-step active" id="jmSignIn">
+        <div class="jm-heading">Sign In</div>
+        <p class="jm-subtext">Enter your registered mobile number and password.</p>
+        <div class="jm-phone"> <button type="button" class="jm-cc-btn" id="jmCCBtn" onclick="jmToggleCCList()"> <img src="https://flagcdn.com/w40/in.png" alt="IN" id="jmCCFlag"> <span id="jmCCCode">+91</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg> </button> <input type="tel" id="jmPhoneInput" placeholder="Mobile number" maxlength="10" inputmode="numeric" autocomplete="tel"> </div>
+        <div class="jm-cc-list" id="jmCCList" style="display:none"> <input type="text" class="jm-cc-search" id="jmCCSearch" placeholder="Search country..." oninput="jmFilterCC(this.value)">
+          <div class="jm-cc-options" id="jmCCOptions"></div>
         </div>
-      </div>
-      <!-- MODE section (collapsed) -->
-      <div class="sm-sec" id="smSecMode">
-        <button class="sm-sec__collapsed" type="button" data-sm-sec="mode">
-          <span class="sm-sec__k">Mode</span>
-          <span class="sm-sec__v" id="smModeVal">Buy</span>
-        </button>
-        <div class="sm-sec__expanded">
-          <h2 class="sm-sec__title">Looking to</h2>
-          <div class="sm-pills sm-pills--toggle" data-sm-group="mode">
-            <button type="button" class="sm-pill" data-val="buy">Buy</button>
-            <button type="button" class="sm-pill" data-val="rent">Rent</button>
-          </div>
+        <div class="jm-pw-wrap"> <input type="password" id="jmPwInput" class="jm-field" placeholder="Password" autocomplete="current-password"> <button type="button" class="jm-pw-toggle" onclick="jmTogglePw()" aria-label="Show password"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.8" stroke-linecap="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg> </button> </div> <button class="jm-btn jm-btn--primary" id="jmSignInBtn" onclick="jmDoSignIn()">Sign In</button>
+        <div class="jm-meta-links"> <a href="#" onclick="event.preventDefault();jmShowForgot()">Forgot Password?</a> <span>·</span> <a href="#" onclick="event.preventDefault();jmShowOTPLogin()">Login with OTP</a> </div>
+        <div class="jm-new-user">
+          <div class="jm-new-label">New to Ghar.tv?</div>
+          <div class="jm-new-actions"> <a href="/postproperty.php" class="jm-new-link" onclick="closeSignIn()"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 10.5L12 3l9 7.5V21a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 21z" />
+                <line x1="12" y1="13" x2="12" y2="18" />
+                <line x1="9.5" y1="15.5" x2="14.5" y2="15.5" />
+              </svg> Post Property </a> <a href="/post-your-requirement.php" class="jm-new-link" onclick="closeSignIn()"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="12" y1="18" x2="12" y2="12" />
+                <line x1="9" y1="15" x2="15" y2="15" />
+              </svg> Post Requirement </a> </div>
         </div>
+        <div class="jm-terms">By signing in, you agree to Ghar.tv's <a href="/terms.php">Terms & Conditions</a> and <a href="/privacy.php">Privacy Policy</a></div>
       </div>
-      <!-- TYPE section (collapsed) -->
-      <div class="sm-sec" id="smSecType">
-        <button class="sm-sec__collapsed" type="button" data-sm-sec="type">
-          <span class="sm-sec__k">Type</span>
-          <span class="sm-sec__v" id="smTypeVal">Homes</span>
-        </button>
-        <div class="sm-sec__expanded">
-          <h2 class="sm-sec__title">Property type</h2>
-          <div class="sm-pills sm-pills--toggle" data-sm-group="type">
-            <button type="button" class="sm-pill" data-val="homes">Homes</button>
-            <button type="button" class="sm-pill" data-val="workspaces">Workspaces</button>
-            <button type="button" class="sm-pill" data-val="land">Land</button>
-          </div>
-        </div>
+      <div class="jm-step" id="jmOTPLogin">
+        <div class="jm-heading">Login with OTP</div>
+        <p class="jm-subtext">We'll send a one-time password to your WhatsApp number.</p>
+        <div class="jm-phone"> <button type="button" class="jm-cc-btn" onclick="jmToggleCCList()"> <img src="https://flagcdn.com/w40/in.png" alt="IN" id="jmCCFlag2"> <span id="jmCCCode2">+91</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg> </button> <input type="tel" id="jmOTPPhoneInput" placeholder="Mobile number" maxlength="10" inputmode="numeric" autocomplete="tel"> </div> <button class="jm-btn jm-btn--primary" id="jmSendOTPBtn" onclick="jmSendOTP()" disabled>Send OTP</button>
+        <div class="jm-meta-links"> <a href="#" onclick="event.preventDefault();jmShowSignIn()">Back to password login</a> </div>
       </div>
-    </div>
-    <div class="sm__foot">
-      <button type="button" class="sm-clear" id="smClearAll">Clear all</button>
-      <button type="button" class="sm-submit" id="smSubmit">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-        Search
-      </button>
+      <div class="jm-step" id="jmOTPVerify">
+        <div class="jm-heading">Enter OTP</div>
+        <p class="jm-subtext" id="jmOtpSentTo">OTP has been sent to +91 ••••••••••</p>
+        <div class="jm-otp-wrap"> <input class="jm-otp-box" type="tel" maxlength="1" inputmode="numeric" data-otp="0"> <input class="jm-otp-box" type="tel" maxlength="1" inputmode="numeric" data-otp="1"> <input class="jm-otp-box" type="tel" maxlength="1" inputmode="numeric" data-otp="2"> <input class="jm-otp-box" type="tel" maxlength="1" inputmode="numeric" data-otp="3"> </div>
+        <div class="jm-otp-meta"> Didn't receive? <a class="jm-otp-resend" onclick="jmResendOTP()">Resend OTP</a> <span style="margin-left:8px">·</span> <a onclick="jmShowOTPLogin()" style="margin-left:8px">Edit number</a> </div> <button class="jm-btn jm-btn--primary" id="jmOtpBtn" onclick="jmVerifyOTP()" disabled>Verify & Sign In</button>
+      </div>
+      <div class="jm-step" id="jmForgot">
+        <div class="jm-heading">Forgot Password</div>
+        <p class="jm-subtext">Enter your registered mobile number. We'll send a reset link to your WhatsApp.</p>
+        <div class="jm-phone"> <button type="button" class="jm-cc-btn" onclick="jmToggleCCList()"> <img src="https://flagcdn.com/w40/in.png" alt="IN"> <span>+91</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg> </button> <input type="tel" id="jmForgotPhone" placeholder="Mobile number" maxlength="10" inputmode="numeric"> </div> <button class="jm-btn jm-btn--primary" onclick="closeSignIn()">Send Reset Link</button>
+        <div class="jm-meta-links"> <a href="#" onclick="event.preventDefault();jmShowSignIn()">Back to Sign In</a> </div>
+      </div>
     </div>
   </div>
 
-  <!-- ═══ SIGN-IN MODAL — opened by account icon / bottom-bar Account / off-canvas Sign In ═══ -->
-  <div id="signInModal" class="modal" role="dialog" aria-modal="true" aria-label="Sign in to Ghar.tv" aria-hidden="true">
-    <div class="modal__overlay" data-modal-close></div>
-    <div class="modal__card">
-      <button class="modal__close" type="button" data-modal-close aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-      <h2 class="modal__title">Sign In</h2>
-      <p class="modal__subtitle">Enter your registered mobile number and password.</p>
-      <form id="signInForm" novalidate>
-        <div class="modal__field">
-          <div class="modal__phone">
-            <button type="button" class="modal__cc" aria-label="Country code">
-              <img src="https://flagcdn.com/w40/in.png" alt="IN" width="20" height="14">
-              <span>+91</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <input id="signInPhone" type="tel" placeholder="Mobile number" maxlength="10" inputmode="numeric" autocomplete="tel">
+  <!-- ═══ MOBILE SEARCH MODAL — copied verbatim from design.html (driven by main.js) ═══ -->
+  <div id="mobileModal" class="fixed inset-0 z-[300] bg-white flex flex-col" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;flex-shrink:0"> <button onclick="closeMobileSearch()" style="width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:#141414;box-shadow:0 1px 3px rgba(0,0,0,.06)">&times;</button>
+      <div style="width:32px"></div>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:0 20px 8px">
+      <div id="mobSec_where" class="mob-section active" style="margin-bottom:10px" onclick="mobStepClick('where')">
+        <div id="mobSec_where_collapsed" style="display:none;padding:18px 22px">
+          <div style="display:flex;align-items:center;justify-content:space-between"> <span style="font-size:13px;font-weight:500;color:#6a6a6a;font-family:'Inter',sans-serif">Where</span> <span id="mobWhereValCollapsed" style="font-size:13px;font-weight:600;color:#141414;font-family:'Inter',sans-serif">Select City</span> </div>
+        </div>
+        <div id="mobSec_where_expanded" style="padding:20px 22px 18px">
+          <div style="font-size:22px;font-weight:700;color:#141414;margin-bottom:16px;font-family:'Inter',sans-serif;letter-spacing:-.02em">Where?</div>
+          <div id="mobCitySearchWrap" style="position:relative;margin-bottom:14px"> <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg> <input id="mobCitySearch" type="text" placeholder="Search city, locality..." autocomplete="off" oninput="mobFilterCities(this.value)" style="width:100%;border:1.5px solid #e5e7eb;border-radius:14px;padding:13px 16px 13px 40px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;transition:border-color .15s;background:#fff" onfocus="this.style.borderColor='#141414'" onblur="this.style.borderColor='#e5e7eb'"> </div>
+          <div id="mobCityGate">
+            <div id="mobCityPopularLabel" style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9ca3af;margin-bottom:10px">Popular cities</div>
+            <div id="mobCityChips" style="display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px"></div>
+            <div id="mobCityEmpty" style="display:none;padding:16px 0;text-align:center;color:#9ca3af;font-size:13px">No cities found</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:16px;margin-bottom:12px">
+              <div style="flex:1;height:1px;background:#e0e0e0"></div> <span style="font-size:11px;font-weight:600;color:#9ca3af;font-family:'Inter',sans-serif">or browse by category</span>
+              <div style="flex:1;height:1px;background:#e0e0e0"></div>
+            </div>
+            <div id="mobExploreCats" style="background:#f9f9f7;padding:14px 16px;border-radius:14px">
+              <div style="display:flex;flex-wrap:wrap;gap:8px"> <a href="#" style="border:1px solid #e5e7eb;background:#fff;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:500;color:#374151;text-decoration:none;font-family:inherit">🧓 Senior Living</a> <a href="#" style="border:1px solid #e5e7eb;background:#fff;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:500;color:#374151;text-decoration:none;font-family:inherit">🏘️ Co-Living</a> <a href="#" style="border:1px solid #e5e7eb;background:#fff;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:500;color:#374151;text-decoration:none;font-family:inherit">💼 Co-Working</a> <a href="#" style="border:1px solid #e5e7eb;background:#fff;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:500;color:#374151;text-decoration:none;font-family:inherit">📦 Warehouse</a> <a href="#" style="border:1px solid #e5e7eb;background:#fff;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:500;color:#374151;text-decoration:none;font-family:inherit">🔨 Auction Deals</a> </div>
+            </div>
+          </div>
+          <div id="mobWithinCity" style="display:none">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+              <div style="display:inline-flex;align-items:center;gap:8px;border:1.5px solid #141414;border-radius:999px;padding:6px 12px;background:#141414"> <span id="mobCityPillName" style="color:#fff;font-size:13px;font-weight:600">Mumbai</span> <button onclick="mobChangeCity()" style="font-size:11px;background:rgba(255,255,255,.18);color:#fff;padding:3px 8px;border-radius:999px;border:0;cursor:pointer;font-family:inherit">Change</button> </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+              <div id="mobSelectedChips" style="display:none;flex-wrap:wrap;gap:6px;flex:1"></div> <a id="mobLocClearLink" href="javascript:void(0)" onclick="event.stopPropagation();mobClearLocs()" style="display:none;font-size:12px;font-weight:600;color:#ee324b;text-decoration:none;white-space:nowrap;font-family:'Inter',sans-serif;flex-shrink:0">Clear</a>
+            </div>
+            <div id="mobWhereNext" style="display:none;margin-bottom:14px"> <button onclick="event.stopPropagation();mobOpenAcc('mode')" style="display:inline-flex;align-items:center;gap:6px;background:#141414;color:#fff;border:0;border-radius:12px;padding:11px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s"> <span id="mobWhereNextLabel">Next</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" style="flex-shrink:0">
+                  <path d="M9 6l6 6-6 6" />
+                </svg> </button> </div>
+            <div style="position:relative"> <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg> <input id="mobLocInput" type="text" placeholder="Locality, project or pincode..." autocomplete="off" oninput="mobOnLocInput(this.value)" style="width:100%;border:1.5px solid #e5e7eb;border-radius:14px;padding:13px 16px 13px 40px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;background:#fff;transition:border-color .15s" onfocus="this.style.borderColor='#141414'" onblur="this.style.borderColor='#e5e7eb'"> </div>
+            <div id="mobAcBox" style="margin-top:4px"></div>
           </div>
         </div>
-        <div class="modal__field modal__pw">
-          <input id="signInPw" type="password" class="modal__input" placeholder="Password" autocomplete="current-password">
-          <button type="button" class="modal__pw-toggle" id="signInPwToggle" aria-label="Show password">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          </button>
+      </div>
+      <div id="mobSec_mode" class="mob-section collapsed" style="margin-bottom:10px" onclick="mobStepClick('mode')">
+        <div id="mobSec_mode_collapsed" style="padding:18px 22px">
+          <div style="display:flex;align-items:center;justify-content:space-between"> <span style="font-size:13px;font-weight:500;color:#6a6a6a;font-family:'Inter',sans-serif">Mode</span> <span id="mobModeValCollapsed" style="font-size:13px;font-weight:600;color:#141414;font-family:'Inter',sans-serif">Buy</span> </div>
         </div>
-        <button type="submit" class="modal__btn">Sign In</button>
-        <div class="modal__meta">
-          <a href="#">Forgot Password?</a>
-          <span>&middot;</span>
-          <a href="#">Login with OTP</a>
+        <div id="mobSec_mode_expanded" style="display:none;padding:20px 22px 18px">
+          <div style="font-size:22px;font-weight:700;color:#141414;margin-bottom:6px;font-family:'Inter',sans-serif;letter-spacing:-.02em">Buy or rent?</div>
+          <div style="font-size:13px;color:#6a6a6a;margin-bottom:18px;font-family:'Inter',sans-serif">Choose how you'd like to search.</div>
+          <div style="display:flex;gap:10px"> <button class="mob-mode-btn mob-sel-btn" data-m="buy" onclick="event.stopPropagation();mobSetMode('buy')" style="flex:1;padding:13px 8px;border-radius:14px;border:1.5px solid #141414;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Buy</button> <button class="mob-mode-btn mob-sel-btn" data-m="rent" onclick="event.stopPropagation();mobSetMode('rent')" style="flex:1;padding:13px 8px;border-radius:14px;border:1.5px solid #e5e7eb;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit">Rent</button> </div>
+          <div style="margin-top:16px;text-align:right"> <button onclick="event.stopPropagation();mobOpenAcc('type')" style="display:inline-flex;align-items:center;gap:6px;background:#141414;color:#fff;border:0;border-radius:12px;padding:11px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s"> Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" style="flex-shrink:0">
+                <path d="M9 6l6 6-6 6" />
+              </svg> </button> </div>
         </div>
-        <div class="modal__divider">New to Ghar.tv?</div>
-        <div class="modal__new-actions">
-          <a href="https://www.ghar.tv/postproperty.php">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10.5L12 3l9 7.5V21a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 21z"/></svg>
-            Post Property
-          </a>
-          <a href="https://www.ghar.tv/post-your-requirement.php">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            Post Requirement
-          </a>
+      </div>
+      <div id="mobSec_type" class="mob-section collapsed" style="margin-bottom:10px" onclick="mobStepClick('type')">
+        <div id="mobSec_type_collapsed" style="padding:18px 22px">
+          <div style="display:flex;align-items:center;justify-content:space-between"> <span style="font-size:13px;font-weight:500;color:#6a6a6a;font-family:'Inter',sans-serif">Type</span> <span id="mobTypeValCollapsed" style="font-size:13px;font-weight:600;color:#141414;font-family:'Inter',sans-serif">Homes</span> </div>
         </div>
-        <p class="modal__terms">By signing in, you agree to Ghar.tv's <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.</p>
-      </form>
+        <div id="mobSec_type_expanded" style="display:none;padding:20px 22px 18px">
+          <div style="font-size:22px;font-weight:700;color:#141414;margin-bottom:6px;font-family:'Inter',sans-serif;letter-spacing:-.02em">What kind of property?</div>
+          <div style="font-size:13px;color:#6a6a6a;margin-bottom:18px;font-family:'Inter',sans-serif">Select the type you're looking for.</div>
+          <div style="display:flex;gap:10px"> <button class="mob-type-btn mob-sel-btn" data-t="homes" onclick="event.stopPropagation();mobSetType('homes')" style="flex:1;padding:13px 8px;border-radius:14px;border:1.5px solid #141414;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Homes</button> <button class="mob-type-btn mob-sel-btn" data-t="workspaces" onclick="event.stopPropagation();mobSetType('workspaces')" style="flex:1;padding:13px 8px;border-radius:14px;border:1.5px solid #e5e7eb;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit">Workspaces</button> <button class="mob-type-btn mob-sel-btn" data-t="land" onclick="event.stopPropagation();mobSetType('land')" style="flex:1;padding:13px 8px;border-radius:14px;border:1.5px solid #e5e7eb;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit">Land</button> </div>
+        </div>
+      </div>
     </div>
+    <div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:#fff;border-top:1px solid #ebebeb"> <button onclick="mobClearAll()" style="font-size:14px;font-weight:600;color:#141414;text-decoration:underline;text-underline-offset:3px;background:transparent;border:0;cursor:pointer;font-family:inherit">Clear all</button> <button onclick="mobSubmitSearch()" style="background:#ee324b;color:#fff;font-size:14px;font-weight:600;padding:14px 28px;border-radius:14px;border:0;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:inherit"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg> Search </button> </div>
   </div>
+  <div id="mobToast" style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;z-index:400;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .3s;font-family:inherit"></div>
 
   <!-- ═══ NEWSLETTER ═══ -->
   <section class="cta" id="newsletter">
@@ -1991,158 +1726,20 @@
     window.openOC = openOC;
     window.closeOC = closeOC;
 
-    // ─── Modal helpers (shared by search + sign-in) ───
-    function openModal(id, focusSel){
-      var m = document.getElementById(id);
-      if (!m) return;
-      m.classList.add('is-open');
-      m.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      if (focusSel) setTimeout(function(){
-        var el = m.querySelector(focusSel);
-        if (el) el.focus();
-      }, 320);
-    }
-    function closeModal(id){
-      var m = document.getElementById(id);
-      if (!m) return;
-      m.classList.remove('is-open');
-      m.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-    // Wire [data-modal-close] on overlay + X buttons to close their parent modal/sm
-    document.querySelectorAll('[data-modal-close]').forEach(function(el){
-      el.addEventListener('click', function(e){
-        e.preventDefault();
-        var m = el.closest('.modal') || el.closest('.sm');
-        if (m) {
-          m.classList.remove('is-open');
-          m.setAttribute('aria-hidden', 'true');
-          document.body.style.overflow = '';
-        }
-      });
-    });
-    // Esc closes any open modal / search modal
-    document.addEventListener('keydown', function(e){
-      if (e.key !== 'Escape') return;
-      document.querySelectorAll('.modal.is-open, .sm.is-open').forEach(function(m){
-        m.classList.remove('is-open');
-        m.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      });
-    });
-
-    // ─── Search modal — accordion sections + pill toggles ───
-    var sm = document.getElementById('searchModal');
-    function openSearch(){
-      if (!sm) return;
-      sm.classList.add('is-open');
-      sm.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      setTimeout(function(){
-        var inp = document.getElementById('smWhereInput');
-        if (inp) inp.focus();
-      }, 320);
-    }
-    function closeSearch(){
-      if (!sm) return;
-      sm.classList.remove('is-open');
-      sm.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-    // Toggle which sm-sec is active (accordion)
-    function setActiveSec(name){
-      ['where','mode','type'].forEach(function(n){
-        var sec = document.getElementById('smSec' + n.charAt(0).toUpperCase() + n.slice(1));
-        if (!sec) return;
-        sec.classList.toggle('is-active', n === name);
-      });
-    }
-    // Wire collapsed section clicks to expand them
-    if (sm) {
-      sm.querySelectorAll('[data-sm-sec]').forEach(function(el){
-        el.addEventListener('click', function(e){
-          // Don't expand if the click came from inside the active head's controls
-          if (el.classList.contains('sm-sec__head')) return;
-          setActiveSec(el.getAttribute('data-sm-sec'));
-        });
-      });
-      // Pill toggle groups (mode + type) — single-select, updates collapsed value display
-      sm.querySelectorAll('[data-sm-group]').forEach(function(group){
-        var key = group.getAttribute('data-sm-group');
-        var valEl = document.getElementById('sm' + key.charAt(0).toUpperCase() + key.slice(1) + 'Val');
-        group.querySelectorAll('.sm-pill').forEach(function(p){
-          // Initial: first pill selected
-          if (p === group.querySelector('.sm-pill')) p.classList.add('is-selected');
-          p.addEventListener('click', function(){
-            group.querySelectorAll('.sm-pill').forEach(function(x){ x.classList.remove('is-selected'); });
-            p.classList.add('is-selected');
-            if (valEl) valEl.textContent = p.textContent.trim();
-            // Auto-collapse this section + open the next one for flow
-            if (key === 'mode') setActiveSec('type');
-            else if (key === 'type') setActiveSec('where');
-          });
-        });
-      });
-      // City pills + category chips — single-select within their group
-      sm.querySelectorAll('.sm-pop .sm-pills .sm-pill, .sm-pills--cat .sm-pill').forEach(function(p){
-        p.addEventListener('click', function(){
-          var siblings = p.parentElement.querySelectorAll('.sm-pill');
-          siblings.forEach(function(x){ x.classList.remove('is-selected'); });
-          p.classList.add('is-selected');
-        });
-      });
-      // Clear all
-      var clearBtn = document.getElementById('smClearAll');
-      if (clearBtn) clearBtn.addEventListener('click', function(){
-        sm.querySelectorAll('.sm-pill.is-selected').forEach(function(x){ x.classList.remove('is-selected'); });
-        // Re-default mode = Buy, type = Homes
-        var modeFirst = sm.querySelector('[data-sm-group="mode"] .sm-pill');
-        var typeFirst = sm.querySelector('[data-sm-group="type"] .sm-pill');
-        if (modeFirst) modeFirst.classList.add('is-selected');
-        if (typeFirst) typeFirst.classList.add('is-selected');
-        var input = document.getElementById('smWhereInput');
-        if (input) input.value = '';
-        document.getElementById('smModeVal').textContent = 'Buy';
-        document.getElementById('smTypeVal').textContent = 'Homes';
-        setActiveSec('where');
-      });
-      // Submit
-      var submitBtn = document.getElementById('smSubmit');
-      if (submitBtn) submitBtn.addEventListener('click', function(){ closeSearch(); });
-    }
-    window.openMobileSearch  = openSearch;
-    window.closeMobileSearch = closeSearch;
-    // Compact pill (desktop scrolled state) also opens the modal
+    // Compact pill (desktop scrolled state) → triggers the same mobile search modal
+    // (main.js handler). Compact pill click in main.js is wired to expand the nav;
+    // for this standalone page we want it to open the search modal instead.
     var cSearchEl = document.getElementById('compactSearch');
-    if (cSearchEl) cSearchEl.addEventListener('click', openSearch);
-
-    // Sign-in modal → opened by account icon, bottom-bar Account, off-canvas
-    // 'Sign In / Join' link. Closing OC menu first so the modal sits cleanly on top.
-    window.openSignIn = function(){
-      closeOC();
-      openModal('signInModal', '#signInPhone');
-    };
-    window.closeSignIn = function(){ closeModal('signInModal'); };
-    // Off-canvas Sign In link
+    if (cSearchEl) cSearchEl.addEventListener('click', function(e){
+      e.stopPropagation();
+      if (typeof openMobileSearch === 'function') openMobileSearch();
+    });
+    // Off-canvas Sign In link → opens the joinModal (main.js openSignIn)
     var ocSignIn = document.getElementById('ocSignInLink');
     if (ocSignIn) ocSignIn.addEventListener('click', function(e){
       e.preventDefault();
-      window.openSignIn();
-    });
-    // Password reveal toggle
-    var pwToggle = document.getElementById('signInPwToggle');
-    var pwInput  = document.getElementById('signInPw');
-    if (pwToggle && pwInput) pwToggle.addEventListener('click', function(){
-      var isPw = pwInput.type === 'password';
-      pwInput.type = isPw ? 'text' : 'password';
-      pwToggle.setAttribute('aria-label', isPw ? 'Hide password' : 'Show password');
-    });
-    // Sign-in submit — placeholder, just closes
-    var siForm = document.getElementById('signInForm');
-    if (siForm) siForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      closeModal('signInModal');
+      closeOC();
+      if (typeof openSignIn === 'function') openSignIn();
     });
   })();
 
@@ -2263,5 +1860,15 @@
     }
   })();
   </script>
+
+  <!-- GSAP + plugins (main.js depends on these; same set as design.html loads) -->
+  <script defer src="https://unpkg.com/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script defer src="https://unpkg.com/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/gsap@3.14.2/dist/Draggable.min.js"></script>
+
+  <!-- Shared site JS (same as design.html) — drives joinModal (openSignIn/closeSignIn/jm*)
+       and mobileModal (openMobileSearch/closeMobileSearch/mob*). Loaded last so it
+       takes over the window-level handlers after my IIFE has set up the off-canvas. -->
+  <script defer src="../../main.js"></script>
 </body>
 </html>
