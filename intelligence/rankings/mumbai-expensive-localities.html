@@ -125,18 +125,23 @@
     #mobSearchRow { display: none; }
     @media (max-width: 743.98px) { #mobSearchRow { display: block; } }
 
-    /* Tablet / mid-screen (744–1079): swap full expanded search for compact pill
-       so the right-side actions (Post Property / Account / Menu) don't get pushed
-       offscreen by the 600px-floor expanded search. Mirrors design.html / main.js
-       showMidTrigger() pattern. */
+    /* Tablet / mid-screen (744–1079): swap full expanded search for a simple
+       'Search Properties' trigger pill (matches index4.html / main.js
+       showMidTrigger pattern — the #compactSearch with Anywhere|Buy|Homes is
+       reserved for the desktop scroll-collapse state, not iPad layout). */
     @media (min-width: 744px) and (max-width: 1079.98px) {
       #expandedSearch { display: none !important; }
-      #compactSearch {
+      #compactSearch { display: none !important; }
+      #tabletSearchTrigger { display: flex !important; }
+      #desktopNavRow { gap: 16px; padding: 0 24px; }
+      /* In the scrolled state at iPad widths the compact pill DOES become useful
+         (replaces the trigger to save space). */
+      #mainNav.is-scrolled #tabletSearchTrigger { display: none !important; }
+      #mainNav.is-scrolled #compactSearch {
         display: flex !important;
         opacity: 1 !important;
         transform: none !important;
       }
-      #desktopNavRow { gap: 16px; padding: 0 24px; }
     }
     /* Slight shrink on the right-side button group at iPad widths */
     @media (min-width: 744px) and (max-width: 899.98px) {
@@ -923,7 +928,7 @@
           </button>
         </div>
       </div>
-      <!-- Compact pill — hidden until scrollY > 8; swaps in via collapseNav() -->
+      <!-- Compact pill — hidden until scrollY > 8 on desktop; swaps in via collapseNav() -->
       <div id="compactSearch" class="items-center bg-white border border-gray-200 rounded-full cursor-pointer whitespace-nowrap" style="padding:6px 6px 6px 16px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:none;transition:opacity .3s ease,transform .3s cubic-bezier(.4,0,.2,1);opacity:0;transform:scale(.92)">
         <span class="text-sm font-medium border-r border-ln pr-3" style="color:var(--ink)">Anywhere</span>
         <span class="text-sm px-3 border-r border-ln" style="color:var(--muted)">Buy</span>
@@ -932,6 +937,11 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
         </div>
       </div>
+      <!-- Tablet search trigger — simple "Search Properties" pill at 744-1079, matches index4.html #midSmallTrigger -->
+      <button id="tabletSearchTrigger" onclick="openMobileSearch&&openMobileSearch()" style="display:none;align-items:center;justify-content:center;gap:10px;background:#fff;border:1px solid var(--rule);border-radius:40px;padding:14px 26px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);cursor:pointer;font-family:inherit;transition:box-shadow .2s,border-color .2s;justify-self:stretch;margin:0 16px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2.5"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
+        <span style="font-size:14px;font-weight:600;color:var(--ink)">Search Properties</span>
+      </button>
       <div style="display:flex;align-items:center;gap:10px;justify-self:end">
         <a href="https://www.ghar.tv/postproperty.php" class="nav-btn">Post Property</a>
         <button onclick="openSignIn&&openSignIn()" class="nav-btn nav-btn--icon" aria-label="Account">
